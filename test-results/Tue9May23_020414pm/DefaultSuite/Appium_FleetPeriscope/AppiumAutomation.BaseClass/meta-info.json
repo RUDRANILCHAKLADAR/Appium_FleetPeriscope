@@ -1,0 +1,38 @@
+{
+  "methods": [
+    {
+      "index": 1,
+      "retryCount": null,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "description": "",
+        "name": "ConfigureAppium",
+        "resultFileName": "ConfigureAppium"
+      },
+      "dependsOn": [],
+      "doc": null,
+      "startTime": 1683621245325,
+      "duration": 9162,
+      "result": "fail",
+      "passPer": 0.0
+    },
+    {
+      "index": 1,
+      "retryCount": null,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "description": "",
+        "name": "tearDown",
+        "resultFileName": "TearDown"
+      },
+      "dependsOn": [],
+      "doc": null,
+      "startTime": 1683621254509,
+      "duration": 1,
+      "result": "skip",
+      "passPer": 0.0
+    }
+  ]
+}

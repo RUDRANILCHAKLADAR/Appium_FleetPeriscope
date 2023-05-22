@@ -1,0 +1,31 @@
+{
+  "total": 3,
+  "pass": 0,
+  "fail": 1,
+  "skip": 2,
+  "classes": [
+    "AppiumAutomation.BaseClass",
+    "AppiumAutomation.SignInTestCases"
+  ],
+  "envInfo": {
+    "isfw-build-info": {
+      "qaf-Type": "core",
+      "qaf-Revision": "0b",
+      "qaf-Version": "3.2",
+      "qaf-Build-Time": "02-Oct-2022 23:11:27"
+    },
+    "run-parameters": {},
+    "execution-env-info": {
+      "java.arch": "64",
+      "java.vendor": "Oracle Corporation",
+      "java.version": "1.8.0_202",
+      "os.arch": "x86_64",
+      "host": "C02CP6GDMD6M.local",
+      "os.name": "Mac OS X",
+      "user.name": "rudranilchakladar",
+      "os.version": "10.16"
+    }
+  },
+  "startTime": 1683622445801,
+  "endTime": 1683622472374
+}

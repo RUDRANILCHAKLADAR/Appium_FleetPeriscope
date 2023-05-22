@@ -1,0 +1,13 @@
+{
+  "name": "Default Suite",
+  "status": "fail",
+  "tests": [
+    "DefaultSuite/Appium_FleetPeriscope"
+  ],
+  "total": 3,
+  "pass": 0,
+  "fail": 1,
+  "skip": 2,
+  "startTime": 1683622445801,
+  "endTime": 1683622472374
+}

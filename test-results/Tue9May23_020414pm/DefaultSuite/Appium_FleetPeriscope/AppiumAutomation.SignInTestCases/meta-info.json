@@ -1,0 +1,22 @@
+{
+  "methods": [
+    {
+      "index": 1,
+      "retryCount": null,
+      "type": "test",
+      "args": [],
+      "metaData": {
+        "description": "",
+        "name": "scrollingTest",
+        "resultFileName": "ScrollingTest",
+        "sign": "SignInTestCases.scrollingTest()[pri:0, instance:AppiumAutomation.SignInTestCases@32eff876]"
+      },
+      "dependsOn": [],
+      "doc": null,
+      "startTime": 1683621254505,
+      "duration": 1,
+      "result": "skip",
+      "passPer": 0.0
+    }
+  ]
+}

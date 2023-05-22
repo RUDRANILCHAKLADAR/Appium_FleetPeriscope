@@ -1,0 +1,22 @@
+{
+  "methods": [
+    {
+      "index": 1,
+      "retryCount": null,
+      "type": "test",
+      "args": [],
+      "metaData": {
+        "description": "",
+        "name": "AccountSelectionVerification",
+        "resultFileName": "AccountSelectionVerification",
+        "sign": "SignInTestCases.AccountSelectionVerification()[pri:0, instance:AppiumAutomation.SignInTestCases@5579bb86]"
+      },
+      "dependsOn": [],
+      "doc": null,
+      "startTime": 1683622472370,
+      "duration": 1,
+      "result": "skip",
+      "passPer": 0.0
+    }
+  ]
+}
