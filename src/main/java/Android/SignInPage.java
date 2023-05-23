@@ -139,6 +139,14 @@ public class SignInPage {
     @AndroidFindBy (id = "android:id/button1")
     private WebElement Confirm_btn;
 
+    @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
+    private WebElement permission_access;
+
+    public void Click_Permission()
+    {
+        permission_access.click();
+    }
+
 
     public WebElement getAccount_icon()
     {

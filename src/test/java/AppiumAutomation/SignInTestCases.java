@@ -21,13 +21,35 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 
 public class SignInTestCases extends BaseClass {
 
-
-    //C18779,C146195-To check whether all the SignIn elements are displayed or not
     @Test(priority = 0)
-    public void LoginUIelementsvalidation() {
-
-        Assert.assertTrue(signinpage.getSignIn().isDisplayed());
+    public void AccountDialogueScreenVerification() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         signinpage.getSignIn().click();
+        signinpage.getUsername().click();
+        signinpage.getUsername().sendKeys("tjbussfl");
+        signinpage.getPassword().click();
+        signinpage.getPassword().sendKeys("123456");
+        signinpage.getSignIn().click();
+        Thread.sleep(2000);
+        Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
+        Thread.sleep(2000);
+        signinpage.getSelectbtn().click();
+        signinpage.Click_Permission();
+        signinpage.getAccount_icon().click();
+        signinpage.getLogout().click();
+        signinpage.getConfirm_btn().click();
+
+    }
+
+
+    //Verify Choose account screen is shown for some user if user scope is set
+    //C18779,C146195-To check whether all the SignIn elements are displayed or not
+    @Test(priority = 2)
+    public void LoginUIelementsvalidation() {
+        signinpage.getCancelbtn().click();
+        Assert.assertTrue(signinpage.getSignIn().isDisplayed());
+        //signinpage.getSignIn().click();
         Assert.assertTrue(signinpage.getUsername().isDisplayed());
         Assert.assertTrue(signinpage.getPassword().isDisplayed());
         Assert.assertTrue(signinpage.getLogin().isDisplayed());
@@ -37,10 +59,21 @@ public class SignInTestCases extends BaseClass {
         Assert.assertTrue(signinpage.getBackbutton().isEnabled());
 
     }
-
+    @Test(priority = 1)
+    public void ForgotPasswordScreenValidation() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        signinpage.getSignIn().click();
+        signinpage.getForgotpassword().click();
+        String ActualErrorMessage = signinpage.getForgotPasswordTxt();
+        String ExpectedResult = "Forgot Password";
+        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+        Thread.sleep(3000);
+        signinpage.getBackbutton2().click();
+    }
 
     //C18780-Verify user is able to enter the username and password in the Sign in Screen
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void LoginCredentialsvalidation() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
@@ -53,7 +86,7 @@ public class SignInTestCases extends BaseClass {
 
 
     //C18783-Verify proper message is shown if username or password fields are missing and tapping on Sign in button
-    @Test(priority = 2)
+    @Test(priority = 4)
     public void EmptyLoginCredentialsvalidation() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -79,7 +112,7 @@ public class SignInTestCases extends BaseClass {
 
     }
 
-    @Test(priority = 3)
+    @Test(priority = 5)
     public void InvalidCredentialValidations() throws InterruptedException {
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -98,7 +131,7 @@ public class SignInTestCases extends BaseClass {
         signinpage.getTryagainBtn().click();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 6)
     public void NoInternetConnection() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         //signinpage.getSignIn().click();
@@ -124,7 +157,7 @@ public class SignInTestCases extends BaseClass {
     }
 
     //C20853-Verify after selecting a account user is able to sign in successfully
-    @Test(priority = 5)
+    @Test(priority = 7)
     public void UserisabletoselectanAccount() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -138,6 +171,7 @@ public class SignInTestCases extends BaseClass {
         signinpage.getAccount().click();
         signinpage.getSelectbtn().click();
         Thread.sleep(2000);
+        signinpage.Click_Permission();
         String ActualErrorMessage = signinpage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
@@ -147,25 +181,14 @@ public class SignInTestCases extends BaseClass {
 
     }
 
-    @Test(priority = 6)
-    public void ForgotPasswordScreenValidation() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        signinpage.getSignIn().click();
-        signinpage.getForgotpassword().click();
-        String ActualErrorMessage = signinpage.getForgotPasswordTxt();
-        String ExpectedResult = "Forgot Password";
-        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-        Thread.sleep(3000);
-        signinpage.getBackbutton2().click();
-    }
+
 
     //Verify tapping on cancel button on dialogue pop up, account is not selected and user is returned to Sign In screen
-    @Test(priority = 7)
+    @Test(priority = 8)
     public void UserAccountSelectionCancel() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        // signinpage.getSignIn().click();
+         signinpage.getSignIn().click();
         signinpage.getUsername().click();
         signinpage.getUsername().sendKeys("tjbussfl");
         signinpage.getPassword().click();
@@ -178,7 +201,7 @@ public class SignInTestCases extends BaseClass {
     }
 
     //Verify user is able to select one account from the list when user attempts to sign in and if multiple accounts are linked to the username
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void AccountSelectionVerification() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         //  signinpage.getSignIn().click();
@@ -194,7 +217,7 @@ public class SignInTestCases extends BaseClass {
         signinpage.getCancelbtn().click();
     }
 
-    @Test(priority = 9)
+    @Test(priority = 10)
     public void UserLoginVerification() throws InterruptedException {
         //Verify user is able to select one account from the list when user attempts to sign in and if multiple accounts are linked to the username
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -225,9 +248,11 @@ public class SignInTestCases extends BaseClass {
         signinpage.getAccount().click();
         signinpage.getSelectbtn().click();
         Thread.sleep(2000);
+        signinpage.Click_Permission();
         String ActualErrorMessage = signinpage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+
         signinpage.getAccount_icon().click();
         signinpage.getLogout().click();
         signinpage.getConfirm_btn().click();
@@ -332,7 +357,7 @@ public class SignInTestCases extends BaseClass {
 
     //   Assert.assertTrue(isDTCAlert,"Basic User");
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void BacktoCarouselPageVerfication() {
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -347,24 +372,6 @@ public class SignInTestCases extends BaseClass {
 //
 //    }
 
-    //Verify account setting is checked tapping on Sign in button for the valid user credentials
-    @Test(priority = 11)
-    public void AccountDialogueScreenVerification() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        signinpage.getSignIn().click();
-        signinpage.getUsername().click();
-        signinpage.getUsername().sendKeys("tjbussfl");
-        signinpage.getPassword().click();
-        signinpage.getPassword().sendKeys("123456");
-        signinpage.getSignIn().click();
-        Thread.sleep(2000);
-        Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
-
-    }
-
-
-    //Verify Choose account screen is shown for some user if user scope is set
     @Test(priority = 12)
     public void AccountScreenDisplayVerification() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -383,6 +390,10 @@ public class SignInTestCases extends BaseClass {
         Thread.sleep(2000);
         signinpage.getCancelbtn().click();
     }
+
+    //Verify account setting is checked tapping on Sign in button for the valid user credentials
+
+
 
 
     //Verify account setting screen is not shown if user scope is not set

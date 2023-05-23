@@ -2,9 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="/Users/rudranilchakladar/IdeaProjects/Appium_FleetPeriscope">
         <classes>
-            <class name="AppiumAutomation.SignInTestCases"/>
-            <class name="AppiumAutomation.ForgotPasswordTestCases"/>
 
+            <class name="AppiumAutomation.SignInTestCases"/>
         </classes>
     </test>
 </suite>

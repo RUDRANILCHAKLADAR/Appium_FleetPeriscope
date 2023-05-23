@@ -47,7 +47,7 @@ public class MapScreenPage
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_password")
     private WebElement Password;
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.ImageView")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     private WebElement HomeScreen_icon;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_vehicles")
@@ -122,7 +122,7 @@ public class MapScreenPage
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout")
     private WebElement Popup1;
 
-    @AndroidFindBy(id = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
+    @AndroidFindBy(id = "R.string.home_title")
     private WebElement FL_text;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_refresh")
@@ -131,9 +131,33 @@ public class MapScreenPage
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/fab_map")
     private WebElement fab_map ;
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/fab_landmarks")
+    private WebElement fab_landmarks ;
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/fab_current_location")
     private WebElement fabcurrent_location;
 
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Collapse\"]")
+    private WebElement back3;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/closeButton")
+    private WebElement popup_close;
+
+    public WebElement getPopup_close()
+    {
+        return popup_close;
+    }
+
+    public void  getback3()
+    {
+        back3.click();
+    }
+
+
+    public WebElement getFab_landmarks()
+    {
+        return fab_landmarks;
+    }
 
     public WebElement getIdle_tab() {
         return Idle_tab;
