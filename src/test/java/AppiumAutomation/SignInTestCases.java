@@ -47,7 +47,7 @@ public class SignInTestCases extends BaseClass {
     //C18779,C146195-To check whether all the SignIn elements are displayed or not
     @Test(priority = 2)
     public void LoginUIelementsvalidation() {
-        signinpage.getCancelbtn().click();
+
         Assert.assertTrue(signinpage.getSignIn().isDisplayed());
         //signinpage.getSignIn().click();
         Assert.assertTrue(signinpage.getUsername().isDisplayed());
@@ -127,7 +127,7 @@ public class SignInTestCases extends BaseClass {
         String actualerror = signinpage.getInvalidLoginErrMsg();
         String expectedresult = "The credentials entered do not match our records. Verify your username and password.";
         Assert.assertEquals(actualerror, expectedresult);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         signinpage.getTryagainBtn().click();
     }
 
@@ -161,17 +161,17 @@ public class SignInTestCases extends BaseClass {
     public void UserisabletoselectanAccount() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        //  signinpage.getSignIn().click();
-        signinpage.getUsername().click();
+       //  signinpage.getSignIn().click();
+        signinpage.getUsername().clear();
         signinpage.getUsername().sendKeys("tjbussfl");
-        signinpage.getPassword().click();
+        signinpage.getPassword().clear();
         signinpage.getPassword().sendKeys("123456");
         signinpage.getSignIn().click();
         Thread.sleep(2000);
         signinpage.getAccount().click();
         signinpage.getSelectbtn().click();
         Thread.sleep(2000);
-        signinpage.Click_Permission();
+       // signinpage.Click_Permission();
         String ActualErrorMessage = signinpage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
@@ -248,7 +248,7 @@ public class SignInTestCases extends BaseClass {
         signinpage.getAccount().click();
         signinpage.getSelectbtn().click();
         Thread.sleep(2000);
-        signinpage.Click_Permission();
+        //signinpage.Click_Permission();
         String ActualErrorMessage = signinpage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
@@ -402,11 +402,11 @@ public class SignInTestCases extends BaseClass {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         //signinpage.getSignIn().click();
-        signinpage.getCancelbtn2().click();
-        signinpage.getUsername().click();
+      //  signinpage.getCancelbtn2().click();
+       // signinpage.getUsername().click();
         signinpage.getUsername().clear();
         signinpage.getUsername().sendKeys("Fleet360A");
-        signinpage.getPassword().click();
+      //  signinpage.getPassword().click();
         signinpage.getPassword().clear();
         signinpage.getPassword().sendKeys("Password@1");
         signinpage.getSignIn().click();

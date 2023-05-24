@@ -75,7 +75,7 @@ public class MapScreenPage
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/iv_close")
     private WebElement Vehicle1_Close;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_search_map")
+    @AndroidFindBy(id = "R.id.action_search_map")
     private WebElement Search_icon;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/search_src_text")
@@ -122,7 +122,7 @@ public class MapScreenPage
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout")
     private WebElement Popup1;
 
-    @AndroidFindBy(id = "R.string.home_title")
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
     private WebElement FL_text;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_refresh")
@@ -142,6 +142,8 @@ public class MapScreenPage
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/closeButton")
     private WebElement popup_close;
+
+
 
     public WebElement getPopup_close()
     {

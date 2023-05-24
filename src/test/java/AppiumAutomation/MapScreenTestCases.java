@@ -2,6 +2,7 @@ package AppiumAutomation;
 
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.apache.log4j.Priority;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -133,17 +134,19 @@ public class MapScreenTestCases extends BaseClass {
         mapScreenPage.getPopup_close().click();
     }
 
-//    @Test
-//    public void UIScreenMatchingZeplinComps() throws InterruptedException {
-//        mapScreenPage.getSignIn().click();
-//        mapScreenPage.getUsername().sendKeys("Fleet360A");
-//        mapScreenPage.getPassword().sendKeys("Password@1");
-//        mapScreenPage.getSignIn().click();
-//        mapScreenPage.Click_Permission();
-//
-//        Thread.sleep(2000);
-//        Assert.assertEquals(mapScreenPage.getFL_text(),mapScreenPage.fl_text);
-    // Assert.assertTrue(mapScreenPage.getSearch_icon().isEnabled());
+    @Test
+    public void UIScreenMatchingZeplinComps() throws InterruptedException {
+        mapScreenPage.getSignIn().click();
+        mapScreenPage.getUsername().sendKeys("Fleet360A");
+        mapScreenPage.getPassword().sendKeys("Password@1");
+        mapScreenPage.getSignIn().click();
+        mapScreenPage.Click_Permission();
+
+        Thread.sleep(2000);
+        //with string appium is not working..need to check with developer
+       // driver.findElement(By.name ("FL Periscope")).isDisplayed();
+       // Assert.assertEquals(mapScreenPage.getFL_text(),mapScreenPage.fl_text);
+      Assert.assertTrue(mapScreenPage.getSearch_icon().isEnabled());
 //        Assert.assertTrue(mapScreenPage.getRefresh_btn().isEnabled());
 //        Assert.assertTrue(mapScreenPage.getMoving_tab().isEnabled());
 //        Assert.assertTrue(mapScreenPage.getStopped_tab().isEnabled());
@@ -151,7 +154,7 @@ public class MapScreenTestCases extends BaseClass {
 //        Assert.assertTrue(mapScreenPage.getSettings_button().isEnabled());
 //        Assert.assertTrue(mapScreenPage.getFab_map().isEnabled());
 //        Assert.assertTrue(mapScreenPage.getFabcurrent_location().isEnabled());
-//}
+}
 
 
 

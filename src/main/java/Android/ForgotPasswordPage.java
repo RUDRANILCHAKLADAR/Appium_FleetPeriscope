@@ -78,6 +78,17 @@ public class ForgotPasswordPage
     @AndroidFindBy (id = "android:id/button3")
     private WebElement OkBtn3;
 
+    @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton")
+    private WebElement BackSupport;
+
+    public WebElement getBackSupport() {
+        return BackSupport;
+    }
+    public void ClickBackSupport()
+    {
+        BackSupport.click();
+    }
+
     public WebElement getOkBtn3()
     {
         return OkBtn3;
