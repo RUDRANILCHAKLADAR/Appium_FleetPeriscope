@@ -50,11 +50,12 @@ public class MapScreenPage
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     private WebElement HomeScreen_icon;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_vehicles")
-    private WebElement Vehicles_icon;
+
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.ImageView")
     private WebElement landmarks_icon;
+
+    public String Land_txt="Landmarks";
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[4]/android.widget.ImageView")
     private WebElement alerts_icon;
@@ -75,7 +76,7 @@ public class MapScreenPage
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/iv_close")
     private WebElement Vehicle1_Close;
 
-    @AndroidFindBy(id = "R.id.action_search_map")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_search_map")
     private WebElement Search_icon;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/search_src_text")
@@ -143,7 +144,98 @@ public class MapScreenPage
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/closeButton")
     private WebElement popup_close;
 
+    @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_ASSET.\"])[5]")
+    private WebElement movingvehicle1;
 
+    @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_ASSET.\"])[2]")
+    private WebElement movingvehicle1tag;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_secondary")
+    private WebElement movingvehicle1_title;
+
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ImageView")
+    private WebElement vehicle_icon;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_speed")
+    private WebElement  movingspeedinfo;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/title_suffix")
+    private WebElement  stoppedspeedinfo;
+
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
+    private WebElement  Accounts_text;
+
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
+    private WebElement  Alerts_text;
+
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.ImageView")
+    private WebElement  Landmarks_text;
+
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
+    private WebElement  Vehicles_text;
+
+
+    public String  getVehicles_text()
+    {
+        return Vehicles_text.getText();
+    }
+
+  public String vehicle_text="Vehicles";
+
+    public String  getLandmarks_text()
+    {
+        return Landmarks_text.getText();
+    }
+
+    public String Veh_txt="Vehicles";
+    public String Land_text="Landmarks";
+
+    public String  getAlerts_text()
+    {
+        return Alerts_text.getText();
+    }
+
+    public String alert_txt="Alerts - 7 Day History";
+    public String getAccounts_text()
+    {
+        return Accounts_text.getText();
+    }
+
+    public String Acc_txt="Account";
+    public WebElement getstoppedspeedinfo()
+    {
+        return stoppedspeedinfo;
+    }
+
+    public WebElement getmovingspeedinfo()
+    {
+        return movingspeedinfo;
+    }
+
+    public WebElement getMovingvehicle1_title()
+    {
+        return movingvehicle1_title;
+    }
+    public void ClickMovingvehicle1_title()
+    {
+        movingvehicle1_title.click();
+    }
+
+    public WebElement getVehicle_icon()
+    {
+        return vehicle_icon;
+    }
+
+
+    public WebElement getMovingvehicle1tag()
+    {
+        return movingvehicle1tag;
+    }
+
+    public WebElement getMovingvehicle1()
+    {
+        return movingvehicle1;
+    }
 
     public WebElement getPopup_close()
     {
@@ -181,7 +273,7 @@ public class MapScreenPage
     {
         return FL_text.getText();
     }
-    public String fl_text="FL Periscope";
+    public String title="FL Periscope";
     public WebElement getPopup1()
     {
         return Popup1;
@@ -229,9 +321,9 @@ public class MapScreenPage
     {
         return StoppedVehicleSpeed.getText();
     }
-    public String stoppedvehiclespeed="(0 mph) SW";
+    public String stoppedvehiclespeed="(0 mph) ";
 
-    public String vehiclespeed="(43 mph) W";
+    public String vehiclespeed="(101 mph) E";
     public void  ClickMovingVehicle1()
     {
         MovingVehicle1.click();
@@ -386,14 +478,7 @@ public String  searchbartext="   Search vehicles";
         return account_icon;
     }
 
-    public WebElement getVehicles_icon()
-    {
-        return Vehicles_icon;
-    }
-    public void ClickVehicleicon()
-    {
-        Vehicles_icon.click();
-    }
+
 
     public WebElement getLandmarks_icon()
     {
