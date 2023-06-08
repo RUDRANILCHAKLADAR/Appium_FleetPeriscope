@@ -2,9 +2,13 @@ package AppiumAutomation;
 
 import Android.ForgotPasswordPage;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
-import org.checkerframework.checker.units.qual.A;
+//import org.checkerframework.checker.units.qual.A;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class ForgotPasswordTestCases extends BaseClass
 {
@@ -21,8 +25,8 @@ public class ForgotPasswordTestCases extends BaseClass
         Assert.assertTrue(forgotPasswordPage.getBackBtn().isEnabled());
         Assert.assertTrue(forgotPasswordPage.getFleetLocateSupport().isEnabled());
         Assert.assertEquals(forgotPasswordPage.FrgtPswrdMsg(), forgotPasswordPage.str);
-        Assert.assertEquals(forgotPasswordPage.getForgotPswrdScreen(),"Forgot Password");
-        Assert.assertEquals(forgotPasswordPage.getNeedHelp(),"If you still need help, contact");
+        Assert.assertEquals(forgotPasswordPage.getForgotPswrdScreen(),forgotPasswordPage.frgt_psswrd);
+        Assert.assertEquals(forgotPasswordPage.getNeedHelp(),forgotPasswordPage.Need_help_txt);
 
     }
 
@@ -32,7 +36,7 @@ public class ForgotPasswordTestCases extends BaseClass
     {
        // forgotPasswordPage.SignInClick();
        // forgotPasswordPage.ForgotpasswordClick();
-        Assert.assertEquals(forgotPasswordPage.FrgtPswrdMsg(),"Enter the email address you used to register. We'll send you an email with reset instructions.");
+        Assert.assertEquals(forgotPasswordPage.FrgtPswrdMsg(),forgotPasswordPage.Email_register_text);
 
     }
 
@@ -44,7 +48,7 @@ public class ForgotPasswordTestCases extends BaseClass
 //        forgotPasswordPage.ForgotpasswordClick();
         forgotPasswordPage.getEmail().sendKeys("");
         forgotPasswordPage.Submit_btn_Click();
-        Assert.assertEquals(forgotPasswordPage.getErrorMsg(),"Please enter valid Email ID.");
+        Assert.assertEquals(forgotPasswordPage.getErrorMsg(),forgotPasswordPage.Valid_Email_text);
         forgotPasswordPage.ClickOk_Btn();
     }
 
@@ -56,7 +60,8 @@ public class ForgotPasswordTestCases extends BaseClass
         forgotPasswordPage.getEmail().sendKeys("tjbusffl@mailinator.com");
         forgotPasswordPage.Submit_btn_Click();
         Thread.sleep(2000);
-        Assert.assertEquals(forgotPasswordPage.getUnregisteredEmailErrorMsg(),"Please enter your registered Email ID and try again.");
+       // new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(forgotPasswordPage.unrgstrederrmsg()));
+        Assert.assertEquals(forgotPasswordPage.getUnregisteredEmailErrorMsg(),forgotPasswordPage.Registered_Email_text);
         forgotPasswordPage.ClickTryAgain();
     }
 
@@ -69,7 +74,7 @@ public class ForgotPasswordTestCases extends BaseClass
         forgotPasswordPage.getEmail().sendKeys("tjbussfl@spireon.com");
         forgotPasswordPage.Submit_btn_Click();
         Thread.sleep(4000);
-        Assert.assertEquals(forgotPasswordPage.getResetMsg(),"Reset instruction sent successfully!");
+        Assert.assertEquals(forgotPasswordPage.getResetMsg(),forgotPasswordPage.Reset_txt);
         forgotPasswordPage.ClickOkbtn2();
     }
 
@@ -80,7 +85,7 @@ public class ForgotPasswordTestCases extends BaseClass
 //          forgotPasswordPage.SignInClick();
 //          forgotPasswordPage.ForgotpasswordClick();
           forgotPasswordPage.getFleetLocateSupport().click();
-          Assert.assertEquals(forgotPasswordPage.getSupport_Title(),"Support");
+          Assert.assertEquals(forgotPasswordPage.getSupport_Title(),forgotPasswordPage.support);
           //forgotPasswordPage.ClickBackSupport();
 
       }
@@ -108,7 +113,7 @@ public class ForgotPasswordTestCases extends BaseClass
          forgotPasswordPage.getEmail().sendKeys("tjbussfl@spireon.com");
          driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
          forgotPasswordPage.Submit_btn_Click();
-         Assert.assertEquals(forgotPasswordPage.getNetworkErrorMsg(),"Please check your network connection and try again.");
+         Assert.assertEquals(forgotPasswordPage.getNetworkErrorMsg(),forgotPasswordPage.network_Err_msg);
          forgotPasswordPage.ClickOkbtn3();
      }
 

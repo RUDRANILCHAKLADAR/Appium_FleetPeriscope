@@ -174,6 +174,87 @@ public class MapScreenPage
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
     private WebElement  Vehicles_text;
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_tertiary")
+    private WebElement  stoppedvehicle2info;
+
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/defaultIcon")
+    private WebElement  DefaultMapView;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/satelliteTv")
+    private WebElement  SatelliteMapView;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/assetIcon")
+    private WebElement  AssetMapDetails;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/landmarkIcon")
+    private WebElement  LandmarksMapDetails;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/trafficIcon")
+    private WebElement  TrafficMapDetails;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/closeButton")
+    private WebElement  MapSettingsClosebutton;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/landmarkTv")
+    private WebElement  LandmarksMapText;
+
+
+    public WebElement getLandmarksMapText()
+    {
+        return LandmarksMapText;
+    }
+
+
+ public WebElement getStoppedvehicle2info()
+ {
+     return stoppedvehicle2info;
+ }
+
+    public WebElement getDefaultMapView()
+    {
+        return DefaultMapView;
+    }
+    public void Click_DefaultMapView()
+    {
+        DefaultMapView.click();
+    }
+
+    public WebElement getSatelliteMapView()
+    {
+        return SatelliteMapView;
+    }
+
+    public void Click_SatelliteMapView()
+    {
+        SatelliteMapView.click();
+    }
+
+    public WebElement getAssetMapDetails()
+    {
+        return AssetMapDetails;
+    }
+
+    public WebElement getLandmarksMapDetails()
+    {
+        return LandmarksMapDetails;
+    }
+
+    public WebElement getTrafficMapDetails()
+    {
+        return TrafficMapDetails;
+    }
+
+    public WebElement getMapSettingsClosebutton() {
+       return MapSettingsClosebutton;
+    }
+
+    public void ClickMapSettingsClosebutton()
+    {
+        MapSettingsClosebutton.click();
+    }
+
+
 
     public String  getVehicles_text()
     {

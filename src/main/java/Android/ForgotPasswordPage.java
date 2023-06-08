@@ -20,6 +20,22 @@ public class ForgotPasswordPage
 
   public   String str="Enter the email address you used to register. We'll send you an email with reset instructions.";
 
+    public String frgt_psswrd="Forgot Password";
+
+    public String Need_help_txt="If you still need help, contact";
+
+    public String Email_register_text="Enter the email address you used to register. We'll send you an email with reset instructions.";
+
+    public String Valid_Email_text="Please enter valid Email ID.";
+
+    public String Registered_Email_text="Please enter your registered Email ID and try again.";
+
+    public String Reset_txt="Reset instruction sent successfully!";
+
+    public String support="Support";
+
+    public String network_Err_msg="Please check your network connection and try again.";
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
     private WebElement SignIn;
 
@@ -80,6 +96,11 @@ public class ForgotPasswordPage
 
     @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton")
     private WebElement BackSupport;
+
+    public WebElement unrgstrederrmsg()
+    {
+        return UnregisteredEmailErrorMsg;
+    }
 
     public WebElement getBackSupport() {
         return BackSupport;

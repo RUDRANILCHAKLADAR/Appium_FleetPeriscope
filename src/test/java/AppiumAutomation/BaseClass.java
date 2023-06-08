@@ -1,5 +1,6 @@
 package AppiumAutomation;
 
+import Android.AlertsPage;
 import Android.ForgotPasswordPage;
 import Android.MapScreenPage;
 import Android.SignInPage;
@@ -8,6 +9,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -30,6 +32,15 @@ public class BaseClass {
     public ForgotPasswordPage forgotPasswordPage;
 
     public MapScreenPage  mapScreenPage;
+    public AlertsPage     alertsPage;
+    public void pullToRefresh() {
+        int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
+        int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
+        int midX = deviceWidth / 2;
+        int midY = deviceHeight / 2;
+        int bottomEdge = (int)((float)deviceHeight * 0.85F);
+        (new TouchAction(BaseClass.driver)).press(PointOption.point(midX, midY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(10L))).moveTo(PointOption.point(midX, bottomEdge)).release().perform();
+    }
 
 
     @BeforeClass
@@ -55,10 +66,11 @@ public class BaseClass {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 
+
         signinpage = new SignInPage(driver);
         forgotPasswordPage=new ForgotPasswordPage(driver);
-        mapScreenPage=new MapScreenPage(driver);
-
+         mapScreenPage=new MapScreenPage(driver);
+        alertsPage=new AlertsPage(driver);
     }
         @AfterClass
         public void tearDown()
