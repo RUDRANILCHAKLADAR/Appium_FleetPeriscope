@@ -95,8 +95,8 @@ public class AlertsTestCases extends BaseClass
         Assert.assertTrue(FilterCategoriesList.get(1).getText().contains(alertsPage.prod));
         Assert.assertTrue(FilterCategoriesList.get(2).getText().contains(alertsPage.monitor));
         Thread.sleep(2000);
-        String as = driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Asset Health (5)\"));")).getText();
-        Assert.assertTrue(as.contains(alertsPage.asset));
+        String Asset_health = driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Asset Health (5)\"));")).getText();
+        Assert.assertTrue(Asset_health.contains(alertsPage.asset));
         alertsPage.ClickBack();
 
     }

@@ -127,10 +127,54 @@ public class MapScreenTestCases extends BaseClass {
     }
 
 
+    //C21453 Tap on Map settings
+    //C83101 Verify by default landmarks is ON in the Map settings screen
+    @Test(priority = 3)
+    public void MapSettingsDisplayVerification()
+    {
+//         mapScreenPage.getSignIn().click();
+//        mapScreenPage.getUsername().sendKeys("Fleet360A");
+//        mapScreenPage.getPassword().sendKeys("Password@1");
+//        mapScreenPage.getSignIn().click();
+//        mapScreenPage.Click_Permission();
+
+        mapScreenPage.Clicksettings_button();
+        Assert.assertTrue(mapScreenPage.getLandmarksMapDetails().isEnabled());
+        Assert.assertTrue(mapScreenPage.getDefaultMapView().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getSatelliteMapView().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getAssetMapDetails().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getLandmarksMapDetails().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getTrafficMapDetails().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getMapSettingsClosebutton().isEnabled());
+        mapScreenPage.getPopup_close().click();
+    }
+
+    //C83437 Tap on map settings when n/w is off
+    @Test(priority = 4)
+    public void ClickingMapSettingswhileNWoff() throws InterruptedException {
+//        mapScreenPage.getSignIn().click();
+//        mapScreenPage.getUsername().sendKeys("Fleet360A");
+//        mapScreenPage.getPassword().sendKeys("Password@1");
+//        mapScreenPage.getSignIn().click();
+//        mapScreenPage.Click_Permission();
+
+        Thread.sleep(2000);
+        mapScreenPage.getFab_map().click();
+        mapScreenPage.getFab_landmarks().click();
+        Thread.sleep(2000);
+        mapScreenPage.Clicksettings_button();
+        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        Assert.assertTrue(mapScreenPage.getPopup1().isDisplayed());
+        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
+        mapScreenPage.getPopup_close().click();
+        mapScreenPage.getFab_map().click();
+        mapScreenPage.getFab_landmarks().click();
+    }
+
 
    // C19246 Verify user is able to tap on any landmarks
    // C21235 Verify user is able to close landmark info screen by clicking on Close(X) button
-    @Test(priority =4)
+    @Test(priority =5)
     public void LandmarksSelectionVerification() throws InterruptedException {
 //        mapScreenPage.getSignIn().click();
 //        mapScreenPage.getUsername().sendKeys("Fleet360A");
@@ -154,7 +198,7 @@ public class MapScreenTestCases extends BaseClass {
     //C21234 Verify user is able to close vehicle info screen by clicking on Close(X) button
    // C21230 Verify the user is able to go to the vehicle details screen by tapping on vehicle info in the bottom panel.
     //C22580 Verify vehicle labels are visible over map
-    @Test(priority =5)
+    @Test(priority =6)
     public void VehicleDisplayVerification() throws InterruptedException {
 //        mapScreenPage.getSignIn().click();
 //        mapScreenPage.getUsername().sendKeys("Fleet360A");
@@ -179,7 +223,7 @@ public class MapScreenTestCases extends BaseClass {
 
 //    C19241 Verify user is able to tap on search button
     //C19969 Verify tapping on search icon in the map screen should take the user to Vehicles screen and cursor should focus on search text bar and by default it shows text "Search vehicles" on the search bar
-    @Test(priority = 6)
+    @Test(priority = 7)
     public void SearchBarFunctionalitiesVerification() throws InterruptedException {
 //        mapScreenPage.getSignIn().click();
 //        mapScreenPage.getUsername().sendKeys("Fleet360A");
@@ -198,34 +242,47 @@ public class MapScreenTestCases extends BaseClass {
     }
 
 
-    //C83437 Tap on map settings when n/w is off
-    @Test(priority = 3)
-    public void ClickingMapSettingswhileNWoff() throws InterruptedException {
+
+
+
+    //C82686 Verify that user is able to see stopped/idle/moving vehicle duration at the bottom (third row) of the vehicle info screen
+    @Test(priority = 8)
+    public void StoppedVehicleDurationDisplay() throws InterruptedException {
 //        mapScreenPage.getSignIn().click();
 //        mapScreenPage.getUsername().sendKeys("Fleet360A");
 //        mapScreenPage.getPassword().sendKeys("Password@1");
 //        mapScreenPage.getSignIn().click();
 //        mapScreenPage.Click_Permission();
 
+        Thread.sleep(3000);
+        WebElement Stopped_tab = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.LinearLayout[1]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView"));
+        Stopped_tab.click();
+//         mapScreenPage.getStoop().click();
+        Thread.sleep(3000);
+        WebElement stoppedvehicle2 = driver.findElement(By.xpath("(//android.view.View[@content-desc=\"MARKER_ASSET.\"])[4]"));
+        stoppedvehicle2.click();
+        Thread.sleep(3000);
+        WebElement stoppedvehicle2tag = driver.findElement(By.xpath("(//android.view.View[@content-desc=\"MARKER_ASSET.\"])[7]"));
+        stoppedvehicle2tag.click();
+        Thread.sleep(3000);
+//        WebElement stoppedvehicle2title = driver.findElement(By.id("com.spireon.fleet.staging:id/tv_bottom_secondary"));
+//        stoppedvehicle2title.click();
+        Thread.sleep(3000);
+        WebElement stoppedvehicle2info= driver.findElement(By.id("com.spireon.fleet.staging:id/tv_bottom_tertiary"));
+
+        Assert.assertTrue(stoppedvehicle2info.isDisplayed());
+        System.out.println(stoppedvehicle2info.getText());
         Thread.sleep(2000);
-        mapScreenPage.getFab_map().click();
-        mapScreenPage.getFab_landmarks().click();
-        Thread.sleep(2000);
-        mapScreenPage.Clicksettings_button();
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
-        Assert.assertTrue(mapScreenPage.getPopup1().isDisplayed());
-        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
-        mapScreenPage.getPopup_close().click();
+
+        mapScreenPage.ClickVehicle1_Close();
         mapScreenPage.getFab_map().click();
         mapScreenPage.getFab_landmarks().click();
     }
 
 
 
-
-
  //   C22587 Verify speed info is shown for moving vehicles on map page detail view
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void SpeedInfoVerificationforMovingVehilces() throws InterruptedException {
 //        mapScreenPage.getSignIn().click();
 //        mapScreenPage.getUsername().sendKeys("Fleet360A");
@@ -259,127 +316,77 @@ public class MapScreenTestCases extends BaseClass {
 //        mapScreenPage.ClickMovingvehicle1_title();
 //        Thread.sleep(2000);
         Assert.assertTrue(mapScreenPage.getmovingspeedinfo().isDisplayed());
+        mapScreenPage.ClickVehicle1_Close();
+        mapScreenPage.getFab_map().click();
+        mapScreenPage.getFab_landmarks().click();
 
     }
 
 
-    //C82686 Verify that user is able to see stopped/idle/moving vehicle duration at the bottom (third row) of the vehicle info screen
-     @Test(priority = 7)
-    public void StoppedVehicleDurationDisplay() throws InterruptedException {
-//        mapScreenPage.getSignIn().click();
-//        mapScreenPage.getUsername().sendKeys("Fleet360A");
-//        mapScreenPage.getPassword().sendKeys("Password@1");
-//        mapScreenPage.getSignIn().click();
-//        mapScreenPage.Click_Permission();
-
-        Thread.sleep(3000);
-         WebElement Stopped_tab = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.LinearLayout[1]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView"));
-        Stopped_tab.click();
-//         mapScreenPage.getStoop().click();
-        Thread.sleep(3000);
-        WebElement stoppedvehicle2 = driver.findElement(By.xpath("(//android.view.View[@content-desc=\"MARKER_ASSET.\"])[4]"));
-        stoppedvehicle2.click();
-         Thread.sleep(3000);
-        WebElement stoppedvehicle2tag = driver.findElement(By.xpath("(//android.view.View[@content-desc=\"MARKER_ASSET.\"])[7]"));
-        stoppedvehicle2tag.click();
-        Thread.sleep(3000);
-//        WebElement stoppedvehicle2title = driver.findElement(By.id("com.spireon.fleet.staging:id/tv_bottom_secondary"));
-//        stoppedvehicle2title.click();
-         Thread.sleep(3000);
-        WebElement stoppedvehicle2info= driver.findElement(By.id("com.spireon.fleet.staging:id/tv_bottom_tertiary"));
-
-        Assert.assertTrue(stoppedvehicle2info.isDisplayed());
-        System.out.println(stoppedvehicle2info.getText());
-        Thread.sleep(2000);
-
-         mapScreenPage.ClickVehicle1_Close();
-         mapScreenPage.getFab_map().click();
-         mapScreenPage.getFab_landmarks().click();
-
-
-     }
 
 
      //C21453 Tap on Map settings
     //C83101 Verify by default landmarks is ON in the Map settings screen
-     @Test
-     public void MapSettingsDisplayVerification()
-     {
-         mapScreenPage.getSignIn().click();
-        mapScreenPage.getUsername().sendKeys("Fleet360A");
-        mapScreenPage.getPassword().sendKeys("Password@1");
-        mapScreenPage.getSignIn().click();
-        mapScreenPage.Click_Permission();
-
-         mapScreenPage.Clicksettings_button();
-         Assert.assertTrue(mapScreenPage.getLandmarksMapDetails().isEnabled());
-         Assert.assertTrue(mapScreenPage.getDefaultMapView().isDisplayed());
-         Assert.assertTrue(mapScreenPage.getSatelliteMapView().isDisplayed());
-         Assert.assertTrue(mapScreenPage.getAssetMapDetails().isDisplayed());
-         Assert.assertTrue(mapScreenPage.getLandmarksMapDetails().isDisplayed());
-         Assert.assertTrue(mapScreenPage.getTrafficMapDetails().isDisplayed());
-         Assert.assertTrue(mapScreenPage.getMapSettingsClosebutton().isEnabled());
-
-     }
-
-     @Test
-     public void MapViewDisplayVerification() throws InterruptedException {
-         mapScreenPage.getSignIn().click();
-         mapScreenPage.getUsername().sendKeys("Fleet360A");
-         mapScreenPage.getPassword().sendKeys("Password@1");
-         mapScreenPage.getSignIn().click();
-         mapScreenPage.Click_Permission();
-
-         mapScreenPage.Clicksettings_button();
-         mapScreenPage.Click_SatelliteMapView();
-         Thread.sleep(3000);
-         mapScreenPage.Clicksettings_button();
-         Thread.sleep(3000);
-         Assert.assertTrue(mapScreenPage.getSatelliteMapView().isSelected());
-         Assert.assertEquals(mapScreenPage.getSatelliteMapView().getAttribute("elementId"),"true");
-         mapScreenPage.Click_DefaultMapView();
-         mapScreenPage.Clicksettings_button();
-         Assert.assertTrue(mapScreenPage.getDefaultMapView().isSelected());
-         mapScreenPage.ClickMapSettingsClosebutton();
-         signinpage.getAccount_icon().click();
-         signinpage.getLogout().click();
-         signinpage.getConfirm_btn().click();
 
 
-         mapScreenPage.getUsername().sendKeys("Fleet360A");
-         mapScreenPage.getPassword().sendKeys("Password@1");
-         mapScreenPage.getSignIn().click();
-         mapScreenPage.Click_Permission();
-
-         mapScreenPage.Clicksettings_button();
-         Assert.assertTrue(mapScreenPage.getDefaultMapView().isSelected());
-
-     }
-
-
-     @Test
-     public void ColorVerificationLandmarksONOFF() throws InterruptedException {
-         mapScreenPage.getSignIn().click();
-         mapScreenPage.getUsername().sendKeys("Fleet360A");
-         mapScreenPage.getPassword().sendKeys("Password@1");
-         mapScreenPage.getSignIn().click();
-         mapScreenPage.Click_Permission();
-
-         mapScreenPage.Clicksettings_button();
-
-         Thread.sleep(3000);
-
-         WebElement textElement = driver.findElement(By.id("com.spireon.fleet.staging:id/landmarkTv"));
-         String colorValue = textElement.getCssValue("Color");
-         System.out.println(colorValue);
-         // Verify if the color is orange
-         if (colorValue.equals("rgba(255, 165, 0, 1)") || colorValue.equals("rgb(255, 165, 0)")) {
-             System.out.println("The text is orange and Landmarks on ON");
-         } else {
-             System.out.println("The text is not orange and Landmarks is OFF");
-         }
-
-     }
+//     @Test
+//     public void MapViewDisplayVerification() throws InterruptedException {
+//         mapScreenPage.getSignIn().click();
+//         mapScreenPage.getUsername().sendKeys("Fleet360A");
+//         mapScreenPage.getPassword().sendKeys("Password@1");
+//         mapScreenPage.getSignIn().click();
+//         mapScreenPage.Click_Permission();
+//
+//         mapScreenPage.Clicksettings_button();
+//         mapScreenPage.Click_SatelliteMapView();
+//         Thread.sleep(3000);
+//         mapScreenPage.Clicksettings_button();
+//         Thread.sleep(3000);
+//         Assert.assertTrue(mapScreenPage.getSatelliteMapView().isSelected());
+//         Assert.assertEquals(mapScreenPage.getSatelliteMapView().getAttribute("elementId"),"true");
+//         mapScreenPage.Click_DefaultMapView();
+//         mapScreenPage.Clicksettings_button();
+//         Assert.assertTrue(mapScreenPage.getDefaultMapView().isSelected());
+//         mapScreenPage.ClickMapSettingsClosebutton();
+//         signinpage.getAccount_icon().click();
+//         signinpage.getLogout().click();
+//         signinpage.getConfirm_btn().click();
+//
+//
+//         mapScreenPage.getUsername().sendKeys("Fleet360A");
+//         mapScreenPage.getPassword().sendKeys("Password@1");
+//         mapScreenPage.getSignIn().click();
+//         mapScreenPage.Click_Permission();
+//
+//         mapScreenPage.Clicksettings_button();
+//         Assert.assertTrue(mapScreenPage.getDefaultMapView().isSelected());
+//
+//     }
+//
+//
+//     @Test
+//     public void ColorVerificationLandmarksONOFF() throws InterruptedException {
+//         mapScreenPage.getSignIn().click();
+//         mapScreenPage.getUsername().sendKeys("Fleet360A");
+//         mapScreenPage.getPassword().sendKeys("Password@1");
+//         mapScreenPage.getSignIn().click();
+//         mapScreenPage.Click_Permission();
+//
+//         mapScreenPage.Clicksettings_button();
+//
+//         Thread.sleep(3000);
+//
+//         WebElement textElement = driver.findElement(By.id("com.spireon.fleet.staging:id/landmarkTv"));
+//         String colorValue = textElement.getCssValue("Color");
+//         System.out.println(colorValue);
+//         // Verify if the color is orange
+//         if (colorValue.equals("rgba(255, 165, 0, 1)") || colorValue.equals("rgb(255, 165, 0)")) {
+//             System.out.println("The text is orange and Landmarks on ON");
+//         } else {
+//             System.out.println("The text is not orange and Landmarks is OFF");
+//         }
+//
+//     }
 
 
 

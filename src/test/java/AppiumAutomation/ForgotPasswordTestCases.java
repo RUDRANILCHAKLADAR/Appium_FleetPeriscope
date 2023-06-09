@@ -40,7 +40,7 @@ public class ForgotPasswordTestCases extends BaseClass
 
     }
 
-    //C146199 Verify error messgae is shown without entering email if user taps on the submit button
+    //C146199 Verify error message is shown without entering email if user taps on the submit button
     @Test(priority = 2)
     public void EmptyEmailfieldErrorVerification()
     {
@@ -115,6 +115,7 @@ public class ForgotPasswordTestCases extends BaseClass
          forgotPasswordPage.Submit_btn_Click();
          Assert.assertEquals(forgotPasswordPage.getNetworkErrorMsg(),forgotPasswordPage.network_Err_msg);
          forgotPasswordPage.ClickOkbtn3();
+         driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
      }
 
 
