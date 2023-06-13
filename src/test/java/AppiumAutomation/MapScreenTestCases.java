@@ -1,5 +1,6 @@
 package AppiumAutomation;
 
+import Android.SignInPage;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.apache.log4j.Priority;
@@ -12,14 +13,16 @@ import org.testng.annotations.Test;
 public class MapScreenTestCases extends BaseClass {
 
 
+
+
 //    C21231 Verify user is able to tap on landmarks icon, vehicles icon, alerts icon and, accounts icon on the bottom tab bar
     //C21229 Verify by default, the Home button is selected in the bottom tab bar
     @Test(priority =0)
     public void UIElementsValidation() throws InterruptedException {
-        mapScreenPage.getSignIn().click();
-        mapScreenPage.getUsername().sendKeys("Fleet360A");
-        mapScreenPage.getPassword().sendKeys("Password@1");
-        mapScreenPage.getSignIn().click();
+        signinpage.getSignIn().click();
+        signinpage.getUsername().sendKeys("Fleet360A");
+        signinpage.getPassword().sendKeys("Password@1");
+        signinpage.getSignIn().click();
         mapScreenPage.Click_Permission();
 
         Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isSelected());

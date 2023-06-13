@@ -1,0 +1,8 @@
+2023-06-13 12:05:22:709 [Appium] Welcome to Appium v2.0.0-beta.48 (REV 9b60fcf7ac3f82fa589a64091376d0663262f8c6)
+2023-06-13 12:05:22:710 [Appium] Non-default server args:
+2023-06-13 12:05:22:711 [Appium] { sessionOverride: true }
+2023-06-13 12:05:22:711 [Appium] Attempting to load driver uiautomator2...
+2023-06-13 12:05:22:713 [Appium] Requiring driver at /Users/MDehury/.appium/node_modules/appium-uiautomator2-driver
+2023-06-13 12:05:23:562 [Appium] Attempting to load driver xcuitest...
+2023-06-13 12:05:23:564 [Appium] Requiring driver at /Users/MDehury/.appium/node_modules/appium-xcuitest-driver
+2023-06-13 12:05:24:066 [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.

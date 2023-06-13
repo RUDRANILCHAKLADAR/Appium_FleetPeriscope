@@ -1,12 +1,8 @@
 package Android;
 
-
-import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -14,15 +10,23 @@ import java.util.List;
 
 public class SignInPage {
 
-    AndroidDriver driver;
+//    AndroidDriver driver;
+//
+//    public SignInPage(AndroidDriver driver) {
+//        super();
+//        this.driver = driver;
+//        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+//    }
 
-    public SignInPage(AndroidDriver driver) {
-        super();
+    public AppiumDriver driver;
+
+    public SignInPage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
-    private WebElement SignIn;
+    public WebElement SignIn;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_username")
     private WebElement Username;
@@ -33,7 +37,7 @@ public class SignInPage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
     private WebElement Login;
    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_forgot_password")
-    private WebElement forgotpassword;
+    private WebElement forgotPassword;
 
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/login_msg")
@@ -43,36 +47,25 @@ public class SignInPage {
     private WebElement SignInTxt;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
-    private WebElement  backbutton;
-
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
-    private WebElement  backbutton2;
+    private WebElement  backButton;
 
     @AndroidFindBy(id = "android:id/message")
-    private WebElement pswrdErr;
+    private WebElement errorMessage;
 
     @AndroidFindBy(id = "android:id/button2")
-    private WebElement Okbtn;
+    private WebElement ok_cancel_Button;
 
-    @AndroidFindBy(id = "android:id/message")
-    private WebElement usrnmErr;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView")
     private WebElement InvalidLoginErrMsg;
 
-    @AndroidFindBy(id = "android:id/button2")
-    private WebElement  TryagainBtn;
 
-    @AndroidFindBy(id = "android:id/message")
-    private WebElement  NetworkErrMsg;
-    @AndroidFindBy(id = "android:id/message")
-    private WebElement  NetworkErr;
 
     @AndroidFindBy(id = "android:id/button3")
     private WebElement Okbtn2;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
-    private WebElement anyaccount;
+    private WebElement anyAccount;
 
     @AndroidFindBy(id = "android:id/button1")
     private WebElement selectbtn;
@@ -83,8 +76,7 @@ public class SignInPage {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
     private WebElement ForgotPasswordTxt;
 
-    @AndroidFindBy(id = "android:id/button2")
-    private WebElement cancelbtn;
+
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[1]")
     private WebElement cancelbtn2;
@@ -96,12 +88,11 @@ public class SignInPage {
 
     @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[1]")
     private WebElement radioButton2;
-    //hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]
 
     @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
     private WebElement BasicUser;
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_filters")
-   private WebElement recyclerView ;
+    private WebElement recyclerView ;
     @AndroidFindBy(className = "android.widget.LinearLayout")
     List<WebElement> linearLayouts;
 
@@ -111,15 +102,14 @@ public class SignInPage {
     private WebElement filter;
 
    @AndroidFindBy(xpath ="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[12]/android.widget.TextView")
-   private WebElement Assethealth;
+   private WebElement AssetHealth;
 
    //Advance User
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[4]/android.widget.ImageView")
     private WebElement alertButton2;
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/action_filter_alerts")
-    private WebElement filter2;
+
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[11]" )
-    private WebElement Assethealth_adv;
+    private WebElement assetHealth_adv;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/iv_title")
     private WebElement title;
@@ -164,18 +154,15 @@ public class SignInPage {
     }
 
 
-    public List<WebElement> listOfFilters()
-    {
-        return linearLayouts;
-    }
-
     public void clickRadioButton() {  radioButton.click();  }
     public WebElement getRadioButton()
     {
         return radioButton;
     }
-     public boolean isRadioButtonChecked()
-     {  return radioButton.getAttribute("checked").equals("true");  }
+
+    public boolean isRadioButtonChecked()
+     {  return radioButton.getAttribute("checked").equals("true");
+     }
     public WebElement getSignIn()
    {
        return SignIn;
@@ -184,6 +171,8 @@ public class SignInPage {
     {
         return Username;
     }
+
+
     public WebElement getPassword()
     {
         return Password;
@@ -192,9 +181,9 @@ public class SignInPage {
     {
         return Login;
     }
-    public WebElement getForgotpassword()
+    public WebElement getForgotPassword()
     {
-        return forgotpassword;
+        return forgotPassword;
     }
 
    public String getLoginMsg()
@@ -207,27 +196,19 @@ public class SignInPage {
        return SignInTxt.getText();
    }
 
-   public WebElement getBackbutton()
+   public WebElement getBackButton()
    {
-       return backbutton;
+       return backButton;
    }
 
-    public WebElement getBackbutton2()
+    public String getErrorMsg()
     {
-        return backbutton2;
+        return errorMessage.getText();
     }
 
-    public String getpswrdErrMsg()
+    public WebElement getOk_cancel_Button()
     {
-        return pswrdErr.getText();
-    }
-    public String getusrnmErrrMsg()
-    {
-        return usrnmErr.getText();
-    }
-    public WebElement getOkbtn()
-    {
-        return Okbtn;
+        return ok_cancel_Button;
     }
 
     public String getInvalidLoginErrMsg()
@@ -235,18 +216,15 @@ public class SignInPage {
         return InvalidLoginErrMsg.getText();
     }
 
-    public WebElement getTryagainBtn()
-    {
-        return TryagainBtn;
-    }
+
 
     public String getNetworkErrMsg()
     {
-        return NetworkErrMsg.getText();
+        return errorMessage.getText();
     }
     public WebElement getNetworkErr()
     {
-        return NetworkErr;
+        return errorMessage;
     }
 
     public WebElement getOkbtn2()
@@ -256,7 +234,7 @@ public class SignInPage {
 
     public WebElement getAccount()
     {
-        return anyaccount;
+        return anyAccount;
     }
 
     public WebElement getSelectbtn()
@@ -274,56 +252,11 @@ public class SignInPage {
         return ForgotPasswordTxt.getText();
     }
 
-    public WebElement getCancelbtn()
-    {
-        return cancelbtn;
-    }
 
-    public WebElement getCancelbtn2()
-    {
-        return cancelbtn2;
-    }
-
-    public WebElement getBasicUser(){
-        return BasicUser;
-    }
-
-   public WebElement getAlertButton()
-   {
-       return alertButton;
-   }
-
-   public WebElement getFilter()
-   {
-       return filter;
-   }
-
-    public WebElement getAssethealth()
-    {
-        return Assethealth;
-    }
-    //AdvancedUser
-    public WebElement getAssethealth_adv()
-    {
-        return Assethealth_adv;
-    }
-    public WebElement getFilter2()
-    {
-        return filter2;
-    }
-    public WebElement getAlertButton2()
-    {
-        return alertButton2;
-    }
 
     public WebElement getTitle()
     {
         return title;
-    }
-
-    public void scrollAndClick() {
-       // driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+Asset Health (2)+"\").instance(0))").click();
-      //  driver.findElement(new AppiumBy.ByAndroidUIAutomator("UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Asset Health (2)\").instance(0))"));
     }
 
     public WebElement getAccount_Dialogue_Screen()
@@ -339,6 +272,39 @@ public class SignInPage {
     {
         return HomeScreen;
     }
+
+
+    public void setUsername(String uname){
+        Username.click();
+        Username.sendKeys(uname);
+    }
+
+    public void setPassword(String pwd){
+        Password.click();
+        Password.sendKeys(pwd);
+    }
+
+    public void clickSignIn(){
+        SignIn.click();
+    }
+
+    public void clickSelectBtn(){
+        selectbtn.click();
+    }
+
+    public void clickLogout(){
+        Logout.click();
+    }
+
+    public void clickConfirm_btn(){
+        Confirm_btn.click();
+    }
+
+    public String getErrorMessage(){
+       String errorMsg= errorMessage.getText();
+       return errorMsg;
+    }
+
 }
 
 

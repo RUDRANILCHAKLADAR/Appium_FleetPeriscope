@@ -1,87 +1,81 @@
 package AppiumAutomation;
 
 import Android.SignInPage;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.connection.ConnectionStateBuilder;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
+import Utility.ActionClass;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-
+import org.testng.annotations.*;
+import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static io.appium.java_client.touch.offset.PointOption.point;
 
 public class SignInTestCases extends BaseClass {
 
+    ActionClass actions= new ActionClass();
+    SignInPage signinpage;
+   // public AndroidDriver driver;
+
+    @BeforeMethod
+    public void beforeMethod(Method m) {
+        signinpage = new SignInPage(driver);
+    }
+
+   @AfterMethod
+   public void afterMethod(){}
+
+
     @Test(priority = 0)
-    public void AccountDialogueScreenVerification() throws InterruptedException {
+    public void AccountDialogueScreenVerification(){
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        signinpage.getSignIn().click();
-        signinpage.getUsername().click();
-        signinpage.getUsername().sendKeys("tjbussfl");
-        signinpage.getPassword().click();
-        signinpage.getPassword().sendKeys("123456");
-        signinpage.getSignIn().click();
-        Thread.sleep(2000);
+        actions.clickElement(signinpage.getSignIn());
+        signinpage.setUsername("tjbussfl");
+        signinpage.setPassword("123456");
+        actions.clickElement(signinpage.getSignIn());
+        actions.WaitTillVisibilityOf(signinpage.getAccount_Dialogue_Screen());
         Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
-        Thread.sleep(2000);
-        signinpage.getSelectbtn().click();
+        signinpage.clickSelectBtn();
         signinpage.Click_Permission();
         signinpage.getAccount_icon().click();
-        signinpage.getLogout().click();
-        signinpage.getConfirm_btn().click();
-
+        signinpage.clickLogout();
+        signinpage.clickConfirm_btn();
     }
 
 
     //Verify Choose account screen is shown for some user if user scope is set
-    //C18779,C146195-To check whether all the SignIn elements are displayed or not
+    //C18779,C146195-To check whether all the signIn elements are displayed or not
     @Test(priority = 2)
     public void LoginUIelementsvalidation() {
 
         Assert.assertTrue(signinpage.getSignIn().isDisplayed());
-        //signinpage.getSignIn().click();
         Assert.assertTrue(signinpage.getUsername().isDisplayed());
         Assert.assertTrue(signinpage.getPassword().isDisplayed());
         Assert.assertTrue(signinpage.getLogin().isDisplayed());
-        Assert.assertTrue(signinpage.getForgotpassword().isDisplayed());
+        Assert.assertTrue(signinpage.getForgotPassword().isDisplayed());
         Assert.assertEquals(signinpage.getLoginMsg(), "with your username and password");
         Assert.assertEquals(signinpage.getSignIntxt(), "Sign In");
-        Assert.assertTrue(signinpage.getBackbutton().isEnabled());
+        Assert.assertTrue(signinpage.getBackButton().isEnabled());
 
     }
     @Test(priority = 1)
     public void ForgotPasswordScreenValidation() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        signinpage.getSignIn().click();
-        signinpage.getForgotpassword().click();
+        actions.clickElement(signinpage.getSignIn());
+        signinpage.getForgotPassword().click();
         String ActualErrorMessage = signinpage.getForgotPasswordTxt();
         String ExpectedResult = "Forgot Password";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         Thread.sleep(3000);
-        signinpage.getBackbutton2().click();
+        signinpage.getBackButton().click();
     }
 
     //C18780-Verify user is able to enter the username and password in the Sign in Screen
     @Test(priority = 3)
     public void LoginCredentialsvalidation() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
-        //  signinpage.getSignIn().click();
-        signinpage.getUsername().click();
-        signinpage.getUsername().sendKeys("tjbussfl");
-        signinpage.getPassword().click();
-        signinpage.getPassword().sendKeys("123456");
+        signinpage.setUsername("tjbussfl");
+        signinpage.setPassword("123456");
     }
 
 
@@ -90,25 +84,24 @@ public class SignInTestCases extends BaseClass {
     public void EmptyLoginCredentialsvalidation() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        //  signinpage.getSignIn().click();
         signinpage.getUsername().clear();
         signinpage.getPassword().clear();
-        signinpage.getUsername().sendKeys("tjbussfl");
-        signinpage.getSignIn().click();
-        Assert.assertEquals(signinpage.getpswrdErrMsg(), "Please enter a valid password");
+        signinpage.setUsername("tjbussfl");
+        signinpage.clickSignIn();
+        Assert.assertEquals(signinpage.getErrorMsg(), "Please enter a valid password");
         Thread.sleep(2000);
-        signinpage.getOkbtn().click();
+        signinpage.getOk_cancel_Button().click();
         Thread.sleep(2000);
         signinpage.getUsername().clear();
-        signinpage.getPassword().sendKeys("123456");
-        signinpage.getSignIn().click();
-        Assert.assertEquals(signinpage.getusrnmErrrMsg(), "Please enter a valid username");
+        signinpage.setPassword("123456");
+        signinpage.clickSignIn();
+        Assert.assertEquals(signinpage.getErrorMsg(), "Please enter a valid username");
         Thread.sleep(2000);
-        signinpage.getOkbtn().click();
+        signinpage.getOk_cancel_Button().click();
         signinpage.getPassword().clear();
-        signinpage.getSignIn().click();
-        Assert.assertEquals(signinpage.getusrnmErrrMsg(), "Please enter a valid username");
-        signinpage.getOkbtn().click();
+        signinpage.clickSignIn();
+        Assert.assertEquals(signinpage.getErrorMsg(), "Please enter a valid username");
+        signinpage.getOk_cancel_Button().click();
 
     }
 
@@ -117,24 +110,22 @@ public class SignInTestCases extends BaseClass {
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        //signinpage.getSignIn().click();
         signinpage.getUsername().clear();
         signinpage.getUsername().sendKeys("tjbuss");
         signinpage.getPassword().clear();
         signinpage.getPassword().sendKeys("1234");
         wait.until(ExpectedConditions.elementToBeClickable(signinpage.getSignIn()));
-        signinpage.getSignIn().click();
-        String actualerror = signinpage.getInvalidLoginErrMsg();
-        String expectedresult = "The credentials entered do not match our records. Verify your username and password.";
-        Assert.assertEquals(actualerror, expectedresult);
+        signinpage.clickSignIn();
+        String actualError = signinpage.getInvalidLoginErrMsg();
+        String expectedResult = "The credentials entered do not match our records. Verify your username and password.";
+        Assert.assertEquals(actualError, expectedResult);
         Thread.sleep(3000);
-        signinpage.getTryagainBtn().click();
+        signinpage.getOk_cancel_Button().click();
     }
 
     @Test(priority = 6)
     public void NoInternetConnection() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        //signinpage.getSignIn().click();
         // To disable wifi/ Data connection
         //driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
         signinpage.getUsername().clear();
@@ -142,13 +133,13 @@ public class SignInTestCases extends BaseClass {
         signinpage.getPassword().clear();
         signinpage.getPassword().sendKeys("243234");
         Assert.assertTrue(signinpage.getSignIn().isEnabled());
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        //driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
         signinpage.getSignIn().click();
-        String ActualErrorMessage = signinpage.getNetworkErrMsg();
+        String ActualErrorMessage = signinpage.getErrorMessage();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         //To enable wifi / data connection
-        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
+       // driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
         signinpage.getOkbtn2().click();
         new WebDriverWait(driver, Duration.ofSeconds(30)).
                 until(ExpectedConditions.invisibilityOf(signinpage.getNetworkErr()));
@@ -162,11 +153,9 @@ public class SignInTestCases extends BaseClass {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
        //  signinpage.getSignIn().click();
-        signinpage.getUsername().clear();
-        signinpage.getUsername().sendKeys("tjbussfl");
-        signinpage.getPassword().clear();
-        signinpage.getPassword().sendKeys("123456");
-        signinpage.getSignIn().click();
+        signinpage.setUsername("tjbussfl");
+        signinpage.setPassword("123456");
+        signinpage.clickSignIn();
         Thread.sleep(2000);
         signinpage.getAccount().click();
         signinpage.getSelectbtn().click();
@@ -176,7 +165,7 @@ public class SignInTestCases extends BaseClass {
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         signinpage.getAccount_icon().click();
-        signinpage.getLogout().click();
+        signinpage.clickLogout();
         signinpage.getConfirm_btn().click();
 
     }
@@ -188,14 +177,14 @@ public class SignInTestCases extends BaseClass {
     public void UserAccountSelectionCancel() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-         signinpage.getSignIn().click();
+        actions.clickElement(signinpage.getSignIn());
         signinpage.getUsername().click();
         signinpage.getUsername().sendKeys("tjbussfl");
         signinpage.getPassword().click();
         signinpage.getPassword().sendKeys("123456");
         signinpage.getSignIn().click();
         Thread.sleep(2000);
-        signinpage.getCancelbtn().click();
+        signinpage.getOk_cancel_Button().click();
         Assert.assertEquals(signinpage.getSignIntxt(), "Sign In");
 
     }
@@ -214,7 +203,7 @@ public class SignInTestCases extends BaseClass {
         signinpage.clickRadioButton();
         Thread.sleep(2000);
         Assert.assertTrue(signinpage.getRadioButton().getAttribute("checked").equals("true"));
-        signinpage.getCancelbtn().click();
+        signinpage.getOk_cancel_Button().click();
     }
 
     @Test(priority = 10)
@@ -236,7 +225,7 @@ public class SignInTestCases extends BaseClass {
 
         //Verify tapping on cancel button on dialogue pop up, account is not selected and user is returned to Sign In screen
         Thread.sleep(2000);
-        signinpage.getCancelbtn().click();
+        signinpage.getOk_cancel_Button().click();
         Assert.assertEquals(signinpage.getSignIntxt(), "Sign In");
 
         //C20853-Verify after selecting a account user is able to sign in successfully
@@ -248,7 +237,6 @@ public class SignInTestCases extends BaseClass {
         signinpage.getAccount().click();
         signinpage.getSelectbtn().click();
         Thread.sleep(2000);
-        //signinpage.Click_Permission();
         String ActualErrorMessage = signinpage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
@@ -362,15 +350,10 @@ public class SignInTestCases extends BaseClass {
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         signinpage.getSignIn().click();
-        signinpage.getBackbutton().click();
+        signinpage.getBackButton().click();
         Assert.assertTrue(signinpage.getTitle().isDisplayed());
     }
 
-//    @Test
-//    public void MaskingUnmaskingOfPassword()
-//    {
-//
-//    }
 
     @Test(priority = 12)
     public void AccountScreenDisplayVerification() throws InterruptedException {
@@ -388,7 +371,7 @@ public class SignInTestCases extends BaseClass {
         //  Assert.assertTrue(signinpage.getRadioButton2().isSelected());
         Assert.assertTrue(signinpage.getRadioButton2().getAttribute("checked").equals("true"));
         Thread.sleep(2000);
-        signinpage.getCancelbtn().click();
+        signinpage.getOk_cancel_Button().click();
     }
 
     //Verify account setting is checked tapping on Sign in button for the valid user credentials
@@ -400,19 +383,14 @@ public class SignInTestCases extends BaseClass {
     @Test(priority = 13)
     public void AccountScreenNotDisplayedVerification() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        //signinpage.getSignIn().click();
-      //  signinpage.getCancelbtn2().click();
-       // signinpage.getUsername().click();
         signinpage.getUsername().clear();
         signinpage.getUsername().sendKeys("Fleet360A");
-      //  signinpage.getPassword().click();
         signinpage.getPassword().clear();
         signinpage.getPassword().sendKeys("Password@1");
         signinpage.getSignIn().click();
         Assert.assertTrue(signinpage.getHomeScreen().isDisplayed());
         Thread.sleep(6000);
-        if (signinpage.getHomeScreen().isDisplayed() == true)
+        if (signinpage.getHomeScreen().isDisplayed())
             System.out.println("Account Screen pop up is not displayed");
         else
             System.out.println("Account Screen pop up is  displayed");
@@ -428,20 +406,20 @@ public class SignInTestCases extends BaseClass {
     {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-         signinpage.getSignIn().click();
+        signinpage.getSignIn().click();
         signinpage.getUsername().click();
         signinpage.getUsername().sendKeys("tjbussfl");
         signinpage.getPassword().click();
         signinpage.getPassword().sendKeys("123456");
         signinpage.getSignIn().click();
         signinpage.getRadioButton().click();
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+       // driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
         signinpage.getSelectbtn().click();
         String ActualErrorMessage = signinpage.getNetworkErrMsg();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         //To enable wifi / data connection
-        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
+      //  driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
 
     }
 
