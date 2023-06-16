@@ -11,7 +11,7 @@
     <parameter name="systemPort" value="10000" />
     <parameter name="chromeDriverPort" value="11000" />
     <classes>
-        <class name="AppiumAutomation.SignInTestCases"/>
+        <class name="AppiumAutomation.loginTest"/>
 
     </classes>
 </test>
@@ -23,7 +23,7 @@
         <parameter name="wdaLocalPort" value="10001" />
         <parameter name="webkitDebugProxyPort" value="11001" />
         <classes>
-            <class name="AppiumAutomation.SignInTestCases"/>
+            <class name="AppiumAutomation.loginTest"/>
 
         </classes>
     </test>

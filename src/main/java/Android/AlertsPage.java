@@ -16,14 +16,7 @@ public class AlertsPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
-    private WebElement SignIn;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_username")
-    private WebElement Username;
-
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_password")
-    private WebElement Password;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
      private WebElement Alert_Title_text;
@@ -127,18 +120,7 @@ public class AlertsPage {
     }
 
 
-    public WebElement getSignIn()
-    {
-        return SignIn;
-    }
-    public WebElement getUsername()
-    {
-        return Username;
-    }
-    public WebElement getPassword()
-    {
-        return Password;
-    }
+
     public String  getAlert_Title_text()
     {
         return Alert_Title_text.getText();

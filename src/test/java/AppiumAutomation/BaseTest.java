@@ -11,6 +11,7 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
+import utility.ActionClass;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +28,8 @@ public class BaseTest {
 
     //public LoginPage signinpage;
     public AppiumDriverLocalService service;
-     public  AppiumDriver driver;
+    public  AppiumDriver driver;
+    ActionClass actions;
 
 
     public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
@@ -121,7 +123,7 @@ public class BaseTest {
             }
             setDriver(driver);
            Log.info("driver initialized: " + driver);
-
+        actions= new ActionClass(driver);
 
     }
 

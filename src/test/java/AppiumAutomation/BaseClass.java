@@ -31,8 +31,8 @@ public class BaseClass {
     public SignInPage signinpage;
     public ForgotPasswordPage forgotPasswordPage;
 
-    public MapScreenPage  mapScreenPage;
-    public AlertsPage     alertsPage;
+    public MapScreenPage mapScreenPage;
+    public AlertsPage alertsPage;
     public void pullToRefresh() {
         int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
         int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
@@ -46,27 +46,18 @@ public class BaseClass {
     @BeforeClass
     public void ConfigureAppium() throws IOException, InterruptedException {
         Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//Configuration//config");
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//Configuration//config.properties");
         prop.load(fis);
         String ipAddress = prop.getProperty("ipAddress");
         String port = prop.getProperty("iPort");
 
-//       service = new AppiumServiceBuilder().
-//                withAppiumJS(new File("//opt//homebrew//Cellar//node//19.1.0//lib//node_modules//appium//build//lib//main.js")).
-//                withIPAddress(ipAddress).usingPort(Integer.parseInt(port))
-//                .build();
-//       service.start();
-
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName(prop.getProperty("AndroidDeviceName"));
         options.setPlatformName("Android");
-        options.setApp(prop.getProperty("AppPath"));
+        options.setApp(prop.getProperty("androidAppPath"));
         //options.setDeviceName("Pixel 4 ");
-        driver = new AndroidDriver(new URL(prop.getProperty("Url")), options);
+        driver = new AndroidDriver(new URL(prop.getProperty("appiumURL")), options);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
-
-
         signinpage = new SignInPage(driver);
         forgotPasswordPage=new ForgotPasswordPage(driver);
          mapScreenPage=new MapScreenPage(driver);

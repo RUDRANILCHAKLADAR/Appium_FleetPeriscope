@@ -27,10 +27,10 @@ public class AlertsTestCases extends BaseClass
     //C147073 Tap on Filter icon
     @Test(priority = 0)
     public void testAlertsScreenUIVerification() throws InterruptedException {
-        alertsPage.getSignIn().click();
-        alertsPage.getUsername().sendKeys("Fleet360A");
-        alertsPage.getPassword().sendKeys("Password@1");
-        alertsPage.getSignIn().click();
+        signinpage.getSignIn().click();
+        signinpage.getUsername().sendKeys("Fleet360A");
+        signinpage.getPassword().sendKeys("Password@1");
+        signinpage.getSignIn().click();
         alertsPage.Click_Permission();
 
         alertsPage.ClickAlerts_icon();
@@ -62,8 +62,6 @@ public class AlertsTestCases extends BaseClass
     @Test(priority = 1)
     public void testAlertsScreenNetworkVerificaton() throws InterruptedException {
 
-
-
         alertsPage.Click_HomeScreen_icon();
         driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
         alertsPage.ClickAlerts_icon();
@@ -83,13 +81,8 @@ public class AlertsTestCases extends BaseClass
     //C103327 Verify alert filter has categories like safety/Productivity/Monitoring/Asset health
     @Test(priority = 2)
     public void testAlertFilterCategoriesVerification() throws InterruptedException {
-
-
-
         alertsPage.Click_filter();
         Thread.sleep(2000);
-
-
         List<WebElement> FilterCategoriesList = driver.findElements(By.id("com.spireon.fleet.staging:id/tv_filter_type"));
         Assert.assertTrue(FilterCategoriesList.get(0).getText().contains(alertsPage.safety));
         Assert.assertTrue(FilterCategoriesList.get(1).getText().contains(alertsPage.prod));
@@ -109,13 +102,9 @@ public class AlertsTestCases extends BaseClass
     @Test(priority = 3)
     public void testSafetyFilterVerfication() throws InterruptedException {
 
-
-
         alertsPage.Click_filter();
         Thread.sleep(2000);
-
-
-       List<WebElement> FilterList = driver.findElements(By.id("com.spireon.fleet.staging:id/material_drawer_name"));
+        List<WebElement> FilterList = driver.findElements(By.id("com.spireon.fleet.staging:id/material_drawer_name"));
         Assert.assertTrue(FilterList.get(0).getText().contains(alertsPage.safety1));
         Assert.assertTrue(FilterList.get(1).getText().contains(alertsPage.safety2));
         Assert.assertTrue(FilterList.get(2).getText().contains(alertsPage.safety3));
@@ -127,8 +116,6 @@ public class AlertsTestCases extends BaseClass
         Assert.assertTrue(FilterList.get(8).getText().contains(alertsPage.productivity4));
         Assert.assertTrue(FilterList.get(9).getText().contains(alertsPage.monitor1));
         Assert.assertTrue(FilterList.get(10).getText().contains(alertsPage.monitor2));
-
-
         Assert.assertEquals( driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Low Battery\"));")).getText(),alertsPage.asset1);
         Assert.assertEquals( driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Maintenance\"));")).getText(),alertsPage.asset2);
         Assert.assertEquals( driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));")).getText(),alertsPage.asset3);
