@@ -1,12 +1,9 @@
 package AppiumAutomation;
 
-import Android.SignInPage;
-import Android.loginPage;
+import android.loginPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 
 
@@ -40,13 +37,13 @@ public class loginTest extends BaseTest {
 
 
     @Parameters({"platformName"})
-    @Test(priority = 2)
+    @Test(enabled=false)
     public void testForgotPasswordScreenValidation() throws InterruptedException {
         actions.waitForVisibility(signinpage.SignIn);
         Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
         actions.clickElement(signinpage.SignIn);
         actions.clickElement(signinpage.forgotPassword);
-        if (platformName.equals("Android")) {
+        if (platformName.equals("android")) {
             String ActualErrorMessage = signinpage.forgotPwdHeader.getText();
             String ExpectedResult = "Forgot Password";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);

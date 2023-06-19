@@ -5,7 +5,7 @@
     <test verbose="2" preserve-order="true" name="/Users/MDehury/Desktop/Appium_PeriScope"/>
 <test name="Pixel_2">
     <parameter name="emulator" value="true" />
-    <parameter name="platformName" value="Android" />
+    <parameter name="platformName" value="android" />
     <parameter name="udid" value="replace_with_device_udid" />
     <parameter name="deviceName" value="emulator-5554" />
     <parameter name="systemPort" value="10000" />

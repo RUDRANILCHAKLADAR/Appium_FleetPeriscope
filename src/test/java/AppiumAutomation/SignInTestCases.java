@@ -1,13 +1,17 @@
 package AppiumAutomation;
 
-import Android.SignInPage;
-import io.appium.java_client.android.connection.ConnectionStateBuilder;
+import android.SignInPage;
+import io.appium.java_client.TouchAction;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -231,8 +235,8 @@ public class SignInTestCases extends BaseTest {
         actions.clickElement(signinpage.Confirm_btn);
 
     }
-//
-//    @Test
+
+//    @Test(enabled = false)
 //    public void AdvanceUserLoginVerification() throws InterruptedException {
 //        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 //        signinpage.getSignIn().click();
@@ -279,7 +283,7 @@ public class SignInTestCases extends BaseTest {
 //    }
 //
 //
-//    @Test
+//    @Test(enabled = false)
 //    public void BasicUserLoginVerification() throws InterruptedException {
 //        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 //        signinpage.getSignIn().click();
@@ -327,8 +331,10 @@ public class SignInTestCases extends BaseTest {
 //                // This LinearLayout contains a DTC alert
 //                isDTCAlert=true;
 //            }
+//
+//       Assert.assertTrue(isDTCAlert,"Basic User");
 
-    //   Assert.assertTrue(isDTCAlert,"Basic User");
+        //}
 
     @Test(priority = 11)
     public void BacktoCarouselPageVerfication() {

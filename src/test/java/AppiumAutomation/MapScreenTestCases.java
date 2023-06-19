@@ -1,9 +1,6 @@
 package AppiumAutomation;
 
-import Android.SignInPage;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
-import org.apache.log4j.Priority;
 //import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
