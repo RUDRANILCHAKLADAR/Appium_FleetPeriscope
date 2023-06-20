@@ -3,8 +3,11 @@ package Android;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class AlertsPage {
 
@@ -16,14 +19,6 @@ public class AlertsPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
-    private WebElement SignIn;
-
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_username")
-    private WebElement Username;
-
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_password")
-    private WebElement Password;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
      private WebElement Alert_Title_text;
@@ -31,11 +26,11 @@ public class AlertsPage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_filter_alerts")
     private WebElement Filter_icon;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_filters")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/fragment_alerts_filter")
     private WebElement Total_itemsCount;
 
-    @AndroidFindBy(id = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout[2]")
-    private WebElement Alert_List;
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_alerts_list")
+    public WebElement Alert_List;
 
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     private WebElement permission_access;
@@ -60,13 +55,85 @@ public class AlertsPage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     private WebElement HomeScreen_icon;
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_no_alerts")
+    private WebElement No_Alerts_Found;
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/progress")
+    private WebElement Progress_bar;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tvAlertName")
+    private WebElement LandmarkName;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tvAlertAddress")
+    private WebElement AddressName;
+
     public String safety="Safety (5)";
     public String prod="Productivity (4)";
     public String monitor="Monitoring (2)";
     public String asset="Asset Health (5)";
 
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/iv_check")
+    private List<WebElement> Tick_Mark;
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/material_drawer_name")
+    private List<WebElement> Productivity_List;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_alerts_list")
+    public List<WebElement> AlertListFull;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/alertValue")
+    public List<WebElement> IdlingTime;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_asset_name")
+    public List<WebElement> IdleVehicleName;
+
+
+    public WebElement getLandmarkName()
+    {
+        return LandmarkName;
+    }
+
+
+    public WebElement getAddressName()
+    {
+        return AddressName;
+    }
+    public WebElement getProgress_bar()
+    {
+        return Progress_bar;
+    }
+
+    public WebElement getNo_Alerts_Found()
+     {
+         return No_Alerts_Found;
+     }
+
+    public String getNo_Alerts_Found_Msg()
+    {
+        return No_Alerts_Found.getText();
+    }
+    public String Alert_Msg="No Alerts found";
+
+
+
+
+    public List<WebElement> getAlertVehicleTime(){
+        return IdlingTime;
+    }
+    public List<WebElement> getAlertVehicleName(){
+        return IdleVehicleName;
+    }
+
+    public List<WebElement> getProductivity_List(){
+        return Productivity_List;
+    }
+    public List<WebElement> getTick_Mark(){
+        return Tick_Mark;
+    }
+
+    public List<WebElement> getAlertListFull(){
+        return AlertListFull;
+    }
 
     public void Click_HomeScreen_icon()
     {
@@ -127,18 +194,7 @@ public class AlertsPage {
     }
 
 
-    public WebElement getSignIn()
-    {
-        return SignIn;
-    }
-    public WebElement getUsername()
-    {
-        return Username;
-    }
-    public WebElement getPassword()
-    {
-        return Password;
-    }
+
     public String  getAlert_Title_text()
     {
         return Alert_Title_text.getText();
@@ -169,6 +225,7 @@ public class AlertsPage {
     {
         permission_access.click();
     }
+
 
 
 }
