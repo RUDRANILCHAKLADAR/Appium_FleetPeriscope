@@ -108,7 +108,7 @@ public class BaseTest {
                     //options.setApp(prop.getProperty("androidAppPath"));
                     //options.setApp(System.getProperty("user.dir") + "//App//app-fleetStaging-debug.apk");
                     //options.setAppPackage("com.spireon.fleet.staging");
-                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "//src//test//java//App//app-fleetStaging-debug.apk");
+                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/Appium_PeriScope/src/test/java/App/app-fleetStaging-debug.apk");
                     driver = new AndroidDriver(url, options);
                     //loginpage=new LoginPage(driver);
 
