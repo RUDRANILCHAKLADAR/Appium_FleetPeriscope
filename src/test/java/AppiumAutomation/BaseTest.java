@@ -109,6 +109,7 @@ public class BaseTest {
                     //options.setApp(System.getProperty("user.dir") + "//App//app-fleetStaging-debug.apk");
                     //options.setAppPackage("com.spireon.fleet.staging");
                     options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     driver = new AndroidDriver(url, options);
                     //loginpage=new LoginPage(driver);
 
