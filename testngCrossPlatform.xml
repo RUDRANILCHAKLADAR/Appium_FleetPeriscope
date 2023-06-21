@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" parallel="tests">
 
-    <test verbose="2" preserve-order="true" name="/Users/MDehury/Desktop/Appium_PeriScope"/>
+    <test verbose="2" preserve-order="true" name="Appium_PeriScope"/>
 <test name="Pixel_2">
     <parameter name="emulator" value="true" />
     <parameter name="platformName" value="android" />
