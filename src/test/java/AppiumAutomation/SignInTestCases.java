@@ -78,33 +78,33 @@ public class SignInTestCases extends BaseTest {
         Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
         actions.clickElement(signinpage.SignIn);
         actions.clickElement(signinpage.forgotPassword);
-//        if (platformName.equals("android")) {
-//            String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
-//            String ExpectedResult = "Forgot Password";
-//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-//
-//        } else
-//        if(platformName.equals("iOS")){
-//            String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
-//            String ExpectedResult = "Forgot Password?";
-//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-//            return;
-//
-//        }
-
-        if (currentPlatform== BaseTest.Platform.ANDROID) {
+        if (platformName.equals("android")) {
             String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
             String ExpectedResult = "Forgot Password";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
 
         } else
-        if(currentPlatform== BaseTest.Platform.iOS){
+        if(platformName.equals("iOS")){
             String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
             String ExpectedResult = "Forgot Password?";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
             return;
 
         }
+
+//        if (currentPlatform== BaseTest.Platform.ANDROID) {
+//            String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
+//            String ExpectedResult = "Forgot Password";
+//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+//
+//        } else
+//        if(currentPlatform== BaseTest.Platform.iOS){
+//            String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
+//            String ExpectedResult = "Forgot Password?";
+//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+//            return;
+
+      //  }
         actions.clickElement(signinpage.backButton);
     }
 
