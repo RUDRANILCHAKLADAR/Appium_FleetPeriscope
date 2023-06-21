@@ -166,7 +166,7 @@ public class SignInTestCases extends BaseTest {
         signinpage.setPassword("243234");
         Assert.assertTrue(signinpage.getSignIn().isEnabled());
 
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        //driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
         actions.clickElement(signinpage.SignIn);
         String ActualErrorMessage = signinpage.getErrorMessage();
         String ExpectedResult = "Please check your network connection and try again.";
