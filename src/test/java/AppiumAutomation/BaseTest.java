@@ -100,7 +100,7 @@ public class BaseTest {
 
             switch(platformName) {
                 case "android":
-                    currentPlatform=Platform.ANDROID;
+                    //currentPlatform=Platform.ANDROID;
                     UiAutomator2Options options = new UiAutomator2Options();
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
                     options.setPlatformName("android");
@@ -111,7 +111,7 @@ public class BaseTest {
 
                     break;
                 case "iOS":
-                    currentPlatform=Platform.iOS;
+                    //urrentPlatform=Platform.iOS;
                     XCUITestOptions option = new XCUITestOptions();
                     option.setDeviceName(prop.getProperty("iOSDeviceName"));
                     option.setPlatformName("iOS");
@@ -134,23 +134,26 @@ public class BaseTest {
         driver=driver2;
     }
 
+//
+//    public AppiumDriver getDriver() {
+//        if(currentPlatform== Platform.ANDROID){
+//            return ((AndroidDriver)driver);
+//        }
+//
+//        else
+//            return ((IOSDriver)driver);
+//    }
+//
+//
+//    enum Platform {
+//        ANDROID,
+//        iOS
+//    }
+//    public Platform currentPlatform = Platform.ANDROID;
 
-    public AppiumDriver getDriver() {
-        if(currentPlatform== Platform.ANDROID){
-            return ((AndroidDriver)driver);
-        }
-
-        else
-            return ((IOSDriver)driver);
+    public AppiumDriver getDriver(){
+        return driver;
     }
-
-
-    enum Platform {
-        ANDROID,
-        iOS
-    }
-    public Platform currentPlatform = Platform.ANDROID;
-
 
     public boolean checkIfAppiumServerIsRunnning(int port) throws Exception {
         boolean isAppiumServerRunning = false;
