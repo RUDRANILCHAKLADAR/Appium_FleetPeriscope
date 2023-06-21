@@ -99,7 +99,7 @@ public class BaseTest {
         URL url = new URL(prop.getProperty("appiumURL"));
 
             switch(platformName) {
-                case "Android":
+                case "android":
                     //currentPlatform=Platform.ANDROID;
                     UiAutomator2Options options = new UiAutomator2Options();
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
