@@ -47,10 +47,14 @@ public class SignInPage {
     public WebElement  backButton;
 
     @AndroidFindBy(id = "android:id/message")
-    @iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/" +
-            "XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/" +
-            "XCUIElementTypeOther[2]/XCUIElementTypeScrollView[1]/XCUIElementTypeOther[1]")
+    @iOSXCUITFindBy(accessibility = "Please enter a valid password")
     public WebElement errorMessage;
+
+    @iOSXCUITFindBy(accessibility = "Please enter a valid password")
+    private WebElement emptyPwdMsg;
+
+    @iOSXCUITFindBy(accessibility = "Please enter a valid username")
+    private WebElement emptyUnameMsg;
 
     @AndroidFindBy(id = "android:id/button2")
     //Ok button for ios
@@ -71,14 +75,18 @@ public class SignInPage {
     public WebElement anyAccount;
 
     @AndroidFindBy(id = "android:id/button1")
+    @iOSXCUITFindBy(accessibility = "Done")
     public WebElement selectBtn;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
     public WebElement FL_Periscope;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Forgot Password?\"`]")
     public WebElement ForgotPasswordTxt;
+
+    @iOSXCUITFindBy(iOSClassChain =
+            "**/XCUIElementTypeStaticText[`label == \"Forgot Password?\"`]")
+    public WebElement iosForgotPwTxt;
 
 
 
@@ -95,19 +103,26 @@ public class SignInPage {
     public WebElement title;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/parentPanel")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther")
     public WebElement Account_Dialogue_Screen;
 
     @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout")
     private WebElement HomeScreen;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_account")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Account\"`]")
     public WebElement Account_icon;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_logout")
+    @iOSXCUITFindBy(accessibility = "Logout")
     public WebElement Logout;
 
     @AndroidFindBy (id = "android:id/button1")
+    @iOSXCUITFindBy(accessibility = "Confirm")
     public WebElement Confirm_btn;
+
+
+
 
     @iOSXCUITFindBy(accessibility = "showpassword")
     public WebElement showPwdIcon;
@@ -116,6 +131,7 @@ public class SignInPage {
 //    blankunma=@iOSXCUITFindBy(accessibility = "Please enter a valid username")
 
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
+    @iOSXCUITFindBy(accessibility = "Allow While Using App")
     public WebElement permission_access;
 
     public WebElement getRadioButton()
@@ -141,25 +157,14 @@ public class SignInPage {
         return Password;
     }
 
-    public WebElement getForgotPassword()
-    {
-        return forgotPassword;
-    }
 
-   public String getLoginMsg()
-   {
-       return LoginMsg.getText();
-   }
 
    public  String getSignIntxt()
    {
        return SignInTxt.getText();
    }
 
-   public WebElement getBackButton()
-   {
-       return backButton;
-   }
+
 
     public String getErrorMsg()
     {

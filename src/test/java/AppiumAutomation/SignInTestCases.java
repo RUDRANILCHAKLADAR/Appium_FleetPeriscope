@@ -1,10 +1,7 @@
 package AppiumAutomation;
 
 import android.SignInPage;
-import io.appium.java_client.TouchAction;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
+import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -33,10 +30,10 @@ public class SignInTestCases extends BaseTest {
     @Test(priority = 0)
     public void AccountDialogueScreenVerification(){
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        actions.clickElement(signinpage.SignIn);
+        actions.clickElement(actions.findElement(signinpage.SignIn));
         signinpage.setUsername("tjbussfl");
         signinpage.setPassword("123456");
-        actions.clickElement(signinpage.SignIn);
+        actions.clickElement(actions.findElement(signinpage.SignIn));
         actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
         Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
         actions.clickElement(signinpage.selectBtn);
@@ -63,15 +60,51 @@ public class SignInTestCases extends BaseTest {
     }
 
 
+//    @Test(priority = 1)
+//    public void ForgotPasswordScreenValidation() throws InterruptedException {
+//        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//        actions.clickElement(signinpage.SignIn);
+//        actions.clickElement(signinpage.forgotPassword);
+//        String ActualErrorMessage = signinpage.getForgotPasswordTxt();
+//        String ExpectedResult = "Forgot Password";
+//        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+//        Thread.sleep(3000);
+//        actions.clickElement(signinpage.backButton);
+//    }
+    @Parameters({"platformName"})
     @Test(priority = 1)
-    public void ForgotPasswordScreenValidation() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+    public void testForgotPasswordScreenValidation(String platformName) throws InterruptedException {
+        actions.waitForVisibility(signinpage.SignIn);
+        Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
         actions.clickElement(signinpage.SignIn);
         actions.clickElement(signinpage.forgotPassword);
-        String ActualErrorMessage = signinpage.getForgotPasswordTxt();
-        String ExpectedResult = "Forgot Password";
-        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-        Thread.sleep(3000);
+//        if (platformName.equals("android")) {
+//            String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
+//            String ExpectedResult = "Forgot Password";
+//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+//
+//        } else
+//        if(platformName.equals("iOS")){
+//            String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
+//            String ExpectedResult = "Forgot Password?";
+//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+//            return;
+//
+//        }
+
+        if (currentPlatform== BaseTest.Platform.ANDROID) {
+            String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
+            String ExpectedResult = "Forgot Password";
+            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+
+        } else
+        if(currentPlatform== BaseTest.Platform.iOS){
+            String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
+            String ExpectedResult = "Forgot Password?";
+            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+            return;
+
+        }
         actions.clickElement(signinpage.backButton);
     }
 
@@ -133,7 +166,7 @@ public class SignInTestCases extends BaseTest {
         signinpage.setPassword("243234");
         Assert.assertTrue(signinpage.getSignIn().isEnabled());
 
-        //driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
         actions.clickElement(signinpage.SignIn);
         String ActualErrorMessage = signinpage.getErrorMessage();
         String ExpectedResult = "Please check your network connection and try again.";

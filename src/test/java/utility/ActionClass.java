@@ -1,9 +1,15 @@
 package utility;
 
+import AppiumAutomation.BaseClass;
+import AppiumAutomation.BaseTest;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.connection.ConnectionState;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
-import io.appium.java_client.android.connection.HasNetworkConnection;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,25 +19,22 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ActionClass {
     private final AppiumDriver driver;
+
 
     public ActionClass(AppiumDriver driver) {
         this.driver = driver;
     }
 
-    public final int timeOut = 40;
+
+    public static final Logger log = LoggerFactory.getLogger(ActionClass.class);
 
 
-    public static final Logger Log = LoggerFactory.getLogger(ActionClass.class);
-
-//    public void WaitTillVisibilityOf(WebElement element) {
-//        new WebDriverWait(driver, Duration.ofSeconds(timeOut)).
-//                until(ExpectedConditions.visibilityOf(element));
-//    }
-
-    public boolean waitForVisibility(WebElement element) {
+    public void waitForVisibility(WebElement element) {
         try {
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -40,7 +43,6 @@ public class ActionClass {
             System.out.println("Element is not visible: " + element);
             throw e;
         }
-        return true;
     }
 
     public boolean waitForInvisibility(WebElement element) {
@@ -58,7 +60,6 @@ public class ActionClass {
 
     public boolean alertIsPresent() {
         try {
-
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             wait.until(ExpectedConditions.alertIsPresent());
         } catch (Exception e) {
@@ -70,25 +71,43 @@ public class ActionClass {
 
 
     public WebElement findElement(WebElement element) {
-        return element;
+        try {
+            return element;
+        } catch (NoSuchElementException e) {
+            throw e;
+
+        }
+    }
+
+    public boolean isElementPresent(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     public void clickElement(WebElement element) {
+        waitForVisibility(element);
         element.click();
 
     }
 
     public void sendKeys(WebElement element, String txt) {
+
         element.sendKeys(txt);
     }
 
-
-
-    public void click(WebElement element, String msg) {
-        waitForVisibility(element);
-        Log.info(msg);
-        element.click();
+    public List<WebElement> findElements(By locator) {
+        try {
+            List<WebElement> element = driver.findElements(locator);
+            return element;
+        } catch (NoSuchElementException e) {
+            throw e;
+        }
     }
+
+
 
     private boolean existsElement(String id) {
         try {
@@ -101,15 +120,33 @@ public class ActionClass {
         return true;
     }
 
+
+
+    public boolean element(WebElement element) {
+        return element(element);
+    }
+
+
 //    public void WifiOn() {
-//        ConnectionState state = driver.setConneection(new ConnectionStateBuilder().withWiFiEnabled().
-//                withDataDisabled().build());
+//        ConnectionState state = driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
 //        Assert.assertTrue(state.isWiFiEnabled(), "Wifi is not switched on");
-//        Log.info("WiFi turned on");
+//        log.info("WiFi turned on");
 //    }
 
 
+    public void networkOn(){
+        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+    }
 
 
+    public void pullToRefresh() {
+        int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
+        int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
+        int midX = deviceWidth / 2;
+        int midY = deviceHeight / 2;
+        int bottomEdge = (int)((float)deviceHeight * 0.85F);
+        (new TouchAction((AndroidDriver)(driver))).
+                press(PointOption.point(midX, midY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(10L))).moveTo(PointOption.point(midX, bottomEdge)).release().perform();
+    }
 
 }

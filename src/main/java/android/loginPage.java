@@ -7,6 +7,8 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class loginPage {
 
     public AppiumDriver driver;
@@ -44,6 +46,44 @@ public class loginPage {
     {
         return SignIn;
     }
+
+    //Chosse Account popup ios
+    @iOSXCUITFindBy(accessibility = "Cancel")
+    private WebElement cancel;
+
+    @iOSXCUITFindBy(accessibility = "Done")
+    private WebElement done;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Choose Account\"`]")
+    private WebElement chooseAccountText;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeImage")
+    private  WebElement tickMark;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[1]")
+    private WebElement accountNameFirst;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
+    private List<WebElement> listOfAccounts;
+
+    //Home Screen
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Map\"`]")
+    private WebElement mapText;
+
+    @iOSXCUITFindBy(accessibility = "Home")
+    private WebElement homeBottomBar;
+
+
+
+    //Logot
+    @iOSXCUITFindBy(accessibility = "Cancel")
+    public WebElement cancelBtn;
+
+    @iOSXCUITFindBy(accessibility = "Are you sure you want to Logout?")
+    private WebElement logoutTxt;
+
+
 
 
 
