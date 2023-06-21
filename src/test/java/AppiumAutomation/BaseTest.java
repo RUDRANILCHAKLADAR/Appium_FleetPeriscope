@@ -111,7 +111,7 @@ public class BaseTest {
 
                     break;
                 case "iOS":
-                    //urrentPlatform=Platform.iOS;
+                    //currentPlatform=Platform.iOS;
                     XCUITestOptions option = new XCUITestOptions();
                     option.setDeviceName(prop.getProperty("iOSDeviceName"));
                     option.setPlatformName("iOS");
