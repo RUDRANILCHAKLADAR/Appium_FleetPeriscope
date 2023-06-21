@@ -105,7 +105,10 @@ public class BaseTest {
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
                     options.setPlatformName("Android");
                     options.setAutomationName(prop.getProperty("androidAutomationName"));
-                    options.setApp(prop.getProperty("androidAppPath"));
+                    //options.setApp(prop.getProperty("androidAppPath"));
+                    //options.setApp(System.getProperty("user.dir") + "//App//app-fleetStaging-debug.apk");
+                    //options.setAppPackage("com.spireon.fleet.staging");
+                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "//src//test//java//App//app-fleetStaging-debug.apk");
                     driver = new AndroidDriver(url, options);
                     //loginpage=new LoginPage(driver);
 
@@ -118,6 +121,7 @@ public class BaseTest {
                     option.setAutomationName(prop.getProperty("iosAutomationName"));
                     option.setPlatformVersion(prop.getProperty("iOSVersion"));
                     option.setWdaLaunchTimeout(Duration.ofSeconds(30));
+                    //option.setApp(System.getProperty("user.dir") + "//App//Fleet Staging.app");
                     option.setApp(prop.getProperty("iOSAppPath"));
                     driver = new IOSDriver(url, option);
                     break;
