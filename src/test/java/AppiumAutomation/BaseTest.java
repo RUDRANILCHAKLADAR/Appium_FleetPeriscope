@@ -99,11 +99,11 @@ public class BaseTest {
         URL url = new URL(prop.getProperty("appiumURL"));
 
             switch(platformName) {
-                case "android":
+                case "Android":
                     //currentPlatform=Platform.ANDROID;
                     UiAutomator2Options options = new UiAutomator2Options();
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
-                    options.setPlatformName("android");
+                    options.setPlatformName("Android");
                     options.setAutomationName(prop.getProperty("androidAutomationName"));
                     options.setApp(prop.getProperty("androidAppPath"));
                     driver = new AndroidDriver(url, options);
