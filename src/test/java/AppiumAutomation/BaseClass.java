@@ -1,6 +1,7 @@
 package AppiumAutomation;
 
 
+import android.AlertsPage;
 import android.ForgotPasswordPage;
 import android.MapScreenPage;
 import android.SignInPage;
@@ -28,7 +29,7 @@ public class BaseClass {
     public ForgotPasswordPage forgotPasswordPage;
 
     public MapScreenPage mapScreenPage;
-    //public AlertsPage alertsPage;
+    public AlertsPage alertsPage;
     public void pullToRefresh() {
         int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
         int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
@@ -57,7 +58,7 @@ public class BaseClass {
         signinpage = new SignInPage(driver);
         forgotPasswordPage=new ForgotPasswordPage(driver);
          mapScreenPage=new MapScreenPage(driver);
-       // alertsPage=new AlertsPage(driver);
+        alertsPage=new AlertsPage(driver);
     }
         @AfterClass
         public void tearDown()
