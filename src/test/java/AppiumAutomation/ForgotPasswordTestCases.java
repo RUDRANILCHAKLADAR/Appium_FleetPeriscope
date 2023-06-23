@@ -1,14 +1,9 @@
 package AppiumAutomation;
 
-import Android.ForgotPasswordPage;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 //import org.checkerframework.checker.units.qual.A;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 public class ForgotPasswordTestCases extends BaseClass
 {

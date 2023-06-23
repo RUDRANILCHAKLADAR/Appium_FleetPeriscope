@@ -1,9 +1,9 @@
-package Android;
+package android;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.By;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -20,51 +20,70 @@ public class AlertsPage {
     }
 
 
+
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
      private WebElement Alert_Title_text;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Filter\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_filter_alerts")
     private WebElement Filter_icon;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/fragment_alerts_filter")
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_details")
     private WebElement Total_itemsCount;
+
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_alerts_list")
     public WebElement Alert_List;
 
-    @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
-    private WebElement permission_access;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Alerts\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_alerts")
     private WebElement Alerts_icon;
 
-    @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_GEOZONE.\"])[17]")
-    private WebElement Alert1;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Alerts - 7 Day History\"`]")
     @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]")
     private WebElement Back;
+
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[1]/android.widget.TextView")
     private WebElement Filters_Text;
 
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/snackbar_text")
     private WebElement Network_Error_Msg;
 
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/snackbar_action")
     private WebElement Retry;
+
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Home\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     private WebElement HomeScreen_icon;
-
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"No Alerts Found\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_no_alerts")
     private WebElement No_Alerts_Found;
+
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/progress")
     private WebElement Progress_bar;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tvAlertName")
-    private WebElement LandmarkName;
+
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tvAlertAddress")
     private WebElement AddressName;
+
+    @AndroidFindBy(id = "android:id/button2")
+    private WebElement RatingPopup;
+
+
+   public void  ClickRatingPopup()
+   {
+       RatingPopup.click();
+   }
+
 
     public String safety="Safety (5)";
     public String prod="Productivity (4)";
@@ -72,26 +91,39 @@ public class AlertsPage {
     public String asset="Asset Health (5)";
 
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/iv_check")
-    private List<WebElement> Tick_Mark;
+
+
+
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/material_drawer_name")
     private List<WebElement> Productivity_List;
 
+
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_alerts_list")
     public List<WebElement> AlertListFull;
+
+
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/alertValue")
     public List<WebElement> IdlingTime;
 
+
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_asset_name")
     public List<WebElement> IdleVehicleName;
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ll_item")
+    public List<WebElement> AlertList;
 
-    public WebElement getLandmarkName()
-    {
-        return LandmarkName;
-    }
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_filter_type")
+    public List<WebElement> FilterCategoriesList;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/material_drawer_name")
+    public List<WebElement> FilterList;
+
+
+
 
 
     public WebElement getAddressName()
@@ -117,6 +149,16 @@ public class AlertsPage {
 
 
 
+    public List<WebElement> getFilterList(){
+        return FilterList;
+    }
+
+    public List<WebElement> getFilterCategoriesList(){
+        return FilterCategoriesList;
+    }
+    public List<WebElement> getAlertList(){
+        return AlertList;
+    }
     public List<WebElement> getAlertVehicleTime(){
         return IdlingTime;
     }
@@ -126,9 +168,6 @@ public class AlertsPage {
 
     public List<WebElement> getProductivity_List(){
         return Productivity_List;
-    }
-    public List<WebElement> getTick_Mark(){
-        return Tick_Mark;
     }
 
     public List<WebElement> getAlertListFull(){
@@ -161,6 +200,12 @@ public class AlertsPage {
     public String asset5="DTC Alert";
 
 
+    public WebElement getNetwork_Error()
+    {
+        return  Network_Error_Msg;
+    }
+
+
     public String getNetwork_Error_Msg()
     {
        return  Network_Error_Msg.getText();
@@ -183,9 +228,9 @@ public class AlertsPage {
     {
         Back.click();
     }
-    public void ClickAlert1()
+    public WebElement Back()
     {
-        Alert1.click();
+        return Back;
     }
 
     public void ClickAlerts_icon()
@@ -221,11 +266,11 @@ public class AlertsPage {
         return Total_itemsCount;
     }
 
-    public void Click_Permission()
+    public void DismissAppRatingPopup()
     {
-        permission_access.click();
+        ClickRatingPopup();
+        ClickRatingPopup();
     }
-
 
 
 }

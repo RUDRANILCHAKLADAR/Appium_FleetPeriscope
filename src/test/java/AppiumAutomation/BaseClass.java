@@ -1,18 +1,14 @@
 package AppiumAutomation;
 
-import Android.AlertsPage;
-import Android.ForgotPasswordPage;
-import Android.MapScreenPage;
-import Android.SignInPage;
+import android.AlertsPage;
+import android.ForgotPasswordPage;
+import android.MapScreenPage;
+import android.SignInPage;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -59,9 +55,9 @@ public class BaseClass {
 
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName(prop.getProperty("AndroidDeviceName"));
-        options.setPlatformName("Android");
+        options.setPlatformName("android");
         options.setApp(prop.getProperty("AppPath"));
-        //options.setDeviceName("Pixel 4 ");
+        options.autoGrantPermissions();
         driver = new AndroidDriver(new URL(prop.getProperty("Url")), options);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 

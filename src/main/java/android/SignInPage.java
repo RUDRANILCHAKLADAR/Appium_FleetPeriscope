@@ -1,8 +1,6 @@
-package Android;
+package android;
 
 
-import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -339,6 +337,23 @@ public class SignInPage {
     {
         return HomeScreen;
     }
+
+    public  void SignIN()
+    {
+        SignIn.click();
+        Username.sendKeys("Fleet360A");
+        Password.sendKeys("Password@1");
+        SignIn.click();
+    }
+
+    public void Logout()
+    {
+        getAccount_icon().click();
+        getLogout().click();
+        getConfirm_btn().click();
+    }
+
+
 }
 
 
