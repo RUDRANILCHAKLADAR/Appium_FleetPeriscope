@@ -8,6 +8,7 @@ import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import org.openqa.selenium.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
@@ -23,9 +24,6 @@ import java.util.Properties;
 
 public class BaseTest {
 
-
-
-    //public LoginPage signinpage;
     public AppiumDriverLocalService service;
 
     public static AppiumDriver driver;
@@ -90,31 +88,6 @@ public class BaseTest {
     }
 
 
-    public AppiumDriverLocalService getAppiumServerDefault() {
-        return AppiumDriverLocalService.buildDefaultService();
-    }
-
-    // for Mac. Update the paths as per your Mac setup
-    public AppiumDriverLocalService getAppiumService() {
-        HashMap<String, String> environment = new HashMap<String, String>();
-        environment.put("ANDROID_HOME", "/Users/MDehury/Library/Android/sdk");
-        return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                .usingDriverExecutable(new File("/usr/local/bin/node"))
-                .withAppiumJS(new File("//opt//homebrew//Cellar//node//19.1.0//lib//node_modules//appium//build//lib//main.js"))
-                .usingPort(4723)
-                .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
-                .withEnvironment(environment)
-                .withLogFile(new File("ServerLogs/server.log")));
-    }
-
-    @AfterSuite (alwaysRun = true)
-    public void afterSuite() {
-        if(service.isRunning()){
-            service.stop();
-            Log.info("Appium server stopped");
-        }
-    }
-
 
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
             "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort"})
@@ -142,30 +115,22 @@ public class BaseTest {
             switch(platformName) {
 
                 case "android":
-                    //currentPlatform=Platform.ANDROID;
-
-                case "Android":
-
+                    currentPlatform= Platform.ANDROID;
                     UiAutomator2Options options = new UiAutomator2Options();
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
                     options.setPlatformName("Android");
                     options.setAutomationName(prop.getProperty("androidAutomationName"));
-
-                    //options.setApp(prop.getProperty("androidAppPath"));
-                    //options.setApp(System.getProperty("user.dir") + "//App//app-fleetStaging-debug.apk");
-                    //options.setAppPackage("com.spireon.fleet.staging");
-                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    options.setApp(prop.getProperty("androidAppPath"));
+                    //options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     options.setApp(prop.getProperty("androidAppPath"));
 
                     driver = new AndroidDriver(url, options);
-                    //loginpage=new LoginPage(driver);
+
 
                     break;
                 case "iOS":
-
-                    //currentPlatform=Platform.iOS;
-
+                    currentPlatform=Platform.iOS;
                     XCUITestOptions option = new XCUITestOptions();
                     option.setDeviceName(prop.getProperty("iOSDeviceName"));
                     option.setPlatformName("iOS");
@@ -184,7 +149,7 @@ public class BaseTest {
             setDriver(driver);
            Log.info("driver initialized: " + driver);
 
-        actions= new ActionClass();
+        actions= new ActionClass(driver);
 
     }
 
@@ -192,26 +157,24 @@ public class BaseTest {
         driver=driver2;
     }
 
-//
-//    public AppiumDriver getDriver() {
-//        if(currentPlatform== Platform.ANDROID){
-//            return ((AndroidDriver)driver);
-//        }
-//
-//        else
-//            return ((IOSDriver)driver);
-//    }
-//
-//
-//    enum Platform {
-//        ANDROID,
-//        iOS
-//    }
-//    public Platform currentPlatform = Platform.ANDROID;
 
-    public AppiumDriver getDriver(){
-        return driver;
+    public AppiumDriver getDriver() {
+        if(currentPlatform== Platform.ANDROID){
+            return ((AndroidDriver)driver);
+        }
+
+        else
+            return ((IOSDriver)driver);
     }
+
+
+    enum Platform {
+        ANDROID,
+        iOS
+    }
+    public Platform currentPlatform = Platform.ANDROID;
+
+
 
 
     //public AppiumDriver getDriver() {

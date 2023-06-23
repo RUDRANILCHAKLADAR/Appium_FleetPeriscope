@@ -46,6 +46,9 @@ public class SignInPage {
     @iOSXCUITFindBy(accessibility = "Back")
     public WebElement  backButton;
 
+    @iOSXCUITFindBy(accessibility = "Sign In")
+    public WebElement forgotPwBackBtn;
+
     @AndroidFindBy(id = "android:id/message")
     @iOSXCUITFindBy(accessibility = "Please enter a valid password")
     public WebElement errorMessage;

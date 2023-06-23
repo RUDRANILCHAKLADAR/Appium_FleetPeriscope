@@ -13,10 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class loginTest extends BaseTest {
 
-    //ActionClass actions=new ActionClass(driver);
 
     SignInPage signinpage;
-    String platformName;
 
 
     @BeforeMethod

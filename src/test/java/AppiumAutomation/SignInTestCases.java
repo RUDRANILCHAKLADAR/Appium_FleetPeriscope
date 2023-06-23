@@ -37,10 +37,20 @@ public class SignInTestCases extends BaseTest {
         actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
         Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
         actions.clickElement(signinpage.selectBtn);
-        actions.clickElement(signinpage.permission_access);
-        actions.clickElement(signinpage.Account_icon);
+        if (currentPlatform == BaseTest.Platform.ANDROID) {
+            actions.waitForVisibility(signinpage.permission_access);
+            signinpage.permission_access.isDisplayed();
+            actions.clickElement(signinpage.permission_access);
+            actions.clickElement(signinpage.Account_icon);
+        } else {
+            if (currentPlatform == BaseTest.Platform.iOS) {
+                actions.clickElement(signinpage.Account_icon);
+            }
+        }
         actions.clickElement(signinpage.Logout);
         actions.clickElement(signinpage.Confirm_btn);
+    }
+
 }
 
 
@@ -59,53 +69,28 @@ public class SignInTestCases extends BaseTest {
         Assert.assertTrue(actions.findElement(signinpage.backButton).isEnabled());
     }
 
-
-//    @Test(priority = 1)
-//    public void ForgotPasswordScreenValidation() throws InterruptedException {
-//        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-//        actions.clickElement(signinpage.SignIn);
-//        actions.clickElement(signinpage.forgotPassword);
-//        String ActualErrorMessage = signinpage.getForgotPasswordTxt();
-//        String ExpectedResult = "Forgot Password";
-//        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-//        Thread.sleep(3000);
-//        actions.clickElement(signinpage.backButton);
-//    }
     @Parameters({"platformName"})
     @Test(priority = 1)
-    public void testForgotPasswordScreenValidation(String platformName) throws InterruptedException {
+    public void testForgotPasswordScreenValidation() {
         actions.waitForVisibility(signinpage.SignIn);
         Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
         actions.clickElement(signinpage.SignIn);
         actions.clickElement(signinpage.forgotPassword);
-        if (platformName.equals("android")) {
+        if (currentPlatform== BaseTest.Platform.ANDROID) {
             String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
             String ExpectedResult = "Forgot Password";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+            actions.clickElement(signinpage.backButton);
 
         } else
-        if(platformName.equals("iOS")){
+        if(currentPlatform== BaseTest.Platform.iOS){
             String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
             String ExpectedResult = "Forgot Password?";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-            return;
+            actions.clickElement(signinpage.forgotPwBackBtn);
 
         }
 
-//        if (currentPlatform== BaseTest.Platform.ANDROID) {
-//            String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
-//            String ExpectedResult = "Forgot Password";
-//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-//
-//        } else
-//        if(currentPlatform== BaseTest.Platform.iOS){
-//            String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
-//            String ExpectedResult = "Forgot Password?";
-//            Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-//            return;
-
-      //  }
-        actions.clickElement(signinpage.backButton);
     }
 
     //C18780-Verify user is able to enter the username and password in the Sign in Screen
@@ -120,8 +105,7 @@ public class SignInTestCases extends BaseTest {
     //C18783-Verify proper message is shown if username or password fields are missing and tapping on Sign in button
     @Test(priority = 4)
     public void EmptyLoginCredentialsvalidation() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        //actions.clickElement(signinpage.SignIn);
+        signinpage.Password.clear();
         signinpage.setUsername("tjbussfl");
         actions.clickElement(signinpage.SignIn);
         Assert.assertEquals(signinpage.getErrorMsg(), "Please enter a valid password");
