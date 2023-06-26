@@ -1,7 +1,8 @@
+
 package AppiumAutomation;
 
-import Android.AlertsPage;
-import Android.SignInPage;
+import android.AlertsPage;
+import android.SignInPage;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.TouchAction;
@@ -384,15 +385,8 @@ public class AlertsTestCases extends BaseClass {
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                  //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());
-
-
                 }
-
             }
         }
-
-
     }
 }
-
-
