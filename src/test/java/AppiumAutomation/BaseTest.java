@@ -104,7 +104,7 @@ public class BaseTest {
                     UiAutomator2Options options = new UiAutomator2Options();
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
                     options.setPlatformName("android");
-//                    options.setAutomationName(prop.getProperty("androidAutomationName"));
+                    options.setAutomationName(prop.getProperty("androidAutomationName"));
 //                    if(System.getenv("BITRISE_SOURCE_DIR")==null){
 //                       options.setApp(prop.getProperty("androidAppPath"));
 //                    }
