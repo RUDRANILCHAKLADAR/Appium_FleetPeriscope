@@ -112,8 +112,8 @@ public class BaseTest {
 //                        options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
 
 //
-                    options.setApp(prop.getProperty("androidAppPath"));
-                    //options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    //options.setApp(prop.getProperty("androidAppPath"));
+                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     options.setApp(prop.getProperty("androidAppPath"));
                     driver = new AndroidDriver(url, options);
