@@ -103,7 +103,7 @@ public class BaseTest {
                     currentPlatform= Platform.ANDROID;
                     UiAutomator2Options options = new UiAutomator2Options();
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
-                    options.setPlatformName("android");
+                    options.setPlatformName("ANDROID");
                     options.setAutomationName(prop.getProperty("androidAutomationName"));
 //                    if(System.getenv("BITRISE_SOURCE_DIR")==null){
 //                       options.setApp(prop.getProperty("androidAppPath"));
@@ -112,8 +112,8 @@ public class BaseTest {
 //                        options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
 
 //
-//                    //options.setApp(prop.getProperty("androidAppPath"));
-                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    options.setApp(prop.getProperty("androidAppPath"));
+                    //options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     options.setApp(prop.getProperty("androidAppPath"));
                     driver = new AndroidDriver(url, options);
