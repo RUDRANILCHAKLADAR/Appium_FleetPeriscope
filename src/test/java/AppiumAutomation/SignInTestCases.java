@@ -14,9 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SignInTestCases extends BaseTest {
 
-   //ActionClass actions =new ActionClass(driver);
     SignInPage signinpage;
-
 
     @BeforeMethod
     public void beforeMethod(Method m) {
@@ -51,7 +49,7 @@ public class SignInTestCases extends BaseTest {
         actions.clickElement(signinpage.Confirm_btn);
     }
 
-}
+
 
 
     //Verify Choose account screen is shown for some user if user scope is set
@@ -229,12 +227,10 @@ public class SignInTestCases extends BaseTest {
         actions.clickElement(signinpage.radioButton);
         Thread.sleep(2000);
         Assert.assertTrue(signinpage.getRadioButton().getAttribute("checked").equals("true"));
-
         //Verify tapping on cancel button on dialogue pop up, account is not selected and user is returned to Sign In screen
         Thread.sleep(2000);
         actions.clickElement(signinpage.ok_cancel_Button);
         Assert.assertEquals(signinpage.getSignIntxt(), "Sign In");
-
         //C20853-Verify after selecting a account user is able to sign in successfully
         signinpage.setUsername("tjbussfl");
         signinpage.setPassword("123456");
@@ -246,7 +242,6 @@ public class SignInTestCases extends BaseTest {
         String ActualErrorMessage = signinpage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-
         actions.clickElement(signinpage.Account_icon);
         actions.clickElement(signinpage.Logout);
         actions.clickElement(signinpage.Confirm_btn);
@@ -396,7 +391,6 @@ public class SignInTestCases extends BaseTest {
             System.out.println("Account Screen pop up is not displayed");
         else
             System.out.println("Account Screen pop up is  displayed");
-
         actions.clickElement(signinpage.Account_icon);
         actions.clickElement(signinpage.Logout);
         actions.clickElement(signinpage.Confirm_btn);

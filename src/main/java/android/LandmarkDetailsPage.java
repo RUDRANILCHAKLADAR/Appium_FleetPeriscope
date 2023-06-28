@@ -6,11 +6,11 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class landmarkDetailsPage {
+public class LandmarkDetailsPage {
 
     public AppiumDriver driver;
 
-    public landmarkDetailsPage(AppiumDriver driver) {
+    public LandmarkDetailsPage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }

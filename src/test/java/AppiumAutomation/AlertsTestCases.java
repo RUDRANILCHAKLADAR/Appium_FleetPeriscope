@@ -77,7 +77,6 @@ public class AlertsTestCases extends BaseClass {
         alertsPage.ClickRetry();
         List<WebElement> AlertList = driver.findElements(By.id("com.spireon.fleet.staging:id/ll_item"));
         Assert.assertFalse(AlertList.isEmpty());
-
         Thread.sleep(3000);
 
         pullToRefresh();

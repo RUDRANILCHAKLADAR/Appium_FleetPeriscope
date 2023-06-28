@@ -1,7 +1,7 @@
 //package AppiumAutomation;
 //
 //import android.SignInPage;
-//import android.vehiclePage;
+//import android.VehiclePage;
 //import org.testng.Assert;
 //import org.testng.annotations.AfterMethod;
 //import org.testng.annotations.BeforeMethod;
@@ -12,7 +12,7 @@
 //
 //public class vehicleTestCase extends BaseTest{
 //
-//    vehiclePage vp;
+//    VehiclePage vp;
 //    SignInPage sp;
 //
 //    public void login(){
@@ -41,7 +41,7 @@
 //
 //    @BeforeMethod()
 //    public void beforeMethod(Method m) {
-//        vp = new vehiclePage(driver);
+//        vp = new VehiclePage(driver);
 //        sp= new SignInPage(driver);
 //    }
 //

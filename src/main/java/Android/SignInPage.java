@@ -110,7 +110,7 @@ public class SignInPage {
     public WebElement Account_Dialogue_Screen;
 
     @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout")
-    private WebElement HomeScreen;
+    public WebElement HomeScreen;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_account")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Account\"`]")
@@ -124,7 +124,11 @@ public class SignInPage {
     @iOSXCUITFindBy(accessibility = "Confirm")
     public WebElement Confirm_btn;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Map\"`]")
+    public WebElement mapTextHomeScreen;
 
+    @iOSXCUITFindBy(accessibility = "Home")
+    public WebElement homeBottomBar;
 
 
     @iOSXCUITFindBy(accessibility = "showpassword")
