@@ -136,14 +136,14 @@ public class ActionClass {
     }
 
 
-//    public void pullToRefresh() {
-//        int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
-//        int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
-//        int midX = deviceWidth / 2;
-//        int midY = deviceHeight / 2;
-//        int bottomEdge = (int)((float)deviceHeight * 0.85F);
-//        (new TouchAction((AndroidDriver)(driver))).
-//                press(PointOption.point(midX, midY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(10L))).moveTo(PointOption.point(midX, bottomEdge)).release().perform();
-//    }
+    public void pullToRefresh() {
+        int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
+        int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
+        int midX = deviceWidth / 2;
+        int midY = deviceHeight / 2;
+        int bottomEdge = (int)((float)deviceHeight * 0.85F);
+        (new TouchAction((AndroidDriver)(driver))).
+                press(PointOption.point(midX, midY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(10L))).moveTo(PointOption.point(midX, bottomEdge)).release().perform();
+    }
 
 }
