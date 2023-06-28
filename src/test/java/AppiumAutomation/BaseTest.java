@@ -104,7 +104,11 @@ public class BaseTest {
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
                     options.setPlatformName("android");
                     options.setAutomationName(prop.getProperty("androidAutomationName"));
-                    options.setApp(prop.getProperty("androidAppPath"));
+                    if(System.getenv("BITRISE_SOURCE_DIR")==null){
+                        options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    }
+                    else options.setApp(prop.getProperty("androidAppPath"));
+                    //options.setApp(prop.getProperty("androidAppPath"));
                     //options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     options.setApp(prop.getProperty("androidAppPath"));
@@ -118,9 +122,7 @@ public class BaseTest {
                     option.setAutomationName(prop.getProperty("iosAutomationName"));
                     option.setPlatformVersion(prop.getProperty("iOSVersion"));
                     option.setWdaLaunchTimeout(Duration.ofSeconds(30));
-
                     //option.setApp(System.getProperty("user.dir") + "//App//Fleet Staging.app");
-
                     option.setApp(prop.getProperty("iOSAppPath"));
                     driver = new IOSDriver(url, option);
                     break;

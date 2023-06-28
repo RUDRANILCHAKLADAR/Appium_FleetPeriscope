@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -83,9 +82,6 @@ public class ActionClass {
         }
     }
 
-
-
-
     public boolean isElementPresent(WebElement element) {
         try {
             return element.isDisplayed();
@@ -108,10 +104,6 @@ public class ActionClass {
         }
 
     }
-
-
-
-
 
     private boolean existsElement(String id) {
         try {
