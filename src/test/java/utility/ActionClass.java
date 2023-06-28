@@ -1,9 +1,12 @@
 package utility;
 
 import AppiumAutomation.BaseClass;
+import AppiumAutomation.BaseTest;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.connection.ConnectionState;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -13,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -75,17 +79,6 @@ public class ActionClass {
         }
     }
 
-    public List<WebElement> listOfElements(List<WebElement> element) {
-        try {
-            return listOfElements(element);
-        } catch (NoSuchElementException e) {
-            throw e;
-        }
-    }
-
-
-
-
     public boolean isElementPresent(WebElement element) {
         try {
             return element.isDisplayed();
@@ -101,15 +94,18 @@ public class ActionClass {
     }
 
     public void sendKeys(WebElement element, String txt) {
+
+        element.sendKeys(txt);
+    }
+
+    public List<WebElement> findElements(By locator) {
         try {
-            element.sendKeys(txt);
+            List<WebElement> element = driver.findElements(locator);
+            return element;
         } catch (NoSuchElementException e) {
             throw e;
         }
-
     }
-
-
 
 
 
@@ -129,6 +125,13 @@ public class ActionClass {
     public boolean element(WebElement element) {
         return element(element);
     }
+
+
+//    public void WifiOn() {
+//        ConnectionState state = driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+//        Assert.assertTrue(state.isWiFiEnabled(), "Wifi is not switched on");
+//        log.info("WiFi turned on");
+//    }
 
 
     public void networkOn(){

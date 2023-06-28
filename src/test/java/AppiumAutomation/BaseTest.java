@@ -96,6 +96,7 @@ public class BaseTest {
 
         URL url = new URL(prop.getProperty("appiumURL"));
 
+
             switch(platformName) {
 
                 case "android":
