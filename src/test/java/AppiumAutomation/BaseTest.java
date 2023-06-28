@@ -6,9 +6,6 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.appium.java_client.service.local.flags.GeneralServerFlag;
-import org.openqa.selenium.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
@@ -19,7 +16,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URL;
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Properties;
 
 public class BaseTest {
@@ -106,13 +102,12 @@ public class BaseTest {
                     currentPlatform= Platform.ANDROID;
                     UiAutomator2Options options = new UiAutomator2Options();
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
-                    options.setPlatformName("Android");
+                    options.setPlatformName("android");
                     options.setAutomationName(prop.getProperty("androidAutomationName"));
-                    //options.setApp(prop.getProperty("androidAppPath"));
-                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    options.setApp(prop.getProperty("androidAppPath"));
+                    //options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     options.setApp(prop.getProperty("androidAppPath"));
-
                     driver = new AndroidDriver(url, options);
                     break;
                 case "iOS":
