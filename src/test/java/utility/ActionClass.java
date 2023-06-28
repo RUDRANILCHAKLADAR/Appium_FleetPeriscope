@@ -98,10 +98,9 @@ public class ActionClass {
         element.sendKeys(txt);
     }
 
-    public List<WebElement> findElements(By locator) {
+    public List<WebElement> listOfElements(List<WebElement> element) {
         try {
-            List<WebElement> element = driver.findElements(locator);
-            return element;
+            return listOfElements(element);
         } catch (NoSuchElementException e) {
             throw e;
         }
@@ -125,13 +124,6 @@ public class ActionClass {
     public boolean element(WebElement element) {
         return element(element);
     }
-
-
-//    public void WifiOn() {
-//        ConnectionState state = driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
-//        Assert.assertTrue(state.isWiFiEnabled(), "Wifi is not switched on");
-//        log.info("WiFi turned on");
-//    }
 
 
     public void networkOn(){
