@@ -122,7 +122,21 @@ public class AlertsPage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/material_drawer_name")
     public List<WebElement> FilterList;
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_alert_name")
+    public List<WebElement> AlertName;
 
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/alertSubValue")
+    public List<WebElement> SubValue;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_time")
+    public List<WebElement> AlertTime;
+
+    public List<WebElement> getSubValue(){
+        return SubValue;
+    }
+    public List<WebElement> getAlertTime(){
+        return AlertTime;
+    }
 
 
 
@@ -153,6 +167,10 @@ public class AlertsPage {
         return FilterList;
     }
 
+
+    public List<WebElement> getAlertName(){
+        return AlertName;
+    }
     public List<WebElement> getFilterCategoriesList(){
         return FilterCategoriesList;
     }
