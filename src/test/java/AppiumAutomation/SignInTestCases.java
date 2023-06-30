@@ -36,11 +36,15 @@ public class SignInTestCases extends BaseTest {
         Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
         actions.clickElement(signinpage.selectBtn);
         if (currentPlatform == BaseTest.Platform.ANDROID) {
-            actions.waitForVisibility(signinpage.permission_access);
-            signinpage.permission_access.isDisplayed();
-            actions.clickElement(signinpage.permission_access);
-            actions.clickElement(signinpage.Account_icon);
-        } else {
+            if(signinpage.permission_access.isDisplayed()){
+                actions.clickElement(signinpage.permission_access);
+                actions.clickElement(signinpage.Account_icon);}
+            //actions.waitForVisibility(signinpage.permission_access);
+            //signinpage.permission_access.isDisplayed();
+            //actions.clickElement(signinpage.permission_access);
+            else actions.clickElement(signinpage.Account_icon);
+        }
+        else {
             if (currentPlatform == BaseTest.Platform.iOS) {
                 actions.clickElement(signinpage.Account_icon);
             }
@@ -49,23 +53,6 @@ public class SignInTestCases extends BaseTest {
         actions.clickElement(signinpage.Confirm_btn);
     }
 
-
-
-
-    //Verify Choose account screen is shown for some user if user scope is set
-    //C18779,C146195-To check whether all the signIn elements are displayed or not
-    @Test(priority = 2)
-    public void testLoginUiElementsValidation() {
-        actions.waitForVisibility(signinpage.SignIn);
-        Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.Username);
-        Assert.assertTrue(actions.findElement(signinpage.Username).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.Password).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.Username).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.forgotPassword).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.backButton).isEnabled());
-    }
 
     @Parameters({"platformName"})
     @Test(priority = 1)
@@ -90,6 +77,19 @@ public class SignInTestCases extends BaseTest {
         }
 
     }
+
+    //Verify Choose account screen is shown for some user if user scope is set
+    //C18779,C146195-To check whether all the signIn elements are displayed or not
+    @Test(priority = 2)
+    public void testLoginUiElementsValidation() {
+        actions.waitForVisibility(signinpage.Username);
+        Assert.assertTrue(actions.findElement(signinpage.Username).isDisplayed());
+        Assert.assertTrue(actions.findElement(signinpage.Password).isDisplayed());
+        Assert.assertTrue(actions.findElement(signinpage.Username).isDisplayed());
+        Assert.assertTrue(actions.findElement(signinpage.forgotPassword).isDisplayed());
+        Assert.assertTrue(actions.findElement(signinpage.backButton).isEnabled());
+    }
+
 
     //C18780-Verify user is able to enter the username and password in the Sign in Screen
     @Test(priority = 3)
