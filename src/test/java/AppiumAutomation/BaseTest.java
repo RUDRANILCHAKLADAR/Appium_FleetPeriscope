@@ -115,6 +115,7 @@ public class BaseTest {
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     //options.setApp(prop.getProperty("androidAppPath"));
                     driver = new AndroidDriver(url, options);
+                    options.autoGrantPermissions();
                     break;
                 case "iOS":
                     currentPlatform=Platform.iOS;

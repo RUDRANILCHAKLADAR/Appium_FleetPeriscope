@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import utility.Utils;
+
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.List;
@@ -38,19 +40,22 @@ public class SignInTestCases extends BaseTest {
         Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
         actions.clickElement(signinpage.selectBtn);
         if (currentPlatform == BaseTest.Platform.ANDROID) {
-            if(signinpage.permission_access.isDisplayed()){
-                actions.clickElement(signinpage.permission_access);
-                actions.clickElement(signinpage.Account_icon);}
-            //actions.waitForVisibility(signinpage.permission_access);
-            //signinpage.permission_access.isDisplayed();
-            //actions.clickElement(signinpage.permission_access);
-            else actions.clickElement(signinpage.Account_icon);
+//            if(Utils.isElementPresent(signinpage.permission_access)&&
+//                    signinpage.permission_access.isDisplayed()){
+//                actions.clickElement(signinpage.permission_access);
+//                actions.clickElement(signinpage.Account_icon);
+//            }
+            actions.waitForVisibility(signinpage.permission_access);
+            actions.clickElement(signinpage.permission_access);
+            //else actions.clickElement(signinpage.Account_icon);
         }
         else {
             if (currentPlatform == BaseTest.Platform.iOS) {
                 actions.clickElement(signinpage.Account_icon);
             }
         }
+
+        actions.clickElement(signinpage.Account_icon);
         actions.clickElement(signinpage.Logout);
         actions.clickElement(signinpage.Confirm_btn);
     }
