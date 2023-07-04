@@ -24,7 +24,7 @@ import utility.Utils;
 import java.time.Duration;
 import java.util.List;
 
-public class AlertsTestCases extends BaseClass {
+public class    AlertsTestCases extends BaseClass {
 
 
     // C21287  Verify Alerts screen UI

@@ -27,8 +27,10 @@ public class SignInTestCases extends BaseTest {
 
     @Test(priority = 0)
     public void AccountDialogueScreenVerification(){
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        actions.waitForVisibility(signinpage.SignIn);
+        Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
         actions.clickElement(actions.findElement(signinpage.SignIn));
+        actions.waitForVisibility(actions.findElement(signinpage.Username));
         signinpage.setUsername("tjbussfl");
         signinpage.setPassword("123456");
         actions.clickElement(actions.findElement(signinpage.SignIn));

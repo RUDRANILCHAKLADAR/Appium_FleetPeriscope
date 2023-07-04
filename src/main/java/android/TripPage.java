@@ -26,14 +26,21 @@ public class TripPage {
     public WebElement tripCalenderButton;
 
     @iOSXCUITFindBy(accessibility = "TripHistorySelectedDate")
-    public WebElement tripCalenderDate;
+    public WebElement tripCurrentDate;
 
     @iOSXCUITFindBy(accessibility = "autoRefreshIcon")
     @AndroidFindBy(accessibility = "com.spireon.fleet.staging:id/tv_auto_refresh")
-    WebElement autoRefreshIcon;
+    public WebElement autoRefreshIcon;
 
     @iOSXCUITFindBy(accessibility = "Back")
     public WebElement backButton;
+
+    //@iOSXCUITFindBy(accessibility = "off")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@index='3']")
+    public WebElement autoRefreshOn_Off;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@index='1']")
+    public WebElement vehicleName;
 
     @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
     @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/cv_trip']")
@@ -54,6 +61,8 @@ public class TripPage {
     public WebElement loading;
 
 
+
+
     public List<WebElement> tripLists(){
         return listOfTrips;
     }
@@ -68,9 +77,70 @@ public class TripPage {
 
     }
 
+    @iOSXCUITFindBy(accessibility = "ActivityDatePickerView")
+    public WebElement datePicker;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"ActivityDatePickerView\"`]/XCUIElementTypeOther[1]")
+    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/cv_trip']")
+    public List<WebElement> calenderValues;
+
+   @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"ActivityDatePickerView\"`]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText")
+   public WebElement currentMonth;
+
+   @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"ActivityDatePickerView\"`]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/" +
+           "XCUIElementTypeOther[4]/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeStaticText")
+    public List<WebElement> dates;
+
+   @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"ActivityDatePickerView\"`]/XCUIElementTypeOther[2]/XCUIElementTypeOther/" +
+           "XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeStaticText")
+   public List<WebElement> days;
+
+   @iOSXCUITFindBy(accessibility = "Ongoing Trip")
+   public WebElement ongoingTrip;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[index='0']")
+    public WebElement moving_idle_Time;
+
+   @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[index='1']")
+   public WebElement startTime;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[index='2']")
+    public WebElement stopTime;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[index='3']")
+    public WebElement alertOnTrips;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[index='4']")
+    public WebElement startAddress ;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[index='5']")
+    public WebElement stopAddress ;
+
+    @iOSXCUITFindBy(accessibility = "Moving")
+    public WebElement movingOngoingTrip;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[index='7']")
+    public WebElement tripNumber ;
 
 
-    //trips: id="com.spireon.fleet.staging:id/swipe_trips"
+
+    public void selectCurrentDate(){
+       for(int i=0; i<dates.size();i++){
+           int dateCount=dates.size();
+           System.out.println(dateCount);
+           if(dates.get(i).isSelected()){
+
+           }
+       }
+   }
+
+
+
+
+
+
+
+
 
 
 

@@ -76,7 +76,7 @@ public class VehiclePage{
     @AndroidFindBy(xpath= "//[@resource-id='com.spireon.fleet.staging:id/iv_vehicle_icon')]")
     public WebElement vehicleIcon;
 
-    //@iOSXCUITFindBy()
+
     @AndroidFindBy(id="@+id/tv_details")
     public WebElement totalCntText;
 
