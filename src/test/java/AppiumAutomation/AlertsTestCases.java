@@ -763,6 +763,87 @@ public class AlertsTestCases extends BaseClass {
     }
 
 
+    //  C21291	Tap on Temperature alert on Filter screen
+    //	C82676	Verify if the user is able to see the current temperature. For e.g: 64.2F
+    //	C147175	Tap on any alert list item
+    @Test(priority = 20)
+    public void testMonitoringTemperatureVerification()
+    {
+
+        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+
+        for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
+            if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.monitor2)) {
+                alertsPage.getProductivity_List().get(i).click();
+                alertsPage.ClickBack();
+                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+
+                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                    Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
+                    System.out.println("In Monitoring Filter No alerts are present for " + alertsPage.monitor2 + " filter");
+                }
+                else if (alertsPage.getAlert_List().isDisplayed()) {
+                    Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
+                    alertsPage.getAlertListFull().get(0).click();
+                    alertsPage.ClickBack();
+                    Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
+                    //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
+                    System.out.println("In Monitoring Filter  alerts are present for " + alertsPage.monitor2+ " filter");
+                    System.out.println("The  Asset name for  this corresponding Temperature filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
+                    System.out.println("The  Alert name for  this corresponding Temperature filter alert is " + alertsPage.getAlertName().get(0).getText());
+                    System.out.println("The temperature value for this Temperature filter alert is " + alertsPage.getAlertVehicleTime().get(0).getText());
+                    System.out.println("The Timing for this corresponding Temperature filter alert is " + alertsPage.getAlertTime().get(0).getText());
+                }
+                alertsPage.Click_filter();
+                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+                Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
+                alertsPage.getProductivity_List().get(i).click();
+            }
+        }
+    }
+
+
+
+
+//  C90298	Verify Fuel Tank alert info
+//	C90322	Tap on Fuel tank alert on Filter screen
+//	C147173	Tap on any alert list item
+    @Test(priority = 21)
+    public void testMonitoringFuelTankVerification()
+    {
+
+        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+
+        for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
+            if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.monitor1)) {
+                alertsPage.getProductivity_List().get(i).click();
+                alertsPage.ClickBack();
+                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+
+                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                    Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
+                    System.out.println("In Monitoring Filter No alerts are present for " + alertsPage.monitor1 + " filter");
+                }
+                else if (alertsPage.getAlert_List().isDisplayed()) {
+                    Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
+                    alertsPage.getAlertListFull().get(0).click();
+                    alertsPage.ClickBack();
+                    Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
+                    //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
+                    System.out.println("In Monitoring Filter  alerts are present for " + alertsPage.monitor1+ " filter");
+                    System.out.println("The  Asset name for  this corresponding Fuel tank filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
+                    System.out.println("The  Alert name for  this corresponding Fuel tank filter alert is " + alertsPage.getAlertName().get(0).getText());
+                    System.out.println("The Fuel Level value for this Fuel tank filter alert is " + alertsPage.getAlertVehicleTime().get(0).getText());
+                    System.out.println("The Timing for this corresponding Fuel tank filter alert is " + alertsPage.getAlertTime().get(0).getText());
+                }
+                alertsPage.Click_filter();
+                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+                Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
+                alertsPage.getProductivity_List().get(i).click();
+            }
+        }
+    }
 }
 
 
+  
