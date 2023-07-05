@@ -1,5 +1,8 @@
 package AppiumAutomation;
 
+
+import utility.ActionClass;
+
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 //import org.checkerframework.checker.units.qual.A;
 import org.testng.Assert;
@@ -7,13 +10,14 @@ import org.testng.annotations.Test;
 
 public class ForgotPasswordTestCases extends BaseClass
 {
+   ActionClass actions= new ActionClass(driver);
 
     //C146197 Verify Forgot Password screen UI matches with Zeplin
     //C146206 Verify the text "If you still need help, contact" and FleetLocate Support button on the forgot password screen
     @Test(priority =0)
     public void UIScreenElementsVerification()
     {
-        forgotPasswordPage.SignInClick();
+        actions.clickElement(signinpage.SignIn);
         forgotPasswordPage.ForgotpasswordClick();
         Assert.assertTrue(forgotPasswordPage.getEmail().isEnabled());
         Assert.assertTrue(forgotPasswordPage.getSubmit_btn().isEnabled());

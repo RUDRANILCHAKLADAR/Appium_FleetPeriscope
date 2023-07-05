@@ -1,151 +1,213 @@
 package android;
 
-
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-
 public class SignInPage {
 
-    AndroidDriver driver;
+    public AppiumDriver driver;
 
-    public SignInPage(AndroidDriver driver) {
-        super();
+    public SignInPage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
+
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
-    private WebElement SignIn;
+    @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeButton[`label == \"SIGN IN\"`]")
+    public WebElement SignIn;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_username")
-    private WebElement Username;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"Username\"`]")
+    public WebElement Username;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_password")
-    private WebElement Password;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSecureTextField[`value == \"Password\"`]")
+    public WebElement Password;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
-    private WebElement Login;
-   @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_forgot_password")
-    private WebElement forgotpassword;
+
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_forgot_password")
+    @iOSXCUITFindBy(accessibility = "Forgot your password?")
+    public WebElement forgotPassword;
 
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/login_msg")
-    private WebElement  LoginMsg;
+    @iOSXCUITFindBy(accessibility = "with your username and password")
+    public WebElement  LoginMsg;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement SignInTxt;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Sign In\"`]")
+    public WebElement SignInTxt;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
-    private WebElement  backbutton;
-
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
-    private WebElement  backbutton2;
+    @iOSXCUITFindBy(accessibility = "Back")
+    public WebElement  backButton;
 
     @AndroidFindBy(id = "android:id/message")
-    private WebElement pswrdErr;
+    @iOSXCUITFindBy(accessibility = "Please enter a valid password")
+    public WebElement errorMessage;
+
+    @iOSXCUITFindBy(accessibility = "Please enter a valid password")
+    private WebElement emptyPwdMsg;
+
+    @iOSXCUITFindBy(accessibility = "Please enter a valid username")
+    private WebElement emptyUnameMsg;
 
     @AndroidFindBy(id = "android:id/button2")
-    private WebElement Okbtn;
+    //Ok button for ios
+    @iOSXCUITFindBy(accessibility = "OK")
+    public WebElement ok_cancel_Button;
 
-    @AndroidFindBy(id = "android:id/message")
-    private WebElement usrnmErr;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView")
-    private WebElement InvalidLoginErrMsg;
+    @iOSXCUITFindBy(accessibility = "The credentials entered do not match our records. Verify your username and password.")
+    public WebElement InvalidLoginErrMsg;
 
-    @AndroidFindBy(id = "android:id/button2")
-    private WebElement  TryagainBtn;
 
-    @AndroidFindBy(id = "android:id/message")
-    private WebElement  NetworkErrMsg;
-    @AndroidFindBy(id = "android:id/message")
-    private WebElement  NetworkErr;
 
     @AndroidFindBy(id = "android:id/button3")
-    private WebElement Okbtn2;
+    public WebElement Okbtn2;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
-    private WebElement anyaccount;
+    public WebElement anyAccount;
 
     @AndroidFindBy(id = "android:id/button1")
-    private WebElement selectbtn;
+    @iOSXCUITFindBy(accessibility = "Done")
+    public WebElement selectBtn;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement FL_Periscope;
+    public WebElement FL_Periscope;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement ForgotPasswordTxt;
+    public WebElement ForgotPasswordTxt;
 
-    @AndroidFindBy(id = "android:id/button2")
-    private WebElement cancelbtn;
-
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[1]")
-    private WebElement cancelbtn2;
+    @iOSXCUITFindBy(iOSClassChain =
+            "**/XCUIElementTypeStaticText[`label == \"Forgot Password?\"`]")
+    public WebElement iosForgotPwTxt;
 
 
-     // Locate the first CheckedTextView element within the ListView
-     @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[4]")
-     private WebElement radioButton;
+
+    // Locate the first CheckedTextView element within the ListView
+    @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[4]")
+    public WebElement radioButton;
 
     @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[1]")
     private WebElement radioButton2;
-    //hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]
 
-    @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
-    private WebElement BasicUser;
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_filters")
-   private WebElement recyclerView ;
-    @AndroidFindBy(className = "android.widget.LinearLayout")
-    List<WebElement> linearLayouts;
 
-    @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_alerts")
-    private WebElement alertButton;
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_filter_alerts")
-    private WebElement filter;
-
-   @AndroidFindBy(xpath ="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[12]/android.widget.TextView")
-   private WebElement Assethealth;
-
-   //Advance User
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[4]/android.widget.ImageView")
-    private WebElement alertButton2;
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/action_filter_alerts")
-    private WebElement filter2;
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[11]" )
-    private WebElement Assethealth_adv;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/iv_title")
-    private WebElement title;
+    public WebElement title;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/parentPanel")
-    private WebElement Account_Dialogue_Screen;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther")
+    public WebElement Account_Dialogue_Screen;
 
     @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout")
     private WebElement HomeScreen;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_account")
-    private WebElement Account_icon;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Account\"`]")
+    public WebElement Account_icon;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_logout")
-    private WebElement Logout;
+    @iOSXCUITFindBy(accessibility = "Logout")
+    public WebElement Logout;
 
     @AndroidFindBy (id = "android:id/button1")
-    private WebElement Confirm_btn;
+    @iOSXCUITFindBy(accessibility = "Confirm")
+    public WebElement Confirm_btn;
+
+
+
+
+    @iOSXCUITFindBy(accessibility = "showpassword")
+    public WebElement showPwdIcon;
+
+    //  blankpw=@iOSXCUITFindBy(accessibility = "Please enter a valid password")
+//    blankunma=@iOSXCUITFindBy(accessibility = "Please enter a valid username")
 
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
-    private WebElement permission_access;
+    @iOSXCUITFindBy(accessibility = "Allow While Using App")
+    public WebElement permission_access;
 
-    public void Click_Permission()
+    public WebElement getRadioButton()
     {
-        permission_access.click();
+        return radioButton;
+    }
+
+    public boolean isRadioButtonChecked()
+    {  return radioButton.getAttribute("checked").equals("true");
+    }
+    public WebElement getSignIn()
+    {
+        return SignIn;
+    }
+    public WebElement getUsername()
+    {
+        return Username;
     }
 
 
+    public WebElement getPassword()
+    {
+        return Password;
+    }
+
+
+
+    public  String getSignIntxt()
+    {
+        return SignInTxt.getText();
+    }
+
+
+
+    public String getErrorMsg()
+    {
+        return errorMessage.getText();
+    }
+
+
+    public String getInvalidLoginErrMsg()
+    {
+        return InvalidLoginErrMsg.getText();
+    }
+
+
+    public String getNetworkErrMsg()
+    {
+        return errorMessage.getText();
+    }
+    public WebElement getNetworkErr()
+    {
+        return errorMessage;
+    }
+
+
+    public WebElement getSelectbtn()
+    {
+        return selectBtn;
+    }
+
+    public String getFL_Periscope()
+    {
+        return FL_Periscope.getText();
+    }
+
+    public String getForgotPasswordTxt()
+    {
+        return ForgotPasswordTxt.getText();
+    }
+
+
+    public WebElement getTitle()
+    {
+        return title;
+    }
     public WebElement getAccount_icon()
     {
         return Account_icon;
@@ -159,169 +221,6 @@ public class SignInPage {
     public WebElement getConfirm_btn()
     {
         return Confirm_btn;
-    }
-
-
-    public List<WebElement> listOfFilters()
-    {
-        return linearLayouts;
-    }
-
-    public void clickRadioButton() {  radioButton.click();  }
-    public WebElement getRadioButton()
-    {
-        return radioButton;
-    }
-     public boolean isRadioButtonChecked()
-     {  return radioButton.getAttribute("checked").equals("true");  }
-    public WebElement getSignIn()
-   {
-       return SignIn;
-   }
-    public WebElement getUsername()
-    {
-        return Username;
-    }
-    public WebElement getPassword()
-    {
-        return Password;
-    }
-    public WebElement getLogin()
-    {
-        return Login;
-    }
-    public WebElement getForgotpassword()
-    {
-        return forgotpassword;
-    }
-
-   public String getLoginMsg()
-   {
-       return LoginMsg.getText();
-   }
-
-   public  String getSignIntxt()
-   {
-       return SignInTxt.getText();
-   }
-
-   public WebElement getBackbutton()
-   {
-       return backbutton;
-   }
-
-    public WebElement getBackbutton2()
-    {
-        return backbutton2;
-    }
-
-    public String getpswrdErrMsg()
-    {
-        return pswrdErr.getText();
-    }
-    public String getusrnmErrrMsg()
-    {
-        return usrnmErr.getText();
-    }
-    public WebElement getOkbtn()
-    {
-        return Okbtn;
-    }
-
-    public String getInvalidLoginErrMsg()
-    {
-        return InvalidLoginErrMsg.getText();
-    }
-
-    public WebElement getTryagainBtn()
-    {
-        return TryagainBtn;
-    }
-
-    public String getNetworkErrMsg()
-    {
-        return NetworkErrMsg.getText();
-    }
-    public WebElement getNetworkErr()
-    {
-        return NetworkErr;
-    }
-
-    public WebElement getOkbtn2()
-    {
-        return Okbtn2;
-    }
-
-    public WebElement getAccount()
-    {
-        return anyaccount;
-    }
-
-    public WebElement getSelectbtn()
-    {
-        return selectbtn;
-    }
-
-    public String getFL_Periscope()
-    {
-        return FL_Periscope.getText();
-    }
-
-    public String getForgotPasswordTxt()
-    {
-        return ForgotPasswordTxt.getText();
-    }
-
-    public WebElement getCancelbtn()
-    {
-        return cancelbtn;
-    }
-
-    public WebElement getCancelbtn2()
-    {
-        return cancelbtn2;
-    }
-
-    public WebElement getBasicUser(){
-        return BasicUser;
-    }
-
-   public WebElement getAlertButton()
-   {
-       return alertButton;
-   }
-
-   public WebElement getFilter()
-   {
-       return filter;
-   }
-
-    public WebElement getAssethealth()
-    {
-        return Assethealth;
-    }
-    //AdvancedUser
-    public WebElement getAssethealth_adv()
-    {
-        return Assethealth_adv;
-    }
-    public WebElement getFilter2()
-    {
-        return filter2;
-    }
-    public WebElement getAlertButton2()
-    {
-        return alertButton2;
-    }
-
-    public WebElement getTitle()
-    {
-        return title;
-    }
-
-    public void scrollAndClick() {
-       // driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+Asset Health (2)+"\").instance(0))").click();
-      //  driver.findElement(new AppiumBy.ByAndroidUIAutomator("UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Asset Health (2)\").instance(0))"));
     }
 
     public WebElement getAccount_Dialogue_Screen()
@@ -338,6 +237,21 @@ public class SignInPage {
         return HomeScreen;
     }
 
+
+    public void setUsername(String uname){
+        Username.clear();
+        Username.sendKeys(uname);
+    }
+
+    public void setPassword(String pwd){
+        Password.clear();
+        Password.sendKeys(pwd);
+    }
+
+    public String getErrorMessage(){
+        String errorMsg= errorMessage.getText();
+        return errorMsg;
+    }
     public  void SignIN()
     {
         SignIn.click();
@@ -353,8 +267,6 @@ public class SignInPage {
         getConfirm_btn().click();
     }
 
-
 }
-
 
 

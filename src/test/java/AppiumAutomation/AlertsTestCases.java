@@ -1,4 +1,6 @@
+
 package AppiumAutomation;
+
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
@@ -555,6 +557,7 @@ public class AlertsTestCases extends BaseClass {
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
+
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
                     System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset1+ " filter");
                     System.out.println("The  Asset name for  this corresponding Low Battery filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
@@ -847,3 +850,4 @@ public class AlertsTestCases extends BaseClass {
 
 
   
+

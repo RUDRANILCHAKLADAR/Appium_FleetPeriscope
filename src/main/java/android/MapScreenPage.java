@@ -26,8 +26,7 @@ public class MapScreenPage
     @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_GEOZONE.\"])[9]")
     private WebElement Landmark1;
 
-//    @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_GEOZONE.\"])[20]")
-//    private WebElement Landmark2;
+
 
     @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_GEOZONE.\"])[2]")
     private WebElement Landmark2_tag;
@@ -39,14 +38,7 @@ public class MapScreenPage
     private WebElement Landmark2_Popup_Close;
 
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
-    private WebElement SIGNIN;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_username")
-    private WebElement Username;
-
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_password")
-    private WebElement Password;
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     private WebElement HomeScreen_icon;
 
@@ -68,7 +60,7 @@ public class MapScreenPage
 
     @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_ASSET.\"])[1]")
     private WebElement Vehicle1;
-    //(//android.view.View[@content-desc="MARKER_ASSET."])[1]
+
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_secondary")
     private WebElement Vehicle1_PopupTitle;
@@ -98,8 +90,7 @@ public class MapScreenPage
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton")
     private WebElement Back;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton")
-    private WebElement Back2;
+
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView[1]")
     private WebElement MovingVehicle1;
@@ -334,9 +325,7 @@ public class MapScreenPage
         return fab_landmarks;
     }
 
-    public WebElement getIdle_tab() {
-        return Idle_tab;
-    }
+
 
     public WebElement getFabcurrent_location() {
         return fabcurrent_location;
@@ -346,10 +335,6 @@ public class MapScreenPage
         return fab_map;
     }
 
-    public WebElement getRefresh_btn()
-    {
-        return Refresh_btn;
-    }
     public String  getFL_text()
     {
         return FL_text.getText();
@@ -360,9 +345,7 @@ public class MapScreenPage
         return Popup1;
     }
 
-    public WebElement getSettings_button() {
-        return Settings_button;
-    }
+
 
     public void Clicksettings_button()
     {
@@ -388,10 +371,7 @@ public class MapScreenPage
     {
         Stopped_tab.click();
     }
-    public void getBack2()
-    {
-        Back2.click();
-    }
+
 
     public String getVehicleSpeed()
     {
@@ -482,15 +462,7 @@ public String  searchbartext="   Search vehicles";
           {
              Vehicle1.click();
          }
-//    public WebElement getLandmark2()
-//    {
-//        return  Landmark2;
-//    }
-//
-//    public void ClickLandmark2()
-//    {
-//        Landmark2.click();
-//    }
+
     public  WebElement getLandmark2_tag()
     {
         return Landmark2_tag;
@@ -506,10 +478,7 @@ public String  searchbartext="   Search vehicles";
     }
     public String Pop_upTitle="mapLMADD";
 
-    public WebElement getLandmark2_Popup_Close()
-    {
-        return  Landmark2_Popup_Close;
-    }
+
     public  void ClickLandmark2_Popup_Close()
     {
         Landmark2_Popup_Close.click();
@@ -528,18 +497,7 @@ public String  searchbartext="   Search vehicles";
     {
         return Landmark1;
     }
-    public WebElement getSignIn()
-    {
-        return SIGNIN;
-    }
-    public WebElement getUsername()
-    {
-        return Username;
-    }
-    public WebElement getPassword()
-    {
-        return Password;
-    }
+
     public WebElement getPermission_access()
     {
         return permission_access;
@@ -560,7 +518,6 @@ public String  searchbartext="   Search vehicles";
     }
 
 
-
     public WebElement getLandmarks_icon()
     {
         return landmarks_icon;
@@ -570,4 +527,6 @@ public String  searchbartext="   Search vehicles";
     {
         return alerts_icon;
     }
+
+
 }

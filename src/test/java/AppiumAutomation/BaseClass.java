@@ -1,5 +1,6 @@
 package AppiumAutomation;
 
+
 import android.AlertsPage;
 import android.ForgotPasswordPage;
 import android.MapScreenPage;
@@ -27,8 +28,8 @@ public class BaseClass {
     public SignInPage signinpage;
     public ForgotPasswordPage forgotPasswordPage;
 
-    public MapScreenPage  mapScreenPage;
-    public AlertsPage     alertsPage;
+    public MapScreenPage mapScreenPage;
+    public AlertsPage alertsPage;
     public void pullToRefresh() {
         int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
         int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
@@ -47,22 +48,15 @@ public class BaseClass {
         String ipAddress = prop.getProperty("ipAddress");
         String port = prop.getProperty("iPort");
 
-//       service = new AppiumServiceBuilder().
-//                withAppiumJS(new File("//opt//homebrew//Cellar//node//19.1.0//lib//node_modules//appium//build//lib//main.js")).
-//                withIPAddress(ipAddress).usingPort(Integer.parseInt(port))
-//                .build();
-//       service.start();
-
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName(prop.getProperty("AndroidDeviceName"));
         options.setPlatformName("android");
+
         options.setApp(prop.getProperty("AppPath"));
         options.autoGrantPermissions();
         driver = new AndroidDriver(new URL(prop.getProperty("Url")), options);
+
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
-
-
         signinpage = new SignInPage(driver);
         forgotPasswordPage=new ForgotPasswordPage(driver);
          mapScreenPage=new MapScreenPage(driver);
@@ -74,6 +68,7 @@ public class BaseClass {
             driver.quit();
             // service.stop();
         }
+
     }
 
 
