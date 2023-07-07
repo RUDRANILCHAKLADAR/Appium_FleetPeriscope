@@ -99,13 +99,13 @@ public class ActionClass {
         element.sendKeys(txt);
     }
 
-    public List<WebElement> listOfElements(List<WebElement> element) {
-        try {
-            return listOfElements(element);
-        } catch (NoSuchElementException e) {
-            throw e;
-        }
-    }
+//    public List<WebElement> is(List<WebElement> element) {
+//        try {
+//            return listOfElements(element);
+//        } catch (NoSuchElementException e) {
+//            throw e;
+//        }
+//    }
 
 
 
@@ -127,8 +127,14 @@ public class ActionClass {
     }
 
 
-    public void networkOn(){
-        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+    public void internetOff(){
+        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().
+                withWiFiDisabled().withDataDisabled().build());
+    }
+
+    public void internetOn(){
+        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().
+                withWiFiEnabled().withDataEnabled().build());
     }
 
 

@@ -19,58 +19,10 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class BaseTest {
-
     public AppiumDriverLocalService service;
-
     public static AppiumDriver driver;
     ActionClass actions;
-
-
-
     public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
-
-
-
-//    @BeforeSuite
-//    public void beforeSuite() throws Exception {
-//        service = getAppiumService(); // -> If using Mac, uncomment this statement and comment below statement
-//        //service = getAppiumServerDefault(); // -> If using Windows, uncomment this statement and comment above statement
-//        if(!checkIfAppiumServerIsRunnning(4723)) {
-//            service.start();
-//            service.clearOutPutStreams(); // -> Comment this if you don't want to see server logs in the console
-//            Log.info("Appium server started");
-//        } else {
-//            Log.info("Appium server already running");
-//        }
-//    }
-//
-//
-//    public AppiumDriverLocalService getAppiumServerDefault() {
-//        return AppiumDriverLocalService.buildDefaultService();
-//    }
-//
-//    // for Mac. Update the paths as per your Mac setup
-//    public AppiumDriverLocalService getAppiumService() {
-//        HashMap<String, String> environment = new HashMap<String, String>();
-//        environment.put("ANDROID_HOME", "/Users/MDehury/Library/Android/sdk");
-//        return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-//                .usingDriverExecutable(new File("/usr/local/bin/node"))
-//                .withAppiumJS(new File("//opt//homebrew//Cellar//node//19.1.0//lib//node_modules//appium//build//lib//main.js"))
-//                .usingPort(4723)
-//                .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
-//                .withEnvironment(environment)
-//                .withLogFile(new File("ServerLogs/server.log")));
-//    }
-//
-//    @AfterSuite (alwaysRun = true)
-//    public void afterSuite() {
-//        if(service.isRunning()){
-//            service.stop();
-//            Log.info("Appium server stopped");
-//        }
-//    }
-
-
 
 
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
@@ -81,7 +33,6 @@ public class BaseTest {
                            @Optional("iOSOnly")String wdaLocalPort, @Optional("iOSOnly")String webkitDebugProxyPort) throws Exception {
 
         Properties prop = new Properties();
-         //AppiumDriver driver;
 
         String strFile = "logs" + File.separator + platformName + "_" + deviceName;
         File logFile = new File(strFile);
@@ -96,8 +47,7 @@ public class BaseTest {
 
         URL url = new URL(prop.getProperty("appiumURL"));
 
-
-            switch(platformName) {
+        switch(platformName) {
 
                 case "android":
                     currentPlatform= Platform.ANDROID;
@@ -110,12 +60,10 @@ public class BaseTest {
                     }
                     else
                         options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
-
-                    //options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
-                    //options.setApp(prop.getProperty("androidAppPath"));
+                    //options.autoGrantPermissions();
                     driver = new AndroidDriver(url, options);
-                    options.autoGrantPermissions();
+
                     break;
                 case "iOS":
                     currentPlatform=Platform.iOS;
@@ -127,6 +75,7 @@ public class BaseTest {
                     option.setWdaLaunchTimeout(Duration.ofSeconds(30));
                     //option.setApp(System.getProperty("user.dir") + "//App//Fleet Staging.app");
                     option.setApp(prop.getProperty("iOSAppPath"));
+                    option.autoAcceptAlerts();
                     driver = new IOSDriver(url, option);
                     break;
                 default:
@@ -135,7 +84,7 @@ public class BaseTest {
             setDriver(driver);
            Log.info("driver initialized: " + driver);
 
-        actions= new ActionClass(driver);
+           actions= new ActionClass(driver);
 
     }
 
@@ -159,23 +108,6 @@ public class BaseTest {
         iOS
     }
     public Platform currentPlatform = Platform.ANDROID;
-
-    public boolean checkIfAppiumServerIsRunnning(int port) throws Exception {
-        boolean isAppiumServerRunning = false;
-        ServerSocket socket;
-        try {
-            socket = new ServerSocket(port);
-            socket.close();
-        } catch (IOException e) {
-            System.out.println("1");
-            isAppiumServerRunning = true;
-        } finally {
-            socket = null;
-        }
-        return isAppiumServerRunning;
-    }
-
-
 
     @AfterTest (alwaysRun = true)
     public void afterTest() {
