@@ -240,18 +240,6 @@ public class MapScreenPage
        return MapSettingsClosebutton;
     }
 
-    public void ClickMapSettingsClosebutton()
-    {
-        MapSettingsClosebutton.click();
-    }
-
-
-
-    public String  getVehicles_text()
-    {
-        return Vehicles_text.getText();
-    }
-
   public String vehicle_text="Vehicles";
 
     public String  getLandmarks_text()

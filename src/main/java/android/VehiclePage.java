@@ -34,7 +34,6 @@ public class VehiclePage{
 
     @iOSXCUITFindBy(accessibility = "Search")
     @AndroidFindBy(accessibility = "Search")
-    //@AndroidFindBy(id="@+id/action_search_vehicle")
     public WebElement searchIcon;
 
     @AndroidFindBy(accessibility = "com.spireon.fleet.staging:id/search_edit_frame")
@@ -86,7 +85,6 @@ public class VehiclePage{
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/" +
             "XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther")
     public WebElement firstVehicle;
-
 
     @AndroidFindBy(id="com.spireon.fleet.staging:id/card_vehicle_list")
     @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")

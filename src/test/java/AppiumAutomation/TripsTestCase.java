@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static org.apache.commons.lang3.compare.ComparableUtils.ge;
 
 public class TripsTestCase extends BaseTest{
 
@@ -42,7 +41,7 @@ public class TripsTestCase extends BaseTest{
 
             }
         }
-
+        actions.waitForVisibility(sp.homeBottomBar);
     }
 
     @BeforeMethod()
@@ -59,12 +58,12 @@ public class TripsTestCase extends BaseTest{
         if (currentPlatform == BaseTest.Platform.ANDROID) {
             actions.waitForVisibility(vp.searchField);
             Assert.assertTrue(vp.searchIcon.isDisplayed());
-            vp.searchField.sendKeys("AS221150001956");
+            vp.searchField.sendKeys("AS820390001479");
 
 
         } else {
             if (currentPlatform == BaseTest.Platform.iOS) {
-                vp.searchIcon.sendKeys("AS221150001956");
+                vp.searchIcon.sendKeys("AS820390001479");
 
             }
         }
@@ -97,35 +96,49 @@ public class TripsTestCase extends BaseTest{
             String noTripText=tp.getNoTrip().getText();
             System.out.println("Empty list Trip Text is:" +noTripText);
         }
-        else if((actions.listOfElements(tp.listOfTrips).size()!=0))
-        {   actions.waitForVisibility(tp.trips);
+        else if(tp.trips.size()>0)
+        {   actions.waitForInvisibility(tp.loading);
             System.out.println("Trips are present" );
-            int tripsCount= actions.listOfElements(tp.listOfTrips).size();
+            int tripsCount= tp.trips.size();
             System.out.println("Total number of trips present on current Date is:"+tripsCount);
-            actions.clickElement(tp.listOfTrips.get(0));
+            actions.clickElement(tp.trips.get(0));
 
         }
+
     }
 
 
-//   @Test(priority = 4)
+//   @Test(priority = 1)
 //    public void testClickOnCalender(){
 //        actions.clickElement(tp.tripCalenderButton);
 //        actions.waitForVisibility(tp.datePicker);
-//        String currentMonth=tp.currentMonth.getText();
-//        System.out.println(currentMonth);
+//        String currentMonthYearVal=tp.currentMonth.getText();
+//        System.out.println(currentMonthYearVal);
 //        //Total Number of dates visible on the calender view
-//        int totalNumberOfDates= tp.dates.size();
+//       int totalNumberOfDates= tp.dates.size();
 //        System.out.println(totalNumberOfDates);
+//        LocalDate currentDate = LocalDate.now();
+//       String currentDateString = currentDate.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+//       String splitter[] = currentDateString.split("/");
+//       System.out.println("System date:"+splitter);
+//       String targetDate = splitter[0];
+//       for (WebElement date : tp.dates) {
+//           String dateText=date.findElement(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText")).getText();
+//           System.out.println("dateText:"+dateText);
+//           if (dateText.equals(targetDate)) {
+//               date.click();
+//               break;
+//           }
 //
-//        for(int i=0;i<totalNumberOfDates;i++){
-//            if(tp.dates.get(i).isSelected()){
-//                System.out.println(i);
-//            }
-//            LocalDate currentDate = LocalDate.now();
-//            String currentDateString = currentDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-//
-//        }
+//       }
+//        actions.clickElement(tp.tripCalenderButton);
+//        actions.waitForVisibility(tp.datePicker);
+//       WebElement selectedDate = tp.datePicker.findElement(By.className("highlighted"));
+//       if (selectedDate.getText().equals(targetDate)) {
+//           System.out.println("The selected date is currently highlighted.");
+//       } else {
+//           System.out.println("The selected date is not highlighted.");
+//       }
 //        }
 
 
@@ -174,16 +187,16 @@ public class TripsTestCase extends BaseTest{
 
     }
 
-    @Test
+    @Test(priority = 5)
     public void testTypesOfTrips(){
-        for(int i=0;i<tp.listOfTrips.size();i++){
+        for(int i=0;i<tp.trips.size();i++){
             if(Utils.isElementPresent(tp.ongoingTrip)&&tp.ongoingTrip.isDisplayed()){
                 System.out.println("Ongoing Trip is present");
                 System.out.println("Start time is :"+ tp.startTime.getText());
-                Assert.assertFalse(tp.stopTime.isDisplayed());
                 System.out.println("Start address is :"+ tp.startAddress.getText());
                 System.out.println(("Vehicle's moving, idle time is :"+tp.moving_idle_Time.getText()));
                 Assert.assertTrue(tp.movingOngoingTrip.isDisplayed());
+                Assert.assertFalse(tp.stopTime.isDisplayed());
             }
             else if(Utils.isElementPresent(tp.tripNumber)&&tp.tripNumber.isDisplayed()){
                 System.out.println("Full Trip is present");
@@ -198,5 +211,7 @@ public class TripsTestCase extends BaseTest{
             }
         }
     }
+
+
 
 }
