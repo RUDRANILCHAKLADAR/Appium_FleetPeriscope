@@ -36,7 +36,7 @@ public class SignInPage {
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/login_msg")
     @iOSXCUITFindBy(accessibility = "with your username and password")
-    public WebElement  LoginMsg;
+    public WebElement  loginMsg;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Sign In\"`]")
@@ -53,23 +53,14 @@ public class SignInPage {
     @iOSXCUITFindBy(accessibility = "Please enter a valid password")
     public WebElement errorMessage;
 
-    @iOSXCUITFindBy(accessibility = "Please enter a valid password")
-    private WebElement emptyPwdMsg;
-
-    @iOSXCUITFindBy(accessibility = "Please enter a valid username")
-    private WebElement emptyUnameMsg;
-
     @AndroidFindBy(id = "android:id/button2")
     //Ok button for ios
     @iOSXCUITFindBy(accessibility = "OK")
     public WebElement ok_cancel_Button;
 
-
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView")
     @iOSXCUITFindBy(accessibility = "The credentials entered do not match our records. Verify your username and password.")
     public WebElement InvalidLoginErrMsg;
-
-
 
     @AndroidFindBy(id = "android:id/button3")
     public WebElement Okbtn2;
@@ -99,8 +90,6 @@ public class SignInPage {
 
     @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[1]")
     private WebElement radioButton2;
-
-
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/iv_title")
     public WebElement title;
@@ -146,9 +135,6 @@ public class SignInPage {
         return radioButton;
     }
 
-    public boolean isRadioButtonChecked()
-     {  return radioButton.getAttribute("checked").equals("true");
-     }
     public WebElement getSignIn()
    {
        return SignIn;
@@ -158,20 +144,15 @@ public class SignInPage {
         return Username;
     }
 
-
     public WebElement getPassword()
     {
         return Password;
     }
 
-
-
    public  String getSignIntxt()
    {
        return SignInTxt.getText();
    }
-
-
 
     public String getErrorMsg()
     {
@@ -241,10 +222,6 @@ public class SignInPage {
         Password.sendKeys(pwd);
     }
 
-    public String getErrorMessage(){
-       String errorMsg= errorMessage.getText();
-       return errorMsg;
-    }
 
 }
 

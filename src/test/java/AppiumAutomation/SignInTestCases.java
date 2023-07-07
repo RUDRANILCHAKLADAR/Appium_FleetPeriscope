@@ -126,29 +126,30 @@ public class SignInTestCases extends BaseTest {
         actions.clickElement(signinpage.ok_cancel_Button);
     }
 
-//    @Test(priority = 6)
-//    public void testNoInternetConnection() {
-//        signinpage.setUsername("tjbussfl");
-//        signinpage.setPassword("123456");
-//        Assert.assertTrue(signinpage.getSignIn().isEnabled());
-//        actions.internetOff();
-//        actions.waitForVisibility(signinpage.SignIn);
-//        actions.clickElement(signinpage.SignIn);
-//        actions.waitForVisibility(signinpage.errorMessage);
-//        String ActualErrorMessage = signinpage.getErrorMessage();
-//        String ExpectedResult = "Please check your network connection and try again.";
-//        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-//        actions.internetOn();
-//        actions.clickElement(signinpage.Okbtn2);
-//        actions.clickElement(signinpage.SignIn);
-//    }
+    @Test(priority = 6)
+    public void testNoInternetConnection() {
+        signinpage.setUsername("tjbussfl");
+        signinpage.setPassword("123456");
+        Assert.assertTrue(signinpage.getSignIn().isEnabled());
+        actions.internetOff();
+        actions.waitForVisibility(signinpage.SignIn);
+        actions.clickElement(signinpage.SignIn);
+        actions.waitForVisibility(signinpage.errorMessage);
+        String ActualErrorMessage = signinpage.getNetworkErrMsg();
+        String ExpectedResult = "Please check your network connection and try again.";
+        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+        actions.internetOn();
+        actions.clickElement(signinpage.Okbtn2);
+        actions.clickElement(signinpage.SignIn);
+
+    }
 
     //C20853-Verify after selecting a account user is able to sign in successfully
     @Test(priority = 7)
     public void testUserAbleToSelectAnyAccount(){
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
-        actions.clickElement(signinpage.SignIn);
+//        signinpage.setUsername("tjbussfl");
+//        signinpage.setPassword("123456");
+//        actions.clickElement(signinpage.SignIn);
         actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
         actions.clickElement(signinpage.anyAccount);
         signinpage.getSelectbtn().click();
