@@ -147,9 +147,6 @@ public class SignInTestCases extends BaseTest {
     //C20853-Verify after selecting a account user is able to sign in successfully
     @Test(priority = 7)
     public void testUserAbleToSelectAnyAccount(){
-//        signinpage.setUsername("tjbussfl");
-//        signinpage.setPassword("123456");
-//        actions.clickElement(signinpage.SignIn);
         actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
         actions.clickElement(signinpage.anyAccount);
         signinpage.getSelectbtn().click();
