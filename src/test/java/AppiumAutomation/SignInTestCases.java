@@ -132,6 +132,7 @@ public class SignInTestCases extends BaseTest {
         signinpage.setPassword("123456");
         Assert.assertTrue(signinpage.getSignIn().isEnabled());
         actions.internetOff();
+        actions.waitForVisibility(signinpage.SignIn);
         actions.clickElement(signinpage.SignIn);
         actions.waitForVisibility(signinpage.errorMessage);
         String ActualErrorMessage = signinpage.getErrorMessage();
