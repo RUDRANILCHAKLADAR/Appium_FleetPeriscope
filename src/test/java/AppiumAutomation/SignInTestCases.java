@@ -93,7 +93,7 @@ public class SignInTestCases extends BaseTest {
 
     //C18783-Verify proper message is shown if username or password fields are missing and tapping on Sign in button
     @Test(priority = 4)
-    public void testEmptyLoginCredentialsValidation() throws InterruptedException {
+    public void testEmptyLoginCredentialsValidation(){
         signinpage.Password.clear();
         signinpage.setUsername("tjbussfl");
         actions.clickElement(signinpage.SignIn);
