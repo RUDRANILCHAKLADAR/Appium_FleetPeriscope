@@ -133,6 +133,7 @@ public class SignInTestCases extends BaseTest {
         Assert.assertTrue(signinpage.getSignIn().isEnabled());
         actions.internetOff();
         actions.clickElement(signinpage.SignIn);
+        actions.waitForVisibility(signinpage.errorMessage);
         String ActualErrorMessage = signinpage.getErrorMessage();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
