@@ -1,6 +1,8 @@
 package AppiumAutomation;
 
+
 import android.SignInPage;
+
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -8,7 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 

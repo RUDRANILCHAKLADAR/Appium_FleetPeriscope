@@ -43,7 +43,7 @@ public class BaseClass {
     @BeforeClass
     public void ConfigureAppium() throws IOException, InterruptedException {
         Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//Configuration//config.properties");
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//Configuration//config");
         prop.load(fis);
         String ipAddress = prop.getProperty("ipAddress");
         String port = prop.getProperty("iPort");
@@ -51,9 +51,11 @@ public class BaseClass {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName(prop.getProperty("AndroidDeviceName"));
         options.setPlatformName("android");
-        options.setApp(prop.getProperty("androidAppPath"));
-        //options.setDeviceName("Pixel 4 ");
-        driver = new AndroidDriver(new URL(prop.getProperty("appiumURL")), options);
+
+        options.setApp(prop.getProperty("AppPath"));
+        options.autoGrantPermissions();
+        driver = new AndroidDriver(new URL(prop.getProperty("Url")), options);
+
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         signinpage = new SignInPage(driver);
         forgotPasswordPage=new ForgotPasswordPage(driver);
