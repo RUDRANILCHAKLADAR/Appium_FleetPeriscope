@@ -3,6 +3,7 @@ package AppiumAutomation;
 
 
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.connection.ConnectionState;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -48,9 +49,7 @@ public class AlertsTestCases extends BaseClass {
     //C22124 Tapping on retry option network call should happen
     //C21297 Verify pull down to refresh functionality
     @Test(priority = 1)
-    public void testAlertsScreenNetworkVerificaton() throws InterruptedException {
-
-
+    public void testAlertsScreenNetworkVerification() throws InterruptedException {
         alertsPage.Click_HomeScreen_icon();
         driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
         alertsPage.ClickAlerts_icon();
@@ -59,14 +58,33 @@ public class AlertsTestCases extends BaseClass {
         driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
         alertsPage.ClickRetry();
 
+        Assert.assertNotNull(alertsPage.getAlertList());
         Assert.assertFalse(alertsPage.getAlertList().isEmpty());
-
 
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.getFilter_icon()));
 
         pullToRefresh();
-
     }
+
+//    public void testAlertsScreenNetworkVerificaton() throws InterruptedException {
+//
+//
+//        alertsPage.Click_HomeScreen_icon();
+//        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+//        alertsPage.ClickAlerts_icon();
+//        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.getNetwork_Error()));
+//        Assert.assertEquals(alertsPage.getNetwork_Error_Msg(), alertsPage.network_msg);
+//        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
+//        alertsPage.ClickRetry();
+//
+//        Assert.assertFalse(alertsPage.getAlertList().isEmpty());
+//
+//
+//        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.getFilter_icon()));
+//
+//        pullToRefresh();
+//
+//    }
 
     //C103327 Verify alert filter has categories like safety/Productivity/Monitoring/Asset health
     @Test(priority = 2)
