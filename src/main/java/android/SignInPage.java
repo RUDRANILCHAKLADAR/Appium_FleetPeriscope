@@ -50,7 +50,6 @@ public class SignInPage extends BasePage{
     public WebElement errorMessage;
 
     @AndroidFindBy(id = "android:id/button2")
-    //Ok button for ios
     @iOSXCUITFindBy(accessibility = "OK")
     public WebElement ok_cancel_Button;
 
@@ -58,8 +57,9 @@ public class SignInPage extends BasePage{
     @iOSXCUITFindBy(accessibility = "The credentials entered do not match our records. Verify your username and password.")
     public WebElement InvalidLoginErrMsg;
 
-    @AndroidFindBy(id = "android:id/button3")
-    public WebElement Okbtn2;
+    //@AndroidFindBy(id = "android:id/button3")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='OK']")
+    public WebElement okButton;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
     public WebElement anyAccount;

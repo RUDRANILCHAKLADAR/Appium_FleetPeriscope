@@ -1,5 +1,8 @@
 package AppiumAutomation;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.connection.ConnectionState;
+import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -120,15 +123,16 @@ public class SignInTestCases extends BaseTest {
         sp.setUsername("tjbussfl");
         sp.setPassword("123456");
         Assert.assertTrue(sp.getSignIn().isEnabled());
-        actions.internetOff();
         actions.waitForVisibility(sp.SignIn);
+        //( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        actions.internetOff();
         actions.clickElement(sp.SignIn);
         actions.waitForVisibility(sp.errorMessage);
         String ActualErrorMessage = sp.getNetworkErrMsg();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+        actions.clickElement(sp.okButton);
         actions.internetOn();
-        actions.clickElement(sp.Okbtn2);
         actions.clickElement(sp.SignIn);
 
     }
@@ -334,7 +338,7 @@ public class SignInTestCases extends BaseTest {
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         //To enable wifi / data connection
         actions.internetOn();
-        actions.clickElement(sp.Okbtn2);
+        actions.clickElement(sp.okButton);
     }
 
 }
