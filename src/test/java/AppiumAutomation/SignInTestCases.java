@@ -120,12 +120,12 @@ public class SignInTestCases extends BaseTest {
 
     @Test(priority = 6)
     public void testNoInternetConnection() {
+        actions.internetOff();
+        actions.waitForVisibility(sp.Username);
         sp.setUsername("tjbussfl");
         sp.setPassword("123456");
         Assert.assertTrue(sp.getSignIn().isEnabled());
         actions.waitForVisibility(sp.SignIn);
-        //( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
-        actions.internetOff();
         actions.clickElement(sp.SignIn);
         actions.waitForVisibility(sp.errorMessage);
         String ActualErrorMessage = sp.getNetworkErrMsg();

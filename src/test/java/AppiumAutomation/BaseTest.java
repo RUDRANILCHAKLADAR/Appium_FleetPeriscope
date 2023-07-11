@@ -29,7 +29,6 @@ public class BaseTest extends SetUp {
                            @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort) throws Exception {
 
         Properties prop = new Properties();
-        //super.beforeClass();
         String strFile = "logs" + File.separator + platformName + "_" + deviceName;
         File logFile = new File(strFile);
         if (!logFile.exists()) {
