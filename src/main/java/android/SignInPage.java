@@ -80,9 +80,9 @@ public class SignInPage extends BasePage{
 
 
 
-     // Locate the first CheckedTextView element within the ListView
-     @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[4]")
-     public WebElement radioButton;
+    // Locate the first CheckedTextView element within the ListView
+    @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[4]")
+    public WebElement radioButton;
 
     @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[1]")
     private WebElement radioButton2;
@@ -119,7 +119,7 @@ public class SignInPage extends BasePage{
     @iOSXCUITFindBy(accessibility = "showpassword")
     public WebElement showPwdIcon;
 
-  //  blankpw=@iOSXCUITFindBy(accessibility = "Please enter a valid password")
+    //  blankpw=@iOSXCUITFindBy(accessibility = "Please enter a valid password")
 //    blankunma=@iOSXCUITFindBy(accessibility = "Please enter a valid username")
 
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
@@ -133,10 +133,15 @@ public class SignInPage extends BasePage{
         return radioButton;
     }
 
+
+    public boolean isRadioButtonChecked()
+    {  return radioButton.getAttribute("checked").equals("true");
+    }
+
     public WebElement getSignIn()
-   {
-       return SignIn;
-   }
+    {
+        return SignIn;
+    }
     public WebElement getUsername()
     {
         return Username;
@@ -147,10 +152,13 @@ public class SignInPage extends BasePage{
         return Password;
     }
 
-   public  String getSignIntxt()
-   {
-       return SignInTxt.getText();
-   }
+
+
+    public  String getSignIntxt()
+    {
+        return SignInTxt.getText();
+    }
+
 
     public String getErrorMsg()
     {
@@ -194,6 +202,20 @@ public class SignInPage extends BasePage{
     {
         return title;
     }
+    public WebElement getAccount_icon()
+    {
+        return Account_icon;
+    }
+
+    public WebElement getLogout()
+    {
+        return Logout;
+    }
+
+    public WebElement getConfirm_btn()
+    {
+        return Confirm_btn;
+    }
 
     public WebElement getAccount_Dialogue_Screen()
     {
@@ -221,7 +243,26 @@ public class SignInPage extends BasePage{
     }
 
 
-}
+    public String getErrorMessage(){
+        String errorMsg= errorMessage.getText();
+        return errorMsg;
+    }
+    public  void SignIN()
+    {
+        SignIn.click();
+        Username.sendKeys("Fleet360A");
+        Password.sendKeys("Password@1");
+        SignIn.click();
+    }
 
+    public void Logout()
+    {
+        getAccount_icon().click();
+        getLogout().click();
+        getConfirm_btn().click();
+    }
+
+
+}
 
 

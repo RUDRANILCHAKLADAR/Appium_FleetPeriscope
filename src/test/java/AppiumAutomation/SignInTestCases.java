@@ -1,7 +1,5 @@
 package AppiumAutomation;
-import android.SignInPage;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.connection.ConnectionStateBuilder;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -9,21 +7,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import utility.Utils;
-
-import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 public class SignInTestCases extends BaseTest {
-//    SignInPage signinpage;
-//    @BeforeMethod
-//    public void beforeMethod(Method m) {
-//        signinpage = new SignInPage(driver);
-//    }
-   @AfterMethod
-   public void afterMethod(){}
+
 
     @Test(priority = 0)
     public void testAccountDialogueScreenVerification(){
@@ -259,23 +248,23 @@ public class SignInTestCases extends BaseTest {
 //        Thread.sleep(6000);
 
 
-        List<WebElement> webElementsList = driver.findElements(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[12]"));
-        boolean isDtcFound = false;
-
-        for (WebElement element : webElementsList) {
-            String elementText = element.getText();
-            if (elementText.contains("DTC")) {
-                isDtcFound = true;
-                break;
-            }
-        }
-        //  Assert.assertTrue(isDtcFound, "Basic User");
-        if (isDtcFound) {
-            System.out.println("Not a Basic User");
-        } else {
-            System.out.println("BASIC user");
-        }
-    }
+//        List<WebElement> webElementsList = driver.findElements(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[12]"));
+//        boolean isDtcFound = false;
+//
+//        for (WebElement element : webElementsList) {
+//            String elementText = element.getText();
+//            if (elementText.contains("DTC")) {
+//                isDtcFound = true;
+//                break;
+//            }
+//        }
+//        //  Assert.assertTrue(isDtcFound, "Basic User");
+//        if (isDtcFound) {
+//            System.out.println("Not a Basic User");
+//        } else {
+//            System.out.println("BASIC user");
+//        }
+//    }
 
         boolean isDTCAlert=false;
 //        for (WebElement linearLayout : signinpage.listOfFilters()) {
@@ -289,7 +278,7 @@ public class SignInTestCases extends BaseTest {
 //
 //       Assert.assertTrue(isDTCAlert,"Basic User");
 //
-//        }
+ }
 
     @Test(priority = 11)
     public void testBackCarouselPageVerification() {

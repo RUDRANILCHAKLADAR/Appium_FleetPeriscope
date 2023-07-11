@@ -3,6 +3,11 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="Appium_PeriScope">
         <classes>
+
+<!--            <class name="AppiumAutomation.SignInTestCases"/>-->
+<!--            <class name="AppiumAutomation.ForgotPasswordTestCases"/>-->
+<!--            <class name="AppiumAutomation.MapScreenTestCases"/>-->
+
             <class name="AppiumAutomation.AlertsTestCases"/>
         </classes>
     </test>

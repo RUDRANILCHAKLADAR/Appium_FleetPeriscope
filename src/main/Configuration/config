@@ -3,4 +3,3 @@ iPort=4723
 AndroidDeviceName=emulator-5554
 Url=http://127.0.0.1:4723
 AppPath=//Users//rudranilchakladar//IdeaProjects//Appium_FleetPeriscope//src//test//java//Resources//app-fleetStaging-debug.apk
-
