@@ -35,8 +35,6 @@ public class BaseTest extends SetUp {
             logFile.mkdirs();
         }
         Log.info("log path: " + strFile);
-
-
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//Configuration//config.properties");
         prop.load(fis);
 
@@ -45,20 +43,20 @@ public class BaseTest extends SetUp {
         switch (platformName) {
 
             case "android":
-                currentPlatform = Platform.ANDROID;
-                UiAutomator2Options options = new UiAutomator2Options();
-                options.setDeviceName(prop.getProperty("AndroidDeviceName"));
-                options.setPlatformName("android");
-                options.setAutomationName(prop.getProperty("androidAutomationName"));
-                if (System.getenv("BITRISE_SOURCE_DIR") == null) {
-                    options.setApp(prop.getProperty("androidAppPath"));
-                } else
-                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
-                options.setCapability("uiautomator2ServerInstallTimeout", 20000);
-                //options.autoGrantPermissions();
-                driver = new AndroidDriver(url, options);
-
-                break;
+                    currentPlatform= Platform.ANDROID;
+                    UiAutomator2Options options = new UiAutomator2Options();
+                    options.setDeviceName(prop.getProperty("AndroidDeviceName"));
+                    options.setPlatformName("android");
+                    options.setAutomationName(prop.getProperty("androidAutomationName"));
+                    if(System.getenv("BITRISE_APK_PATH")==null){
+                       options.setApp(prop.getProperty("androidAppPath"));
+                    }
+                    else
+                        options.setApp(System.getenv("BITRISE_APK_PATH"));
+                    options.setCapability("uiautomator2ServerInstallTimeout", 20000);
+                    //options.autoGrantPermissions();
+                    driver = new AndroidDriver(url, options);
+                    break;
             case "iOS":
                 currentPlatform = Platform.iOS;
                 XCUITestOptions option = new XCUITestOptions();
