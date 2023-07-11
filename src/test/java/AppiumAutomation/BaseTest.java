@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
+import org.openqa.selenium.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
@@ -48,11 +49,16 @@ public class BaseTest extends SetUp {
                     options.setDeviceName(prop.getProperty("AndroidDeviceName"));
                     options.setPlatformName("android");
                     options.setAutomationName(prop.getProperty("androidAutomationName"));
-                    if(System.getenv("BITRISE_APK_PATH")==null){
+                    if(System.getenv("BITRISE_APK_PATH")==null && System.getenv("BITRISE_SOURCE_DIR")==null){
                        options.setApp(prop.getProperty("androidAppPath"));
-                    }
-                    else
+                    }else if(System.getenv("BITRISE_APK_PATH")!=null)
+                    {
                         options.setApp(System.getenv("BITRISE_APK_PATH"));
+                    }
+                    else {
+                        options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    }
+
                     options.setCapability("uiautomator2ServerInstallTimeout", 20000);
                     //options.autoGrantPermissions();
                     driver = new AndroidDriver(url, options);
