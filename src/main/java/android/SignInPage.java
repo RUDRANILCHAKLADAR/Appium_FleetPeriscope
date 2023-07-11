@@ -7,15 +7,11 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class SignInPage {
-
-    public AppiumDriver driver;
+public class SignInPage extends BasePage{
 
     public SignInPage(AppiumDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        super(driver);
     }
-
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
     @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeButton[`label == \"SIGN IN\"`]")
     public WebElement SignIn;
@@ -129,6 +125,8 @@ public class SignInPage {
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     @iOSXCUITFindBy(accessibility = "Allow While Using App")
     public WebElement permission_access;
+
+
 
     public WebElement getRadioButton()
     {

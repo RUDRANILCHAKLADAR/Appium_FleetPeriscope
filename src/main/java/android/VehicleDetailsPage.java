@@ -7,12 +7,10 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class VehicleDetailsPage {
-    public AppiumDriver driver;
+public class VehicleDetailsPage extends BasePage{
 
     public VehicleDetailsPage(AppiumDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        super(driver);
     }
 
     @iOSXCUITFindBy(accessibility = "Details")

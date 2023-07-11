@@ -39,7 +39,7 @@ public class    AlertsTestCases extends BaseClass {
         alertsPage.Click_Permission();
 
         alertsPage.ClickAlerts_icon();
-        //  Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
+
 
 
         Assert.assertTrue(driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout[2]")).isDisplayed());
@@ -66,7 +66,6 @@ public class    AlertsTestCases extends BaseClass {
     //C21297 Verify pull down to refresh functionality
     @Test(priority = 1)
     public void testAlertsScreenNetworkVerificaton() throws InterruptedException {
-
 
         alertsPage.Click_HomeScreen_icon();
         driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());

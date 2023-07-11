@@ -17,58 +17,58 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SignInTestCases extends BaseTest {
-    SignInPage signinpage;
-    @BeforeMethod
-    public void beforeMethod(Method m) {
-        signinpage = new SignInPage(driver);
-    }
+//    SignInPage signinpage;
+//    @BeforeMethod
+//    public void beforeMethod(Method m) {
+//        signinpage = new SignInPage(driver);
+//    }
    @AfterMethod
    public void afterMethod(){}
 
     @Test(priority = 0)
     public void testAccountDialogueScreenVerification(){
-        actions.waitForVisibility(signinpage.SignIn);
-        Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
-        actions.clickElement(actions.findElement(signinpage.SignIn));
-        actions.waitForVisibility(actions.findElement(signinpage.Username));
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
-        actions.clickElement(actions.findElement(signinpage.SignIn));
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
-        Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
-        actions.clickElement(signinpage.selectBtn);
+        actions.waitForVisibility(sp.SignIn);
+        Assert.assertTrue(actions.findElement(sp.SignIn).isDisplayed());
+        actions.clickElement(actions.findElement(sp.SignIn));
+        actions.waitForVisibility(actions.findElement(sp.Username));
+        sp.setUsername("tjbussfl");
+        sp.setPassword("123456");
+        actions.clickElement(actions.findElement(sp.SignIn));
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
+        Assert.assertTrue(sp.getAccount_Dialogue_Screen().isDisplayed());
+        actions.clickElement(sp.selectBtn);
         if (currentPlatform == BaseTest.Platform.ANDROID) {
-            actions.waitForVisibility(signinpage.permission_access);
-            actions.clickElement(signinpage.permission_access);
-            actions.clickElement(signinpage.Account_icon);
+            actions.waitForVisibility(sp.permission_access);
+            actions.clickElement(sp.permission_access);
+            actions.clickElement(sp.Account_icon);
         }
         else {
             if (currentPlatform == BaseTest.Platform.iOS) {
-                actions.clickElement(signinpage.Account_icon);
+                actions.clickElement(sp.Account_icon);
             }
         }
-        actions.clickElement(signinpage.Logout);
-        actions.clickElement(signinpage.Confirm_btn);
+        actions.clickElement(sp.Logout);
+        actions.clickElement(sp.Confirm_btn);
     }
 
     @Test(priority = 1)
     public void testForgotPasswordScreenValidation() {
-        actions.waitForVisibility(signinpage.SignIn);
-        Assert.assertTrue(actions.findElement(signinpage.SignIn).isDisplayed());
-        actions.clickElement(signinpage.SignIn);
-        actions.clickElement(signinpage.forgotPassword);
+        actions.waitForVisibility(sp.SignIn);
+        Assert.assertTrue(actions.findElement(sp.SignIn).isDisplayed());
+        actions.clickElement(sp.SignIn);
+        actions.clickElement(sp.forgotPassword);
         if (currentPlatform== BaseTest.Platform.ANDROID) {
-            String ActualErrorMessage = signinpage.ForgotPasswordTxt.getText();
+            String ActualErrorMessage = sp.ForgotPasswordTxt.getText();
             String ExpectedResult = "Forgot Password";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-            actions.clickElement(signinpage.backButton);
+            actions.clickElement(sp.backButton);
 
         } else
         if(currentPlatform== BaseTest.Platform.iOS){
-            String ActualErrorMessage = signinpage.iosForgotPwTxt.getText();
+            String ActualErrorMessage = sp.iosForgotPwTxt.getText();
             String ExpectedResult = "Forgot Password?";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-            actions.clickElement(signinpage.forgotPwBackBtn);
+            actions.clickElement(sp.forgotPwBackBtn);
         }
     }
 
@@ -76,144 +76,144 @@ public class SignInTestCases extends BaseTest {
     //C18779,C146195-To check whether all the signIn elements are displayed or not
     @Test(priority = 2)
     public void testLoginUiElementsValidation() {
-        actions.waitForVisibility(signinpage.Username);
-        Assert.assertTrue(actions.findElement(signinpage.Username).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.Password).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.Username).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.forgotPassword).isDisplayed());
-        Assert.assertTrue(actions.findElement(signinpage.backButton).isEnabled());
+        actions.waitForVisibility(sp.Username);
+        Assert.assertTrue(actions.findElement(sp.Username).isDisplayed());
+        Assert.assertTrue(actions.findElement(sp.Password).isDisplayed());
+        Assert.assertTrue(actions.findElement(sp.Username).isDisplayed());
+        Assert.assertTrue(actions.findElement(sp.forgotPassword).isDisplayed());
+        Assert.assertTrue(actions.findElement(sp.backButton).isEnabled());
     }
 
     //C18780-Verify user is able to enter the username and password in the Sign in Screen
     @Test(priority = 3)
     public void testLoginCredentialsValidation() {
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
+        sp.setUsername("tjbussfl");
+        sp.setPassword("123456");
     }
 
     //C18783-Verify proper message is shown if username or password fields are missing and tapping on Sign in button
     @Test(priority = 4)
     public void testEmptyLoginCredentialsValidation(){
-        signinpage.Password.clear();
-        signinpage.setUsername("tjbussfl");
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.errorMessage);
-        Assert.assertEquals(signinpage.getErrorMsg(), "Please enter a valid password");
-        actions.clickElement(signinpage.ok_cancel_Button);
-        signinpage.setUsername("");
-        signinpage.setPassword("123456");
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.errorMessage);
-        Assert.assertEquals(signinpage.getErrorMsg(), "Please enter a valid username");
-        actions.clickElement(signinpage.ok_cancel_Button);
-        signinpage.getPassword().clear();
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.errorMessage);
-        Assert.assertEquals(signinpage.getErrorMsg(), "Please enter a valid username");
-        actions.clickElement(signinpage.ok_cancel_Button);
+        sp.Password.clear();
+        sp.setUsername("tjbussfl");
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.errorMessage);
+        Assert.assertEquals(sp.getErrorMsg(), "Please enter a valid password");
+        actions.clickElement(sp.ok_cancel_Button);
+        sp.setUsername("");
+        sp.setPassword("123456");
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.errorMessage);
+        Assert.assertEquals(sp.getErrorMsg(), "Please enter a valid username");
+        actions.clickElement(sp.ok_cancel_Button);
+        sp.getPassword().clear();
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.errorMessage);
+        Assert.assertEquals(sp.getErrorMsg(), "Please enter a valid username");
+        actions.clickElement(sp.ok_cancel_Button);
     }
 
     @Test(priority = 5)
     public void testInvalidCredentialValidations(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        signinpage.setUsername("tjbuss");
-        signinpage.setPassword("1234");
-        wait.until(ExpectedConditions.elementToBeClickable(signinpage.getSignIn()));
-        actions.clickElement(signinpage.SignIn);
-        String actualError = signinpage.getInvalidLoginErrMsg();
+        sp.setUsername("tjbuss");
+        sp.setPassword("1234");
+        wait.until(ExpectedConditions.elementToBeClickable(sp.getSignIn()));
+        actions.clickElement(sp.SignIn);
+        String actualError = sp.getInvalidLoginErrMsg();
         String expectedResult = "The credentials entered do not match our records. Verify your username and password.";
         Assert.assertEquals(actualError, expectedResult);
-        actions.clickElement(signinpage.ok_cancel_Button);
+        actions.clickElement(sp.ok_cancel_Button);
     }
 
     @Test(priority = 6)
     public void testNoInternetConnection() {
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
-        Assert.assertTrue(signinpage.getSignIn().isEnabled());
+        sp.setUsername("tjbussfl");
+        sp.setPassword("123456");
+        Assert.assertTrue(sp.getSignIn().isEnabled());
         actions.internetOff();
-        actions.waitForVisibility(signinpage.SignIn);
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.errorMessage);
-        String ActualErrorMessage = signinpage.getNetworkErrMsg();
+        actions.waitForVisibility(sp.SignIn);
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.errorMessage);
+        String ActualErrorMessage = sp.getNetworkErrMsg();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         actions.internetOn();
-        actions.clickElement(signinpage.Okbtn2);
-        actions.clickElement(signinpage.SignIn);
+        actions.clickElement(sp.Okbtn2);
+        actions.clickElement(sp.SignIn);
 
     }
 
     //C20853-Verify after selecting a account user is able to sign in successfully
     @Test(priority = 7)
     public void testUserAbleToSelectAnyAccount(){
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
-        actions.clickElement(signinpage.anyAccount);
-        signinpage.getSelectbtn().click();
-        actions.waitForVisibility(signinpage.Account_icon);
-        String ActualErrorMessage = signinpage.getFL_Periscope();
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
+        actions.clickElement(sp.anyAccount);
+        sp.getSelectbtn().click();
+        actions.waitForVisibility(sp.Account_icon);
+        String ActualErrorMessage = sp.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-        actions.clickElement(signinpage.Account_icon);
-        actions.clickElement(signinpage.Logout);
-        actions.clickElement(signinpage.Confirm_btn);
+        actions.clickElement(sp.Account_icon);
+        actions.clickElement(sp.Logout);
+        actions.clickElement(sp.Confirm_btn);
 
     }
 
     //Verify tapping on cancel button on dialogue pop up, account is not selected and user is returned to Sign In screen
     @Test(priority = 8)
     public void testUserAccountSelectionCancel(){
-        actions.clickElement(signinpage.SignIn);
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
-        actions.clickElement(signinpage.ok_cancel_Button);
-        Assert.assertEquals(signinpage.getSignIntxt(), "Sign In");
+        actions.clickElement(sp.SignIn);
+        sp.setUsername("tjbussfl");
+        sp.setPassword("123456");
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
+        actions.clickElement(sp.ok_cancel_Button);
+        Assert.assertEquals(sp.getSignIntxt(), "Sign In");
 
     }
     //Verify user is able to select one account from the list when user attempts to sign in and if multiple accounts are linked to the username
     @Test(priority = 9)
     public void testAccountSelectionVerification(){
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
-        actions.clickElement(signinpage.radioButton);
-        Assert.assertTrue(signinpage.getRadioButton().getAttribute("checked").equals("true"));
-        actions.clickElement(signinpage.ok_cancel_Button);
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
+        actions.clickElement(sp.radioButton);
+        Assert.assertTrue(sp.getRadioButton().getAttribute("checked").equals("true"));
+        actions.clickElement(sp.ok_cancel_Button);
     }
 
     //Verify user is able to select one account from the list when user attempts to sign in and if multiple accounts are linked to the username
     @Test(priority = 10)
     public void UserLoginVerification(){
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
-        actions.clickElement(signinpage.radioButton);
-        Assert.assertTrue(signinpage.getRadioButton().getAttribute("checked").equals("true"));
+        sp.setUsername("tjbussfl");
+        sp.setPassword("123456");
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
+        actions.clickElement(sp.radioButton);
+        Assert.assertTrue(sp.getRadioButton().getAttribute("checked").equals("true"));
         //Verify tapping on cancel button on dialogue pop up, account is not selected and user is returned to Sign In screen
-        actions.clickElement(signinpage.ok_cancel_Button);
-        Assert.assertEquals(signinpage.getSignIntxt(), "Sign In");
+        actions.clickElement(sp.ok_cancel_Button);
+        Assert.assertEquals(sp.getSignIntxt(), "Sign In");
         //C20853-Verify after selecting a account user is able to sign in successfully
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
-        actions.clickElement(signinpage.anyAccount);
-        signinpage.getSelectbtn().click();
-        actions.waitForVisibility(signinpage.FL_Periscope);
-        String ActualErrorMessage = signinpage.getFL_Periscope();
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
+        actions.clickElement(sp.anyAccount);
+        sp.getSelectbtn().click();
+        actions.waitForVisibility(sp.FL_Periscope);
+        String ActualErrorMessage = sp.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
-        actions.clickElement(signinpage.Account_icon);
-        actions.clickElement(signinpage.Logout);
-        actions.clickElement(signinpage.Confirm_btn);
+        actions.clickElement(sp.Account_icon);
+        actions.clickElement(sp.Logout);
+        actions.clickElement(sp.Confirm_btn);
     }
     @Test(enabled = false)
     public void AdvanceUserLoginVerification() throws InterruptedException {
-        actions.clickElement(signinpage.SignIn);
-        signinpage.setUsername("Fleet360A");
-        signinpage.setPassword("Password@1");
-        actions.clickElement(signinpage.SignIn);
-        signinpage.ok_cancel_Button.click();
+        actions.clickElement(sp.SignIn);
+        sp.setUsername("Fleet360A");
+        sp.setPassword("Password@1");
+        actions.clickElement(sp.SignIn);
+        sp.ok_cancel_Button.click();
         Dimension size = driver.manage().window().getSize();
         int startX = size.width / 2;
         int startY = (int) (size.height * 0.8);
@@ -241,14 +241,14 @@ public class SignInTestCases extends BaseTest {
 
     @Test(enabled = false)
     public void BasicUserLoginVerification(){
-        signinpage.getSignIn().click();
-        signinpage.getUsername().click();
-        signinpage.getUsername().sendKeys("pratibha_mone_1");
+        sp.getSignIn().click();
+        sp.getUsername().click();
+        sp.getUsername().sendKeys("pratibha_mone_1");
         //signinpage.getUsername().sendKeys("Fleet360A");
-        signinpage.getPassword().click();
-        signinpage.getPassword().sendKeys("123456");
+        sp.getPassword().click();
+        sp.getPassword().sendKeys("123456");
         // signinpage.getPassword().sendKeys("Password@1");
-        signinpage.getSignIn().click();
+        sp.getSignIn().click();
 //        signinpage.getBasicUser().click();
 //        signinpage.getSelectbtn().click();
 //        signinpage.getAlertButton().click();
@@ -293,59 +293,59 @@ public class SignInTestCases extends BaseTest {
 
     @Test(priority = 11)
     public void testBackCarouselPageVerification() {
-        signinpage.getSignIn().click();
-        actions.clickElement(signinpage.backButton);
-        Assert.assertTrue(signinpage.getTitle().isDisplayed());
+        sp.getSignIn().click();
+        actions.clickElement(sp.backButton);
+        Assert.assertTrue(sp.getTitle().isDisplayed());
     }
 
     @Test(priority = 12)
     public void testAccountScreenDisplayVerification(){
-        actions.clickElement(signinpage.SignIn);
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
-        Assert.assertTrue(signinpage.getAccount_Dialogue_Screen().isDisplayed());
-        Assert.assertTrue(signinpage.getRadioButton2().getAttribute("checked").equals("true"));
-        actions.clickElement(signinpage.ok_cancel_Button);
+        actions.clickElement(sp.SignIn);
+        sp.setUsername("tjbussfl");
+        sp.setPassword("123456");
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
+        Assert.assertTrue(sp.getAccount_Dialogue_Screen().isDisplayed());
+        Assert.assertTrue(sp.getRadioButton2().getAttribute("checked").equals("true"));
+        actions.clickElement(sp.ok_cancel_Button);
     }
 
     //Verify account setting is checked tapping on Sign in button for the valid user credentials
     //Verify account setting screen is not shown if user scope is not set
     @Test(priority = 13)
     public void testAccountScreenNotDisplayedVerification(){
-        actions.waitForVisibility(signinpage.Username);
-        signinpage.setUsername("Fleet360A");
-        signinpage.setPassword("Password@1");
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.FL_Periscope);
-        Assert.assertTrue(signinpage.getHomeScreen().isDisplayed());
-        if (signinpage.getHomeScreen().isDisplayed())
+        actions.waitForVisibility(sp.Username);
+        sp.setUsername("Fleet360A");
+        sp.setPassword("Password@1");
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.FL_Periscope);
+        Assert.assertTrue(sp.getHomeScreen().isDisplayed());
+        if (sp.getHomeScreen().isDisplayed())
             System.out.println("Account Screen pop up is not displayed");
         else
             System.out.println("Account Screen pop up is  displayed");
-        actions.clickElement(signinpage.Account_icon);
-        actions.clickElement(signinpage.Logout);
-        actions.clickElement(signinpage.Confirm_btn);
+        actions.clickElement(sp.Account_icon);
+        actions.clickElement(sp.Logout);
+        actions.clickElement(sp.Confirm_btn);
     }
 
     @Test(priority = 14)
     public void testAfterAccountSelectionNetworkVerification() {
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.Username);
-        signinpage.setUsername("tjbussfl");
-        signinpage.setPassword("123456");
-        actions.clickElement(signinpage.SignIn);
-        actions.waitForVisibility(signinpage.getAccount_Dialogue_Screen());
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.Username);
+        sp.setUsername("tjbussfl");
+        sp.setPassword("123456");
+        actions.clickElement(sp.SignIn);
+        actions.waitForVisibility(sp.getAccount_Dialogue_Screen());
         //To disable wifi / data connection
         actions.internetOff();
-        signinpage.getSelectbtn().click();
-        String ActualErrorMessage = signinpage.getNetworkErrMsg();
+        sp.getSelectbtn().click();
+        String ActualErrorMessage = sp.getNetworkErrMsg();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         //To enable wifi / data connection
         actions.internetOn();
-        actions.clickElement(signinpage.Okbtn2);
+        actions.clickElement(sp.Okbtn2);
     }
 
 }

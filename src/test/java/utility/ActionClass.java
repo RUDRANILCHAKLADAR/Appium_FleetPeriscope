@@ -17,23 +17,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ActionClass {
     private final AppiumDriver driver;
-
-
     public ActionClass(AppiumDriver driver) {
         this.driver = driver;
     }
 
-
     public static final Logger log = LoggerFactory.getLogger(ActionClass.class);
-
 
     public void waitForVisibility(WebElement element) {
         try {
@@ -99,14 +93,13 @@ public class ActionClass {
         element.sendKeys(txt);
     }
 
-//    public List<WebElement> is(List<WebElement> element) {
-//        try {
-//            return listOfElements(element);
-//        } catch (NoSuchElementException e) {
-//            throw e;
-//        }
-//    }
-
+    public List<WebElement> listOfElements(List<WebElement> element) {
+        try {
+            return element;
+        } catch (NoSuchElementException e) {
+            throw e;
+        }
+    }
 
 
     private boolean existsElement(String id) {
@@ -121,9 +114,9 @@ public class ActionClass {
     }
 
 
+    public WebElement Element(WebElement element) {
 
-    public boolean element(WebElement element) {
-        return element(element);
+        return element;
     }
 
 

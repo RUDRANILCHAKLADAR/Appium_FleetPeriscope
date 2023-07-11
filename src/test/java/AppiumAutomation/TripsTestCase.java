@@ -1,29 +1,19 @@
 package AppiumAutomation;
 
-import android.SignInPage;
-import android.TripPage;
-import android.VehicleDetailsPage;
-import android.VehiclePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utility.ActionClass;
 import utility.Utils;
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-
+import java.util.Calendar;
 
 public class TripsTestCase extends BaseTest{
 
-    TripPage tp;
-    SignInPage sp;
-    VehiclePage vp;
-    VehicleDetailsPage vdp;
 
-    public void login() {
+       public void login() {
         actions.waitForVisibility(actions.findElement(sp.SignIn));
         actions.clickElement(actions.findElement(sp.SignIn));
         actions.waitForVisibility(actions.findElement(sp.Username));
@@ -44,14 +34,6 @@ public class TripsTestCase extends BaseTest{
         actions.waitForVisibility(sp.homeBottomBar);
     }
 
-    @BeforeMethod()
-    public void beforeMethod(Method m) {
-        tp = new TripPage(driver);
-        sp= new SignInPage(driver);
-        vp= new VehiclePage(driver);
-        vdp=new VehicleDetailsPage(driver);
-    }
-
     public void clickAndSearch() {
         actions.waitForVisibility(actions.findElement(vp.listOfVehicles));
         vp.searchIcon.click();
@@ -69,15 +51,13 @@ public class TripsTestCase extends BaseTest{
         }
     }
 
-    @AfterMethod
-    public void afterMethod() {
-    }
 
 
-    /*C22530- Tap on Trips
-    C22510- Verify user is able to click on dates in calendar component
-    C105323- Tap on any trip list item
-    C146621-Verify trips empty screen*/
+
+    //C22530- Tap on Trips
+    //C22510- Verify user is able to click on dates in calendar component
+    //C105323- Tap on any trip list item
+    //C146621-Verify trips empty screen*/
 
     @Test
     public void testTripScreenValidation() {
@@ -89,7 +69,6 @@ public class TripsTestCase extends BaseTest{
         actions.waitForVisibility(vdp.detailsTab);
         actions.clickElement(tp.tripTab);
         actions.waitForInvisibility(tp.loading);
-
         if(Utils.isElementPresent(tp.getNoTrip()) && tp.getNoTrip().isDisplayed())
         {
             System.out.println("No Trips found");
@@ -102,44 +81,55 @@ public class TripsTestCase extends BaseTest{
             int tripsCount= tp.trips.size();
             System.out.println("Total number of trips present on current Date is:"+tripsCount);
             actions.clickElement(tp.trips.get(0));
+            actions.clickElement(tp.backButton);
 
         }
 
     }
 
 
-//   @Test(priority = 1)
-//    public void testClickOnCalender(){
-//        actions.clickElement(tp.tripCalenderButton);
-//        actions.waitForVisibility(tp.datePicker);
-//        String currentMonthYearVal=tp.currentMonth.getText();
-//        System.out.println(currentMonthYearVal);
-//        //Total Number of dates visible on the calender view
-//       int totalNumberOfDates= tp.dates.size();
-//        System.out.println(totalNumberOfDates);
-//        LocalDate currentDate = LocalDate.now();
-//       String currentDateString = currentDate.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
-//       String splitter[] = currentDateString.split("/");
-//       System.out.println("System date:"+splitter);
-//       String targetDate = splitter[0];
-//       for (WebElement date : tp.dates) {
-//           String dateText=date.findElement(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText")).getText();
-//           System.out.println("dateText:"+dateText);
-//           if (dateText.equals(targetDate)) {
-//               date.click();
-//               break;
-//           }
-//
-//       }
-//        actions.clickElement(tp.tripCalenderButton);
-//        actions.waitForVisibility(tp.datePicker);
-//       WebElement selectedDate = tp.datePicker.findElement(By.className("highlighted"));
-//       if (selectedDate.getText().equals(targetDate)) {
-//           System.out.println("The selected date is currently highlighted.");
-//       } else {
-//           System.out.println("The selected date is not highlighted.");
-//       }
-//        }
+    @Test(priority = 1)
+    public void testClickOnCalender() {
+        actions.clickElement(tp.tripCalenderButton);
+        actions.waitForVisibility(tp.datePicker);
+        String currentMonthYearVal = tp.currentMonth.getText();
+        System.out.println(currentMonthYearVal);
+        //Total Number of dates visible on the calender view
+        int totalNumberOfDates = tp.dates.size();
+        System.out.println(totalNumberOfDates);
+        LocalDate currentDate = LocalDate.now();
+        String currentDateString = currentDate.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        String splitter[] = currentDateString.split("/");
+        //System.out.println("System date:"+splitter);
+        String targetDate = splitter[0];
+        for (WebElement date : tp.dates) {
+            String dateText = date.findElement(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText")).getText();
+            //System.out.println("dateText:"+dateText);
+            if (dateText.equals(targetDate)) {
+                date.click();
+                break;
+            }
+
+        }
+        actions.clickElement(tp.tripCalenderButton);
+        actions.waitForVisibility(tp.datePicker);
+        WebElement selectedDate = tp.datePicker.findElement(By.className("highlighted"));
+        if (selectedDate.getText().equals(targetDate)) {
+            System.out.println("The selected date is currently highlighted.");
+        } else {
+            System.out.println("The selected date is not highlighted.");
+        }
+
+        LocalDate localDatePrevious = currentDate.minusDays(1);
+        System.out.println("\nNext Day is :- \n"
+                + localDatePrevious);
+
+//        LocalDate localDateNext = currentDate.plusDays(1);
+//        String localDateNextString = localDateNext.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+//        System.out.println(localDateNextString);
+
+
+    }
 
 
     @Test(priority = 1)

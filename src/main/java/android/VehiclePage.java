@@ -9,16 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 
-public class VehiclePage{
-
-    public AppiumDriver driver;
-
-
+public class VehiclePage extends BasePage{
     public VehiclePage(AppiumDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        super(driver);
     }
-
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Vehicles\"`]")
     @AndroidFindBy(xpath="//[@text='Vehicles']")
@@ -94,7 +88,7 @@ public class VehiclePage{
     @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
     public WebElement listOfVehicles;
 
-   public WebElement getVehicleTitle(){
+    public WebElement getVehicleTitle(){
        return vehicleTitle;
    }
 
