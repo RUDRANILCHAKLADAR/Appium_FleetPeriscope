@@ -1,25 +1,18 @@
 package android;
 
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import java.util.List;
 
 
-
-public class vehiclePage {
-
-    public AppiumDriver driver;
-
-    public vehiclePage(AppiumDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+public class VehiclePage extends BasePage{
+    public VehiclePage(AppiumDriver driver) {
+        super(driver);
     }
-
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Vehicles\"`]")
     @AndroidFindBy(xpath="//[@text='Vehicles']")
@@ -35,7 +28,11 @@ public class vehiclePage {
 
     @iOSXCUITFindBy(accessibility = "Search")
     @AndroidFindBy(accessibility = "Search")
-    public WebElement searchFld;
+    public WebElement searchIcon;
+
+    @AndroidFindBy(accessibility = "com.spireon.fleet.staging:id/search_edit_frame")
+    @iOSXCUITFindBy(iOSNsPredicate = "label == \"Search\"")
+    public WebElement searchField;
 
     @iOSXCUITFindBy(accessibility = "Horizontal scroll bar, 2 pages")
     @AndroidFindBy(xpath="//[@resource-id='com.spireon.fleet.staging:id/rv_filters')]")
@@ -72,30 +69,41 @@ public class vehiclePage {
     @AndroidFindBy(xpath= "//[@resource-id='com.spireon.fleet.staging:id/iv_vehicle_icon')]")
     public WebElement vehicleIcon;
 
-    //@iOSXCUITFindBy()
+
     @AndroidFindBy(id="@+id/tv_details")
     public WebElement totalCntText;
 
     @AndroidFindBy(id="@+id/direction")
     public WebElement direction;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/" +
+            "XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther")
+    public WebElement firstVehicle;
 
     @AndroidFindBy(id="com.spireon.fleet.staging:id/card_vehicle_list")
-    public WebElement vehicleLists;
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
+    public List<WebElement> vehicleLists;
 
-   public WebElement getVehicleTitle(){
+    @AndroidFindBy(id="com.spireon.fleet.staging:id/card_vehicle_list")
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
+    public WebElement listOfVehicles;
+
+    public WebElement getVehicleTitle(){
        return vehicleTitle;
    }
 
-    public WebElement vehicleLists() {
+    public List<WebElement> vehicleLists() {
        return vehicleLists;
     }
 
     public WebElement searchFld() {
-       return searchFld;
+       return searchIcon;
     }
 
     public WebElement filterOption() {
        return filterOption;
     }
+
+
+
 }

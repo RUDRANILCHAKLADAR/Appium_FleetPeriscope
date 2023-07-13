@@ -7,15 +7,11 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class SignInPage {
-
-    public AppiumDriver driver;
+public class SignInPage extends BasePage{
 
     public SignInPage(AppiumDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        super(driver);
     }
-
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
     @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeButton[`label == \"SIGN IN\"`]")
     public WebElement SignIn;
@@ -36,7 +32,7 @@ public class SignInPage {
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/login_msg")
     @iOSXCUITFindBy(accessibility = "with your username and password")
-    public WebElement  LoginMsg;
+    public WebElement  loginMsg;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Sign In\"`]")
@@ -46,30 +42,24 @@ public class SignInPage {
     @iOSXCUITFindBy(accessibility = "Back")
     public WebElement  backButton;
 
+    @iOSXCUITFindBy(accessibility = "Sign In")
+    public WebElement forgotPwBackBtn;
+
     @AndroidFindBy(id = "android:id/message")
     @iOSXCUITFindBy(accessibility = "Please enter a valid password")
     public WebElement errorMessage;
 
-    @iOSXCUITFindBy(accessibility = "Please enter a valid password")
-    private WebElement emptyPwdMsg;
-
-    @iOSXCUITFindBy(accessibility = "Please enter a valid username")
-    private WebElement emptyUnameMsg;
-
     @AndroidFindBy(id = "android:id/button2")
-    //Ok button for ios
     @iOSXCUITFindBy(accessibility = "OK")
     public WebElement ok_cancel_Button;
-
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView")
     @iOSXCUITFindBy(accessibility = "The credentials entered do not match our records. Verify your username and password.")
     public WebElement InvalidLoginErrMsg;
 
-
-
-    @AndroidFindBy(id = "android:id/button3")
-    public WebElement Okbtn2;
+    //@AndroidFindBy(id = "android:id/button3")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='OK']")
+    public WebElement okButton;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
     public WebElement anyAccount;
@@ -97,8 +87,6 @@ public class SignInPage {
     @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[1]")
     private WebElement radioButton2;
 
-
-
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/iv_title")
     public WebElement title;
 
@@ -107,7 +95,7 @@ public class SignInPage {
     public WebElement Account_Dialogue_Screen;
 
     @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout")
-    private WebElement HomeScreen;
+    public WebElement HomeScreen;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_account")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Account\"`]")
@@ -121,7 +109,11 @@ public class SignInPage {
     @iOSXCUITFindBy(accessibility = "Confirm")
     public WebElement Confirm_btn;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Map\"`]")
+    public WebElement mapTextHomeScreen;
 
+    @iOSXCUITFindBy(accessibility = "Home")
+    public WebElement homeBottomBar;
 
 
     @iOSXCUITFindBy(accessibility = "showpassword")
@@ -134,14 +126,18 @@ public class SignInPage {
     @iOSXCUITFindBy(accessibility = "Allow While Using App")
     public WebElement permission_access;
 
+
+
     public WebElement getRadioButton()
     {
         return radioButton;
     }
 
+
     public boolean isRadioButtonChecked()
     {  return radioButton.getAttribute("checked").equals("true");
     }
+
     public WebElement getSignIn()
     {
         return SignIn;
@@ -150,7 +146,6 @@ public class SignInPage {
     {
         return Username;
     }
-
 
     public WebElement getPassword()
     {
@@ -163,7 +158,6 @@ public class SignInPage {
     {
         return SignInTxt.getText();
     }
-
 
 
     public String getErrorMsg()
@@ -248,6 +242,7 @@ public class SignInPage {
         Password.sendKeys(pwd);
     }
 
+
     public String getErrorMessage(){
         String errorMsg= errorMessage.getText();
         return errorMsg;
@@ -266,6 +261,7 @@ public class SignInPage {
         getLogout().click();
         getConfirm_btn().click();
     }
+
 
 }
 

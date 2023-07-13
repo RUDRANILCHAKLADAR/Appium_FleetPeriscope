@@ -125,6 +125,8 @@ public class ActionClass {
                 withWiFiDisabled().withDataDisabled().build());
     }
 
+
+
     public void internetOn(){
         ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().
                 withWiFiEnabled().withDataEnabled().build());
