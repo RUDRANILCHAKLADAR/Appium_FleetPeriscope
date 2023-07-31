@@ -25,11 +25,8 @@ public class MapScreenTestCase extends BaseTest {
     //C21229 Verify by default, the Home button is selected in the bottom tab bar
     @Test(priority = 0)
     public void UIElementsValidation() throws InterruptedException {
-        signInpage.getSignIn().click();
-        signInpage.getUsername().sendKeys("Fleet360A");
-        signInpage.getPassword().sendKeys("Password@1");
-        signInpage.getSignIn().click();
-        mapScreenPage.Click_Permission();
+
+        ActionClass.logInUser(signInpage, getDriver(), "Fleet360A", "Password@1");
 
         Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isSelected());
 

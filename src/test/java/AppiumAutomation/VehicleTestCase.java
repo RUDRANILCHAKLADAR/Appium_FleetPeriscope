@@ -11,32 +11,9 @@ public class VehicleTestCase extends BaseTest {
     VehiclePage vehiclePage;
     SignInPage signInPage;
 
-    public void login() {
-        ActionClass.waitForVisibility(signInPage.signIn, getDriver());
-        signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
-        ActionClass.sendKeys(signInPage.userName, "Fleet360A");
-        ActionClass.sendKeys(signInPage.password, "Password@1");
-        signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.permission_access, getDriver());
-        if (signInPage.permission_access.isDisplayed()) {
-            ActionClass.waitForVisibility(signInPage.permission_access, getDriver());
-            signInPage.permission_access.click();
-        }
-//        else
-//       if(actions.findElement(sp.permission_access).isDisplayed()&&
-//       actions.isElementPresent(sp.permission_access)){
-//           actions.clickElement(sp.permission_access);
-//       }
-//       else if (!actions.isElementPresent(sp.permission_access)) {
-//           System.out.println("No permission popup is displayed");
-//
-//       }
-    }
-
     @Test
     public void testVehicleUIElements() {
-        login();
+        ActionClass.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
         ActionClass.waitForVisibility(vehiclePage.vehicleBottomBar, getDriver());
         vehiclePage.vehicleBottomBar.click();
         ActionClass.waitForVisibility(vehiclePage.vehicleTitle, getDriver());

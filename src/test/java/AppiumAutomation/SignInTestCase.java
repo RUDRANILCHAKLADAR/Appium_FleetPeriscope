@@ -311,10 +311,8 @@ public class SignInTestCase extends BaseTest {
     //Verify account setting screen is not shown if user scope is not set
     @Test(priority = 13)
     public void testAccountScreenNotDisplayedVerification() {
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
-        signInPage.setUsername("Fleet360A");
-        signInPage.setPassword("Password@1");
-        signInPage.signIn.click();
+
+        ActionClass.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
         ActionClass.waitForVisibility(signInPage.FL_Periscope, getDriver());
         Assert.assertTrue(signInPage.getHomeScreen().isDisplayed());
         if (signInPage.getHomeScreen().isDisplayed())
