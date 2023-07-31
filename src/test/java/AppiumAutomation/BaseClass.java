@@ -30,12 +30,13 @@ public class BaseClass {
 
     public MapScreenPage mapScreenPage;
     public AlertsPage alertsPage;
+
     public void pullToRefresh() {
         int deviceWidth = BaseClass.driver.manage().window().getSize().getWidth();
         int deviceHeight = BaseClass.driver.manage().window().getSize().getHeight();
         int midX = deviceWidth / 2;
         int midY = deviceHeight / 2;
-        int bottomEdge = (int)((float)deviceHeight * 0.85F);
+        int bottomEdge = (int) ((float) deviceHeight * 0.85F);
         (new TouchAction(BaseClass.driver)).press(PointOption.point(midX, midY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(10L))).moveTo(PointOption.point(midX, bottomEdge)).release().perform();
     }
 
@@ -58,18 +59,18 @@ public class BaseClass {
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         signinpage = new SignInPage(driver);
-        forgotPasswordPage=new ForgotPasswordPage(driver);
-         mapScreenPage=new MapScreenPage(driver);
-        alertsPage=new AlertsPage(driver);
+        forgotPasswordPage = new ForgotPasswordPage(driver);
+        mapScreenPage = new MapScreenPage(driver);
+        alertsPage = new AlertsPage(driver);
     }
-        @AfterClass
-        public void tearDown()
-        {
-            driver.quit();
-            // service.stop();
-        }
 
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+        // service.stop();
     }
+
+}
 
 
 

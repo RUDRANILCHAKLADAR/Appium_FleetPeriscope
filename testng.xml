@@ -4,11 +4,11 @@
     <test verbose="2" preserve-order="true" name="Appium_PeriScope">
         <classes>
 
-<!--            <class name="AppiumAutomation.SignInTestCases"/>-->
-<!--            <class name="AppiumAutomation.ForgotPasswordTestCases"/>-->
-<!--            <class name="AppiumAutomation.MapScreenTestCases"/>-->
+<!--            <class name="AppiumAutomation.SignInTestCase"/>-->
+<!--            <class name="AppiumAutomation.ForgotPasswordTestCase"/>-->
+<!--            <class name="AppiumAutomation.MapScreenTestCase"/>-->
 
-            <class name="AppiumAutomation.AlertsTestCases"/>
+            <class name="AppiumAutomation.AlertsTestCase"/>
         </classes>
     </test>
 </suite>

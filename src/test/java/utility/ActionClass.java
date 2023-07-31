@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -77,7 +78,6 @@ public class ActionClass {
     }
 
     public static void sendKeys(WebElement element, String txt) {
-
         element.sendKeys(txt);
     }
 
@@ -101,15 +101,14 @@ public class ActionClass {
         return true;
     }
 
-    public static void internetOff(AppiumDriver driver){
-        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().
+    public static void internetOff(AppiumDriver driver) {
+        ((AndroidDriver) driver).setConnection(new ConnectionStateBuilder().
                 withWiFiDisabled().withDataDisabled().build());
     }
 
 
-
-    public static void internetOn(AppiumDriver driver){
-        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().
+    public static void internetOn(AppiumDriver driver) {
+        ((AndroidDriver) driver).setConnection(new ConnectionStateBuilder().
                 withWiFiEnabled().withDataEnabled().build());
     }
 
@@ -119,7 +118,7 @@ public class ActionClass {
         int deviceHeight = driver.manage().window().getSize().getHeight();
         int midX = deviceWidth / 2;
         int midY = deviceHeight / 2;
-        int bottomEdge = (int)((float)deviceHeight * 0.85F);
+        int bottomEdge = (int) ((float) deviceHeight * 0.85F);
         (new TouchAction((PerformsTouchActions) driver)).
                 press(PointOption.point(midX, midY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(10L))).moveTo(PointOption.point(midX, bottomEdge)).release().perform();
     }
@@ -134,7 +133,7 @@ public class ActionClass {
         int endY = (int) (size.height * 0.2);
 
         // Perform the scroll gesture from start to end coordinates
-        new TouchAction((PerformsTouchActions)(AppiumDriver) driver)
+        new TouchAction((PerformsTouchActions) (AppiumDriver) driver)
                 .press(PointOption.point(startX, startY))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
                 .moveTo(PointOption.point(startX, endY))

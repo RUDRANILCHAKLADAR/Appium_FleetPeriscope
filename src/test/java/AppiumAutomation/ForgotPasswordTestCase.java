@@ -1,18 +1,29 @@
 package AppiumAutomation;
 
+import android.ForgotPasswordPage;
+import android.SignInPage;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utility.ActionClass;
 
-public class ForgotPasswordTestCases extends BaseClass {
-    ActionClass actions = new ActionClass(driver);
+public class ForgotPasswordTestCase extends BaseTest {
+//    ActionClass actions = new ActionClass(driver);
+
+    private SignInPage signInPage;
+    private ForgotPasswordPage forgotPasswordPage;
+
+    @Override
+    protected void initPage() {
+        signInPage = new SignInPage(getDriver());
+        forgotPasswordPage = new ForgotPasswordPage(getDriver());
+    }
 
     //C146197 Verify Forgot Password screen UI matches with Zeplin
     //C146206 Verify the text "If you still need help, contact" and FleetLocate Support button on the forgot password screen
     @Test(priority = 0)
     public void UIScreenElementsVerification() {
-        actions.clickElement(signinpage.signIn, getDriver());
+        ActionClass.clickElement(signInPage.signIn, getDriver());
         forgotPasswordPage.ForgotpasswordClick();
         Assert.assertTrue(forgotPasswordPage.getEmail().isEnabled());
         Assert.assertTrue(forgotPasswordPage.getSubmit_btn().isEnabled());
@@ -100,12 +111,10 @@ public class ForgotPasswordTestCases extends BaseClass {
 //         forgotPasswordPage.SignInClick();
 //         forgotPasswordPage.ForgotpasswordClick();
         forgotPasswordPage.getEmail().sendKeys("tjbussfl@spireon.com");
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        ActionClass.internetOff(getDriver());
         forgotPasswordPage.Submit_btn_Click();
         Assert.assertEquals(forgotPasswordPage.getNetworkErrorMsg(), forgotPasswordPage.network_Err_msg);
         forgotPasswordPage.ClickOkbtn3();
-        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
+        ActionClass.internetOn(getDriver());
     }
-
-
 }

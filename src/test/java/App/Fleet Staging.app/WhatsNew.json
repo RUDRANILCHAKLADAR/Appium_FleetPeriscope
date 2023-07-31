@@ -1,9 +1,12 @@
-[{
+[
+  {
     "description": "Gain visibility into the trips that each of your vehicles are making. See where a vehicle has been and for how long. We separate your data into easily digestible trips so you don’t have to. Available as a list view or as a breadcrumb trail on the map.",
     "imageName": "whatsNew1",
     "title": "Trip History"
-},{
+  },
+  {
     "description": "Dig deeper into your landmarks. See which assets are inside your landmark and take action, whether by calling or navigating to that landmark. All your landmarks’ relevant information at your fingertips.",
     "imageName": "whatsNew2",
     "title": "Landmark Details"
-}]
+  }
+]

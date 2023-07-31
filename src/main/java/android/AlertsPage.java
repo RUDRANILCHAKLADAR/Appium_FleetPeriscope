@@ -1,5 +1,6 @@
 package android;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -11,10 +12,9 @@ import java.util.List;
 
 public class AlertsPage {
 
-    AndroidDriver driver;
+    AppiumDriver driver;
 
-    public AlertsPage(AndroidDriver driver) {
-        super();
+    public AlertsPage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }

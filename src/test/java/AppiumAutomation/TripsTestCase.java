@@ -8,11 +8,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utility.ActionClass;
 import utility.Utils;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class TripsTestCase extends BaseTest{
+public class TripsTestCase extends BaseTest {
 
     private SignInPage signInPage;
     private VehiclePage vehiclePage;
@@ -27,32 +29,32 @@ public class TripsTestCase extends BaseTest{
         vehicleDetailsPage = new VehicleDetailsPage(getDriver());
     }
 
-       public void login() {
-        actions.waitForVisibility(actions.findElement(signInPage.signIn));
-        actions.clickElement(actions.findElement(signInPage.signIn));
-        actions.waitForVisibility(actions.findElement(signInPage.userName));
-        actions.sendKeys(signInPage.userName, "Fleet360A");
-        actions.sendKeys(signInPage.password, "Password@1");
-        actions.clickElement(actions.findElement(signInPage.signIn));
+    public void login() {
+        ActionClass.waitForVisibility(signInPage.signIn, getDriver());
+        signInPage.signIn.click();
+        ActionClass.waitForVisibility(signInPage.userName, getDriver());
+        ActionClass.sendKeys(signInPage.userName, "Fleet360A");
+        ActionClass.sendKeys(signInPage.password, "Password@1");
+        signInPage.signIn.click();
         if (currentPlatform == BaseTest.Platform.ANDROID) {
-            actions.waitForVisibility(signInPage.permission_access);
+            ActionClass.waitForVisibility(signInPage.permission_access, getDriver());
             signInPage.permission_access.isDisplayed();
-            actions.clickElement(signInPage.permission_access);
+            signInPage.permission_access.click();
 
-        } else {
+        } /*else {
             if (currentPlatform == BaseTest.Platform.iOS) {
-                actions.waitForVisibility(signInPage.homeBottomBar);
+                ActionClass.waitForVisibility(signInPage.homeBottomBar, getDriver());
 
             }
-        }
-        actions.waitForVisibility(signInPage.homeBottomBar);
+        }*/
+        ActionClass.waitForVisibility(signInPage.homeBottomBar, getDriver());
     }
 
     public void clickAndSearch() {
-        actions.waitForVisibility(actions.findElement(vehiclePage.listOfVehicles));
+        ActionClass.waitForVisibility(vehiclePage.listOfVehicles, getDriver());
         vehiclePage.searchIcon.click();
         if (currentPlatform == BaseTest.Platform.ANDROID) {
-            actions.waitForVisibility(vehiclePage.searchField);
+            ActionClass.waitForVisibility(vehiclePage.searchField, getDriver());
             Assert.assertTrue(vehiclePage.searchIcon.isDisplayed());
             vehiclePage.searchField.sendKeys("AS820390001479");
 
@@ -66,8 +68,6 @@ public class TripsTestCase extends BaseTest{
     }
 
 
-
-
     //C22530- Tap on Trips
     //C22510- Verify user is able to click on dates in calendar component
     //C105323- Tap on any trip list item
@@ -78,24 +78,22 @@ public class TripsTestCase extends BaseTest{
         login();
         vehiclePage.vehicleBottomBar.click();
         clickAndSearch();
-        actions.waitForVisibility(vehiclePage.firstVehicle);
-        actions.clickElement(vehiclePage.firstVehicle);
-        actions.waitForVisibility(vehicleDetailsPage.detailsTab);
-        actions.clickElement(tripPage.tripTab);
-        actions.waitForInvisibility(tripPage.loading);
-        if(Utils.isElementPresent(tripPage.getNoTrip()) && tripPage.getNoTrip().isDisplayed())
-        {
+        ActionClass.waitForVisibility(vehiclePage.firstVehicle, getDriver());
+        vehiclePage.firstVehicle.click();
+        ActionClass.waitForVisibility(vehicleDetailsPage.detailsTab, getDriver());
+        tripPage.tripTab.click();
+        ActionClass.waitForInvisibility(tripPage.loading, getDriver());
+        if (Utils.isElementPresent(tripPage.getNoTrip()) && tripPage.getNoTrip().isDisplayed()) {
             System.out.println("No Trips found");
-            String noTripText= tripPage.getNoTrip().getText();
-            System.out.println("Empty list Trip Text is:" +noTripText);
-        }
-        else if(tripPage.trips.size()>0)
-        {   actions.waitForInvisibility(tripPage.loading);
-            System.out.println("Trips are present" );
-            int tripsCount= tripPage.trips.size();
-            System.out.println("Total number of trips present on current Date is:"+tripsCount);
-            actions.clickElement(tripPage.trips.get(0));
-            actions.clickElement(tripPage.backButton);
+            String noTripText = tripPage.getNoTrip().getText();
+            System.out.println("Empty list Trip Text is:" + noTripText);
+        } else if (tripPage.trips.size() > 0) {
+            ActionClass.waitForInvisibility(tripPage.loading, getDriver());
+            System.out.println("Trips are present");
+            int tripsCount = tripPage.trips.size();
+            System.out.println("Total number of trips present on current Date is:" + tripsCount);
+            ActionClass.clickElement(tripPage.trips.get(0), getDriver());
+            ActionClass.clickElement(tripPage.backButton, getDriver());
 
         }
 
@@ -104,16 +102,16 @@ public class TripsTestCase extends BaseTest{
 
     @Test(priority = 1)
     public void testClickOnCalender() {
-        actions.clickElement(tripPage.tripCalenderButton);
-        actions.waitForVisibility(tripPage.datePicker);
+        ActionClass.clickElement(tripPage.tripCalenderButton, getDriver());
+        ActionClass.waitForVisibility(tripPage.datePicker, getDriver());
         String currentMonthYearVal = tripPage.currentMonth.getText();
         System.out.println(currentMonthYearVal);
-        //Total Number of dates visible on the calender view
+        //Total Number of dates visible on the calendar view
         int totalNumberOfDates = tripPage.dates.size();
         System.out.println(totalNumberOfDates);
         LocalDate currentDate = LocalDate.now();
         String currentDateString = currentDate.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
-        String splitter[] = currentDateString.split("/");
+        String[] splitter = currentDateString.split("/");
         //System.out.println("System date:"+splitter);
         String targetDate = splitter[0];
         for (WebElement date : tripPage.dates) {
@@ -125,8 +123,8 @@ public class TripsTestCase extends BaseTest{
             }
 
         }
-        actions.clickElement(tripPage.tripCalenderButton);
-        actions.waitForVisibility(tripPage.datePicker);
+        tripPage.tripCalenderButton.click();
+        ActionClass.waitForVisibility(tripPage.datePicker, getDriver());
         WebElement selectedDate = tripPage.datePicker.findElement(By.className("highlighted"));
         if (selectedDate.getText().equals(targetDate)) {
             System.out.println("The selected date is currently highlighted.");
@@ -147,34 +145,32 @@ public class TripsTestCase extends BaseTest{
 
 
     @Test(priority = 1)
-    public void testCurrentDateValidation(){
-      String currentDate= tripPage.tripCurrentDate.getText();
-      System.out.println("Today's date is: "+currentDate);
+    public void testCurrentDateValidation() {
+        String currentDate = tripPage.tripCurrentDate.getText();
+        System.out.println("Today's date is: " + currentDate);
 
     }
 
     //C23937- Verify user is able to turn on/off auto refresh button
     @Test(priority = 2)
-    public void testRefreshButtonFunctionality(){
+    public void testRefreshButtonFunctionality() {
         Assert.assertTrue(tripPage.autoRefreshIcon.isDisplayed());
-        if(tripPage.autoRefreshIcon.isDisplayed())
-        {
-            String refreshOn= tripPage.autoRefreshOn_Off.getText();
-            System.out.println("Auto refresh is:"+ refreshOn);
+        if (tripPage.autoRefreshIcon.isDisplayed()) {
+            String refreshOn = tripPage.autoRefreshOn_Off.getText();
+            System.out.println("Auto refresh is:" + refreshOn);
             tripPage.autoRefreshIcon.click();
-            String refreshOff= tripPage.autoRefreshOn_Off.getText();
-            System.out.println("Auto refresh is:"+ refreshOff);
-        }
-        else if(!tripPage.autoRefreshIcon.isDisplayed()){
+            String refreshOff = tripPage.autoRefreshOn_Off.getText();
+            System.out.println("Auto refresh is:" + refreshOff);
+        } else if (!tripPage.autoRefreshIcon.isDisplayed()) {
             System.out.println("Auto refresh is not visible");
         }
 
     }
 
 
-    //C22391- Verify Trip list screen UI is matching with Zeplyn
+    //C22391- Verify Trip list screen UI is matching with Zeplin
     @Test(priority = 3)
-    public void testTripUiElement(){
+    public void testTripUiElement() {
         Assert.assertTrue(tripPage.autoRefreshIcon.isDisplayed());
         Assert.assertTrue(tripPage.backButton.isDisplayed());
         Assert.assertTrue(tripPage.vehicleName.isDisplayed());
@@ -182,40 +178,39 @@ public class TripsTestCase extends BaseTest{
         Assert.assertTrue(tripPage.tripCalenderButton.isDisplayed());
 
     }
-     //Scrolling functionality
-     // Pull to refresh functionality
+
+    //Scrolling functionality
+    // Pull to refresh functionality
     @Test(priority = 4)
-    public void testPullToRefreshAndScrollTripScreen(){
-        actions.pullToRefresh();
-        actions.scrollToEnd();
+    public void testPullToRefreshAndScrollTripScreen() {
+        ActionClass.pullToRefresh(getDriver());
+        ActionClass.scrollToEnd(getDriver());
 
     }
 
     @Test(priority = 5)
-    public void testTypesOfTrips(){
-        for(int i = 0; i< tripPage.trips.size(); i++){
-            if(Utils.isElementPresent(tripPage.ongoingTrip)&& tripPage.ongoingTrip.isDisplayed()){
+    public void testTypesOfTrips() {
+        for (int i = 0; i < tripPage.trips.size(); i++) {
+            if (Utils.isElementPresent(tripPage.ongoingTrip) && tripPage.ongoingTrip.isDisplayed()) {
                 System.out.println("Ongoing Trip is present");
-                System.out.println("Start time is :"+ tripPage.startTime.getText());
-                System.out.println("Start address is :"+ tripPage.startAddress.getText());
-                System.out.println(("Vehicle's moving, idle time is :"+ tripPage.moving_idle_Time.getText()));
+                System.out.println("Start time is :" + tripPage.startTime.getText());
+                System.out.println("Start address is :" + tripPage.startAddress.getText());
+                System.out.println(("Vehicle's moving, idle time is :" + tripPage.moving_idle_Time.getText()));
                 Assert.assertTrue(tripPage.movingOngoingTrip.isDisplayed());
                 Assert.assertFalse(tripPage.stopTime.isDisplayed());
-            }
-            else if(Utils.isElementPresent(tripPage.tripNumber)&& tripPage.tripNumber.isDisplayed()){
+            } else if (Utils.isElementPresent(tripPage.tripNumber) && tripPage.tripNumber.isDisplayed()) {
                 System.out.println("Full Trip is present");
-                System.out.println("Start time is :"+ tripPage.startTime.getText());
+                System.out.println("Start time is :" + tripPage.startTime.getText());
                 Assert.assertTrue(tripPage.stopTime.isDisplayed());
-                System.out.println("stop time is :"+ tripPage.stopTime.getText());
-                System.out.println("Start address is :"+ tripPage.startAddress.getText());
-                System.out.println("Stop address is :"+ tripPage.stopAddress.getText());
-                System.out.println(("Vehicle's moving, idle time is :"+ tripPage.moving_idle_Time.getText()));
+                System.out.println("stop time is :" + tripPage.stopTime.getText());
+                System.out.println("Start address is :" + tripPage.startAddress.getText());
+                System.out.println("Stop address is :" + tripPage.stopAddress.getText());
+                System.out.println(("Vehicle's moving, idle time is :" + tripPage.moving_idle_Time.getText()));
                 Assert.assertFalse(tripPage.movingOngoingTrip.isDisplayed());
-                System.out.println("Trip count number is:"+ tripPage.tripNumber.getText());
+                System.out.println("Trip count number is:" + tripPage.tripNumber.getText());
             }
         }
     }
-
 
 
 }

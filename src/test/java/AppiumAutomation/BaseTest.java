@@ -1,4 +1,5 @@
 package AppiumAutomation;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import utility.ActionClass;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
@@ -16,11 +18,9 @@ import java.time.Duration;
 import java.util.Properties;
 
 public abstract class BaseTest /*extends SetUp*/ {
-//    ActionClass actions;
-
     private AppiumDriver driver;
-    public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
 
+    public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
 
     protected abstract void initPage();
 
@@ -46,25 +46,23 @@ public abstract class BaseTest /*extends SetUp*/ {
         switch (platformName) {
 
             case "android":
-                    currentPlatform= Platform.ANDROID;
-                    UiAutomator2Options options = new UiAutomator2Options();
-                    options.setDeviceName(prop.getProperty("AndroidDeviceName"));
-                    options.setPlatformName("android");
-                    options.setAutomationName(prop.getProperty("androidAutomationName"));
-                    if(System.getenv("BITRISE_APK_PATH")==null && System.getenv("BITRISE_SOURCE_DIR")==null){
-                       options.setApp(prop.getProperty("androidAppPath"));
-                    }else if(System.getenv("BITRISE_APK_PATH")!=null)
-                    {
-                        options.setApp(System.getenv("BITRISE_APK_PATH"));
-                    }
-                    else {
-                        options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
-                    }
+                currentPlatform = Platform.ANDROID;
+                UiAutomator2Options options = new UiAutomator2Options();
+                options.setDeviceName(prop.getProperty("AndroidDeviceName"));
+                options.setPlatformName("android");
+                options.setAutomationName(prop.getProperty("androidAutomationName"));
+                if (System.getenv("BITRISE_APK_PATH") == null && System.getenv("BITRISE_SOURCE_DIR") == null) {
+                    options.setApp(prop.getProperty("androidAppPath"));
+                } else if (System.getenv("BITRISE_APK_PATH") != null) {
+                    options.setApp(System.getenv("BITRISE_APK_PATH"));
+                } else {
+                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                }
 
-                    options.setCapability("uiautomator2ServerInstallTimeout", 20000);
-                    //options.autoGrantPermissions();
-                    driver = new AndroidDriver(url, options);
-                    break;
+                options.setCapability("uiautomator2ServerInstallTimeout", 20000);
+                //options.autoGrantPermissions();
+                driver = new AndroidDriver(url, options);
+                break;
             case "iOS":
                 currentPlatform = Platform.iOS;
                 XCUITestOptions option = new XCUITestOptions();
@@ -85,14 +83,19 @@ public abstract class BaseTest /*extends SetUp*/ {
         Log.info("driver initialized: " + driver);
 
         initPage();
-//        actions = new ActionClass(driver);
-
     }
 
     public AppiumDriver getDriver() {
         return driver;
     }
 
+    public AndroidDriver getAndroidDriver() {
+        return ((AndroidDriver) driver);
+    }
+
+    public IOSDriver getIosDriver() {
+        return ((IOSDriver) driver);
+    }
 
     enum Platform {
         ANDROID,
