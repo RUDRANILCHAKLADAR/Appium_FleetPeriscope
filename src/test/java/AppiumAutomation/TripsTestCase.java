@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utility.ActionClass;
-import utility.Utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,42 +28,14 @@ public class TripsTestCase extends BaseTest {
         vehicleDetailsPage = new VehicleDetailsPage(getDriver());
     }
 
-    public void login() {
-        ActionClass.waitForVisibility(signInPage.signIn, getDriver());
-        signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
-        ActionClass.sendKeys(signInPage.userName, "Fleet360A");
-        ActionClass.sendKeys(signInPage.password, "Password@1");
-        signInPage.signIn.click();
-        if (currentPlatform == BaseTest.Platform.ANDROID) {
-            ActionClass.waitForVisibility(signInPage.permission_access, getDriver());
-            signInPage.permission_access.isDisplayed();
-            signInPage.permission_access.click();
-
-        } /*else {
-            if (currentPlatform == BaseTest.Platform.iOS) {
-                ActionClass.waitForVisibility(signInPage.homeBottomBar, getDriver());
-
-            }
-        }*/
-        ActionClass.waitForVisibility(signInPage.homeBottomBar, getDriver());
-    }
-
     public void clickAndSearch() {
         ActionClass.waitForVisibility(vehiclePage.listOfVehicles, getDriver());
         vehiclePage.searchIcon.click();
-        if (currentPlatform == BaseTest.Platform.ANDROID) {
+        if (isAndroidPlatform()) {
             ActionClass.waitForVisibility(vehiclePage.searchField, getDriver());
             Assert.assertTrue(vehiclePage.searchIcon.isDisplayed());
-            vehiclePage.searchField.sendKeys("AS820390001479");
-
-
-        } else {
-            if (currentPlatform == BaseTest.Platform.iOS) {
-                vehiclePage.searchIcon.sendKeys("AS820390001479");
-
-            }
         }
+        vehiclePage.searchField.sendKeys("AS820390001479");
     }
 
 
@@ -75,7 +46,7 @@ public class TripsTestCase extends BaseTest {
 
     @Test(priority = 0)
     public void testTripScreenValidation() {
-        login();
+        ActionClass.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
         vehiclePage.vehicleBottomBar.click();
         clickAndSearch();
         ActionClass.waitForVisibility(vehiclePage.firstVehicle, getDriver());
@@ -83,7 +54,7 @@ public class TripsTestCase extends BaseTest {
         ActionClass.waitForVisibility(vehicleDetailsPage.detailsTab, getDriver());
         tripPage.tripTab.click();
         ActionClass.waitForInvisibility(tripPage.loading, getDriver());
-        if (Utils.isElementPresent(tripPage.getNoTrip()) && tripPage.getNoTrip().isDisplayed()) {
+        if (ActionClass.isElementPresent(tripPage.getNoTrip()) && tripPage.getNoTrip().isDisplayed()) {
             System.out.println("No Trips found");
             String noTripText = tripPage.getNoTrip().getText();
             System.out.println("Empty list Trip Text is:" + noTripText);
@@ -191,14 +162,14 @@ public class TripsTestCase extends BaseTest {
     @Test(priority = 6)
     public void testTypesOfTrips() {
         for (int i = 0; i < tripPage.trips.size(); i++) {
-            if (Utils.isElementPresent(tripPage.ongoingTrip) && tripPage.ongoingTrip.isDisplayed()) {
+            if (ActionClass.isElementPresent(tripPage.ongoingTrip) && tripPage.ongoingTrip.isDisplayed()) {
                 System.out.println("Ongoing Trip is present");
                 System.out.println("Start time is :" + tripPage.startTime.getText());
                 System.out.println("Start address is :" + tripPage.startAddress.getText());
                 System.out.println(("Vehicle's moving, idle time is :" + tripPage.moving_idle_Time.getText()));
                 Assert.assertTrue(tripPage.movingOngoingTrip.isDisplayed());
                 Assert.assertFalse(tripPage.stopTime.isDisplayed());
-            } else if (Utils.isElementPresent(tripPage.tripNumber) && tripPage.tripNumber.isDisplayed()) {
+            } else if (ActionClass.isElementPresent(tripPage.tripNumber) && tripPage.tripNumber.isDisplayed()) {
                 System.out.println("Full Trip is present");
                 System.out.println("Start time is :" + tripPage.startTime.getText());
                 Assert.assertTrue(tripPage.stopTime.isDisplayed());

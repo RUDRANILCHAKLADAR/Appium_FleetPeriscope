@@ -1,5 +1,7 @@
 package utility;
 
+import AppiumAutomation.BaseTest;
+import android.SignInPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
@@ -141,6 +143,29 @@ public class ActionClass {
 
         // Wait for the content to load if necessary
         // ...
+    }
+
+    public static void logInUser(SignInPage sp, AppiumDriver driver, String userName, String passWord) {
+
+        ActionClass.waitForVisibility(sp.signIn, driver);
+        sp.signIn.click();
+        ActionClass.waitForVisibility(sp.userName, driver);
+        ActionClass.sendKeys(sp.userName, userName);
+        ActionClass.sendKeys(sp.password, passWord);
+        sp.signIn.click();
+
+        if (BaseTest.isAndroidPlatform()) {
+            ActionClass.waitForVisibility(sp.permission_access, driver);
+            sp.permission_access.isDisplayed();
+            sp.permission_access.click();
+        }
+        ActionClass.waitForVisibility(sp.homeBottomBar, driver);
+    }
+
+    public static void logOutUser(SignInPage signInPage) {
+        signInPage.getAccountIcon().click();
+        signInPage.getLogout().click();
+        signInPage.getConfirmBtn().click();
     }
 
 //    public void scrollDown(int swipeTimes, int durationForSwipe) {

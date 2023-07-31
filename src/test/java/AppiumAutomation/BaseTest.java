@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import utility.ActionClass;
+import utility.Constants;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +20,8 @@ import java.util.Properties;
 
 public abstract class BaseTest {
     private AppiumDriver driver;
+
+    private static Constants.Platform currentPlatform = Constants.Platform.ANDROID;
 
     public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
 
@@ -44,10 +47,10 @@ public abstract class BaseTest {
         URL url = new URL(prop.getProperty("appiumURL"));
 
 //        platformName = "android";
-        switch (platformName) {
+        switch (Constants.Platform.getPlatformFromName(platformName)) {
 
-            case "android":
-                currentPlatform = Platform.ANDROID;
+            case ANDROID:
+                currentPlatform = Constants.Platform.ANDROID;
                 UiAutomator2Options options = new UiAutomator2Options();
                 options.setDeviceName(prop.getProperty("AndroidDeviceName"));
                 options.setPlatformName("android");
@@ -64,8 +67,8 @@ public abstract class BaseTest {
                 //options.autoGrantPermissions();
                 driver = new AndroidDriver(url, options);
                 break;
-            case "iOS":
-                currentPlatform = Platform.iOS;
+            case iOS:
+                currentPlatform = Constants.Platform.iOS;
                 XCUITestOptions option = new XCUITestOptions();
                 option.setDeviceName(prop.getProperty("iOSDeviceName"));
                 option.setPlatformName("iOS");
@@ -98,12 +101,17 @@ public abstract class BaseTest {
         return ((IOSDriver) driver);
     }
 
-    enum Platform {
-        ANDROID,
-        iOS
+    public Constants.Platform getCurrentPlatform() {
+        return currentPlatform;
     }
 
-    public Platform currentPlatform = Platform.ANDROID;
+    public static boolean isAndroidPlatform() {
+        return currentPlatform == Constants.Platform.ANDROID;
+    }
+
+    public static boolean isIosPlatform() {
+        return currentPlatform == Constants.Platform.iOS;
+    }
 
     @AfterTest(alwaysRun = true)
     public void afterTest() {

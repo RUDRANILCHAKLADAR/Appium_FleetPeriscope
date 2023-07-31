@@ -200,7 +200,7 @@ public class SignInPage extends BasePage{
     {
         return title;
     }
-    public WebElement getAccount_icon()
+    public WebElement getAccountIcon()
     {
         return Account_icon;
     }
@@ -210,7 +210,7 @@ public class SignInPage extends BasePage{
         return Logout;
     }
 
-    public WebElement getConfirm_btn()
+    public WebElement getConfirmBtn()
     {
         return Confirm_btn;
     }
@@ -242,22 +242,7 @@ public class SignInPage extends BasePage{
 
 
     public String getErrorMessage(){
-        String errorMsg= errorMessage.getText();
-        return errorMsg;
-    }
-    public  void SignIN()
-    {
-        signIn.click();
-        userName.sendKeys("Fleet360A");
-        password.sendKeys("Password@1");
-        signIn.click();
-    }
-
-    public void Logout()
-    {
-        getAccount_icon().click();
-        getLogout().click();
-        getConfirm_btn().click();
+        return errorMessage.getText();
     }
 
 

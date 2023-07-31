@@ -36,7 +36,7 @@ public class SignInTestCase extends BaseTest {
         ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         Assert.assertTrue(signInPage.getAccount_Dialogue_Screen().isDisplayed());
         signInPage.selectBtn.click();
-        if (currentPlatform == BaseTest.Platform.ANDROID) {
+        if (isAndroidPlatform()) {
             ActionClass.waitForVisibility(signInPage.permission_access, getDriver());
             signInPage.permission_access.click();
             signInPage.Account_icon.click();
@@ -51,13 +51,13 @@ public class SignInTestCase extends BaseTest {
         Assert.assertTrue(signInPage.signIn.isDisplayed());
         signInPage.signIn.click();
         signInPage.forgotPassword.click();
-        if (currentPlatform == BaseTest.Platform.ANDROID) {
+        if (isAndroidPlatform()) {
             String ActualErrorMessage = signInPage.ForgotPasswordTxt.getText();
             String ExpectedResult = "Forgot Password";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
             signInPage.backButton.click();
 
-        } else if (currentPlatform == BaseTest.Platform.iOS) {
+        } else if (isIosPlatform()) {
             String ActualErrorMessage = signInPage.iosForgotPwTxt.getText();
             String ExpectedResult = "Forgot Password?";
             Assert.assertEquals(ActualErrorMessage, ExpectedResult);
