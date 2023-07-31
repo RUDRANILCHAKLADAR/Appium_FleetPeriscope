@@ -73,7 +73,7 @@ public class TripsTestCase extends BaseTest {
     //C105323- Tap on any trip list item
     //C146621-Verify trips empty screen*/
 
-    @Test
+    @Test(priority = 0)
     public void testTripScreenValidation() {
         login();
         vehiclePage.vehicleBottomBar.click();
@@ -144,7 +144,7 @@ public class TripsTestCase extends BaseTest {
     }
 
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void testCurrentDateValidation() {
         String currentDate = tripPage.tripCurrentDate.getText();
         System.out.println("Today's date is: " + currentDate);
@@ -152,7 +152,7 @@ public class TripsTestCase extends BaseTest {
     }
 
     //C23937- Verify user is able to turn on/off auto refresh button
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void testRefreshButtonFunctionality() {
         Assert.assertTrue(tripPage.autoRefreshIcon.isDisplayed());
         if (tripPage.autoRefreshIcon.isDisplayed()) {
@@ -169,7 +169,7 @@ public class TripsTestCase extends BaseTest {
 
 
     //C22391- Verify Trip list screen UI is matching with Zeplin
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void testTripUiElement() {
         Assert.assertTrue(tripPage.autoRefreshIcon.isDisplayed());
         Assert.assertTrue(tripPage.backButton.isDisplayed());
@@ -181,14 +181,14 @@ public class TripsTestCase extends BaseTest {
 
     //Scrolling functionality
     // Pull to refresh functionality
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void testPullToRefreshAndScrollTripScreen() {
         ActionClass.pullToRefresh(getDriver());
         ActionClass.scrollToEnd(getDriver());
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void testTypesOfTrips() {
         for (int i = 0; i < tripPage.trips.size(); i++) {
             if (Utils.isElementPresent(tripPage.ongoingTrip) && tripPage.ongoingTrip.isDisplayed()) {

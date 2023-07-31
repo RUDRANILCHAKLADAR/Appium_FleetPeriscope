@@ -17,7 +17,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
-public abstract class BaseTest /*extends SetUp*/ {
+public abstract class BaseTest {
     private AppiumDriver driver;
 
     public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
@@ -27,7 +27,7 @@ public abstract class BaseTest /*extends SetUp*/ {
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
             "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort"})
     @BeforeClass
-    public void beforeTest(@Optional("androidOnly") String emulator, String platformName, String udid, String deviceName,
+    public void beforeTest(@Optional("androidOnly") String emulator, @Optional("androidOnly") String platformName, @Optional("androidOnly") String udid, @Optional("androidOnly") String deviceName,
                            @Optional("androidOnly") String systemPort, @Optional("androidOnly") String chromeDriverPort,
                            @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort) throws Exception {
 
@@ -43,6 +43,7 @@ public abstract class BaseTest /*extends SetUp*/ {
 
         URL url = new URL(prop.getProperty("appiumURL"));
 
+//        platformName = "android";
         switch (platformName) {
 
             case "android":
@@ -52,7 +53,7 @@ public abstract class BaseTest /*extends SetUp*/ {
                 options.setPlatformName("android");
                 options.setAutomationName(prop.getProperty("androidAutomationName"));
                 if (System.getenv("BITRISE_APK_PATH") == null && System.getenv("BITRISE_SOURCE_DIR") == null) {
-                    options.setApp(prop.getProperty("androidAppPath"));
+                    options.setApp(System.getProperty("user.dir") + prop.getProperty("androidAppPath"));
                 } else if (System.getenv("BITRISE_APK_PATH") != null) {
                     options.setApp(System.getenv("BITRISE_APK_PATH"));
                 } else {
@@ -72,7 +73,7 @@ public abstract class BaseTest /*extends SetUp*/ {
                 option.setPlatformVersion(prop.getProperty("iOSVersion"));
                 option.setWdaLaunchTimeout(Duration.ofSeconds(30));
                 //option.setApp(System.getProperty("user.dir") + "//App//Fleet Staging.app");
-                option.setApp(prop.getProperty("iOSAppPath"));
+                option.setApp(System.getProperty("user.dir") + prop.getProperty("iOSAppPath"));
                 option.autoAcceptAlerts();
                 driver = new IOSDriver(url, option);
                 break;

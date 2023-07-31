@@ -19,8 +19,6 @@ public class AlertsPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-
-
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
      private WebElement Alert_Title_text;
 
