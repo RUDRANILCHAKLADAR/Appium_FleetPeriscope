@@ -15,12 +15,12 @@ public class VehicleTestCase extends BaseTest{
     SignInPage sp;
 
     public void login(){
-        actions.waitForVisibility(actions.findElement(sp.SignIn));
-        actions.clickElement(actions.findElement(sp.SignIn));
-        actions.waitForVisibility(actions.findElement(sp.Username));
-        actions.sendKeys(sp.Username, "Fleet360A");
-        actions.sendKeys(sp.Password,"Password@1");
-        actions.clickElement(actions.findElement(sp.SignIn));
+        actions.waitForVisibility(actions.findElement(sp.signIn));
+        actions.clickElement(actions.findElement(sp.signIn));
+        actions.waitForVisibility(actions.findElement(sp.userName));
+        actions.sendKeys(sp.userName, "Fleet360A");
+        actions.sendKeys(sp.password,"Password@1");
+        actions.clickElement(actions.findElement(sp.signIn));
         actions.waitForVisibility(actions.findElement(sp.permission_access));
         if(actions.findElement(sp.permission_access).isDisplayed()){
         actions.waitForVisibility(actions.findElement(sp.permission_access));

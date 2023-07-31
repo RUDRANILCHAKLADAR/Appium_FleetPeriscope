@@ -12,7 +12,7 @@ public class ForgotPasswordTestCases extends BaseClass {
     //C146206 Verify the text "If you still need help, contact" and FleetLocate Support button on the forgot password screen
     @Test(priority = 0)
     public void UIScreenElementsVerification() {
-        actions.clickElement(signinpage.SignIn);
+        actions.clickElement(signinpage.signIn, getDriver());
         forgotPasswordPage.ForgotpasswordClick();
         Assert.assertTrue(forgotPasswordPage.getEmail().isEnabled());
         Assert.assertTrue(forgotPasswordPage.getSubmit_btn().isEnabled());

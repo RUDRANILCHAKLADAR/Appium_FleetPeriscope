@@ -15,11 +15,14 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
-public class BaseTest extends SetUp {
-    ActionClass actions;
+public abstract class BaseTest /*extends SetUp*/ {
+//    ActionClass actions;
 
+    private AppiumDriver driver;
     public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
 
+
+    protected abstract void initPage();
 
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
             "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort"})
@@ -78,25 +81,16 @@ public class BaseTest extends SetUp {
             default:
                 throw new Exception("Invalid platform! - " + platformName);
         }
-        super.beforeClass();
-        setDriver(driver);
 
         Log.info("driver initialized: " + driver);
 
-        actions = new ActionClass(driver);
+        initPage();
+//        actions = new ActionClass(driver);
 
     }
-
-    private void setDriver(AppiumDriver driver2) {
-        driver = driver2;
-    }
-
 
     public AppiumDriver getDriver() {
-        if (currentPlatform == Platform.ANDROID) {
-            return ((AndroidDriver) driver);
-        } else
-            return ((IOSDriver) driver);
+        return driver;
     }
 
 

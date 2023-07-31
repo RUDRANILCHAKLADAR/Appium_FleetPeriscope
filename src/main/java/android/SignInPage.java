@@ -2,10 +2,8 @@ package android;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 public class SignInPage extends BasePage{
 
@@ -14,15 +12,15 @@ public class SignInPage extends BasePage{
     }
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
     @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeButton[`label == \"SIGN IN\"`]")
-    public WebElement SignIn;
+    public WebElement signIn;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_username")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"Username\"`]")
-    public WebElement Username;
+    public WebElement userName;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_password")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSecureTextField[`value == \"Password\"`]")
-    public WebElement Password;
+    public WebElement password;
 
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_forgot_password")
@@ -140,16 +138,16 @@ public class SignInPage extends BasePage{
 
     public WebElement getSignIn()
     {
-        return SignIn;
+        return signIn;
     }
     public WebElement getUsername()
     {
-        return Username;
+        return userName;
     }
 
     public WebElement getPassword()
     {
-        return Password;
+        return password;
     }
 
 
@@ -233,13 +231,13 @@ public class SignInPage extends BasePage{
 
 
     public void setUsername(String uname){
-        Username.clear();
-        Username.sendKeys(uname);
+        userName.clear();
+        userName.sendKeys(uname);
     }
 
     public void setPassword(String pwd){
-        Password.clear();
-        Password.sendKeys(pwd);
+        password.clear();
+        password.sendKeys(pwd);
     }
 
 
@@ -249,10 +247,10 @@ public class SignInPage extends BasePage{
     }
     public  void SignIN()
     {
-        SignIn.click();
-        Username.sendKeys("Fleet360A");
-        Password.sendKeys("Password@1");
-        SignIn.click();
+        signIn.click();
+        userName.sendKeys("Fleet360A");
+        password.sendKeys("Password@1");
+        signIn.click();
     }
 
     public void Logout()
