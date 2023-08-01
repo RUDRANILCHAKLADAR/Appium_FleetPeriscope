@@ -13,9 +13,14 @@ public class ForgotPasswordTestCase extends BaseTest {
     private ForgotPasswordPage forgotPasswordPage;
 
     @Override
-    protected void initPage() {
+    protected void init() {
         signInPage = new SignInPage(getDriver());
         forgotPasswordPage = new ForgotPasswordPage(getDriver());
+    }
+
+    @Override
+    protected void deInit() {
+
     }
 
     //C146197 Verify Forgot Password screen UI matches with Zeplin

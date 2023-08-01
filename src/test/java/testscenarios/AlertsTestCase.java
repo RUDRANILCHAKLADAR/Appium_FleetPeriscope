@@ -23,10 +23,15 @@ public class AlertsTestCase extends BaseTest {
     public AlertsPage alertsPage;
 
     @Override
-    protected void initPage() {
+    protected void init() {
         forgotPasswordPage = new ForgotPasswordPage(getDriver());
         mapScreenPage = new MapScreenPage(getDriver());
         alertsPage = new AlertsPage(getDriver());
+    }
+
+    @Override
+    protected void deInit() {
+
     }
 
     // C21287  Verify Alerts screen UI

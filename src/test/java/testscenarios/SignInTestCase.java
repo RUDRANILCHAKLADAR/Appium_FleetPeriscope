@@ -21,8 +21,13 @@ public class SignInTestCase extends BaseTest {
     private SignInPage signInPage;
 
     @Override
-    protected void initPage() {
+    protected void init() {
         signInPage = new SignInPage(getDriver());
+    }
+
+    @Override
+    protected void deInit() {
+
     }
 
     @Test(priority = 0)

@@ -15,8 +15,13 @@ public class MapScreenTestCase extends BaseTest {
     private MapScreenPage mapScreenPage;
 
     @Override
-    protected void initPage() {
+    protected void init() {
         mapScreenPage = new MapScreenPage(getDriver());
+    }
+
+    @Override
+    protected void deInit() {
+
     }
 
     //    C21231 Verify user is able to tap on landmarks icon, vehicles icon, alerts icon and, accounts icon on the bottom tab bar

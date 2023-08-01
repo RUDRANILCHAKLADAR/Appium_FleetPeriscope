@@ -21,10 +21,14 @@ public class TripsTestCase extends BaseTest {
     private VehicleDetailsPage vehicleDetailsPage;
 
     @Override
-    protected void initPage() {
+    protected void init() {
         vehiclePage = new VehiclePage(getDriver());
         tripPage = new TripPage(getDriver());
         vehicleDetailsPage = new VehicleDetailsPage(getDriver());
+    }
+    @Override
+    protected void deInit() {
+
     }
 
     public void clickAndSearch() {

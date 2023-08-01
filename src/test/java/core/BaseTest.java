@@ -25,7 +25,8 @@ public abstract class BaseTest {
 
     public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
 
-    protected abstract void initPage();
+    protected abstract void init();
+    protected abstract void deInit();
 
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
             "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort"})
@@ -49,7 +50,7 @@ public abstract class BaseTest {
 
         URL url = new URL(prop.getProperty(APPIUM_URL));
 
-//        platformName = "android";
+        platformName = "android";
         switch (Constants.Platform.getPlatformFromName(platformName)) {
 
             case ANDROID:
@@ -89,7 +90,7 @@ public abstract class BaseTest {
 
         Log.info("driver initialized: " + driver);
 
-        initPage();
+        init();
     }
 
     public AppiumDriver getDriver() {

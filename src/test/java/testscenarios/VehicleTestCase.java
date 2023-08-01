@@ -12,8 +12,13 @@ public class VehicleTestCase extends BaseTest {
     VehiclePage vehiclePage;
 
     @Override
-    protected void initPage() {
+    protected void init() {
         vehiclePage = new VehiclePage(getDriver());
+    }
+
+    @Override
+    protected void deInit() {
+
     }
 
     @Test
