@@ -1,5 +1,6 @@
 package testscenarios;
 
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -17,9 +18,12 @@ public class VehicleTestCase extends BaseTest {
 
     VehiclePage vehiclePage;
 
+    AppiumDriver vehiclePageDriver;
+
     @Override
     protected void init() {
         vehiclePage = new VehiclePage(getDriver());
+        vehiclePageDriver = getDriver();
     }
 
     @Override
@@ -28,19 +32,20 @@ public class VehicleTestCase extends BaseTest {
     }
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         vehiclePageSetup();
     }
 
-    public void vehiclePageSetup(){
-        TestUtils.logInUser(vehiclePage, getDriver(), "Fleet360A", "Password@1");
-        TestUtils.waitForVisibility(vehiclePage.vehicleBottomBar, getDriver());
+    public void vehiclePageSetup() {
+        TestUtils.logInUser(vehiclePage, vehiclePageDriver, "Fleet360A", "Password@1");
+        TestUtils.waitForVisibility(vehiclePage.vehicleBottomBar, vehiclePageDriver);
         vehiclePage.vehicleBottomBar.click();
-        new WebDriverWait(getDriver(), Duration.ofSeconds(60)).until(ExpectedConditions.visibilityOf(vehiclePage.vehicleLists()));
+        new WebDriverWait(vehiclePageDriver, Duration.ofSeconds(60)).until(ExpectedConditions.visibilityOf(vehiclePage.vehicleLists()));
         Assert.assertTrue((vehiclePage.vehicleLists().isDisplayed()));
     }
+
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         TestUtils.logOutUser(vehiclePage);
     }
 
@@ -49,7 +54,7 @@ public class VehicleTestCase extends BaseTest {
     //	C19950	Verify list of vehicles are shown properly
     @Test(priority = 0)
     public void testVehicleUIElements() {
-        TestUtils.waitForVisibility(vehiclePage.vehicleTitle, getDriver());
+        TestUtils.waitForVisibility(vehiclePage.vehicleTitle, vehiclePageDriver);
         Assert.assertTrue((vehiclePage.getVehicleTitle().isDisplayed()));
         Assert.assertTrue((vehiclePage.vehicleLists()).isDisplayed());
         Assert.assertTrue(vehiclePage.searchField().isDisplayed());
@@ -58,9 +63,15 @@ public class VehicleTestCase extends BaseTest {
 
     //C19965	Verify the vehicle status is shown correctly on the vehicle list screen
     @Test(priority = 1)
-    public void testVehicleStatusDetailsDisplay()
-    {
+    public void testVehicleStatusDetailsDisplay() {
         Assert.assertTrue(vehiclePage.getVehicleList().get(0).isDisplayed(), "Vehicle Status is Not Displayed");
     }
 
+
+    //C19971	Verify pull down to refresh functionality
+    @Test(priority = 2)
+    public void testVehicleListScreenPullToRefresh() throws InterruptedException {
+        TestUtils.clickElement(vehiclePage.vehicleBottomBar, vehiclePageDriver);
+        TestUtils.pullToRefresh(vehiclePageDriver);
+    }
 }
