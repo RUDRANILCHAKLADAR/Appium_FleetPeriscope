@@ -3,7 +3,7 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [All Test Suite]">
   <test thread-count="5" name="/Users/rudranilchakladar/IdeaProjects/Appium_FleetPeriscope(failed)">
     <classes>
-      <class name="AppiumAutomation.SignInTestCases">
+      <class name="testscenarios.SignInTestCase">
         <methods>
           <include name="EmptyLoginCredentialsvalidation"/>
           <include name="ConfigureAppium"/>
@@ -12,7 +12,7 @@
           <include name="UserisabletoselectanAccount"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- AppiumAutomation.SignInTestCases -->
+      </class> <!-- testscenarios.SignInTestCase -->
     </classes>
   </test> <!-- /Users/rudranilchakladar/IdeaProjects/Appium_FleetPeriscope(failed) -->
 </suite> <!-- Failed suite [All Test Suite] -->

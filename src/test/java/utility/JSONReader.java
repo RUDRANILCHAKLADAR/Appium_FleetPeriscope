@@ -13,11 +13,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class JSONReader {
-    public static JSONObject getJSONData()  {
+    public static JSONObject getJSONData() {
         JSONObject jsonObject = null;
         try (FileInputStream inputStream = new
-                FileInputStream("//Users//MDehury//Desktop//Appium_PeriScope//src//test//java//data//users.json"))
-        {
+                FileInputStream("//Users//MDehury//Desktop//Appium_PeriScope//src//test//java//data//users.json")) {
             JSONTokener jsonTokener = new JSONTokener(inputStream);
             jsonObject = new JSONObject(jsonTokener);
         } catch (IOException e) {

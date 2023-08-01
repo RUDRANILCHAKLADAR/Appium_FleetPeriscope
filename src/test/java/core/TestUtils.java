@@ -1,12 +1,10 @@
-package utility;
+package core;
 
-import AppiumAutomation.BaseClass;
-import AppiumAutomation.BaseTest;
+import pageobjects.SignInPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.connection.ConnectionState;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -17,19 +15,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ActionClass {
-    private final AppiumDriver driver;
-    public ActionClass(AppiumDriver driver) {
-        this.driver = driver;
-    }
+public class TestUtils {
 
-    public static final Logger log = LoggerFactory.getLogger(ActionClass.class);
+    public static final Logger log = LoggerFactory.getLogger(TestUtils.class);
 
-    public void waitForVisibility(WebElement element) {
+    public static void waitForVisibility(WebElement element, AppiumDriver driver) {
         try {
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -40,7 +35,7 @@ public class ActionClass {
         }
     }
 
-    public boolean waitForInvisibility(WebElement element) {
+    public static boolean waitForInvisibility(WebElement element, AppiumDriver driver) {
         try {
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -53,7 +48,7 @@ public class ActionClass {
     }
 
 
-    public boolean alertIsPresent() {
+    public static boolean alertIsPresent(AppiumDriver driver) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             wait.until(ExpectedConditions.alertIsPresent());
@@ -65,16 +60,7 @@ public class ActionClass {
     }
 
 
-    public WebElement findElement(WebElement element) {
-        try {
-            return element;
-        } catch (NoSuchElementException e) {
-            throw e;
-
-        }
-    }
-
-    public boolean isElementPresent(WebElement element) {
+    public static boolean isElementPresent(WebElement element) {
         try {
             return element.isDisplayed();
         } catch (NoSuchElementException e) {
@@ -82,14 +68,13 @@ public class ActionClass {
         }
     }
 
-    public void clickElement(WebElement element) {
-        waitForVisibility(element);
+    public static void clickElement(WebElement element, AppiumDriver driver) {
+        waitForVisibility(element, driver);
         element.click();
 
     }
 
-    public void sendKeys(WebElement element, String txt) {
-
+    public static void sendKeys(WebElement element, String txt) {
         element.sendKeys(txt);
     }
 
@@ -102,7 +87,7 @@ public class ActionClass {
     }
 
 
-    private boolean existsElement(String id) {
+    private static boolean existsElement(String id, AppiumDriver driver) {
         try {
             driver.findElement(By.id(id));
         } catch (Exception e) {
@@ -113,37 +98,29 @@ public class ActionClass {
         return true;
     }
 
-
-    public WebElement Element(WebElement element) {
-
-        return element;
-    }
-
-
-    public void internetOff(){
-        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().
+    public static void internetOff(AppiumDriver driver) {
+        ((AndroidDriver) driver).setConnection(new ConnectionStateBuilder().
                 withWiFiDisabled().withDataDisabled().build());
     }
 
 
-
-    public void internetOn(){
-        ( (AndroidDriver)driver).setConnection(new ConnectionStateBuilder().
+    public static void internetOn(AppiumDriver driver) {
+        ((AndroidDriver) driver).setConnection(new ConnectionStateBuilder().
                 withWiFiEnabled().withDataEnabled().build());
     }
 
 
-    public void pullToRefresh() {
-        int deviceWidth = BaseTest.driver.manage().window().getSize().getWidth();
-        int deviceHeight = BaseTest.driver.manage().window().getSize().getHeight();
+    public static void pullToRefresh(AppiumDriver driver) {
+        int deviceWidth = driver.manage().window().getSize().getWidth();
+        int deviceHeight = driver.manage().window().getSize().getHeight();
         int midX = deviceWidth / 2;
         int midY = deviceHeight / 2;
-        int bottomEdge = (int)((float)deviceHeight * 0.85F);
+        int bottomEdge = (int) ((float) deviceHeight * 0.85F);
         (new TouchAction((PerformsTouchActions) driver)).
                 press(PointOption.point(midX, midY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(10L))).moveTo(PointOption.point(midX, bottomEdge)).release().perform();
     }
 
-    public void scrollToEnd() {
+    public static void scrollToEnd(AppiumDriver driver) {
         // Get the size of the device screen
         Dimension size = driver.manage().window().getSize();
 
@@ -153,7 +130,7 @@ public class ActionClass {
         int endY = (int) (size.height * 0.2);
 
         // Perform the scroll gesture from start to end coordinates
-        new TouchAction((PerformsTouchActions)(AppiumDriver) driver)
+        new TouchAction((PerformsTouchActions) (AppiumDriver) driver)
                 .press(PointOption.point(startX, startY))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
                 .moveTo(PointOption.point(startX, endY))
@@ -161,6 +138,28 @@ public class ActionClass {
 
         // Wait for the content to load if necessary
         // ...
+    }
+
+    public static void logInUser(BasePage basePage, AppiumDriver driver, String userName, String passWord) {
+        TestUtils.waitForVisibility(basePage.signIn, driver);
+        basePage.signIn.click();
+        TestUtils.waitForVisibility(basePage.userName, driver);
+        TestUtils.sendKeys(basePage.userName, userName);
+        TestUtils.sendKeys(basePage.password, passWord);
+        basePage.signIn.click();
+
+        if (BaseTest.isAndroidPlatform()) {
+            TestUtils.waitForVisibility(basePage.permission_access, driver);
+            basePage.permission_access.isDisplayed();
+            basePage.permission_access.click();
+        }
+        TestUtils.waitForVisibility(basePage.homeBottomBar, driver);
+    }
+
+    public static void logOutUser(BasePage basePage) {
+        basePage.Account_icon.click();
+        basePage.Logout.click();
+        basePage.Confirm_btn.click();
     }
 
 //    public void scrollDown(int swipeTimes, int durationForSwipe) {

@@ -1,18 +1,33 @@
-package AppiumAutomation;
+package testscenarios;
 
-import io.appium.java_client.android.connection.ConnectionStateBuilder;
+import pageobjects.ForgotPasswordPage;
+import pageobjects.SignInPage;
+import core.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utility.ActionClass;
+import core.TestUtils;
 
-public class ForgotPasswordTestCases extends BaseClass {
-    ActionClass actions = new ActionClass(driver);
+public class ForgotPasswordTestCase extends BaseTest {
+
+    private SignInPage signInPage;
+    private ForgotPasswordPage forgotPasswordPage;
+
+    @Override
+    protected void init() {
+        signInPage = new SignInPage(getDriver());
+        forgotPasswordPage = new ForgotPasswordPage(getDriver());
+    }
+
+    @Override
+    protected void deInit() {
+
+    }
 
     //C146197 Verify Forgot Password screen UI matches with Zeplin
     //C146206 Verify the text "If you still need help, contact" and FleetLocate Support button on the forgot password screen
     @Test(priority = 0)
     public void UIScreenElementsVerification() {
-        actions.clickElement(signinpage.SignIn);
+        TestUtils.clickElement(signInPage.signIn, getDriver());
         forgotPasswordPage.ForgotpasswordClick();
         Assert.assertTrue(forgotPasswordPage.getEmail().isEnabled());
         Assert.assertTrue(forgotPasswordPage.getSubmit_btn().isEnabled());
@@ -100,12 +115,10 @@ public class ForgotPasswordTestCases extends BaseClass {
 //         forgotPasswordPage.SignInClick();
 //         forgotPasswordPage.ForgotpasswordClick();
         forgotPasswordPage.getEmail().sendKeys("tjbussfl@spireon.com");
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        TestUtils.internetOff(getDriver());
         forgotPasswordPage.Submit_btn_Click();
         Assert.assertEquals(forgotPasswordPage.getNetworkErrorMsg(), forgotPasswordPage.network_Err_msg);
         forgotPasswordPage.ClickOkbtn3();
-        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
+        TestUtils.internetOn(getDriver());
     }
-
-
 }

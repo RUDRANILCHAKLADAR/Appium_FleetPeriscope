@@ -1,20 +1,38 @@
 
-package AppiumAutomation;
+package testscenarios;
 
 
+import pageobjects.AlertsPage;
+import pageobjects.ForgotPasswordPage;
+import pageobjects.MapScreenPage;
+import core.BaseTest;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.android.connection.ConnectionState;
-import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utility.Utils;
+import core.TestUtils;
 
 import java.time.Duration;
 
-public class AlertsTestCases extends BaseClass {
+public class AlertsTestCase extends BaseTest {
 
+    public ForgotPasswordPage forgotPasswordPage;
+
+    public MapScreenPage mapScreenPage;
+    public AlertsPage alertsPage;
+
+    @Override
+    protected void init() {
+        forgotPasswordPage = new ForgotPasswordPage(getDriver());
+        mapScreenPage = new MapScreenPage(getDriver());
+        alertsPage = new AlertsPage(getDriver());
+    }
+
+    @Override
+    protected void deInit() {
+
+    }
 
     // C21287  Verify Alerts screen UI
     //C102181 Tap on any alert list item
@@ -22,10 +40,10 @@ public class AlertsTestCases extends BaseClass {
     @Test(priority = 0)
     public void testAlertsScreenUIVerification() throws InterruptedException {
 
-        signinpage.SignIN();
-        alertsPage.ClickAlerts_icon();
-          Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
+        TestUtils.logInUser(alertsPage, getDriver(), "Fleet360A", "Password@1");
 
+        alertsPage.ClickAlerts_icon();
+        Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
 
 
         Assert.assertEquals(alertsPage.getAlert_Title_text(), alertsPage.Alert_Title);
@@ -33,7 +51,7 @@ public class AlertsTestCases extends BaseClass {
 
         alertsPage.AlertListFull.get(0).click();
 
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.Back()));
+        new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.Back()));
         alertsPage.ClickBack();
 
         Assert.assertTrue(alertsPage.getFilter_icon().isEnabled());
@@ -51,19 +69,19 @@ public class AlertsTestCases extends BaseClass {
     @Test(priority = 1)
     public void testAlertsScreenNetworkVerification() throws InterruptedException {
         alertsPage.Click_HomeScreen_icon();
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+        TestUtils.internetOff(getDriver());
         alertsPage.ClickAlerts_icon();
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.getNetwork_Error()));
+        new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.getNetwork_Error()));
         Assert.assertEquals(alertsPage.getNetwork_Error_Msg(), alertsPage.network_msg);
-        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
+        TestUtils.internetOn(getDriver());
         alertsPage.ClickRetry();
 
         Assert.assertNotNull(alertsPage.getAlertList());
         Assert.assertFalse(alertsPage.getAlertList().isEmpty());
 
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.getFilter_icon()));
+        TestUtils.waitForInvisibility(alertsPage.getFilter_icon(), getDriver());
 
-        pullToRefresh();
+        TestUtils.pullToRefresh(getDriver());
     }
 
 //    public void testAlertsScreenNetworkVerificaton() throws InterruptedException {
@@ -97,7 +115,7 @@ public class AlertsTestCases extends BaseClass {
         Assert.assertTrue(alertsPage.getFilterCategoriesList().get(0).getText().contains(alertsPage.safety));
         Assert.assertTrue(alertsPage.getFilterCategoriesList().get(1).getText().contains(alertsPage.prod));
         Assert.assertTrue(alertsPage.getFilterCategoriesList().get(2).getText().contains(alertsPage.monitor));
-        String Asset_health = driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Asset Health (5)\"));")).getText();
+        String Asset_health = getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Asset Health (5)\"));")).getText();
         Assert.assertTrue(Asset_health.contains(alertsPage.asset));
         alertsPage.ClickBack();
 
@@ -113,7 +131,6 @@ public class AlertsTestCases extends BaseClass {
         alertsPage.Click_filter();
 
 
-
         Assert.assertTrue(alertsPage.getFilterList().get(0).getText().contains(alertsPage.safety1));
         Assert.assertTrue(alertsPage.getFilterList().get(1).getText().contains(alertsPage.safety2));
         Assert.assertTrue(alertsPage.getFilterList().get(2).getText().contains(alertsPage.safety3));
@@ -126,15 +143,15 @@ public class AlertsTestCases extends BaseClass {
         Assert.assertTrue(alertsPage.getFilterList().get(9).getText().contains(alertsPage.monitor1));
         Assert.assertTrue(alertsPage.getFilterList().get(10).getText().contains(alertsPage.monitor2));
 
-        Assert.assertEquals(driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Low Battery\"));")).getText(), alertsPage.asset1);
-        Assert.assertEquals(driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Maintenance\"));")).getText(), alertsPage.asset2);
-        Assert.assertEquals(driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));")).getText(), alertsPage.asset3);
-        Assert.assertEquals(driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Engine Oil Life\"));")).getText(), alertsPage.asset4);
-        Assert.assertEquals(driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"DTC Alert\"));")).getText(), alertsPage.asset5);
+        Assert.assertEquals(getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Low Battery\"));")).getText(), alertsPage.asset1);
+        Assert.assertEquals(getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Maintenance\"));")).getText(), alertsPage.asset2);
+        Assert.assertEquals(getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));")).getText(), alertsPage.asset3);
+        Assert.assertEquals(getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Engine Oil Life\"));")).getText(), alertsPage.asset4);
+        Assert.assertEquals(getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"DTC Alert\"));")).getText(), alertsPage.asset5);
 
     }
 
-    @Test(priority =4)
+    @Test(priority = 4)
     public void testProductivityFilterSelection() {
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
@@ -152,39 +169,36 @@ public class AlertsTestCases extends BaseClass {
         }
 
         alertsPage.ClickBack();
-       alertsPage.DismissAppRatingPopup();
-        signinpage.Logout();
+        alertsPage.DismissAppRatingPopup();
 
+        TestUtils.logOutUser(alertsPage);
     }
 
     @Test(priority = 9)
     public void testProductivityListDisplayVerification() throws InterruptedException {
-        int k=1;
-        for (int i = 0; i <alertsPage.getProductivity_List().size(); i++) {
+        int k = 1;
+        for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity1) || alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity2) || alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity3) || alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity4)) {
 
 
-                String filter_name=alertsPage.getProductivity_List().get(i).getText();
+                String filter_name = alertsPage.getProductivity_List().get(i).getText();
                 alertsPage.getProductivity_List().get(i).click();
 
                 alertsPage.ClickBack();
-                if(k==1) {
+                if (k == 1) {
                     alertsPage.ClickRatingPopup();
                     alertsPage.ClickRatingPopup();
-                    k=k+1;
+                    k = k + 1;
                 }
 
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
-                if(Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed())
-                {
-                    Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(),alertsPage.Alert_Msg);
-                    System.out.println("In Productivity Filter No alerts are present for " + filter_name+" filter");
+                new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                    Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
+                    System.out.println("In Productivity Filter No alerts are present for " + filter_name + " filter");
                     alertsPage.Click_filter();
                     alertsPage.getProductivity_List().get(i).click();
-                }
-                else if(alertsPage.getAlert_List().isDisplayed())
-                {
-                    System.out.println("In Productivity Filter, alerts are present for " +filter_name+ " filter" );
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
+                    System.out.println("In Productivity Filter, alerts are present for " + filter_name + " filter");
                     alertsPage.Click_filter();
                     alertsPage.getProductivity_List().get(i).click();
                 }
@@ -195,36 +209,32 @@ public class AlertsTestCases extends BaseClass {
 
     }
 
-//    C21456	Tap on Arrival/Departure alert on Filters screen
+    //    C21456	Tap on Arrival/Departure alert on Filters screen
 //	C93507	Verify tapping on any Arrival/Departure alert list item takes the user to alert details screen and shows the landmark name
 //	C93508	Verify if landmark name is empty or null then we need to show the address of the alert.
 //	C147174	Tap on any alert list item
 //	C166386	Verify that header displays the information of the list in the following format(Ex:7-day history, Total (xxxx): Showing 1 to 50)
     @Test(priority = 5)
-    public void testLandmarkArrivalandDepartureFilterVerification()
-    {
-        signinpage.SignIN();
+    public void testLandmarkArrivalandDepartureFilterVerification() {
+        TestUtils.logInUser(alertsPage, getDriver(), "Fleet360A", "Password@1");
 
         alertsPage.ClickAlerts_icon();
         alertsPage.Click_filter();
 
-        for (int i = 0; i <alertsPage.getProductivity_List().size(); i++)
-        {
-            if( alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity4))
-            {
+        for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
+            if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity4)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+                new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity4 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
-                  // System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getAttribute("text")); (we can do assertion of header count, but cannot print it.....will check later)
+                    // System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getAttribute("text")); (we can do assertion of header count, but cannot print it.....will check later)
                     alertsPage.getAlertListFull().get(0).click();
                     //String landmark_name=alertsPage.getLandmarkName().getText();
                     String address_name = alertsPage.getAddressName().getText();
@@ -249,8 +259,7 @@ public class AlertsTestCases extends BaseClass {
                         System.out.println("In Productivity Filter  alerts are present for " + alertsPage.productivity4 + " filter");
                         System.out.println("The Landmark name for this alert ----" + result[0]);
                         alertsPage.ClickBack();
-                    }
-                    else if (result[0] == null) {
+                    } else if (result[0] == null) {
                         System.out.println("In Productivity Filter  alerts are present for " + alertsPage.productivity4 + " filter");
                         System.out.println("The Landmark name for this alert is not displayed or is null");
                         System.out.println("The Address name for this alert is " + result[1]);
@@ -263,7 +272,7 @@ public class AlertsTestCases extends BaseClass {
         }
     }
 
-//    C21454	Tap on Idle alert on Filter screen
+    //    C21454	Tap on Idle alert on Filter screen
 //	C82672	Verify if the user can see how long the vehicle have been idling. For e.g: 5m
 //	C147179	Tap on any idle alert list item
 //	C166384	Verify that header displays the information of the list in the following format(Ex:7-day history, Total (xxxx): Showing 1 to 50)
@@ -274,20 +283,19 @@ public class AlertsTestCases extends BaseClass {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity1)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+                new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity1 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     System.out.println("In Productivity Filter  alerts are present for " + alertsPage.productivity1 + " filter");
-                   // System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText()); (we can do assertion of header count, but cannot print it.....will check later)
+                    // System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText()); (we can do assertion of header count, but cannot print it.....will check later)
                     System.out.println("The idle time for the Vehicle name " + alertsPage.getAlertVehicleName().get(0).getText() + " is " + alertsPage.getAlertVehicleTime().get(0));
 
                 }
@@ -298,33 +306,31 @@ public class AlertsTestCases extends BaseClass {
     }
 
 
-//    C21462	Tap on Stop alert on Filter screen
+    //    C21462	Tap on Stop alert on Filter screen
 //	C82681	Verify if user is able to see since how long the vehicle has been stopped For e.g: 1422d
 //	C147181	Tap on any Stop alert list item
 //	C166385	Verify that header displays the information of the list in the following format(Ex:7-day history, Total (xxxx): Showing 1 to 50)
     @Test(priority = 7)
-    public void testStopFilterVerification()
-    {
+    public void testStopFilterVerification() {
 
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity2)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+                new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity2 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     System.out.println("In Productivity Filter  alerts are present for " + alertsPage.productivity2 + " filter");
-                  //  System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText()); (we can do assertion of header count, but cannot print it.....will check later)
+                    //  System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText()); (we can do assertion of header count, but cannot print it.....will check later)
                     System.out.println("The Stopped time for the Vehicle name " + alertsPage.getAlertVehicleName().get(0).getText() + " is " + alertsPage.getAlertVehicleTime().get(0));
 
                 }
@@ -335,30 +341,28 @@ public class AlertsTestCases extends BaseClass {
 
     }
 
-//   C21455	Tap on Input alert on Filters screen
+    //   C21455	Tap on Input alert on Filters screen
 //	C147170	Tap on Input alert list item
 //	C166383	Verify that header displays the information of the list in the following format(Ex:7-day history, Total (xxxx): Showing 1 to 50)
     @Test(priority = 8)
-    public void testInputFilterVerification()
-    {
+    public void testInputFilterVerification() {
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity3)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity3 + " filter");
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     System.out.println("In Productivity Filter  alerts are present for " + alertsPage.productivity3 + " filter");
                     System.out.println("For this Input filter alert the Vehicle name is " + alertsPage.getAlertVehicleName().get(0).getText());
-                 //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
+                    //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
                 }
                 alertsPage.Click_filter();
                 alertsPage.getProductivity_List().get(i).click();
@@ -369,24 +373,23 @@ public class AlertsTestCases extends BaseClass {
     }
 
 
-//	C24360	Tap on Speed Limit alert on Filter screen
+    //	C24360	Tap on Speed Limit alert on Filter screen
 //	C147176	Tap on any alert list item
-    @Test(priority=10)
-    public void testSafetyPostedSpeedLimitVerification()
-    {
+    @Test(priority = 10)
+    public void testSafetyPostedSpeedLimitVerification() {
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.safety3)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety3 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
@@ -408,21 +411,20 @@ public class AlertsTestCases extends BaseClass {
     //C21463	Tap on Hard Braking alert on Filter screen
     //C147178	Tap on any alert list item
     @Test(priority = 11)
-    public void testSafetyHardBrakingVerification()
-    {
+    public void testSafetyHardBrakingVerification() {
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.safety1)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety1 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
@@ -444,21 +446,20 @@ public class AlertsTestCases extends BaseClass {
     //C21460	Tap on Odd Hours alert on Filter screen
     //C147177	Tap on any alert list item
     @Test(priority = 12)
-    public void testSafetyOddHourVerification()
-    {
+    public void testSafetyOddHourVerification() {
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.safety2)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety2 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
@@ -477,26 +478,24 @@ public class AlertsTestCases extends BaseClass {
     }
 
 
-
-//C21474	Tap on Unauthorized Movement alert on Filter screen
+    //C21474	Tap on Unauthorized Movement alert on Filter screen
 //C96835	Verify alert registration id name is shown on alert list
 //C147184	Tap on any alert list item
     @Test(priority = 13)
-    public void testSafetyUnauthorizedMomentVerification()
-    {
+    public void testSafetyUnauthorizedMomentVerification() {
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.safety5)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety5 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
@@ -518,28 +517,26 @@ public class AlertsTestCases extends BaseClass {
     //C82675	Verify that the user is able to see the current speed threshold For e.g: 20.0 mph
     //C147180	Tap on any alert list item
     @Test(priority = 14)
-    public void testSafetySpeedThresholdVerification()
-    {
+    public void testSafetySpeedThresholdVerification() {
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.safety4)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety4 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
                     System.out.println("In Safety Filter  alerts are present for " + alertsPage.safety4 + " filter");
-                    System.out.println("The  Vehicle name for SpeedThreshold filter alert is " + alertsPage.getAlertVehicleName().get(0).getText()+ " and it's threshold speed is " + alertsPage.getAlertVehicleTime().get(0).getText());
+                    System.out.println("The  Vehicle name for SpeedThreshold filter alert is " + alertsPage.getAlertVehicleName().get(0).getText() + " and it's threshold speed is " + alertsPage.getAlertVehicleTime().get(0).getText());
                 }
                 alertsPage.Click_filter();
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
@@ -551,39 +548,37 @@ public class AlertsTestCases extends BaseClass {
     }
 
 
-//C24352	Tap on Low Battery alert on Filter screen
+    //C24352	Tap on Low Battery alert on Filter screen
 //C147185	Tap on any Low battery alert list item
     @Test(priority = 15)
-    public void testAssetHealthLowBatteryVerification()
-    {
+    public void testAssetHealthLowBatteryVerification() {
 
-        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Low Battery\"));"));
+        getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Low Battery\"));"));
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.asset1)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset1 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
 
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
-                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset1+ " filter");
+                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset1 + " filter");
                     System.out.println("The  Asset name for  this corresponding Low Battery filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
                     System.out.println("The  Alert name for  this corresponding Low Battery filter alert is " + alertsPage.getAlertName().get(0).getText());
                     System.out.println("The Low Battery voltage is  " + alertsPage.getAlertVehicleTime().get(0).getText());
                 }
                 alertsPage.Click_filter();
-                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Low Battery\"));"));
+                getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Low Battery\"));"));
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
                 alertsPage.getProductivity_List().get(i).click();
             }
@@ -591,68 +586,61 @@ public class AlertsTestCases extends BaseClass {
 
 
     }
-//C21457	Tap on Maintenance alert on Filter screen
+
+    //C21457	Tap on Maintenance alert on Filter screen
 //C82673	Check user is able to see the actual odometer of the vehicle
 //C82674	Verify that the user is able to see the current engine hours For e.g: 1438 hrs
 //C147183	Tap on any alert list item
     @Test(priority = 16)
-    public void testAssetHealthMaintenanceVerification()
-    {
+    public void testAssetHealthMaintenanceVerification() {
 
-        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Maintenance\"));"));
+        getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Maintenance\"));"));
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.asset2)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.asset2 + " filter");
 
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
-                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset2+ " filter");
-                  String Type_Of_Alert =alertsPage.getAlertVehicleTime().get(0).getText();
-                     if(Type_Of_Alert.contains("Time Period"))
-                     {
-                         System.out.println("The  Asset name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
-                         System.out.println("The  Alert name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertName().get(0).getText());
-                         System.out.println("The Maintenance Alert type it is  --->  " + alertsPage.getAlertVehicleTime().get(0).getText());
-                         System.out.println("For the Maintenance Alert type --->  " + alertsPage.getAlertVehicleTime().get(0).getText() + "--->the corresponding value is --->" + alertsPage.getSubValue().get(0).getText());
-                         System.out.println("The Timing for this corresponding Maintenance filter alert is " + alertsPage.getAlertTime().get(0).getText());
-                     }
-                   else if(Type_Of_Alert.contains("Engine Hours"))
-                     {
-                         System.out.println("The  Asset name for  this corresponding Maintenance filter  alert is " + alertsPage.getAlertVehicleName().get(0).getText());
-                         System.out.println("The  Alert name for  this corresponding Maintenance filter  alert is " + alertsPage.getAlertName().get(0).getText());
-                         System.out.println("The Maintenance Alert type it is  --->  " + alertsPage.getAlertVehicleTime().get(0).getText());
-                         System.out.println("For the Maintenance Alert type --->  " + alertsPage.getAlertVehicleTime().get(0).getText() + "--->the corresponding value is --->" + alertsPage.getSubValue().get(0).getText());
-                         System.out.println("The Timing for this corresponding Maintenance filter  alert is " + alertsPage.getAlertTime().get(0).getText());
-                     }
-
-                    else if(Type_Of_Alert.contains("Distance"))
-                     {
-                         System.out.println("The  Asset name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
-                         System.out.println("The  Alert name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertName().get(0).getText());
-                         System.out.println("The Maintenance Alert type it is  --->  " + alertsPage.getAlertVehicleTime().get(0).getText());
-                         System.out.println("For the Maintenance Alert type --->  " + alertsPage.getAlertVehicleTime().get(0).getText() + "--->the corresponding value is --->" + alertsPage.getSubValue().get(0).getText());
-                         System.out.println("The Timing for this corresponding Maintenance filter alert is " + alertsPage.getAlertTime().get(0).getText());
-                     }
+                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset2 + " filter");
+                    String Type_Of_Alert = alertsPage.getAlertVehicleTime().get(0).getText();
+                    if (Type_Of_Alert.contains("Time Period")) {
+                        System.out.println("The  Asset name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
+                        System.out.println("The  Alert name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertName().get(0).getText());
+                        System.out.println("The Maintenance Alert type it is  --->  " + alertsPage.getAlertVehicleTime().get(0).getText());
+                        System.out.println("For the Maintenance Alert type --->  " + alertsPage.getAlertVehicleTime().get(0).getText() + "--->the corresponding value is --->" + alertsPage.getSubValue().get(0).getText());
+                        System.out.println("The Timing for this corresponding Maintenance filter alert is " + alertsPage.getAlertTime().get(0).getText());
+                    } else if (Type_Of_Alert.contains("Engine Hours")) {
+                        System.out.println("The  Asset name for  this corresponding Maintenance filter  alert is " + alertsPage.getAlertVehicleName().get(0).getText());
+                        System.out.println("The  Alert name for  this corresponding Maintenance filter  alert is " + alertsPage.getAlertName().get(0).getText());
+                        System.out.println("The Maintenance Alert type it is  --->  " + alertsPage.getAlertVehicleTime().get(0).getText());
+                        System.out.println("For the Maintenance Alert type --->  " + alertsPage.getAlertVehicleTime().get(0).getText() + "--->the corresponding value is --->" + alertsPage.getSubValue().get(0).getText());
+                        System.out.println("The Timing for this corresponding Maintenance filter  alert is " + alertsPage.getAlertTime().get(0).getText());
+                    } else if (Type_Of_Alert.contains("Distance")) {
+                        System.out.println("The  Asset name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
+                        System.out.println("The  Alert name for  this corresponding Maintenance filter alert is " + alertsPage.getAlertName().get(0).getText());
+                        System.out.println("The Maintenance Alert type it is  --->  " + alertsPage.getAlertVehicleTime().get(0).getText());
+                        System.out.println("For the Maintenance Alert type --->  " + alertsPage.getAlertVehicleTime().get(0).getText() + "--->the corresponding value is --->" + alertsPage.getSubValue().get(0).getText());
+                        System.out.println("The Timing for this corresponding Maintenance filter alert is " + alertsPage.getAlertTime().get(0).getText());
+                    }
                 }
                 alertsPage.Click_filter();
-                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Maintenance\"));"));
+                getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Maintenance\"));"));
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
                 alertsPage.getProductivity_List().get(i).click();
             }
         }
-
 
 
     }
@@ -662,121 +650,111 @@ public class AlertsTestCases extends BaseClass {
     //C98077	Tap on any DTC alert list item
     //C98079	Verify Alert name, Asset name , Diagnostic code,  time is shown on DTC alert list screen
     @Test(priority = 17)
-    public void testAssetHealthDTCAlertsVerification()
-    {
+    public void testAssetHealthDTCAlertsVerification() {
 
-        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"DTC Alert\"));"));
+        getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"DTC Alert\"));"));
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.asset5)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset5 + " filter");
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
-                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset5+ " filter");
+                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset5 + " filter");
                     System.out.println("The  Asset name for  this corresponding DTC Alert filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
                     System.out.println("The  Alert name for  this corresponding DTC Alert filter alert is " + alertsPage.getAlertName().get(0).getText());
                     System.out.println("The Diagnostic code for this DTC Alert filter alert is " + alertsPage.getAlertVehicleTime().get(0).getText());
                     System.out.println("The Timing for this corresponding DTC filter alert is " + alertsPage.getAlertTime().get(0).getText());
                 }
                 alertsPage.Click_filter();
-                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"DTC Alert\"));"));
+                getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"DTC Alert\"));"));
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
                 alertsPage.getProductivity_List().get(i).click();
             }
         }
     }
-
-
 
 
     //C90297	Verify Engine Oil Life alert info
     //C90318	Tap on Engine Oil Life on Filter screen
     //C147186	Tap on any alert list item
     @Test(priority = 18)
-    public void testAssetHealthEngineOilVerification()
-    {
+    public void testAssetHealthEngineOilVerification() {
 
-        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Engine Oil Life\"));"));
+        getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Engine Oil Life\"));"));
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.asset4)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset4 + " filter");
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
-                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset4+ " filter");
+                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset4 + " filter");
                     System.out.println("The  Asset name for  this corresponding Engine Oil Life filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
                     System.out.println("The  Alert name for  this corresponding Engine Oil Life filter alert is " + alertsPage.getAlertName().get(0).getText());
                     System.out.println("The Oil level % for this Engine Oil Life filter  alert is " + alertsPage.getAlertVehicleTime().get(0).getText());
                     System.out.println("The Timing for this corresponding Engine Oil Life filter alert is " + alertsPage.getAlertTime().get(0).getText());
                 }
                 alertsPage.Click_filter();
-                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Engine Oil Life\"));"));
+                getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Engine Oil Life\"));"));
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
                 alertsPage.getProductivity_List().get(i).click();
             }
         }
 
 
-
     }
 
 
-
-//C90296	Verify Tire Pressure alert info
+    //C90296	Verify Tire Pressure alert info
 //C90320	Tap on Tire pressure alert on Filter screen
 //C147172	Tap on any Tire Pressure alert list item
     @Test(priority = 19)
-    public void testAssetHealthTirePressureVerification()
-    {
+    public void testAssetHealthTirePressureVerification() {
 
-        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+        getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.asset3)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset3 + " filter");
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
-                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset3+ " filter");
+                    System.out.println("In Asset Health Filter  alerts are present for " + alertsPage.asset3 + " filter");
                     System.out.println("The  Asset name for  this corresponding Tire Pressure filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
                     System.out.println("The  Alert name for  this corresponding Tire Pressure filter alert is " + alertsPage.getAlertName().get(0).getText());
-                    System.out.println("The tire pressure value for this Tire Pressure filter alert is" + alertsPage.getAlertVehicleTime().get(0).getText()+" " +alertsPage.getSubValue().get(0).getText());
+                    System.out.println("The tire pressure value for this Tire Pressure filter alert is" + alertsPage.getAlertVehicleTime().get(0).getText() + " " + alertsPage.getSubValue().get(0).getText());
                     System.out.println("The Timing for this corresponding Tire Pressure filter alert is " + alertsPage.getAlertTime().get(0).getText());
                 }
                 alertsPage.Click_filter();
-                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+                getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
                 alertsPage.getProductivity_List().get(i).click();
             }
@@ -788,35 +766,33 @@ public class AlertsTestCases extends BaseClass {
     //	C82676	Verify if the user is able to see the current temperature. For e.g: 64.2F
     //	C147175	Tap on any alert list item
     @Test(priority = 20)
-    public void testMonitoringTemperatureVerification()
-    {
+    public void testMonitoringTemperatureVerification() {
 
-        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+        getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.monitor2)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Monitoring Filter No alerts are present for " + alertsPage.monitor2 + " filter");
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
-                    System.out.println("In Monitoring Filter  alerts are present for " + alertsPage.monitor2+ " filter");
+                    System.out.println("In Monitoring Filter  alerts are present for " + alertsPage.monitor2 + " filter");
                     System.out.println("The  Asset name for  this corresponding Temperature filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
                     System.out.println("The  Alert name for  this corresponding Temperature filter alert is " + alertsPage.getAlertName().get(0).getText());
                     System.out.println("The temperature value for this Temperature filter alert is " + alertsPage.getAlertVehicleTime().get(0).getText());
                     System.out.println("The Timing for this corresponding Temperature filter alert is " + alertsPage.getAlertTime().get(0).getText());
                 }
                 alertsPage.Click_filter();
-                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+                getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
                 alertsPage.getProductivity_List().get(i).click();
             }
@@ -824,41 +800,37 @@ public class AlertsTestCases extends BaseClass {
     }
 
 
-
-
-//  C90298	Verify Fuel Tank alert info
+    //  C90298	Verify Fuel Tank alert info
 //	C90322	Tap on Fuel tank alert on Filter screen
 //	C147173	Tap on any alert list item
     @Test(priority = 21)
-    public void testMonitoringFuelTankVerification()
-    {
+    public void testMonitoringFuelTankVerification() {
 
-        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+        getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
 
         for (int i = 0; i < alertsPage.getProductivity_List().size(); i++) {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.monitor1)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (Utils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Monitoring Filter No alerts are present for " + alertsPage.monitor1 + " filter");
-                }
-                else if (alertsPage.getAlert_List().isDisplayed()) {
+                } else if (alertsPage.getAlert_List().isDisplayed()) {
                     Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
                     alertsPage.getAlertListFull().get(0).click();
                     alertsPage.ClickBack();
                     Assert.assertTrue(alertsPage.getTotal_itemsCount().isDisplayed());
                     //   System.out.println("Total alerts present in list" + alertsPage.getTotal_itemsCount().getText());(we can do assertion of header count, but cannot print it.....will check later)
-                    System.out.println("In Monitoring Filter  alerts are present for " + alertsPage.monitor1+ " filter");
+                    System.out.println("In Monitoring Filter  alerts are present for " + alertsPage.monitor1 + " filter");
                     System.out.println("The  Asset name for  this corresponding Fuel tank filter alert is " + alertsPage.getAlertVehicleName().get(0).getText());
                     System.out.println("The  Alert name for  this corresponding Fuel tank filter alert is " + alertsPage.getAlertName().get(0).getText());
                     System.out.println("The Fuel Level value for this Fuel tank filter alert is " + alertsPage.getAlertVehicleTime().get(0).getText());
                     System.out.println("The Timing for this corresponding Fuel tank filter alert is " + alertsPage.getAlertTime().get(0).getText());
                 }
                 alertsPage.Click_filter();
-                driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
+                getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Tire Pressure\"));"));
                 Assert.assertTrue(alertsPage.getProductivity_List().get(i).isSelected());
                 alertsPage.getProductivity_List().get(i).click();
             }
