@@ -5,13 +5,13 @@
     <test verbose="2" preserve-order="true" name="Appium_PeriScope"/>
 <test name="Pixel_2">
     <parameter name="emulator" value="true" />
-    <parameter name="platformName" value="android" />
+    <parameter name="platformName" value="pageobjects" />
     <parameter name="udid" value="replace_with_device_udid" />
     <parameter name="deviceName" value="emulator-5554" />
     <parameter name="systemPort" value="10000" />
     <parameter name="chromeDriverPort" value="11000" />
     <classes>
-        <class name="AppiumAutomation.SignInTestCase"/>
+        <class name="testscenarios.SignInTestCase"/>
 
     </classes>
 </test>

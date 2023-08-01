@@ -1,14 +1,15 @@
-package AppiumAutomation;
+package testscenarios;
 
-import android.SignInPage;
-import android.TripPage;
-import android.VehicleDetailsPage;
-import android.VehiclePage;
+import pageobjects.SignInPage;
+import pageobjects.TripPage;
+import pageobjects.VehicleDetailsPage;
+import pageobjects.VehiclePage;
+import core.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utility.ActionClass;
+import core.TestUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,10 +30,10 @@ public class TripsTestCase extends BaseTest {
     }
 
     public void clickAndSearch() {
-        ActionClass.waitForVisibility(vehiclePage.listOfVehicles, getDriver());
+        TestUtils.waitForVisibility(vehiclePage.listOfVehicles, getDriver());
         vehiclePage.searchIcon.click();
         if (isAndroidPlatform()) {
-            ActionClass.waitForVisibility(vehiclePage.searchField, getDriver());
+            TestUtils.waitForVisibility(vehiclePage.searchField, getDriver());
             Assert.assertTrue(vehiclePage.searchIcon.isDisplayed());
         }
         vehiclePage.searchField.sendKeys("AS820390001479");
@@ -46,25 +47,25 @@ public class TripsTestCase extends BaseTest {
 
     @Test(priority = 0)
     public void testTripScreenValidation() {
-        ActionClass.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
         vehiclePage.vehicleBottomBar.click();
         clickAndSearch();
-        ActionClass.waitForVisibility(vehiclePage.firstVehicle, getDriver());
+        TestUtils.waitForVisibility(vehiclePage.firstVehicle, getDriver());
         vehiclePage.firstVehicle.click();
-        ActionClass.waitForVisibility(vehicleDetailsPage.detailsTab, getDriver());
+        TestUtils.waitForVisibility(vehicleDetailsPage.detailsTab, getDriver());
         tripPage.tripTab.click();
-        ActionClass.waitForInvisibility(tripPage.loading, getDriver());
-        if (ActionClass.isElementPresent(tripPage.getNoTrip()) && tripPage.getNoTrip().isDisplayed()) {
+        TestUtils.waitForInvisibility(tripPage.loading, getDriver());
+        if (TestUtils.isElementPresent(tripPage.getNoTrip()) && tripPage.getNoTrip().isDisplayed()) {
             System.out.println("No Trips found");
             String noTripText = tripPage.getNoTrip().getText();
             System.out.println("Empty list Trip Text is:" + noTripText);
         } else if (tripPage.trips.size() > 0) {
-            ActionClass.waitForInvisibility(tripPage.loading, getDriver());
+            TestUtils.waitForInvisibility(tripPage.loading, getDriver());
             System.out.println("Trips are present");
             int tripsCount = tripPage.trips.size();
             System.out.println("Total number of trips present on current Date is:" + tripsCount);
-            ActionClass.clickElement(tripPage.trips.get(0), getDriver());
-            ActionClass.clickElement(tripPage.backButton, getDriver());
+            TestUtils.clickElement(tripPage.trips.get(0), getDriver());
+            TestUtils.clickElement(tripPage.backButton, getDriver());
 
         }
 
@@ -73,8 +74,8 @@ public class TripsTestCase extends BaseTest {
 
     @Test(priority = 1)
     public void testClickOnCalender() {
-        ActionClass.clickElement(tripPage.tripCalenderButton, getDriver());
-        ActionClass.waitForVisibility(tripPage.datePicker, getDriver());
+        TestUtils.clickElement(tripPage.tripCalenderButton, getDriver());
+        TestUtils.waitForVisibility(tripPage.datePicker, getDriver());
         String currentMonthYearVal = tripPage.currentMonth.getText();
         System.out.println(currentMonthYearVal);
         //Total Number of dates visible on the calendar view
@@ -95,7 +96,7 @@ public class TripsTestCase extends BaseTest {
 
         }
         tripPage.tripCalenderButton.click();
-        ActionClass.waitForVisibility(tripPage.datePicker, getDriver());
+        TestUtils.waitForVisibility(tripPage.datePicker, getDriver());
         WebElement selectedDate = tripPage.datePicker.findElement(By.className("highlighted"));
         if (selectedDate.getText().equals(targetDate)) {
             System.out.println("The selected date is currently highlighted.");
@@ -154,22 +155,22 @@ public class TripsTestCase extends BaseTest {
     // Pull to refresh functionality
     @Test(priority = 5)
     public void testPullToRefreshAndScrollTripScreen() {
-        ActionClass.pullToRefresh(getDriver());
-        ActionClass.scrollToEnd(getDriver());
+        TestUtils.pullToRefresh(getDriver());
+        TestUtils.scrollToEnd(getDriver());
 
     }
 
     @Test(priority = 6)
     public void testTypesOfTrips() {
         for (int i = 0; i < tripPage.trips.size(); i++) {
-            if (ActionClass.isElementPresent(tripPage.ongoingTrip) && tripPage.ongoingTrip.isDisplayed()) {
+            if (TestUtils.isElementPresent(tripPage.ongoingTrip) && tripPage.ongoingTrip.isDisplayed()) {
                 System.out.println("Ongoing Trip is present");
                 System.out.println("Start time is :" + tripPage.startTime.getText());
                 System.out.println("Start address is :" + tripPage.startAddress.getText());
                 System.out.println(("Vehicle's moving, idle time is :" + tripPage.moving_idle_Time.getText()));
                 Assert.assertTrue(tripPage.movingOngoingTrip.isDisplayed());
                 Assert.assertFalse(tripPage.stopTime.isDisplayed());
-            } else if (ActionClass.isElementPresent(tripPage.tripNumber) && tripPage.tripNumber.isDisplayed()) {
+            } else if (TestUtils.isElementPresent(tripPage.tripNumber) && tripPage.tripNumber.isDisplayed()) {
                 System.out.println("Full Trip is present");
                 System.out.println("Start time is :" + tripPage.startTime.getText());
                 Assert.assertTrue(tripPage.stopTime.isDisplayed());

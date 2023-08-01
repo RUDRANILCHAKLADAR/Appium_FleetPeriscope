@@ -1,11 +1,12 @@
-package android;
+package pageobjects;
 
+import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 
-public class SignInPage extends BasePage{
+public class SignInPage extends BasePage {
 
     public SignInPage(AppiumDriver driver) {
         super(driver);

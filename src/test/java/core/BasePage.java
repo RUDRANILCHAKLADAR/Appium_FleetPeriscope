@@ -1,4 +1,4 @@
-package android;
+package core;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;

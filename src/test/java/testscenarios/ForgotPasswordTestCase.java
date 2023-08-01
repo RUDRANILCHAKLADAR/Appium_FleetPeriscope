@@ -1,11 +1,11 @@
-package AppiumAutomation;
+package testscenarios;
 
-import android.ForgotPasswordPage;
-import android.SignInPage;
-import io.appium.java_client.android.connection.ConnectionStateBuilder;
+import pageobjects.ForgotPasswordPage;
+import pageobjects.SignInPage;
+import core.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utility.ActionClass;
+import core.TestUtils;
 
 public class ForgotPasswordTestCase extends BaseTest {
 //    ActionClass actions = new ActionClass(driver);
@@ -23,7 +23,7 @@ public class ForgotPasswordTestCase extends BaseTest {
     //C146206 Verify the text "If you still need help, contact" and FleetLocate Support button on the forgot password screen
     @Test(priority = 0)
     public void UIScreenElementsVerification() {
-        ActionClass.clickElement(signInPage.signIn, getDriver());
+        TestUtils.clickElement(signInPage.signIn, getDriver());
         forgotPasswordPage.ForgotpasswordClick();
         Assert.assertTrue(forgotPasswordPage.getEmail().isEnabled());
         Assert.assertTrue(forgotPasswordPage.getSubmit_btn().isEnabled());
@@ -111,10 +111,10 @@ public class ForgotPasswordTestCase extends BaseTest {
 //         forgotPasswordPage.SignInClick();
 //         forgotPasswordPage.ForgotpasswordClick();
         forgotPasswordPage.getEmail().sendKeys("tjbussfl@spireon.com");
-        ActionClass.internetOff(getDriver());
+        TestUtils.internetOff(getDriver());
         forgotPasswordPage.Submit_btn_Click();
         Assert.assertEquals(forgotPasswordPage.getNetworkErrorMsg(), forgotPasswordPage.network_Err_msg);
         forgotPasswordPage.ClickOkbtn3();
-        ActionClass.internetOn(getDriver());
+        TestUtils.internetOn(getDriver());
     }
 }

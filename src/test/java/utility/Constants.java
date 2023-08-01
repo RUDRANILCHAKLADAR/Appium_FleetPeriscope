@@ -4,7 +4,7 @@ public class Constants {
 
     public static String APPIUM_URL = "appiumURL";
     public static String ANDROID_DEVICE_NAME = "AndroidDeviceName";
-    public static String ANDROID_PLATFORM_NAME = "android";
+    public static String ANDROID_PLATFORM_NAME = "pageobjects";
     public static String ANDROID_AUTOMATION_DRIVER = "androidAutomationDriver";
     public static String ANDROID_APP_PATH = "androidAppPath";
     public static String ANDROID_SERVER_INSTALL_TIMEOUT = "uiautomator2ServerInstallTimeout";
@@ -16,7 +16,7 @@ public class Constants {
 
     public static String CONFIG_PROPERTIES_PATH = "//src//test//java//config//config.properties";
     public enum Platform {
-        ANDROID("android"),
+        ANDROID("pageobjects"),
         iOS("iOS");
 
         private String platformName = "";

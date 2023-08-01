@@ -1,10 +1,11 @@
-package AppiumAutomation;
+package testscenarios;
 
-import android.SignInPage;
-import android.VehiclePage;
+import pageobjects.SignInPage;
+import pageobjects.VehiclePage;
+import core.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utility.ActionClass;
+import core.TestUtils;
 
 public class VehicleTestCase extends BaseTest {
 
@@ -13,10 +14,10 @@ public class VehicleTestCase extends BaseTest {
 
     @Test
     public void testVehicleUIElements() {
-        ActionClass.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
-        ActionClass.waitForVisibility(vehiclePage.vehicleBottomBar, getDriver());
+        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.waitForVisibility(vehiclePage.vehicleBottomBar, getDriver());
         vehiclePage.vehicleBottomBar.click();
-        ActionClass.waitForVisibility(vehiclePage.vehicleTitle, getDriver());
+        TestUtils.waitForVisibility(vehiclePage.vehicleTitle, getDriver());
         Assert.assertTrue((vehiclePage.getVehicleTitle().isDisplayed()));
         //Assert.assertTrue((vp.vehicleLists()).isDisplayed()));
         Assert.assertTrue(vehiclePage.searchFld().isDisplayed());

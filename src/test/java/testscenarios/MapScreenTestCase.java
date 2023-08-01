@@ -1,14 +1,14 @@
-package AppiumAutomation;
+package testscenarios;
 
-import android.MapScreenPage;
-import android.SignInPage;
-import io.appium.java_client.android.connection.ConnectionStateBuilder;
+import pageobjects.MapScreenPage;
+import pageobjects.SignInPage;
 //import org.checkerframework.checker.units.qual.A;
+import core.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utility.ActionClass;
+import core.TestUtils;
 
 public class MapScreenTestCase extends BaseTest {
 
@@ -26,7 +26,7 @@ public class MapScreenTestCase extends BaseTest {
     @Test(priority = 0)
     public void UIElementsValidation() throws InterruptedException {
 
-        ActionClass.logInUser(signInpage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(signInpage, getDriver(), "Fleet360A", "Password@1");
 
         Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isSelected());
 
@@ -167,9 +167,9 @@ public class MapScreenTestCase extends BaseTest {
         mapScreenPage.getFab_landmarks().click();
         Thread.sleep(2000);
         mapScreenPage.Clicksettings_button();
-        ActionClass.internetOff(getDriver());
+        TestUtils.internetOff(getDriver());
         Assert.assertTrue(mapScreenPage.getPopup1().isDisplayed());
-        ActionClass.internetOn(getDriver());
+        TestUtils.internetOn(getDriver());
         mapScreenPage.getPopup_close().click();
         mapScreenPage.getFab_map().click();
         mapScreenPage.getFab_landmarks().click();

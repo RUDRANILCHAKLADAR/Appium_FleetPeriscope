@@ -1,7 +1,6 @@
-package utility;
+package core;
 
-import AppiumAutomation.BaseTest;
-import android.SignInPage;
+import pageobjects.SignInPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
@@ -21,13 +20,9 @@ import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ActionClass {
-//    private final AppiumDriver driver;
-//    public ActionClass(AppiumDriver driver) {
-//        this.driver = driver;
-//    }
+public class TestUtils {
 
-    public static final Logger log = LoggerFactory.getLogger(ActionClass.class);
+    public static final Logger log = LoggerFactory.getLogger(TestUtils.class);
 
     public static void waitForVisibility(WebElement element, AppiumDriver driver) {
         try {
@@ -147,19 +142,19 @@ public class ActionClass {
 
     public static void logInUser(SignInPage sp, AppiumDriver driver, String userName, String passWord) {
 
-        ActionClass.waitForVisibility(sp.signIn, driver);
+        TestUtils.waitForVisibility(sp.signIn, driver);
         sp.signIn.click();
-        ActionClass.waitForVisibility(sp.userName, driver);
-        ActionClass.sendKeys(sp.userName, userName);
-        ActionClass.sendKeys(sp.password, passWord);
+        TestUtils.waitForVisibility(sp.userName, driver);
+        TestUtils.sendKeys(sp.userName, userName);
+        TestUtils.sendKeys(sp.password, passWord);
         sp.signIn.click();
 
         if (BaseTest.isAndroidPlatform()) {
-            ActionClass.waitForVisibility(sp.permission_access, driver);
+            TestUtils.waitForVisibility(sp.permission_access, driver);
             sp.permission_access.isDisplayed();
             sp.permission_access.click();
         }
-        ActionClass.waitForVisibility(sp.homeBottomBar, driver);
+        TestUtils.waitForVisibility(sp.homeBottomBar, driver);
     }
 
     public static void logOutUser(SignInPage signInPage) {

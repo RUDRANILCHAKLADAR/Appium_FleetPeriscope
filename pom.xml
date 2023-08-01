@@ -90,7 +90,7 @@
 
     <!--    <profiles>-->
     <!--        <profile>-->
-    <!--            <id>android</id>-->
+    <!--            <id>pageobjects</id>-->
     <!--            <build>-->
     <!--                <plugins>-->
     <!--                    <plugin>-->

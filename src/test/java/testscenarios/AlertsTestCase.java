@@ -1,17 +1,18 @@
 
-package AppiumAutomation;
+package testscenarios;
 
 
-import android.AlertsPage;
-import android.ForgotPasswordPage;
-import android.MapScreenPage;
-import android.SignInPage;
+import pageobjects.AlertsPage;
+import pageobjects.ForgotPasswordPage;
+import pageobjects.MapScreenPage;
+import pageobjects.SignInPage;
+import core.BaseTest;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utility.ActionClass;
+import core.TestUtils;
 
 import java.time.Duration;
 
@@ -37,7 +38,7 @@ public class AlertsTestCase extends BaseTest {
     @Test(priority = 0)
     public void testAlertsScreenUIVerification() throws InterruptedException {
 
-        ActionClass.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
 
         alertsPage.ClickAlerts_icon();
         Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
@@ -66,19 +67,19 @@ public class AlertsTestCase extends BaseTest {
     @Test(priority = 1)
     public void testAlertsScreenNetworkVerification() throws InterruptedException {
         alertsPage.Click_HomeScreen_icon();
-        ActionClass.internetOff(getDriver());
+        TestUtils.internetOff(getDriver());
         alertsPage.ClickAlerts_icon();
         new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(alertsPage.getNetwork_Error()));
         Assert.assertEquals(alertsPage.getNetwork_Error_Msg(), alertsPage.network_msg);
-        ActionClass.internetOn(getDriver());
+        TestUtils.internetOn(getDriver());
         alertsPage.ClickRetry();
 
         Assert.assertNotNull(alertsPage.getAlertList());
         Assert.assertFalse(alertsPage.getAlertList().isEmpty());
 
-        ActionClass.waitForInvisibility(alertsPage.getFilter_icon(), getDriver());
+        TestUtils.waitForInvisibility(alertsPage.getFilter_icon(), getDriver());
 
-        ActionClass.pullToRefresh(getDriver());
+        TestUtils.pullToRefresh(getDriver());
     }
 
 //    public void testAlertsScreenNetworkVerificaton() throws InterruptedException {
@@ -168,7 +169,7 @@ public class AlertsTestCase extends BaseTest {
         alertsPage.ClickBack();
         alertsPage.DismissAppRatingPopup();
 
-        ActionClass.logOutUser(signInPage);
+        TestUtils.logOutUser(signInPage);
     }
 
     @Test(priority = 9)
@@ -189,7 +190,7 @@ public class AlertsTestCase extends BaseTest {
                 }
 
                 new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + filter_name + " filter");
                     alertsPage.Click_filter();
@@ -213,7 +214,7 @@ public class AlertsTestCase extends BaseTest {
 //	C166386	Verify that header displays the information of the list in the following format(Ex:7-day history, Total (xxxx): Showing 1 to 50)
     @Test(priority = 5)
     public void testLandmarkArrivalandDepartureFilterVerification() {
-        ActionClass.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
 
         alertsPage.ClickAlerts_icon();
         alertsPage.Click_filter();
@@ -224,7 +225,7 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.ClickBack();
                 new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity4 + " filter");
 
@@ -282,7 +283,7 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.ClickBack();
                 new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity1 + " filter");
 
@@ -317,7 +318,7 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.ClickBack();
                 new WebDriverWait(getDriver(), Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOf(alertsPage.getProgress_bar()));
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity2 + " filter");
 
@@ -347,9 +348,9 @@ public class AlertsTestCase extends BaseTest {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.productivity3)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Productivity Filter No alerts are present for " + alertsPage.productivity3 + " filter");
                 } else if (alertsPage.getAlert_List().isDisplayed()) {
@@ -380,9 +381,9 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety3 + " filter");
 
@@ -415,9 +416,9 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety1 + " filter");
 
@@ -450,9 +451,9 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety2 + " filter");
 
@@ -486,9 +487,9 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety5 + " filter");
 
@@ -520,9 +521,9 @@ public class AlertsTestCase extends BaseTest {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.safety4)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.safety4 + " filter");
 
@@ -556,9 +557,9 @@ public class AlertsTestCase extends BaseTest {
             if (alertsPage.getProductivity_List().get(i).getText().contains(alertsPage.asset1)) {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset1 + " filter");
 
@@ -598,9 +599,9 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
 
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Safety Filter No alerts are present for " + alertsPage.asset2 + " filter");
 
@@ -656,8 +657,8 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset5 + " filter");
                 } else if (alertsPage.getAlert_List().isDisplayed()) {
@@ -694,8 +695,8 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset4 + " filter");
                 } else if (alertsPage.getAlert_List().isDisplayed()) {
@@ -734,8 +735,8 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Asset Health Filter No alerts are present for " + alertsPage.asset3 + " filter");
                 } else if (alertsPage.getAlert_List().isDisplayed()) {
@@ -772,8 +773,8 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Monitoring Filter No alerts are present for " + alertsPage.monitor2 + " filter");
                 } else if (alertsPage.getAlert_List().isDisplayed()) {
@@ -810,8 +811,8 @@ public class AlertsTestCase extends BaseTest {
                 alertsPage.getProductivity_List().get(i).click();
                 alertsPage.ClickBack();
 
-                ActionClass.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
-                if (ActionClass.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
+                TestUtils.waitForVisibility(alertsPage.getProgress_bar(), getDriver());
+                if (TestUtils.isElementPresent(alertsPage.getNo_Alerts_Found()) && alertsPage.getNo_Alerts_Found().isDisplayed()) {
                     Assert.assertEquals(alertsPage.getNo_Alerts_Found_Msg(), alertsPage.Alert_Msg);
                     System.out.println("In Monitoring Filter No alerts are present for " + alertsPage.monitor1 + " filter");
                 } else if (alertsPage.getAlert_List().isDisplayed()) {

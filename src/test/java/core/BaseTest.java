@@ -1,15 +1,13 @@
-package AppiumAutomation;
+package core;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
-import org.openqa.selenium.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
-import utility.ActionClass;
 import utility.Constants;
 
 import java.io.File;
@@ -41,7 +39,7 @@ public abstract class BaseTest {
             logFile.mkdirs();
         }
         Log.info("log path: " + strFile);
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//Configuration//config.properties");
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//test//java//config//config.properties");
         prop.load(fis);
 
         URL url = new URL(prop.getProperty("appiumURL"));
@@ -60,7 +58,7 @@ public abstract class BaseTest {
                 } else if (System.getenv("BITRISE_APK_PATH") != null) {
                     options.setApp(System.getenv("BITRISE_APK_PATH"));
                 } else {
-                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/App/app-fleetStaging-debug.apk");
+                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/artifacts/app-fleetStaging-debug.apk");
                 }
 
                 options.setCapability("uiautomator2ServerInstallTimeout", 20000);

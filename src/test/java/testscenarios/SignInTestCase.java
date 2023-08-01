@@ -1,6 +1,7 @@
-package AppiumAutomation;
+package testscenarios;
 
-import android.SignInPage;
+import pageobjects.SignInPage;
+import core.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import utility.ActionClass;
+import core.TestUtils;
 
 import java.time.Duration;
 import java.util.List;
@@ -26,28 +27,28 @@ public class SignInTestCase extends BaseTest {
 
     @Test(priority = 0)
     public void testAccountDialogueScreenVerification() {
-        ActionClass.waitForVisibility(signInPage.signIn, getDriver());
+        TestUtils.waitForVisibility(signInPage.signIn, getDriver());
         Assert.assertTrue(signInPage.signIn.isDisplayed());
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
+        TestUtils.waitForVisibility(signInPage.userName, getDriver());
         signInPage.setUsername("tjbussfl");
         signInPage.setPassword("123456");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         Assert.assertTrue(signInPage.getAccount_Dialogue_Screen().isDisplayed());
         signInPage.selectBtn.click();
         if (isAndroidPlatform()) {
-            ActionClass.waitForVisibility(signInPage.permission_access, getDriver());
+            TestUtils.waitForVisibility(signInPage.permission_access, getDriver());
             signInPage.permission_access.click();
             signInPage.Account_icon.click();
         }
         signInPage.Logout.click();
-        ActionClass.clickElement(signInPage.Confirm_btn, getDriver());
+        TestUtils.clickElement(signInPage.Confirm_btn, getDriver());
     }
 
     @Test(priority = 1)
     public void testForgotPasswordScreenValidation() {
-        ActionClass.waitForVisibility(signInPage.signIn, getDriver());
+        TestUtils.waitForVisibility(signInPage.signIn, getDriver());
         Assert.assertTrue(signInPage.signIn.isDisplayed());
         signInPage.signIn.click();
         signInPage.forgotPassword.click();
@@ -69,7 +70,7 @@ public class SignInTestCase extends BaseTest {
     //C18779,C146195-To check whether all the signIn elements are displayed or not
     @Test(priority = 2)
     public void testLoginUiElementsValidation() {
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
+        TestUtils.waitForVisibility(signInPage.userName, getDriver());
         Assert.assertTrue(signInPage.userName.isDisplayed());
         Assert.assertTrue(signInPage.password.isDisplayed());
         Assert.assertTrue(signInPage.userName.isDisplayed());
@@ -90,18 +91,18 @@ public class SignInTestCase extends BaseTest {
         signInPage.password.clear();
         signInPage.setUsername("tjbussfl");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.errorMessage, getDriver());
+        TestUtils.waitForVisibility(signInPage.errorMessage, getDriver());
         Assert.assertEquals(signInPage.getErrorMsg(), "Please enter a valid password");
         signInPage.ok_cancel_Button.click();
         signInPage.setUsername("");
         signInPage.setPassword("123456");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.errorMessage, getDriver());
+        TestUtils.waitForVisibility(signInPage.errorMessage, getDriver());
         Assert.assertEquals(signInPage.getErrorMsg(), "Please enter a valid username");
         signInPage.ok_cancel_Button.click();
         signInPage.getPassword().clear();
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.errorMessage, getDriver());
+        TestUtils.waitForVisibility(signInPage.errorMessage, getDriver());
         Assert.assertEquals(signInPage.getErrorMsg(), "Please enter a valid username");
         signInPage.ok_cancel_Button.click();
     }
@@ -121,19 +122,19 @@ public class SignInTestCase extends BaseTest {
 
     @Test(priority = 6)
     public void testNoInternetConnection() {
-        ActionClass.internetOff(getDriver());
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
+        TestUtils.internetOff(getDriver());
+        TestUtils.waitForVisibility(signInPage.userName, getDriver());
         signInPage.setUsername("tjbussfl");
         signInPage.setPassword("123456");
         Assert.assertTrue(signInPage.getSignIn().isEnabled());
-        ActionClass.waitForVisibility(signInPage.signIn, getDriver());
+        TestUtils.waitForVisibility(signInPage.signIn, getDriver());
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.errorMessage, getDriver());
+        TestUtils.waitForVisibility(signInPage.errorMessage, getDriver());
         String ActualErrorMessage = signInPage.getNetworkErrMsg();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         signInPage.okButton.click();
-        ActionClass.internetOn(getDriver());
+        TestUtils.internetOn(getDriver());
         signInPage.signIn.click();
 
     }
@@ -141,10 +142,10 @@ public class SignInTestCase extends BaseTest {
     //C20853-Verify after selecting a account user is able to sign in successfully
     @Test(priority = 7)
     public void testUserAbleToSelectAnyAccount() {
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         signInPage.anyAccount.click();
         signInPage.getSelectbtn().click();
-        ActionClass.waitForVisibility(signInPage.Account_icon, getDriver());
+        TestUtils.waitForVisibility(signInPage.Account_icon, getDriver());
         String ActualErrorMessage = signInPage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
@@ -161,7 +162,7 @@ public class SignInTestCase extends BaseTest {
         signInPage.setUsername("tjbussfl");
         signInPage.setPassword("123456");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         signInPage.ok_cancel_Button.click();
         Assert.assertEquals(signInPage.getSignIntxt(), "Sign In");
 
@@ -171,7 +172,7 @@ public class SignInTestCase extends BaseTest {
     @Test(priority = 9)
     public void testAccountSelectionVerification() {
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         signInPage.radioButton.click();
         Assert.assertEquals(signInPage.getRadioButton().getAttribute("checked"), "true");
         signInPage.ok_cancel_Button.click();
@@ -183,7 +184,7 @@ public class SignInTestCase extends BaseTest {
         signInPage.setUsername("tjbussfl");
         signInPage.setPassword("123456");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         signInPage.radioButton.click();
         Assert.assertEquals(signInPage.getRadioButton().getAttribute("checked"), "true");
         //Verify tapping on cancel button on dialogue pop up, account is not selected and user is returned to Sign In screen
@@ -191,10 +192,10 @@ public class SignInTestCase extends BaseTest {
         Assert.assertEquals(signInPage.getSignIntxt(), "Sign In");
         //C20853-Verify after selecting a account user is able to sign in successfully
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         signInPage.anyAccount.click();
         signInPage.getSelectbtn().click();
-        ActionClass.waitForVisibility(signInPage.FL_Periscope, getDriver());
+        TestUtils.waitForVisibility(signInPage.FL_Periscope, getDriver());
         String ActualErrorMessage = signInPage.getFL_Periscope();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
@@ -301,7 +302,7 @@ public class SignInTestCase extends BaseTest {
         signInPage.setUsername("tjbussfl");
         signInPage.setPassword("123456");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         Assert.assertTrue(signInPage.getAccount_Dialogue_Screen().isDisplayed());
         Assert.assertEquals(signInPage.getRadioButton2().getAttribute("checked"), "true");
         signInPage.ok_cancel_Button.click();
@@ -311,11 +312,11 @@ public class SignInTestCase extends BaseTest {
     //Verify account setting screen is not shown if user scope is not set
     @Test(priority = 13)
     public void testAccountScreenNotDisplayedVerification() {
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
+        TestUtils.waitForVisibility(signInPage.userName, getDriver());
         signInPage.setUsername("Fleet360A");
         signInPage.setPassword("Password@1");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.FL_Periscope, getDriver());
+        TestUtils.waitForVisibility(signInPage.FL_Periscope, getDriver());
         Assert.assertTrue(signInPage.getHomeScreen().isDisplayed());
         if (signInPage.getHomeScreen().isDisplayed())
             System.out.println("Account Screen pop up is not displayed");
@@ -329,19 +330,19 @@ public class SignInTestCase extends BaseTest {
     @Test(priority = 14)
     public void testAfterAccountSelectionNetworkVerification() {
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.userName, getDriver());
+        TestUtils.waitForVisibility(signInPage.userName, getDriver());
         signInPage.setUsername("tjbussfl");
         signInPage.setPassword("123456");
         signInPage.signIn.click();
-        ActionClass.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
+        TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         //To disable wifi / data connection
-        ActionClass.internetOff(getDriver());
+        TestUtils.internetOff(getDriver());
         signInPage.getSelectbtn().click();
         String ActualErrorMessage = signInPage.getNetworkErrMsg();
         String ExpectedResult = "Please check your network connection and try again.";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         //To enable wifi / data connection
-        ActionClass.internetOn(getDriver());
+        TestUtils.internetOn(getDriver());
         signInPage.okButton.click();
     }
 
