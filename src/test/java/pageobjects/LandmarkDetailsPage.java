@@ -1,41 +1,39 @@
 package pageobjects;
 
+import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandmarkDetailsPage {
-
-    public AppiumDriver driver;
+public class LandmarkDetailsPage extends BasePage {
 
     public LandmarkDetailsPage(AppiumDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        super(driver);
     }
 
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/tv_bottom_title")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_title")
     public WebElement landmarkName;
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/tv_bottom_secondary")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_secondary")
     public WebElement landmarkAddress;
 
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/tv_bottom_tertiary")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_tertiary")
     public WebElement landmarkItenary;
 
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/tv_bottom_speed")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_speed")
     public WebElement landmarkSpeed;
 
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/layoutDirections")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/layoutDirections")
     public WebElement directionBtn;
 
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/layoutLMCheck")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/layoutLMCheck")
     public WebElement lmCheckBtn;
 
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/layoutCall")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/layoutCall")
     public WebElement callBtn;
 
-    @AndroidFindBy(id="com.spireon.fleet.staging:id/iv_close")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/iv_close")
     public WebElement closeBtn;
 
     @AndroidFindBy(xpath = "//[content-desc='MARKER_GEOZONE.']")

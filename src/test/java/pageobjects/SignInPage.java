@@ -11,18 +11,6 @@ public class SignInPage extends BasePage {
     public SignInPage(AppiumDriver driver) {
         super(driver);
     }
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
-    @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeButton[`label == \"SIGN IN\"`]")
-    public WebElement signIn;
-
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_username")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"Username\"`]")
-    public WebElement userName;
-
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_password")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSecureTextField[`value == \"Password\"`]")
-    public WebElement password;
-
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_forgot_password")
     @iOSXCUITFindBy(accessibility = "Forgot your password?")
@@ -31,7 +19,7 @@ public class SignInPage extends BasePage {
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/login_msg")
     @iOSXCUITFindBy(accessibility = "with your username and password")
-    public WebElement  loginMsg;
+    public WebElement loginMsg;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Sign In\"`]")
@@ -39,7 +27,7 @@ public class SignInPage extends BasePage {
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
     @iOSXCUITFindBy(accessibility = "Back")
-    public WebElement  backButton;
+    public WebElement backButton;
 
     @iOSXCUITFindBy(accessibility = "Sign In")
     public WebElement forgotPwBackBtn;
@@ -78,171 +66,117 @@ public class SignInPage extends BasePage {
     public WebElement iosForgotPwTxt;
 
 
-
     // Locate the first CheckedTextView element within the ListView
-    @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[4]")
+    @AndroidFindBy(xpath = "//android.widget.ListView/android.widget.CheckedTextView[4]")
     public WebElement radioButton;
 
-    @AndroidFindBy (xpath = "//android.widget.ListView/android.widget.CheckedTextView[1]")
+    @AndroidFindBy(xpath = "//android.widget.ListView/android.widget.CheckedTextView[1]")
     private WebElement radioButton2;
 
-    @AndroidFindBy (id = "com.spireon.fleet.staging:id/iv_title")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/iv_title")
     public WebElement title;
 
-    @AndroidFindBy (id = "com.spireon.fleet.staging:id/parentPanel")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/parentPanel")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther")
     public WebElement Account_Dialogue_Screen;
 
-    @AndroidFindBy (xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout")
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout")
     public WebElement HomeScreen;
-
-    @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_account")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Account\"`]")
-    public WebElement Account_icon;
-
-    @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_logout")
-    @iOSXCUITFindBy(accessibility = "Logout")
-    public WebElement Logout;
-
-    @AndroidFindBy (id = "android:id/button1")
-    @iOSXCUITFindBy(accessibility = "Confirm")
-    public WebElement Confirm_btn;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Map\"`]")
     public WebElement mapTextHomeScreen;
 
-    @iOSXCUITFindBy(accessibility = "Home")
-    public WebElement homeBottomBar;
-
-
     @iOSXCUITFindBy(accessibility = "showpassword")
     public WebElement showPwdIcon;
 
-    //  blankpw=@iOSXCUITFindBy(accessibility = "Please enter a valid password")
-//    blankunma=@iOSXCUITFindBy(accessibility = "Please enter a valid username")
-
-    @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
-    @iOSXCUITFindBy(accessibility = "Allow While Using App")
-    public WebElement permission_access;
-
-
-
-    public WebElement getRadioButton()
-    {
+    public WebElement getRadioButton() {
         return radioButton;
     }
 
 
-    public boolean isRadioButtonChecked()
-    {  return radioButton.getAttribute("checked").equals("true");
+    public boolean isRadioButtonChecked() {
+        return radioButton.getAttribute("checked").equals("true");
     }
 
-    public WebElement getSignIn()
-    {
+    public WebElement getSignIn() {
         return signIn;
     }
-    public WebElement getUsername()
-    {
+
+    public WebElement getUsername() {
         return userName;
     }
 
-    public WebElement getPassword()
-    {
+    public WebElement getPassword() {
         return password;
     }
 
 
-
-    public  String getSignIntxt()
-    {
+    public String getSignIntxt() {
         return SignInTxt.getText();
     }
 
 
-    public String getErrorMsg()
-    {
+    public String getErrorMsg() {
         return errorMessage.getText();
     }
 
 
-    public String getInvalidLoginErrMsg()
-    {
+    public String getInvalidLoginErrMsg() {
         return InvalidLoginErrMsg.getText();
     }
 
 
-    public String getNetworkErrMsg()
-    {
+    public String getNetworkErrMsg() {
         return errorMessage.getText();
     }
-    public WebElement getNetworkErr()
-    {
+
+    public WebElement getNetworkErr() {
         return errorMessage;
     }
 
 
-    public WebElement getSelectbtn()
-    {
+    public WebElement getSelectbtn() {
         return selectBtn;
     }
 
-    public String getFL_Periscope()
-    {
+    public String getFL_Periscope() {
         return FL_Periscope.getText();
     }
 
-    public String getForgotPasswordTxt()
-    {
+    public String getForgotPasswordTxt() {
         return ForgotPasswordTxt.getText();
     }
 
 
-    public WebElement getTitle()
-    {
+    public WebElement getTitle() {
         return title;
     }
-    public WebElement getAccountIcon()
-    {
-        return Account_icon;
-    }
 
-    public WebElement getLogout()
-    {
-        return Logout;
-    }
-
-    public WebElement getConfirmBtn()
-    {
-        return Confirm_btn;
-    }
-
-    public WebElement getAccount_Dialogue_Screen()
-    {
+    public WebElement getAccount_Dialogue_Screen() {
         return Account_Dialogue_Screen;
     }
-    public WebElement getRadioButton2()
-    {
+
+    public WebElement getRadioButton2() {
         return radioButton2;
     }
 
-    public WebElement getHomeScreen()
-    {
+    public WebElement getHomeScreen() {
         return HomeScreen;
     }
 
 
-    public void setUsername(String uname){
+    public void setUsername(String uname) {
         userName.clear();
         userName.sendKeys(uname);
     }
 
-    public void setPassword(String pwd){
+    public void setPassword(String pwd) {
         password.clear();
         password.sendKeys(pwd);
     }
 
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return errorMessage.getText();
     }
 

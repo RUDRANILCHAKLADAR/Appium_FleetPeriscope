@@ -5,7 +5,6 @@ package testscenarios;
 import pageobjects.AlertsPage;
 import pageobjects.ForgotPasswordPage;
 import pageobjects.MapScreenPage;
-import pageobjects.SignInPage;
 import core.BaseTest;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +17,6 @@ import java.time.Duration;
 
 public class AlertsTestCase extends BaseTest {
 
-    public SignInPage signInPage;
     public ForgotPasswordPage forgotPasswordPage;
 
     public MapScreenPage mapScreenPage;
@@ -26,7 +24,6 @@ public class AlertsTestCase extends BaseTest {
 
     @Override
     protected void initPage() {
-        signInPage = new SignInPage(getDriver());
         forgotPasswordPage = new ForgotPasswordPage(getDriver());
         mapScreenPage = new MapScreenPage(getDriver());
         alertsPage = new AlertsPage(getDriver());
@@ -38,7 +35,7 @@ public class AlertsTestCase extends BaseTest {
     @Test(priority = 0)
     public void testAlertsScreenUIVerification() throws InterruptedException {
 
-        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(alertsPage, getDriver(), "Fleet360A", "Password@1");
 
         alertsPage.ClickAlerts_icon();
         Assert.assertTrue(alertsPage.getAlert_List().isDisplayed());
@@ -169,7 +166,7 @@ public class AlertsTestCase extends BaseTest {
         alertsPage.ClickBack();
         alertsPage.DismissAppRatingPopup();
 
-        TestUtils.logOutUser(signInPage);
+        TestUtils.logOutUser(alertsPage);
     }
 
     @Test(priority = 9)
@@ -214,7 +211,7 @@ public class AlertsTestCase extends BaseTest {
 //	C166386	Verify that header displays the information of the list in the following format(Ex:7-day history, Total (xxxx): Showing 1 to 50)
     @Test(priority = 5)
     public void testLandmarkArrivalandDepartureFilterVerification() {
-        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(alertsPage, getDriver(), "Fleet360A", "Password@1");
 
         alertsPage.ClickAlerts_icon();
         alertsPage.Click_filter();

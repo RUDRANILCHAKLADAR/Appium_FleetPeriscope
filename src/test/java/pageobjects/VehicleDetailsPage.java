@@ -17,5 +17,4 @@ public class VehicleDetailsPage extends BasePage {
     public WebElement detailsTab;
 
 
-
 }

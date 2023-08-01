@@ -10,11 +10,15 @@ import core.TestUtils;
 public class VehicleTestCase extends BaseTest {
 
     VehiclePage vehiclePage;
-    SignInPage signInPage;
+
+    @Override
+    protected void initPage() {
+        vehiclePage = new VehiclePage(getDriver());
+    }
 
     @Test
     public void testVehicleUIElements() {
-        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(vehiclePage, getDriver(), "Fleet360A", "Password@1");
         TestUtils.waitForVisibility(vehiclePage.vehicleBottomBar, getDriver());
         vehiclePage.vehicleBottomBar.click();
         TestUtils.waitForVisibility(vehiclePage.vehicleTitle, getDriver());
@@ -22,12 +26,5 @@ public class VehicleTestCase extends BaseTest {
         //Assert.assertTrue((vp.vehicleLists()).isDisplayed()));
         Assert.assertTrue(vehiclePage.searchFld().isDisplayed());
         Assert.assertTrue(vehiclePage.filterOption().isDisplayed());
-    }
-
-
-    @Override
-    protected void initPage() {
-        vehiclePage = new VehiclePage(getDriver());
-        signInPage = new SignInPage(getDriver());
     }
 }

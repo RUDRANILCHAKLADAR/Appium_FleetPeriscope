@@ -16,14 +16,12 @@ import java.time.format.DateTimeFormatter;
 
 public class TripsTestCase extends BaseTest {
 
-    private SignInPage signInPage;
     private VehiclePage vehiclePage;
     private TripPage tripPage;
     private VehicleDetailsPage vehicleDetailsPage;
 
     @Override
     protected void initPage() {
-        signInPage = new SignInPage(getDriver());
         vehiclePage = new VehiclePage(getDriver());
         tripPage = new TripPage(getDriver());
         vehicleDetailsPage = new VehicleDetailsPage(getDriver());
@@ -47,7 +45,7 @@ public class TripsTestCase extends BaseTest {
 
     @Test(priority = 0)
     public void testTripScreenValidation() {
-        TestUtils.logInUser(signInPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(tripPage, getDriver(), "Fleet360A", "Password@1");
         vehiclePage.vehicleBottomBar.click();
         clickAndSearch();
         TestUtils.waitForVisibility(vehiclePage.firstVehicle, getDriver());

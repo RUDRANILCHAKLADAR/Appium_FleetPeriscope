@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import core.TestUtils;
 
 public class ForgotPasswordTestCase extends BaseTest {
-//    ActionClass actions = new ActionClass(driver);
 
     private SignInPage signInPage;
     private ForgotPasswordPage forgotPasswordPage;

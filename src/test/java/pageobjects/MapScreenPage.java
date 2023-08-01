@@ -1,20 +1,16 @@
 package pageobjects;
 
+import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class MapScreenPage
-{
-    AppiumDriver driver;
-
-    public MapScreenPage (AppiumDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+public class MapScreenPage extends BasePage {
+    public MapScreenPage(AppiumDriver driver) {
+        super(driver);
     }
-
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout[2]")
     private WebElement Map;
@@ -24,7 +20,6 @@ public class MapScreenPage
 
     @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_GEOZONE.\"])[9]")
     private WebElement Landmark1;
-
 
 
     @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"MARKER_GEOZONE.\"])[2]")
@@ -37,16 +32,14 @@ public class MapScreenPage
     private WebElement Landmark2_Popup_Close;
 
 
-
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     private WebElement HomeScreen_icon;
-
 
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.ImageView")
     private WebElement landmarks_icon;
 
-    public String Land_txt="Landmarks";
+    public String Land_txt = "Landmarks";
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_alerts")
     private WebElement alerts_icon;
@@ -90,7 +83,6 @@ public class MapScreenPage
     private WebElement Back;
 
 
-
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView[1]")
     private WebElement MovingVehicle1;
 
@@ -98,17 +90,17 @@ public class MapScreenPage
     private WebElement StoppedVehicle1;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/title_suffix")
-    private WebElement  VehicleSpeed;
+    private WebElement VehicleSpeed;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/title_suffix")
-    private WebElement  StoppedVehicleSpeed;
+    private WebElement StoppedVehicleSpeed;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.view.ViewGroup[2]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[5]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[1]")
     private WebElement StoppedVehicleDuration;
 
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/fabStack")
-    private WebElement  Settings_button;
+    private WebElement Settings_button;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout")
     private WebElement Popup1;
@@ -117,13 +109,13 @@ public class MapScreenPage
     private WebElement FL_text;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_refresh")
-    private WebElement  Refresh_btn;
+    private WebElement Refresh_btn;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/fab_map")
-    private WebElement fab_map ;
+    private WebElement fab_map;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/fab_landmarks")
-    private WebElement fab_landmarks ;
+    private WebElement fab_landmarks;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/fab_current_location")
     private WebElement fabcurrent_location;
@@ -147,171 +139,152 @@ public class MapScreenPage
     private WebElement vehicle_icon;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_speed")
-    private WebElement  movingspeedinfo;
+    private WebElement movingspeedinfo;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/title_suffix")
-    private WebElement  stoppedspeedinfo;
+    private WebElement stoppedspeedinfo;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement  Accounts_text;
+    private WebElement Accounts_text;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement  Alerts_text;
+    private WebElement Alerts_text;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.ImageView")
-    private WebElement  Landmarks_text;
+    private WebElement Landmarks_text;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement  Vehicles_text;
+    private WebElement Vehicles_text;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_tertiary")
-    private WebElement  stoppedvehicle2info;
+    private WebElement stoppedvehicle2info;
 
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/defaultIcon")
-    private WebElement  DefaultMapView;
+    private WebElement DefaultMapView;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/satelliteTv")
-    private WebElement  SatelliteMapView;
+    private WebElement SatelliteMapView;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/assetIcon")
-    private WebElement  AssetMapDetails;
+    private WebElement AssetMapDetails;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/landmarkIcon")
-    private WebElement  LandmarksMapDetails;
+    private WebElement LandmarksMapDetails;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/trafficIcon")
-    private WebElement  TrafficMapDetails;
+    private WebElement TrafficMapDetails;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/closeButton")
-    private WebElement  MapSettingsClosebutton;
+    private WebElement MapSettingsClosebutton;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/landmarkTv")
-    private WebElement  LandmarksMapText;
+    private WebElement LandmarksMapText;
 
 
-    public WebElement getLandmarksMapText()
-    {
+    public WebElement getLandmarksMapText() {
         return LandmarksMapText;
     }
 
 
- public WebElement getStoppedvehicle2info()
- {
-     return stoppedvehicle2info;
- }
+    public WebElement getStoppedvehicle2info() {
+        return stoppedvehicle2info;
+    }
 
-    public WebElement getDefaultMapView()
-    {
+    public WebElement getDefaultMapView() {
         return DefaultMapView;
     }
-    public void Click_DefaultMapView()
-    {
+
+    public void Click_DefaultMapView() {
         DefaultMapView.click();
     }
 
-    public WebElement getSatelliteMapView()
-    {
+    public WebElement getSatelliteMapView() {
         return SatelliteMapView;
     }
 
-    public void Click_SatelliteMapView()
-    {
+    public void Click_SatelliteMapView() {
         SatelliteMapView.click();
     }
 
-    public WebElement getAssetMapDetails()
-    {
+    public WebElement getAssetMapDetails() {
         return AssetMapDetails;
     }
 
-    public WebElement getLandmarksMapDetails()
-    {
+    public WebElement getLandmarksMapDetails() {
         return LandmarksMapDetails;
     }
 
-    public WebElement getTrafficMapDetails()
-    {
+    public WebElement getTrafficMapDetails() {
         return TrafficMapDetails;
     }
 
     public WebElement getMapSettingsClosebutton() {
-       return MapSettingsClosebutton;
+        return MapSettingsClosebutton;
     }
 
-  public String vehicle_text="Vehicles";
+    public String vehicle_text = "Vehicles";
 
-    public String  getLandmarks_text()
-    {
+    public String getLandmarks_text() {
         return Landmarks_text.getText();
     }
 
-    public String Veh_txt="Vehicles";
-    public String Land_text="Landmarks";
+    public String Veh_txt = "Vehicles";
+    public String Land_text = "Landmarks";
 
-    public String  getAlerts_text()
-    {
+    public String getAlerts_text() {
         return Alerts_text.getText();
     }
 
-    public String alert_txt="Alerts - 7 Day History";
-    public String getAccounts_text()
-    {
+    public String alert_txt = "Alerts - 7 Day History";
+
+    public String getAccounts_text() {
         return Accounts_text.getText();
     }
 
-    public String Acc_txt="Account";
-    public WebElement getstoppedspeedinfo()
-    {
+    public String Acc_txt = "Account";
+
+    public WebElement getstoppedspeedinfo() {
         return stoppedspeedinfo;
     }
 
-    public WebElement getmovingspeedinfo()
-    {
+    public WebElement getmovingspeedinfo() {
         return movingspeedinfo;
     }
 
-    public WebElement getMovingvehicle1_title()
-    {
+    public WebElement getMovingvehicle1_title() {
         return movingvehicle1_title;
     }
-    public void ClickMovingvehicle1_title()
-    {
+
+    public void ClickMovingvehicle1_title() {
         movingvehicle1_title.click();
     }
 
-    public WebElement getVehicle_icon()
-    {
+    public WebElement getVehicle_icon() {
         return vehicle_icon;
     }
 
 
-    public WebElement getMovingvehicle1tag()
-    {
+    public WebElement getMovingvehicle1tag() {
         return movingvehicle1tag;
     }
 
-    public WebElement getMovingvehicle1()
-    {
+    public WebElement getMovingvehicle1() {
         return movingvehicle1;
     }
 
-    public WebElement getPopup_close()
-    {
+    public WebElement getPopup_close() {
         return popup_close;
     }
 
-    public void  getback3()
-    {
+    public void getback3() {
         back3.click();
     }
 
 
-    public WebElement getFab_landmarks()
-    {
+    public WebElement getFab_landmarks() {
         return fab_landmarks;
     }
-
 
 
     public WebElement getFabcurrent_location() {
@@ -322,28 +295,26 @@ public class MapScreenPage
         return fab_map;
     }
 
-    public String  getFL_text()
-    {
+    public String getFL_text() {
         return FL_text.getText();
     }
-    public String title="FL Periscope";
-    public WebElement getPopup1()
-    {
+
+    public String title = "FL Periscope";
+
+    public WebElement getPopup1() {
         return Popup1;
     }
 
 
-
-    public void Clicksettings_button()
-    {
+    public void Clicksettings_button() {
         Settings_button.click();
     }
 
-    public String VehicleDurationText()
-    {
-       return  StoppedVehicleDuration.getText();
+    public String VehicleDurationText() {
+        return StoppedVehicleDuration.getText();
     }
-    public String vehicledurationtext="Stopped for 6h 12m";
+
+    public String vehicledurationtext = "Stopped for 6h 12m";
 
 
     public WebElement getMoving_tab() {
@@ -354,164 +325,147 @@ public class MapScreenPage
         return Stopped_tab;
     }
 
-    public void  ClickStopped_tab()
-    {
+    public void ClickStopped_tab() {
         Stopped_tab.click();
     }
 
 
-    public String getVehicleSpeed()
-    {
-         return VehicleSpeed.getText();
+    public String getVehicleSpeed() {
+        return VehicleSpeed.getText();
     }
 
-    public String getStoppedVehicleSpeed()
-    {
+    public String getStoppedVehicleSpeed() {
         return StoppedVehicleSpeed.getText();
     }
-    public String stoppedvehiclespeed="(0 mph) ";
 
-    public String vehiclespeed="(101 mph) E";
-    public void  ClickMovingVehicle1()
-    {
+    public String stoppedvehiclespeed = "(0 mph) ";
+
+    public String vehiclespeed = "(101 mph) E";
+
+    public void ClickMovingVehicle1() {
         MovingVehicle1.click();
     }
 
-    public void  ClickStoppedVehicle1()
-
-    {
+    public void ClickStoppedVehicle1() {
         StoppedVehicle1.click();
     }
 
 
-    public void  ClickMoving_tab()
-    {
-         Moving_tab.click();
+    public void ClickMoving_tab() {
+        Moving_tab.click();
     }
-    public WebElement  getDetails_tab()
-    {
+
+    public WebElement getDetails_tab() {
         return Details_tab;
     }
 
-    public WebElement  getBack()
-    {
+    public WebElement getBack() {
         return Back;
     }
 
-    public void ClickBack(){
+    public void ClickBack() {
         Back.click();
     }
 
-    public String  getDetails_tabText()
-    {
+    public String getDetails_tabText() {
         return Details_tab.getText();
     }
-    public String details="DETAILS";
-    public WebElement  getSearch_icon()
-    {
+
+    public String details = "DETAILS";
+
+    public WebElement getSearch_icon() {
         return Search_icon;
     }
 
-    public void ClickSearchIcon()
-    {
+    public void ClickSearchIcon() {
         Search_icon.click();
     }
 
-    public WebElement getSearch_bar()
-    {
-       return Search_bar;
+    public WebElement getSearch_bar() {
+        return Search_bar;
     }
 
-    public String  getSearchBar_Text()
-    {
+    public String getSearchBar_Text() {
         return Search_bar.getText();
     }
-public String  searchbartext="   Search vehicles";
-    public WebElement  Vehile1PopupText()
-    {
+
+    public String searchbartext = "   Search vehicles";
+
+    public WebElement Vehile1PopupText() {
         return Vehicle1_PopupTitle;
     }
 
-    public String getVehicle1PopupTitle()
-    {
-         return Vehicle1_PopupTitle.getText();
+    public String getVehicle1PopupTitle() {
+        return Vehicle1_PopupTitle.getText();
     }
-      public String  Vehicle1Pop_up="International Dr, Tysons, VA, 22102";
-    public void ClickVehicle1_Close()
-    {
+
+    public String Vehicle1Pop_up = "International Dr, Tysons, VA, 22102";
+
+    public void ClickVehicle1_Close() {
         Vehicle1_Close.click();
     }
-    public WebElement getVehicle1item()
-    {
+
+    public WebElement getVehicle1item() {
         return Vehicle1;
     }
-          public void getVehicle1()
-          {
-             Vehicle1.click();
-         }
 
-    public  WebElement getLandmark2_tag()
-    {
+    public void getVehicle1() {
+        Vehicle1.click();
+    }
+
+    public WebElement getLandmark2_tag() {
         return Landmark2_tag;
     }
-    public void ClickLandmark2_tag()
-    {
+
+    public void ClickLandmark2_tag() {
         Landmark2_tag.click();
     }
 
-    public String getLandmark2_Popup_Title()
-    {
-        return  Landmark2_Popup_Title.getText();
+    public String getLandmark2_Popup_Title() {
+        return Landmark2_Popup_Title.getText();
     }
-    public String Pop_upTitle="mapLMADD";
+
+    public String Pop_upTitle = "mapLMADD";
 
 
-    public  void ClickLandmark2_Popup_Close()
-    {
+    public void ClickLandmark2_Popup_Close() {
         Landmark2_Popup_Close.click();
     }
-    public WebElement getMap()
-    {
+
+    public WebElement getMap() {
         return Map;
     }
 
-    public WebElement getAsset1()
-    {
+    public WebElement getAsset1() {
         return Asset1;
     }
 
-    public WebElement getLandmark1()
-    {
+    public WebElement getLandmark1() {
         return Landmark1;
     }
 
-    public WebElement getPermission_access()
-    {
+    public WebElement getPermission_access() {
         return permission_access;
     }
 
-    public void Click_Permission()
-    {
+    public void Click_Permission() {
         permission_access.click();
     }
-    public WebElement getHomeScreen_icon()
-    {
+
+    public WebElement getHomeScreen_icon() {
         return HomeScreen_icon;
     }
 
-    public WebElement getAccount_icon()
-    {
+    public WebElement getAccount_icon() {
         return account_icon;
     }
 
 
-    public WebElement getLandmarks_icon()
-    {
+    public WebElement getLandmarks_icon() {
         return landmarks_icon;
     }
 
-    public WebElement getAlerts_icon()
-    {
+    public WebElement getAlerts_icon() {
         return alerts_icon;
     }
 

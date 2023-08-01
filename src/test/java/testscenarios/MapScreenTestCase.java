@@ -12,12 +12,10 @@ import core.TestUtils;
 
 public class MapScreenTestCase extends BaseTest {
 
-    private SignInPage signInpage;
     private MapScreenPage mapScreenPage;
 
     @Override
     protected void initPage() {
-        signInpage = new SignInPage(getDriver());
         mapScreenPage = new MapScreenPage(getDriver());
     }
 
@@ -26,7 +24,7 @@ public class MapScreenTestCase extends BaseTest {
     @Test(priority = 0)
     public void UIElementsValidation() throws InterruptedException {
 
-        TestUtils.logInUser(signInpage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(mapScreenPage, getDriver(), "Fleet360A", "Password@1");
 
         Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isSelected());
 

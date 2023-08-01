@@ -140,27 +140,26 @@ public class TestUtils {
         // ...
     }
 
-    public static void logInUser(SignInPage sp, AppiumDriver driver, String userName, String passWord) {
-
-        TestUtils.waitForVisibility(sp.signIn, driver);
-        sp.signIn.click();
-        TestUtils.waitForVisibility(sp.userName, driver);
-        TestUtils.sendKeys(sp.userName, userName);
-        TestUtils.sendKeys(sp.password, passWord);
-        sp.signIn.click();
+    public static void logInUser(BasePage basePage, AppiumDriver driver, String userName, String passWord) {
+        TestUtils.waitForVisibility(basePage.signIn, driver);
+        basePage.signIn.click();
+        TestUtils.waitForVisibility(basePage.userName, driver);
+        TestUtils.sendKeys(basePage.userName, userName);
+        TestUtils.sendKeys(basePage.password, passWord);
+        basePage.signIn.click();
 
         if (BaseTest.isAndroidPlatform()) {
-            TestUtils.waitForVisibility(sp.permission_access, driver);
-            sp.permission_access.isDisplayed();
-            sp.permission_access.click();
+            TestUtils.waitForVisibility(basePage.permission_access, driver);
+            basePage.permission_access.isDisplayed();
+            basePage.permission_access.click();
         }
-        TestUtils.waitForVisibility(sp.homeBottomBar, driver);
+        TestUtils.waitForVisibility(basePage.homeBottomBar, driver);
     }
 
-    public static void logOutUser(SignInPage signInPage) {
-        signInPage.getAccountIcon().click();
-        signInPage.getLogout().click();
-        signInPage.getConfirmBtn().click();
+    public static void logOutUser(BasePage basePage) {
+        basePage.Account_icon.click();
+        basePage.Logout.click();
+        basePage.Confirm_btn.click();
     }
 
 //    public void scrollDown(int swipeTimes, int durationForSwipe) {
