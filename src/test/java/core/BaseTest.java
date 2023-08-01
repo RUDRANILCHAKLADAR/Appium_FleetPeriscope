@@ -34,6 +34,8 @@ public abstract class BaseTest {
                            @Optional("androidOnly") String systemPort, @Optional("androidOnly") String chromeDriverPort,
                            @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort) throws Exception {
 
+        ConsoleLogger.setLoggable(false);
+
         Properties prop = new Properties();
         String strFile = "logs" + File.separator + platformName + "_" + deviceName;
         File logFile = new File(strFile);
@@ -41,6 +43,7 @@ public abstract class BaseTest {
             logFile.mkdirs();
         }
         Log.info("log path: " + strFile);
+
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + CONFIG_PROPERTIES_PATH);
         prop.load(fis);
 
