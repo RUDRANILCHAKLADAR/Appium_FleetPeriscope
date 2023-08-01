@@ -16,6 +16,8 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
+import static utility.Constants.*;
+
 public abstract class BaseTest {
     private AppiumDriver driver;
 
@@ -39,42 +41,42 @@ public abstract class BaseTest {
             logFile.mkdirs();
         }
         Log.info("log path: " + strFile);
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//test//java//config//config.properties");
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + CONFIG_PROPERTIES_PATH);
         prop.load(fis);
 
-        URL url = new URL(prop.getProperty("appiumURL"));
+        URL url = new URL(prop.getProperty(APPIUM_URL));
 
-        platformName = "android";
+//        platformName = "android";
         switch (Constants.Platform.getPlatformFromName(platformName)) {
 
             case ANDROID:
                 currentPlatform = Constants.Platform.ANDROID;
                 UiAutomator2Options options = new UiAutomator2Options();
-                options.setDeviceName(prop.getProperty("AndroidDeviceName"));
-                options.setPlatformName("android");
-                options.setAutomationName(prop.getProperty("androidAutomationName"));
+                options.setDeviceName(prop.getProperty(ANDROID_DEVICE_NAME));
+                options.setPlatformName(ANDROID_PLATFORM_NAME);
+                options.setAutomationName(prop.getProperty(ANDROID_AUTOMATION_DRIVER));
                 if (System.getenv("BITRISE_APK_PATH") == null && System.getenv("BITRISE_SOURCE_DIR") == null) {
-                    options.setApp(System.getProperty("user.dir") + prop.getProperty("androidAppPath"));
+                    options.setApp(System.getProperty("user.dir") + prop.getProperty(ANDROID_APP_PATH));
                 } else if (System.getenv("BITRISE_APK_PATH") != null) {
                     options.setApp(System.getenv("BITRISE_APK_PATH"));
                 } else {
-                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + "/src/test/java/artifacts/app-fleetStaging-debug.apk");
+                    options.setApp(System.getenv("BITRISE_SOURCE_DIR") + prop.getProperty(Constants.ANDROID_APP_PATH));
                 }
 
-                options.setCapability("uiautomator2ServerInstallTimeout", 20000);
+                options.setCapability(ANDROID_SERVER_INSTALL_TIMEOUT, 20000);
                 //options.autoGrantPermissions();
                 driver = new AndroidDriver(url, options);
                 break;
             case iOS:
                 currentPlatform = Constants.Platform.iOS;
                 XCUITestOptions option = new XCUITestOptions();
-                option.setDeviceName(prop.getProperty("iOSDeviceName"));
-                option.setPlatformName("iOS");
-                option.setAutomationName(prop.getProperty("iosAutomationName"));
-                option.setPlatformVersion(prop.getProperty("iOSVersion"));
+                option.setDeviceName(prop.getProperty(IOS_DEVICE_NAME));
+                option.setPlatformName(IOS_PLATFORM_NAME);
+                option.setAutomationName(prop.getProperty(IOS_AUTOMATION_DRIVER));
+                option.setPlatformVersion(prop.getProperty(IOS_VERSION));
                 option.setWdaLaunchTimeout(Duration.ofSeconds(30));
                 //option.setApp(System.getProperty("user.dir") + "//App//Fleet Staging.app");
-                option.setApp(System.getProperty("user.dir") + prop.getProperty("iOSAppPath"));
+                option.setApp(System.getProperty("user.dir") + prop.getProperty(IOS_APP_PATH));
                 option.autoAcceptAlerts();
                 driver = new IOSDriver(url, option);
                 break;
