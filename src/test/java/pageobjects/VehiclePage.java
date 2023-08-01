@@ -15,7 +15,7 @@ public class VehiclePage extends BasePage {
     }
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Vehicles\"`]")
-    @AndroidFindBy(xpath = "//[@text='Vehicles']")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Vehicles']")
     public WebElement vehicleTitle;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Vehicles\"`]")
@@ -80,23 +80,26 @@ public class VehiclePage extends BasePage {
             "XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther")
     public WebElement firstVehicle;
 
-    @AndroidFindBy(id = "com.spireon.fleet.staging:id/card_vehicle_list")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/rcl_vehicle_list")
     @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
-    public List<WebElement> vehicleLists;
+    public WebElement vehicleLists;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/card_vehicle_list")
     @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
     public WebElement listOfVehicles;
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/rl_list_item_base")
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
+    public List<WebElement> vehicleList;
 
     public WebElement getVehicleTitle() {
         return vehicleTitle;
     }
 
-    public List<WebElement> vehicleLists() {
+    public WebElement vehicleLists() {
         return vehicleLists;
     }
 
-    public WebElement searchFld() {
+    public WebElement searchField() {
         return searchIcon;
     }
 
@@ -104,5 +107,7 @@ public class VehiclePage extends BasePage {
         return filterOption;
     }
 
-
+    public List<WebElement> getVehicleList() {
+        return vehicleList;
+    }
 }
