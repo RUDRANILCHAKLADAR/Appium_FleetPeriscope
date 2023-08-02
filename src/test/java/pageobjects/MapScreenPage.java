@@ -3,9 +3,7 @@ package pageobjects;
 import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 public class MapScreenPage extends BasePage {
     public MapScreenPage(AppiumDriver driver) {
@@ -33,7 +31,8 @@ public class MapScreenPage extends BasePage {
 
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
-    private WebElement HomeScreen_icon;
+    private WebElement homeScreenIcon;
+
 
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.ImageView")
@@ -45,7 +44,7 @@ public class MapScreenPage extends BasePage {
     private WebElement alerts_icon;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_account")
-    private WebElement account_icon;
+    private WebElement accountIcon;
 
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     private WebElement permission_access;
@@ -106,7 +105,7 @@ public class MapScreenPage extends BasePage {
     private WebElement Popup1;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement FL_text;
+    private WebElement flText;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_refresh")
     private WebElement Refresh_btn;
@@ -145,7 +144,7 @@ public class MapScreenPage extends BasePage {
     private WebElement stoppedspeedinfo;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement Accounts_text;
+    private WebElement accountsText;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
     private WebElement Alerts_text;
@@ -238,17 +237,17 @@ public class MapScreenPage extends BasePage {
 
     public String alert_txt = "Alerts - 7 Day History";
 
-    public String getAccounts_text() {
-        return Accounts_text.getText();
+    public String getAccountsText() {
+        return accountsText.getText();
     }
 
-    public String Acc_txt = "Account";
+    public String accountText = "Account";
 
     public WebElement getstoppedspeedinfo() {
         return stoppedspeedinfo;
     }
 
-    public WebElement getmovingspeedinfo() {
+    public WebElement getMovingSpeedInfo() {
         return movingspeedinfo;
     }
 
@@ -273,7 +272,7 @@ public class MapScreenPage extends BasePage {
         return movingvehicle1;
     }
 
-    public WebElement getPopup_close() {
+    public WebElement getPopupClose() {
         return popup_close;
     }
 
@@ -282,7 +281,7 @@ public class MapScreenPage extends BasePage {
     }
 
 
-    public WebElement getFab_landmarks() {
+    public WebElement getFabLandmarks() {
         return fab_landmarks;
     }
 
@@ -295,8 +294,8 @@ public class MapScreenPage extends BasePage {
         return fab_map;
     }
 
-    public String getFL_text() {
-        return FL_text.getText();
+    public String getFLText() {
+        return flText.getText();
     }
 
     public String title = "FL Periscope";
@@ -452,12 +451,12 @@ public class MapScreenPage extends BasePage {
         permission_access.click();
     }
 
-    public WebElement getHomeScreen_icon() {
-        return HomeScreen_icon;
+    public WebElement getHomeScreenIcon() {
+        return homeScreenIcon;
     }
 
-    public WebElement getAccount_icon() {
-        return account_icon;
+    public WebElement getAccountIcon() {
+        return accountIcon;
     }
 
 
@@ -468,6 +467,13 @@ public class MapScreenPage extends BasePage {
     public WebElement getAlerts_icon() {
         return alerts_icon;
     }
-
+    public void clickHomeScreenIcon()
+    {
+        homeScreenIcon.click();
+    }
+    public void clickAccountIcon()
+    {
+        accountIcon.click();
+    }
 
 }
