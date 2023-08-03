@@ -70,7 +70,7 @@ public class VehiclePage extends BasePage {
     public WebElement vehicleIcon;
 
 
-    @iOSXCUITFindBy(iOSNsPredicate = "label BEGINSWITH 'Total ('")
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeStaticText' and label BEGINSWITH 'Total'")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_details")
     public WebElement totalCount;
 

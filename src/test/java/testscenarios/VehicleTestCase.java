@@ -85,7 +85,7 @@ public class VehicleTestCase extends BaseTest {
 
     //C19972	Verify total count of vehicles in the vehicle list screen
     @Test(priority = 3)
-    public void testVehicleListScreenTotalCountValidation() throws InterruptedException {
+    public void testVehicleListScreenTotalCountValidation(){
         TestUtils.clickElement(vehiclePage.vehicleBottomBar, vehiclePageDriver);
         Assert.assertTrue(vehiclePage.getTotalCount().isDisplayed());
         Log.info("Vehicle Count :: " + vehiclePage.getTotalCount().getText());
@@ -95,7 +95,7 @@ public class VehicleTestCase extends BaseTest {
     //	C19974	Verify user is able to go to other screens from vehicle screen
     //  C19975	Verify on click of individual vehicle it shows detailed vehicle page
     @Test(priority = 4)
-    public void testVehicleListScreenVerification() throws InterruptedException {
+    public void testVehicleListScreenVerification(){
         mapScreenPage = new MapScreenPage(vehiclePageDriver);
 
         mapScreenPage.clickHomeScreenIcon();
