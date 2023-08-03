@@ -3,6 +3,7 @@ package pageobjects;
 import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 
 public class MapScreenPage extends BasePage {
@@ -30,10 +31,9 @@ public class MapScreenPage extends BasePage {
     private WebElement Landmark2_Popup_Close;
 
 
+    @iOSXCUITFindBy(accessibility = "Home")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     private WebElement homeScreenIcon;
-
-
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.ImageView")
     private WebElement landmarks_icon;
@@ -43,6 +43,7 @@ public class MapScreenPage extends BasePage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_alerts")
     private WebElement alerts_icon;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Account\"]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_account")
     private WebElement accountIcon;
 
@@ -65,8 +66,9 @@ public class MapScreenPage extends BasePage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/search_src_text")
     private WebElement Search_bar;
 
+    @iOSXCUITFindBy(accessibility = "Details")
     @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"Details\"]/android.widget.TextView")
-    private WebElement Details_tab;
+    private WebElement detailsTab;
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_filter_title")
     private WebElement Moving_tab;
@@ -104,6 +106,7 @@ public class MapScreenPage extends BasePage {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout")
     private WebElement Popup1;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Map\"]")
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
     private WebElement flText;
 
@@ -143,6 +146,7 @@ public class MapScreenPage extends BasePage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/title_suffix")
     private WebElement stoppedspeedinfo;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Account\"`]")
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
     private WebElement accountsText;
 
@@ -298,8 +302,6 @@ public class MapScreenPage extends BasePage {
         return flText.getText();
     }
 
-    public String title = "FL Periscope";
-
     public WebElement getPopup1() {
         return Popup1;
     }
@@ -354,8 +356,8 @@ public class MapScreenPage extends BasePage {
         Moving_tab.click();
     }
 
-    public WebElement getDetails_tab() {
-        return Details_tab;
+    public WebElement getDetailsTab() {
+        return detailsTab;
     }
 
     public WebElement getBack() {
@@ -366,8 +368,8 @@ public class MapScreenPage extends BasePage {
         Back.click();
     }
 
-    public String getDetails_tabText() {
-        return Details_tab.getText();
+    public String getDetailsTabText() {
+        return detailsTab.getText();
     }
 
     public String details = "DETAILS";

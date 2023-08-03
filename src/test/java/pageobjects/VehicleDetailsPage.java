@@ -13,8 +13,7 @@ public class VehicleDetailsPage extends BasePage {
     }
 
     @iOSXCUITFindBy(accessibility = "Details")
-    @AndroidFindBy(accessibility = "Details")
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"Details\"]/android.widget.TextView")
     public WebElement detailsTab;
-
 
 }

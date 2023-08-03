@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import core.TestUtils;
+import utility.Constants;
 
 public class MapScreenTestCase extends BaseTest {
 
@@ -79,7 +80,7 @@ public class MapScreenTestCase extends BaseTest {
         //  Thread.sleep(2000);
         WebElement fl_text = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView"));
         String FL_txt = fl_text.getText();
-        Assert.assertEquals(FL_txt, mapScreenPage.title);
+        Assert.assertEquals(FL_txt, Constants.ANDROID_HOME_SCREEN_TITLE);
 
         WebElement search_icon = getDriver().findElement(By.xpath("//android.widget.Button[@content-desc=\"Search\"]"));
         Assert.assertTrue(search_icon.isEnabled());
@@ -219,7 +220,7 @@ public class MapScreenTestCase extends BaseTest {
         Assert.assertTrue(mapScreenPage.Vehile1PopupText().isDisplayed());
         Assert.assertEquals(mapScreenPage.getVehicle1PopupTitle(), mapScreenPage.Vehicle1Pop_up);
         mapScreenPage.Vehile1PopupText().click();
-        Assert.assertEquals(mapScreenPage.getDetails_tabText(), mapScreenPage.details);
+        Assert.assertEquals(mapScreenPage.getDetailsTabText(), Constants.ANDROID_VEHICLES_DETAILS_TAB);
         mapScreenPage.ClickBack();
         mapScreenPage.ClickVehicle1_Close();
         Assert.assertTrue(mapScreenPage.getHomeScreenIcon().isDisplayed());

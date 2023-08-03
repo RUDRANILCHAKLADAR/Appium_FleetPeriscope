@@ -14,6 +14,13 @@ public class Constants {
     public static String IOS_VERSION = "iOSVersion";
     public static String IOS_APP_PATH = "iOSAppPath";
 
+    public static String ANDROID_VEHICLES_DETAILS_TAB= "DETAILS";
+    public static String IOS_VEHICLES_DETAILS_TAB= "1";
+    public static String ANDROID_HOME_SCREEN_TITLE= "FL Periscope";
+    public static String IOS_HOME_SCREEN_TITLE= "Map";
+    public static String ACCOUNTS_SCREEN_TITLE= "Account";
+
+
     public static String CONFIG_PROPERTIES_PATH = "//src//test//java//config//config.properties";
     public enum Platform {
         ANDROID("android"),

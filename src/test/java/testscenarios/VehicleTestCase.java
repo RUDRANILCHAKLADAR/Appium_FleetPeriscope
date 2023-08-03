@@ -5,28 +5,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import pageobjects.AlertsPage;
-import pageobjects.MapScreenPage;
-import pageobjects.VehiclePage;
+import pageobjects.*;
 import core.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import core.TestUtils;
+import utility.Constants;
 
 import java.time.Duration;
 
 public class VehicleTestCase extends BaseTest {
 
     VehiclePage vehiclePage;
+    VehicleDetailsPage vehicleDetailsPage;
+
     MapScreenPage mapScreenPage;
+
+    AccountsPage accountsPage;
     AlertsPage alertsPage;
 
     AppiumDriver vehiclePageDriver;
 
     @Override
     protected void init() {
-        vehiclePage = new VehiclePage(getDriver());
         vehiclePageDriver = getDriver();
+        vehiclePage = new VehiclePage(getDriver());
     }
 
     @Override
@@ -95,18 +98,26 @@ public class VehicleTestCase extends BaseTest {
     //	C19974	Verify user is able to go to other screens from vehicle screen
     //  C19975	Verify on click of individual vehicle it shows detailed vehicle page
     @Test(priority = 4)
-    public void testVehicleListScreenVerification(){
+    public void testVehicleListScreenWithNavigationAndVehicleDetailsClickVerification(){
         mapScreenPage = new MapScreenPage(vehiclePageDriver);
-
         mapScreenPage.clickHomeScreenIcon();
-        Assert.assertEquals(mapScreenPage.getFLText(), mapScreenPage.title);
+        vehicleDetailsPage = new VehicleDetailsPage(getDriver());
+        accountsPage = new AccountsPage(getDriver());
+
+        if(isIosPlatform())
+            Assert.assertEquals(mapScreenPage.getFLText(), Constants.IOS_HOME_SCREEN_TITLE);
+        else
+            Assert.assertEquals(mapScreenPage.getFLText(), Constants.ANDROID_HOME_SCREEN_TITLE);
         mapScreenPage.clickAccountIcon();
-        Assert.assertEquals(mapScreenPage.getAccountsText(), mapScreenPage.accountText);
+        Assert.assertEquals(accountsPage.accountsText.getText(), Constants.ACCOUNTS_SCREEN_TITLE);
         TestUtils.clickElement(vehiclePage.vehicleBottomBar, vehiclePageDriver);
 
         TestUtils.waitForVisibility(vehiclePage.getVehicleLists(), vehiclePageDriver);
         vehiclePage.getVehicleList().get(0).click();
-        Assert.assertEquals(mapScreenPage.getDetails_tabText(), mapScreenPage.details);
+        if(isIosPlatform())
+            Assert.assertEquals(vehicleDetailsPage.detailsTab.getText(), Constants.IOS_VEHICLES_DETAILS_TAB);
+        else
+            Assert.assertEquals(vehicleDetailsPage.detailsTab.getText(), Constants.ANDROID_VEHICLES_DETAILS_TAB);
         mapScreenPage.ClickBack();
 
     }
