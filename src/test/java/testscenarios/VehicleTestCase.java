@@ -114,7 +114,6 @@ public class VehicleTestCase extends BaseTest {
     //C20774	Verify if no filter is applied
     @Test(priority = 5)
     public void testFilterNotApplied() throws InterruptedException {
-
         for (int i = 0; i < 4; i++) {
             Assert.assertFalse(vehiclePage.getFilterTitleList().get(i).isSelected());
             Log.info("The " + vehiclePage.getFilterTitleList().get(i).getText() + " filter is not selected");
@@ -128,8 +127,6 @@ public class VehicleTestCase extends BaseTest {
     }
 
     //C103792	Verify on vehicle screen applied filters are highlighted and on the leftmost of the scrollbar
-    //C103849	Verify scrolling functionality on top filter
-    //C20844	Verify Filter functionality(ex:In Landmark/out of landmark filter is working properly)
     //C20783	Verify user is able to select more than one filters
     @Test(priority = 6)
     public void testMultiFilterSelected() {
@@ -139,27 +136,28 @@ public class VehicleTestCase extends BaseTest {
             if (vehiclePage.getFilterTitleList().get(i).getText().contains(vehiclePage.moving) || vehiclePage.getFilterTitleList().get(i).getText().contains(vehiclePage.stopped)) {
                 vehiclePage.getFilterTitleList().get(i).click();
                 Assert.assertTrue(vehiclePage.getFilterTitleList().get(0).isSelected());
+                Log.info("The " + vehiclePage.getFilterTitleList().get(0).getText() + " filter is  selected");
             }
         }
         vehiclePage.getFilterTitleList().get(0).click();
         vehiclePage.getFilterTitleList().get(0).click();
-        for (int i = 0; i < vehiclePage.getFilterTitleList().size() - 1; i++) {
-            if (vehiclePage.getFilterTitleList().get(i).getText().contains(vehiclePage.inLandmark)) {
-                vehiclePage.getFilterTitleList().get(i).click();
-                TestUtils.swipeRight(vehiclePage.getFilterTitleList(), vehiclePageDriver);
-                Assert.assertTrue(vehiclePage.getFilterTitleList().get(0).isSelected(), "In LandMark not Selected");
-                vehiclePage.getFilterTitleList().get(0).click();
-                TestUtils.swipeLeft(vehiclePage.getFilterTitleList(), vehiclePageDriver);
-            }
-            vehiclePage.getFilterTitleList().get(0).click();
-            TestUtils.swipeRight(vehiclePage.getFilterTitleList(), vehiclePageDriver);
-            if (vehiclePage.getFilterTitleList().get(i).getText().contains(vehiclePage.outofLandmark)) {
-                vehiclePage.getFilterTitleList().get(i).click();
-                TestUtils.swipeRight(vehiclePage.getFilterTitleList(), vehiclePageDriver);
-                Assert.assertTrue(vehiclePage.getFilterTitleList().get(0).isSelected(), "Out of Landmark not Selected");
-                vehiclePage.getFilterTitleList().get(0).click();
-            }
-        }
+
     }
 
+    //C103849	Verify scrolling functionality on top filter
+    //C20844	Verify Filter functionality(ex:In Landmark/out of landmark filter is working properly)
+    @Test(priority = 7)
+    public void testInLMFAndOutOfLMFilterSelected() {
+        TestUtils.swipeLeft(vehiclePage.getFilterTitleList(), vehiclePageDriver);
+        vehiclePage.getLMIcon().click();
+        TestUtils.swipeRight(vehiclePage.getFilterTitleList(), vehiclePageDriver);
+
+        Assert.assertTrue(vehiclePage.getFilterTitleList().get(0).isSelected() && vehiclePage.getFilterTitleList().get(0).getText().contains(vehiclePage.inLandmark));
+        TestUtils.swipeLeft(vehiclePage.getFilterTitleList(), vehiclePageDriver);
+        vehiclePage.getNotLMIcon().click();
+        TestUtils.swipeRight(vehiclePage.getFilterTitleList(), vehiclePageDriver);
+        Assert.assertTrue(vehiclePage.getFilterTitleList().get(0).isSelected() && vehiclePage.getFilterTitleList().get(0).getText().contains(vehiclePage.outofLandmark));
+        vehiclePage.getFilterTitleList().get(0).click();
+
+    }
 }

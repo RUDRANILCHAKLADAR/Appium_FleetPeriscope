@@ -51,7 +51,7 @@ public class VehiclePage extends BasePage {
     public WebElement idleIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-In LM")
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/ll_parent'][3]")
+    @AndroidFindBy(xpath = "//*[contains(@text,'In LM')]" )
     public WebElement LMIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-Not in LM")
@@ -227,6 +227,11 @@ public class VehiclePage extends BasePage {
         return notLMIcon;
     }
 
+
+    public WebElement getLMIcon()
+    {
+        return LMIcon;
+    }
     public WebElement getNotReportingIcon()
     {
         return notReportingIcon;

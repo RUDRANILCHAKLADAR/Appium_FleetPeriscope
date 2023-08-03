@@ -31,7 +31,7 @@ public abstract class BaseTest {
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
             "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort"})
     @BeforeClass
-    public void beforeTest(@Optional("androidOnly") String emulator, @Optional("androidOnly") String platformName, @Optional("androidOnly") String udid, @Optional("androidOnly") String deviceName,
+    public void beforeTest(@Optional("androidOnly") String emulator, @Optional String platformName, @Optional String udid, @Optional String deviceName,
                            @Optional("androidOnly") String systemPort, @Optional("androidOnly") String chromeDriverPort,
                            @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort) throws Exception {
 
@@ -85,7 +85,6 @@ public abstract class BaseTest {
             default:
                 throw new Exception("Invalid platform! - " + platformName);
         }
-
         Log.info("driver initialized: " + driver);
 
         init();
