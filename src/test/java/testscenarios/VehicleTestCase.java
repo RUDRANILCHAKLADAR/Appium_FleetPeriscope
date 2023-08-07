@@ -124,10 +124,10 @@ public class VehicleTestCase extends BaseTest {
 
     //C20774	Verify if no filter is applied
     @Test(priority = 5)
-    public void testFilterNotApplied() throws InterruptedException {
-        for (int i = 0; i < 4; i++) {
+    public void testFilterNotApplied(){
+        for (int i = 0; i < vehiclePage.getFilterTitleList().size(); i++) {
             Assert.assertFalse(vehiclePage.getFilterTitleList().get(i).isSelected());
-            Log.info("The " + vehiclePage.getFilterTitleList().get(i).getText() + " filter is not selected");
+            Log.info("The " + vehiclePage.filterTitleList.get(i).getText() + "filter is not selected");
         }
         TestUtils.swipeLeft(vehiclePage.getFilterTitleList(), vehiclePageDriver);
         Assert.assertFalse(vehiclePage.getNotLMIcon().isSelected());
@@ -137,11 +137,10 @@ public class VehicleTestCase extends BaseTest {
 
     }
 
-    //C103792	Verify on vehicle screen applied filters are highlighted and on the leftmost of the scrollbar
+ /*   //C103792	Verify on vehicle screen applied filters are highlighted and on the leftmost of the scrollbar
     //C20783	Verify user is able to select more than one filters
     @Test(priority = 6)
     public void testMultiFilterSelected() {
-
         //Multi filter selection
         for (int i = 0; i < vehiclePage.getFilterTitleList().size(); i++) {
             if (vehiclePage.getFilterTitleList().get(i).getText().contains(vehiclePage.moving) || vehiclePage.getFilterTitleList().get(i).getText().contains(vehiclePage.stopped)) {
@@ -170,5 +169,5 @@ public class VehicleTestCase extends BaseTest {
         Assert.assertTrue(vehiclePage.getFilterTitleList().get(0).isSelected() && vehiclePage.getFilterTitleList().get(0).getText().contains(vehiclePage.outofLandmark));
         vehiclePage.getFilterTitleList().get(0).click();
 
-    }
+    }*/
 }

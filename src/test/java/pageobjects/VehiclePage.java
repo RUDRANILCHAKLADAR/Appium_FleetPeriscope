@@ -92,7 +92,7 @@ public class VehiclePage extends BasePage {
     @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
     public List<WebElement> vehicleList;
 
-    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeCollectionView' and name = 'id_vehiclesFiltersItemList'")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCollectionView[1]/XCUIElementTypeCell")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_filter_title")
     public List<WebElement> filterTitleList;
 
