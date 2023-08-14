@@ -1,7 +1,6 @@
 package testscenarios;
 
 import pageobjects.MapScreenPage;
-import pageobjects.SignInPage;
 //import org.checkerframework.checker.units.qual.A;
 import core.BaseTest;
 import org.openqa.selenium.By;
@@ -29,17 +28,17 @@ public class MapScreenTestCase extends BaseTest {
     @Test(priority = 0)
     public void UIElementsValidation() throws InterruptedException {
 
-        TestUtils.logInUser(mapScreenPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(mapScreenPage, getDriver(), "Fleet360A", "Password@1",this);
 
-        Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isSelected());
+        Assert.assertTrue(mapScreenPage.getHomeScreenIcon().isSelected());
 
-        Assert.assertTrue(mapScreenPage.getAccount_icon().isEnabled());
-        mapScreenPage.getAccount_icon().click();
-        Assert.assertEquals(mapScreenPage.getAccounts_text(), mapScreenPage.Acc_txt);
-        mapScreenPage.getHomeScreen_icon().click();
+        Assert.assertTrue(mapScreenPage.getAccountIcon().isEnabled());
+        mapScreenPage.getAccountIcon().click();
+        Assert.assertEquals(mapScreenPage.getAccountsText(), mapScreenPage.accountText);
+        mapScreenPage.getHomeScreenIcon().click();
 
 
-        Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isEnabled());
+        Assert.assertTrue(mapScreenPage.getHomeScreenIcon().isEnabled());
 
         Assert.assertTrue(mapScreenPage.getAlerts_icon().isEnabled());
         mapScreenPage.getAlerts_icon().click();
@@ -55,7 +54,7 @@ public class MapScreenTestCase extends BaseTest {
         Vehicle_icon.click();
         WebElement vehicle_text = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView"));
         Assert.assertEquals(vehicle_text.getText(), mapScreenPage.Veh_txt);
-        mapScreenPage.getHomeScreen_icon().click();
+        mapScreenPage.getHomeScreenIcon().click();
 
 
 //       Assert.assertTrue(mapScreenPage.getLandmarks_icon().isEnabled());
@@ -153,7 +152,7 @@ public class MapScreenTestCase extends BaseTest {
         Assert.assertTrue(mapScreenPage.getLandmarksMapDetails().isDisplayed());
         Assert.assertTrue(mapScreenPage.getTrafficMapDetails().isDisplayed());
         Assert.assertTrue(mapScreenPage.getMapSettingsClosebutton().isEnabled());
-        mapScreenPage.getPopup_close().click();
+        mapScreenPage.getPopupClose().click();
     }
 
     //C83437 Tap on map settings when n/w is off
@@ -167,15 +166,15 @@ public class MapScreenTestCase extends BaseTest {
 
         Thread.sleep(2000);
         mapScreenPage.getFab_map().click();
-        mapScreenPage.getFab_landmarks().click();
+        mapScreenPage.getFabLandmarks().click();
         Thread.sleep(2000);
         mapScreenPage.Clicksettings_button();
         TestUtils.internetOff(getDriver());
         Assert.assertTrue(mapScreenPage.getPopup1().isDisplayed());
         TestUtils.internetOn(getDriver());
-        mapScreenPage.getPopup_close().click();
+        mapScreenPage.getPopupClose().click();
         mapScreenPage.getFab_map().click();
-        mapScreenPage.getFab_landmarks().click();
+        mapScreenPage.getFabLandmarks().click();
     }
 
 
@@ -194,9 +193,9 @@ public class MapScreenTestCase extends BaseTest {
         mapScreenPage.ClickLandmark2_tag();
         Assert.assertEquals(mapScreenPage.getLandmark2_Popup_Title(), mapScreenPage.Pop_upTitle);
         mapScreenPage.ClickLandmark2_Popup_Close();
-        Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getHomeScreenIcon().isDisplayed());
         mapScreenPage.getFab_map().click();
-        mapScreenPage.getFab_landmarks().click();
+        mapScreenPage.getFabLandmarks().click();
 
     }
 
@@ -223,7 +222,7 @@ public class MapScreenTestCase extends BaseTest {
         Assert.assertEquals(mapScreenPage.getDetails_tabText(), mapScreenPage.details);
         mapScreenPage.ClickBack();
         mapScreenPage.ClickVehicle1_Close();
-        Assert.assertTrue(mapScreenPage.getHomeScreen_icon().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getHomeScreenIcon().isDisplayed());
 
     }
 
@@ -243,9 +242,9 @@ public class MapScreenTestCase extends BaseTest {
         Assert.assertTrue(mapScreenPage.getSearch_bar().isEnabled());
         Assert.assertEquals(mapScreenPage.getSearchBar_Text(), mapScreenPage.searchbartext);
         mapScreenPage.getback3();
-        mapScreenPage.getHomeScreen_icon().click();
+        mapScreenPage.getHomeScreenIcon().click();
         mapScreenPage.getFab_map().click();
-        mapScreenPage.getFab_landmarks().click();
+        mapScreenPage.getFabLandmarks().click();
     }
 
 
@@ -280,7 +279,7 @@ public class MapScreenTestCase extends BaseTest {
 
         mapScreenPage.ClickVehicle1_Close();
         mapScreenPage.getFab_map().click();
-        mapScreenPage.getFab_landmarks().click();
+        mapScreenPage.getFabLandmarks().click();
     }
 
 
@@ -318,10 +317,10 @@ public class MapScreenTestCase extends BaseTest {
         Thread.sleep(2000);
 //        mapScreenPage.ClickMovingvehicle1_title();
 //        Thread.sleep(2000);
-        Assert.assertTrue(mapScreenPage.getmovingspeedinfo().isDisplayed());
+        Assert.assertTrue(mapScreenPage.getMovingSpeedInfo().isDisplayed());
         mapScreenPage.ClickVehicle1_Close();
         mapScreenPage.getFab_map().click();
-        mapScreenPage.getFab_landmarks().click();
+        mapScreenPage.getFabLandmarks().click();
 
     }
 

@@ -151,9 +151,8 @@ public class SignInTestCase extends BaseTest {
         signInPage.anyAccount.click();
         signInPage.getSelectbtn().click();
         TestUtils.waitForVisibility(signInPage.Account_icon, getDriver());
-        String ActualErrorMessage = signInPage.getFL_Periscope();
-        String ExpectedResult = "FL Periscope";
-        Assert.assertEquals(ActualErrorMessage, ExpectedResult);
+        String ActualTitleMessage = signInPage.getHomeScreenTitle();
+        Assert.assertEquals(ActualTitleMessage, "Periscope");
         signInPage.Account_icon.click();
         signInPage.Logout.click();
         signInPage.Confirm_btn.click();
@@ -200,8 +199,8 @@ public class SignInTestCase extends BaseTest {
         TestUtils.waitForVisibility(signInPage.getAccount_Dialogue_Screen(), getDriver());
         signInPage.anyAccount.click();
         signInPage.getSelectbtn().click();
-        TestUtils.waitForVisibility(signInPage.FL_Periscope, getDriver());
-        String ActualErrorMessage = signInPage.getFL_Periscope();
+        TestUtils.waitForVisibility(signInPage.homeScreenTitle, getDriver());
+        String ActualErrorMessage = signInPage.getHomeScreenTitle();
         String ExpectedResult = "FL Periscope";
         Assert.assertEquals(ActualErrorMessage, ExpectedResult);
         signInPage.Account_icon.click();
@@ -321,7 +320,7 @@ public class SignInTestCase extends BaseTest {
         signInPage.setUsername("Fleet360A");
         signInPage.setPassword("Password@1");
         signInPage.signIn.click();
-        TestUtils.waitForVisibility(signInPage.FL_Periscope, getDriver());
+        TestUtils.waitForVisibility(signInPage.homeScreenTitle, getDriver());
         Assert.assertTrue(signInPage.getHomeScreen().isDisplayed());
         if (signInPage.getHomeScreen().isDisplayed())
             System.out.println("Account Screen pop up is not displayed");

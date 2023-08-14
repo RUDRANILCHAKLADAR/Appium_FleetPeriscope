@@ -33,6 +33,7 @@ public class BasePage {
     public WebElement permission_access;
 
     @iOSXCUITFindBy(accessibility = "Home")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
     public WebElement homeBottomBar;
 
     @AndroidFindBy (id = "com.spireon.fleet.staging:id/action_account")
@@ -46,4 +47,8 @@ public class BasePage {
     @AndroidFindBy (id = "android:id/button1")
     @iOSXCUITFindBy(accessibility = "Confirm")
     public WebElement Confirm_btn;
+
+    @iOSXCUITFindBy(accessibility = "Allow While Using App")
+    public WebElement allowButton;
+
 }

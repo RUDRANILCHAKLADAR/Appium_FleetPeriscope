@@ -31,7 +31,7 @@ public abstract class BaseTest {
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
             "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort"})
     @BeforeClass
-    public void beforeTest(@Optional("androidOnly") String emulator, @Optional("androidOnly") String platformName, @Optional("androidOnly") String udid, @Optional("androidOnly") String deviceName,
+    public void beforeTest(@Optional("androidOnly") String emulator, @Optional String platformName, @Optional String udid, @Optional String deviceName,
                            @Optional("androidOnly") String systemPort, @Optional("androidOnly") String chromeDriverPort,
                            @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort) throws Exception {
 
@@ -49,8 +49,6 @@ public abstract class BaseTest {
         prop.load(fis);
 
         URL url = new URL(prop.getProperty(APPIUM_URL));
-
-        platformName = "android";
         switch (Constants.Platform.getPlatformFromName(platformName)) {
 
             case ANDROID:
@@ -87,7 +85,6 @@ public abstract class BaseTest {
             default:
                 throw new Exception("Invalid platform! - " + platformName);
         }
-
         Log.info("driver initialized: " + driver);
 
         init();
@@ -117,8 +114,9 @@ public abstract class BaseTest {
         return currentPlatform == Constants.Platform.iOS;
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void afterTest() {
+        deInit();
         if (getDriver() != null) {
             getDriver().quit();
         }

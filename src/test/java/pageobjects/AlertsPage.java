@@ -3,10 +3,8 @@ package pageobjects;
 import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -16,25 +14,27 @@ public class AlertsPage extends BasePage {
         super(driver);
     }
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    private WebElement Alert_Title_text;
+    @iOSXCUITFindBy(iOSNsPredicate = "label == \"Alerts - 7 Day History\"")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Alerts - 7 Day History']")
+    private WebElement alertTitleText;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Filter\"`]")
+    @iOSXCUITFindBy(accessibility = "Filter")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_filter_alerts")
-    private WebElement Filter_icon;
+    private WebElement filterIcon;
 
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_details")
-    private WebElement Total_itemsCount;
+    private WebElement totalItemsCount;
 
 
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/rv_alerts_list")
-    public WebElement Alert_List;
+    public WebElement alertList;
 
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Alerts\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_alerts")
-    private WebElement Alerts_icon;
+    private WebElement alertsIcon;
 
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Alerts - 7 Day History\"`]")
@@ -116,6 +116,10 @@ public class AlertsPage extends BasePage {
 
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_time")
     public List<WebElement> AlertTime;
+
+    @iOSXCUITFindBy(accessibility = "Alerts")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_alerts")
+    public WebElement alertsBottomBar;
 
     public List<WebElement> getSubValue() {
         return SubValue;
@@ -233,30 +237,30 @@ public class AlertsPage extends BasePage {
     }
 
     public void ClickAlerts_icon() {
-        Alerts_icon.click();
+        alertsIcon.click();
     }
 
 
-    public String getAlert_Title_text() {
-        return Alert_Title_text.getText();
+    public String getAlertTitleText() {
+        return alertTitleText.getText();
     }
 
-    public String Alert_Title = "Alerts - 7 Day History";
+    public String alertTitle = "Alerts - 7 Day History";
 
-    public WebElement getFilter_icon() {
-        return Filter_icon;
+    public WebElement getFilterIcon() {
+        return filterIcon;
     }
 
     public void Click_filter() {
-        Filter_icon.click();
+        filterIcon.click();
     }
 
-    public WebElement getAlert_List() {
-        return Alert_List;
+    public WebElement getAlertLists() {
+        return alertList;
     }
 
-    public WebElement getTotal_itemsCount() {
-        return Total_itemsCount;
+    public WebElement getTotalItemsCount() {
+        return totalItemsCount;
     }
 
     public void DismissAppRatingPopup() {
