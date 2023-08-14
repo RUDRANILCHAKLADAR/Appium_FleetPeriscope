@@ -114,8 +114,9 @@ public abstract class BaseTest {
         return currentPlatform == Constants.Platform.iOS;
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void afterTest() {
+        deInit();
         if (getDriver() != null) {
             getDriver().quit();
         }

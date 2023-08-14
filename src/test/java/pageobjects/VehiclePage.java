@@ -51,15 +51,15 @@ public class VehiclePage extends BasePage {
     public WebElement idleIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-In LM")
-    @AndroidFindBy(xpath = "//*[contains(@text,'In LM')]" )
+    @AndroidFindBy(xpath = "//*[contains(@text,'In LM')]" )//android.widget.TextView[@text='In LM']
     public WebElement LMIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-Not in LM")
-    @AndroidFindBy(xpath = "//*[contains(@text,'Not In LM')]")
+    @AndroidFindBy(xpath = "//*[contains(@text,'Not In LM')]")//android.widget.TextView[@text='Not In LM']
     public WebElement notLMIcon ;
 
     @iOSXCUITFindBy(accessibility = "Filter-Non-Reporting")
-    @AndroidFindBy(xpath = "//*[contains(@text,'Non Reporting')]")
+    @AndroidFindBy(xpath = "//*[contains(@text,'Non Reporting')]")//android.widget.TextView[@text='Non Reporting']
     public WebElement notReportingIcon;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='nextArrowVehilceList']")
@@ -69,8 +69,7 @@ public class VehiclePage extends BasePage {
     @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/iv_vehicle_icon')]")
     public WebElement vehicleIcon;
 
-
-    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeStaticText' and label BEGINSWITH 'Total'")
+    @iOSXCUITFindBy(iOSNsPredicate = "label BEGINSWITH 'Total ('")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_details")
     public WebElement totalCount;
 
@@ -92,7 +91,7 @@ public class VehiclePage extends BasePage {
     @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
     public List<WebElement> vehicleList;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCollectionView[1]/XCUIElementTypeCell")
+    @iOSXCUITFindBy(iOSNsPredicate = "name == 'Filter_text'")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_filter_title")
     public List<WebElement> filterTitleList;
 

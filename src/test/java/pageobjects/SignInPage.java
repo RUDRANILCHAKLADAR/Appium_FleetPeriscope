@@ -56,7 +56,7 @@ public class SignInPage extends BasePage {
     public WebElement selectBtn;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    public WebElement FL_Periscope;
+    public WebElement homeScreenTitle;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
     public WebElement ForgotPasswordTxt;
@@ -139,8 +139,8 @@ public class SignInPage extends BasePage {
         return selectBtn;
     }
 
-    public String getFL_Periscope() {
-        return FL_Periscope.getText();
+    public String getHomeScreenTitle() {
+        return homeScreenTitle.getText();
     }
 
     public String getForgotPasswordTxt() {

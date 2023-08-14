@@ -49,7 +49,7 @@ public class TripsTestCase extends BaseTest {
 
     @Test(priority = 0)
     public void testTripScreenValidation() {
-        TestUtils.logInUser(tripPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(tripPage, getDriver(), "Fleet360A", "Password@1",this);
         vehiclePage.vehicleBottomBar.click();
         clickAndSearch();
         TestUtils.waitForVisibility(vehiclePage.firstVehicle, getDriver());

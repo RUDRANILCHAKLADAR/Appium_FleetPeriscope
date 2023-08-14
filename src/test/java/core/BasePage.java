@@ -47,4 +47,8 @@ public class BasePage {
     @AndroidFindBy (id = "android:id/button1")
     @iOSXCUITFindBy(accessibility = "Confirm")
     public WebElement Confirm_btn;
+
+    @iOSXCUITFindBy(accessibility = "Allow While Using App")
+    public WebElement allowButton;
+
 }

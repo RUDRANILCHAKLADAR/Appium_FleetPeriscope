@@ -3,9 +3,8 @@ package pageobjects;
 import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 public class LandmarkPage extends BasePage {
 
@@ -13,26 +12,58 @@ public class LandmarkPage extends BasePage {
         super(driver);
     }
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Landmarks\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_landmarks")
     public WebElement landmarkBottomBarIcon;
 
-    @AndroidFindBy(xpath = "//[@text='Landmarks']")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Landmarks\"`]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Landmarks']")
     public WebElement landmarkTitle;
 
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/landmark_show_count']")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/landmark_show_count")
     public WebElement landmarkTotalCnt;
 
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/card_landmark_list']")
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeTable\"")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/rcl_landmark_list")
     public WebElement landmarkList;
 
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/iv_landmark_icon']")
-    public WebElement landmarkIcon;
 
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/rl_landmark_detail']")
-    public WebElement landmarkDetails;
 
-    @AndroidFindBy(xpath = "//[@text='Refresh']")
-    public WebElement refresh;
 
+    @iOSXCUITFindBy(accessibility = "Search")
+    @AndroidFindBy(accessibility = "Search")
+    public WebElement searchIcon;
+
+    @iOSXCUITFindBy(accessibility = "Filter")
+    @AndroidFindBy(accessibility = "Filters")
+    public WebElement filterLandmarks;
+
+    public WebElement getFilterLandmarks()
+    {
+        return filterLandmarks;
+    }
+
+
+    public WebElement getSearchIcon()
+    {
+        return searchIcon;
+    }
+
+    public WebElement getLandmarkList()
+    {
+        return landmarkList;
+    }
+
+
+    public WebElement getlandmarkTotalCnt()
+    {
+        return landmarkTotalCnt;
+    }
+
+    public WebElement getLandmarkTitle()
+    {
+        return landmarkTitle;
+    }
+  public String landmarkText="Landmarks";
 
 }

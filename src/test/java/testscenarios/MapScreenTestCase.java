@@ -29,7 +29,7 @@ public class MapScreenTestCase extends BaseTest {
     @Test(priority = 0)
     public void UIElementsValidation() throws InterruptedException {
 
-        TestUtils.logInUser(mapScreenPage, getDriver(), "Fleet360A", "Password@1");
+        TestUtils.logInUser(mapScreenPage, getDriver(), "Fleet360A", "Password@1",this);
 
         Assert.assertTrue(mapScreenPage.getHomeScreenIcon().isSelected());
 
