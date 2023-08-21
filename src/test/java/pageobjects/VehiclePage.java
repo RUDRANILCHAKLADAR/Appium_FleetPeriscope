@@ -18,6 +18,14 @@ public class VehiclePage extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Vehicles']")
     public WebElement vehicleTitle;
 
+    @iOSXCUITFindBy(iOSNsPredicate = "label == \"Periscope\"")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Periscope']")
+    public WebElement homeScreenTitle;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Account\"`]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Account']")
+    public WebElement accountsText;
+
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Vehicles\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_vehicles")
     public WebElement vehicleBottomBar;
@@ -30,51 +38,44 @@ public class VehiclePage extends BasePage {
     @AndroidFindBy(accessibility = "Search")
     public WebElement searchIcon;
 
-    @AndroidFindBy(accessibility = "com.spireon.fleet.staging:id/search_edit_frame")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/search_src_text")
     @iOSXCUITFindBy(iOSNsPredicate = "label == \"Search\"")
     public WebElement searchField;
 
-    @iOSXCUITFindBy(accessibility = "Horizontal scroll bar, 2 pages")
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/rv_filters')]")
-    public WebElement filterIcons;
+
 
     @iOSXCUITFindBy(accessibility = "Filter-Moving")
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/ll_parent'][0]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Moving']")
     public WebElement movingIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-Stopped")
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/ll_parent'][1]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Stopped']")
     public WebElement stopIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-Idle")
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/ll_parent'][2]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Idle']")
     public WebElement idleIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-In LM")
-    @AndroidFindBy(xpath = "//*[contains(@text,'In LM')]" )//android.widget.TextView[@text='In LM']
+    @AndroidFindBy(xpath = "//*[contains(@text,'In LM')]")//android.widget.TextView[@text='In LM']
     public WebElement LMIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-Not in LM")
     @AndroidFindBy(xpath = "//*[contains(@text,'Not In LM')]")//android.widget.TextView[@text='Not In LM']
-    public WebElement notLMIcon ;
+    public WebElement notLMIcon;
 
     @iOSXCUITFindBy(accessibility = "Filter-Non-Reporting")
     @AndroidFindBy(xpath = "//*[contains(@text,'Non Reporting')]")//android.widget.TextView[@text='Non Reporting']
     public WebElement notReportingIcon;
 
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='nextArrowVehilceList']")
-    public WebElement arrowIcon;
 
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name='truck1']")
-    @AndroidFindBy(xpath = "//[@resource-id='com.spireon.fleet.staging:id/iv_vehicle_icon')]")
-    public WebElement vehicleIcon;
+
 
     @iOSXCUITFindBy(iOSNsPredicate = "label BEGINSWITH 'Total ('")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_details")
     public WebElement totalCount;
 
-    @AndroidFindBy(id = "@+id/direction")
-    public WebElement direction;
+
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/" +
             "XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther")
@@ -123,12 +124,66 @@ public class VehiclePage extends BasePage {
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_bottom_tertiary")
     private WebElement vehicleStatusMap;
 
+    @iOSXCUITFindBy(accessibility = "mapFilled")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/icon_right")
     public List<WebElement> icon;
 
+    @iOSXCUITFindBy(accessibility = "mapFilled")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/icon_right")
     public WebElement mapIcon;
 
+    @iOSXCUITFindBy(accessibility = "Home")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/bb_bottom_bar_icon")
+    private WebElement homeScreenIcon;
+
+    @iOSXCUITFindBy(accessibility = "Account")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/action_account")
+    private WebElement accountIcon;
+
+    @iOSXCUITFindBy(accessibility = "Details")
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"Details\"]/android.widget.TextView")
+    private WebElement detailsTab;
+
+    @iOSXCUITFindBy(accessibility = "Done")
+    @AndroidFindBy(accessibility = "Navigate up")
+    private WebElement Back;
+
+    @iOSXCUITFindBy(accessibility = "Back")
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
+    private WebElement detailsBack;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "label == \"Filters\"")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Filters']")
+    private WebElement filtersText;
+
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Alerts - 7 Day History\"`]")
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]")
+    private WebElement Back2;
+
+    @iOSXCUITFindBy(accessibility = "drawerCloseButton")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/iv_close")
+    private WebElement popupClose;
+
+    public WebElement getDetailsBack()
+    {
+        return detailsBack;
+    }
+
+    public void clickPopupClose() {
+        popupClose.click();
+    }
+    public void ClickBack2() {
+        Back2.click();
+    }
+    public void clickHomeScreenIcon()
+    {
+        homeScreenIcon.click();
+    }
+    public void clickAccountIcon()
+    {
+        accountIcon.click();
+    }
     public WebElement vehicleLists() {
         return vehicleLists;
     }
@@ -180,13 +235,13 @@ public class VehiclePage extends BasePage {
         return noAssetsFound;
     }
 
-    public void getSearch_icon()
+    public void getSearchIcon()
     {
         searchIcon.click();
     }
 
 
-    public void Click_filter()
+    public void clickFilter()
     {
         filterOption.click();
     }
@@ -225,7 +280,19 @@ public class VehiclePage extends BasePage {
     {
         return notLMIcon;
     }
+    public WebElement getMovingIcon()
+    {
+        return movingIcon;
+    }
 
+    public WebElement getStopIcon()
+    {
+        return stopIcon;
+    }
+    public WebElement getIdleIcon()
+    {
+        return idleIcon;
+    }
 
     public WebElement getLMIcon()
     {
@@ -235,7 +302,28 @@ public class VehiclePage extends BasePage {
     {
         return notReportingIcon;
     }
+    public String getDetailsTabText() {
+        return detailsTab.getText();
+    }
+    public void ClickBack() {
+        Back.click();
+    }
+    public String getAccountsText() {
+        return accountsText.getText();
+    }
 
+
+    public String getFilterText() {
+        return filtersText.getText();
+    }
+    public WebElement getFilterTitle()
+    {
+        return filtersText;
+    }
+    public String filterText = "Filters";
+    public String accountText = "Account";
+
+    public String details = "DETAILS";
 
     public String moving="Moving";
     public String stopped="Stopped";

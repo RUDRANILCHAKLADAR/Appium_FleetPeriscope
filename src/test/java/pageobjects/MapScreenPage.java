@@ -299,7 +299,7 @@ public class MapScreenPage extends BasePage {
         return fab_map;
     }
 
-    public String getFLText() {
+    public String  getFLText() {
         return flText.getText();
     }
 

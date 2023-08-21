@@ -4,6 +4,7 @@ import core.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -31,65 +32,88 @@ public class ForgotPasswordPage extends BasePage {
 
     public String network_Err_msg = "Please check your network connection and try again.";
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"SIGN IN\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_sign_in")
     private WebElement SignIn;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Forgot your password?\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/tv_forgot_password")
     private WebElement forgotpassword;
 
+    @iOSXCUITFindBy(accessibility = "Enter the email address that you used to register. We'll send you an email with reset instructions.")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/login_msg")
     private WebElement forgotpasswordmsg;
 
+    @iOSXCUITFindBy(iOSNsPredicate = "value == \"Email\"")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/ed_email")
     private WebElement email;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"SUBMIT\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/bt_send_instructions")
     private WebElement Submit_btn;
 
+    @iOSXCUITFindBy(accessibility = "Please enter valid Email ID.")
     @AndroidFindBy(id = "android:id/message")
     private WebElement ErrorMsg;
 
+    @iOSXCUITFindBy(accessibility = "Please enter your registered email-id and try again")
     @AndroidFindBy(id = "android:id/message")
     private WebElement UnregisteredEmailErrorMsg;
 
+    @iOSXCUITFindBy(accessibility = "OK")
     @AndroidFindBy(id = "android:id/button2")
     private WebElement OK_Btn;
 
+    @iOSXCUITFindBy(accessibility = "OK")
     @AndroidFindBy(id = "android:id/button2")
     private WebElement Tryagain_Btn;
+
+    @iOSXCUITFindBy(accessibility = "Reset Instruction Sent Successfully!")
     @AndroidFindBy(id = "android:id/message")
     private WebElement ResetMsg;
 
+    @iOSXCUITFindBy(accessibility = "OK")
     @AndroidFindBy(id = "android:id/button3")
     private WebElement Okbtn2;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
+    @iOSXCUITFindBy(accessibility = "Sign In")
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
     private WebElement BackBtn;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.TextView")
+    @iOSXCUITFindBy(iOSNsPredicate = "label == \"Forgot Password?\"")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Forgot Password']")
     private WebElement ForgotPswrdScreen;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.TextView[1]")
+    @iOSXCUITFindBy(accessibility = "If you still need help, contact")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='If you still need help, contact']")
     private WebElement NeedHelp;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"FleetLocate Support\"`]")
     @AndroidFindBy(id = "com.spireon.fleet.staging:id/txt_kahu_support")
     private WebElement FleetLocateSupport;
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
+
+    @iOSXCUITFindBy(iOSNsPredicate = "label == \"Support\"")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Support']")
     private WebElement Support_Title;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.Button")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"EMAIL SUPPORT\"`]")
+    @AndroidFindBy(id = "com.spireon.fleet.staging:id/btn_support")
     private WebElement EmailSupport_Btn;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.Button")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"CALL SUPPORT\"`]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='CALL SUPPORT']")
     private WebElement CallSupport_Btn;
 
+    @iOSXCUITFindBy(accessibility = "Please check your internet connection and try again.")
     @AndroidFindBy(id = "android:id/message")
     private WebElement NetworkErrorMsg;
 
+    @iOSXCUITFindBy(accessibility = "Retry")
     @AndroidFindBy(id = "android:id/button3")
     private WebElement OkBtn3;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton")
+    @iOSXCUITFindBy(accessibility = "Forgot Password?")
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
     private WebElement BackSupport;
 
     public WebElement unrgstrederrmsg() {

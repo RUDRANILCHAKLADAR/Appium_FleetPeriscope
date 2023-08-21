@@ -1,5 +1,6 @@
 package testscenarios;
 
+import io.appium.java_client.AppiumDriver;
 import pageobjects.ForgotPasswordPage;
 import pageobjects.SignInPage;
 import core.BaseTest;
@@ -12,10 +13,13 @@ public class ForgotPasswordTestCase extends BaseTest {
     private SignInPage signInPage;
     private ForgotPasswordPage forgotPasswordPage;
 
+    AppiumDriver forgotPasswordPageDriver;
+
     @Override
     protected void init() {
         signInPage = new SignInPage(getDriver());
         forgotPasswordPage = new ForgotPasswordPage(getDriver());
+        forgotPasswordPageDriver = getDriver();
     }
 
     @Override

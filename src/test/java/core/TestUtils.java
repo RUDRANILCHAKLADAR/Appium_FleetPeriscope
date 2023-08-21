@@ -166,51 +166,51 @@ public class TestUtils {
         TestUtils.waitForVisibility(basePage.Confirm_btn, driver);
         basePage.Confirm_btn.click();
     }
-    public  static void swipeLeft(List<WebElement> element, AppiumDriver driver) {
-        WebElement firstElement = element.get(0);
-        WebElement fourthElement = element.get(3);
-        int midOfYCoordinate = firstElement.getLocation().y + (firstElement.getSize().height / 2);
-        int firstElementXCoordinate = firstElement.getLocation().x;
-        int fourthElementXCoordinate = fourthElement.getLocation().x;
-        TouchAction action = new TouchAction((PerformsTouchActions)  driver);
-        action.press(PointOption.point(fourthElementXCoordinate, midOfYCoordinate))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(5)))
-                .moveTo(PointOption.point(firstElementXCoordinate, midOfYCoordinate))
-                .release()
-                .perform();
+//    public  static void swipeLeft(List<WebElement> element, AppiumDriver driver) {
+//        WebElement firstElement = element.get(0);
+//        WebElement fourthElement = element.get(3);
+//        int midOfYCoordinate = firstElement.getLocation().y + (firstElement.getSize().height / 2);
+//        int firstElementXCoordinate = firstElement.getLocation().x;
+//        int fourthElementXCoordinate = fourthElement.getLocation().x;
+//        TouchAction action = new TouchAction((PerformsTouchActions)  driver);
+//        action.press(PointOption.point(fourthElementXCoordinate, midOfYCoordinate))
+//                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(5)))
+//                .moveTo(PointOption.point(firstElementXCoordinate, midOfYCoordinate))
+//                .release()
+//                .perform();
+//
+//    }
+//
+//    public static void swipeRight(List<WebElement> element, AppiumDriver driver) {
+//        WebElement fourthElement = element.get(element.size()-1);
+//        WebElement sixthElement = element.get(element.size()-3);
+//        int midOfYCoordinate = fourthElement.getLocation().y + (fourthElement.getSize().height / 2);
+//        int fourthElementXCoordinate = fourthElement.getLocation().x;
+//        int sixthElementXCoordinate = sixthElement.getLocation().x;
+//
+//        TouchAction action = new TouchAction((PerformsTouchActions) driver);
+//        action.press(PointOption.point(sixthElementXCoordinate, midOfYCoordinate))
+//                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(5)))
+//                .moveTo(PointOption.point(fourthElementXCoordinate, midOfYCoordinate))
+//                .release()
+//                .perform();
+//
+//    }
 
-    }
-
-    public static void swipeRight(List<WebElement> element, AppiumDriver driver) {
-        WebElement fourthElement = element.get(element.size()-1);
-        WebElement sixthElement = element.get(element.size()-3);
-        int midOfYCoordinate = fourthElement.getLocation().y + (fourthElement.getSize().height / 2);
-        int fourthElementXCoordinate = fourthElement.getLocation().x;
-        int sixthElementXCoordinate = sixthElement.getLocation().x;
-
-        TouchAction action = new TouchAction((PerformsTouchActions) driver);
-        action.press(PointOption.point(sixthElementXCoordinate, midOfYCoordinate))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(5)))
-                .moveTo(PointOption.point(fourthElementXCoordinate, midOfYCoordinate))
-                .release()
-                .perform();
-
-    }
-
-    public static  void ScrollDown( AppiumDriver driver) {
-        TouchAction  action =new TouchAction((PerformsTouchActions) driver);
-        Dimension size	=driver.manage().window().getSize();
-        int width=size.width;
-        int height=size.height;
-        int middleOfX=width/2;
-        int startYCoordinate= (int)(height*.7);
-        int endYCoordinate= (int)(height*.2);
-
-        action.press(PointOption.point(middleOfX, startYCoordinate))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
-                .moveTo(PointOption.point(middleOfX, endYCoordinate)).release().perform();
-
-    }
+//    public static  void ScrollDown( AppiumDriver driver) {
+//        TouchAction  action =new TouchAction((PerformsTouchActions) driver);
+//        Dimension size	=driver.manage().window().getSize();
+//        int width=size.width;
+//        int height=size.height;
+//        int middleOfX=width/2;
+//        int startYCoordinate= (int)(height*.7);
+//        int endYCoordinate= (int)(height*.2);
+//
+//        action.press(PointOption.point(middleOfX, startYCoordinate))
+//                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+//                .moveTo(PointOption.point(middleOfX, endYCoordinate)).release().perform();
+//
+//    }
 
     public static void handlelocationPopup(BaseTest baseTest,BasePage basePage,AppiumDriver driver)
     {
