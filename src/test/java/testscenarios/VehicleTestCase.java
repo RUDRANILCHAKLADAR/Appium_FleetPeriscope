@@ -27,16 +27,12 @@ public class VehicleTestCase extends BaseTest {
     protected void init() {
         vehiclePage = new VehiclePage(getDriver());
         vehiclePageDriver = getDriver();
+        vehiclePageSetup();
     }
 
     @Override
     protected void deInit() {
-
-    }
-
-    @BeforeClass
-    public void beforeClass() {
-        vehiclePageSetup();
+        TestUtils.logOutUser(vehiclePage,vehiclePageDriver);
     }
 
     public void vehiclePageSetup() {
@@ -46,12 +42,6 @@ public class VehicleTestCase extends BaseTest {
         new WebDriverWait(vehiclePageDriver, Duration.ofSeconds(60)).until(ExpectedConditions.visibilityOf(vehiclePage.vehicleLists()));
         Assert.assertTrue((vehiclePage.vehicleLists().isDisplayed()));
     }
-
-    @AfterClass
-    public void afterClass() {
-        TestUtils.logOutUser(vehiclePage,vehiclePageDriver);
-    }
-
 
     //	C19949	Verify vehicle list screen UI is matching with Zeplin comp
     //	C19950	Verify list of vehicles are shown properly
