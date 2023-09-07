@@ -1,15 +1,15 @@
 package testscenarios;
 
-import pageobjects.SignInPage;
+import org.testng.ITestContext;
 import pageobjects.TripPage;
 import pageobjects.VehicleDetailsPage;
 import pageobjects.VehiclePage;
-import core.BaseTest;
+import core.testrail.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import core.TestUtils;
+import core.testrail.TestUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +21,7 @@ public class TripsTestCase extends BaseTest {
     private VehicleDetailsPage vehicleDetailsPage;
 
     @Override
-    protected void init() {
+    protected void init(ITestContext context) {
         vehiclePage = new VehiclePage(getDriver());
         tripPage = new TripPage(getDriver());
         vehicleDetailsPage = new VehicleDetailsPage(getDriver());

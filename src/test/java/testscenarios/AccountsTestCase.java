@@ -1,11 +1,12 @@
 package testscenarios;
 
-import core.BaseTest;
-import core.TestUtils;
+import core.testrail.BaseTest;
+import core.testrail.TestUtils;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 import pageobjects.AccountsPage;
 
@@ -18,7 +19,7 @@ public class AccountsTestCase extends BaseTest
     public AccountsPage accountsPage;
     AppiumDriver  accountPageDriver;
     @Override
-    protected void init() {
+    protected void init(ITestContext context) {
         accountsPage = new AccountsPage(getDriver());
         accountPageDriver = getDriver();
         accountsPageSetup();

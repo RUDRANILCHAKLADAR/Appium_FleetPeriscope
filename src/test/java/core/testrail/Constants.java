@@ -1,6 +1,8 @@
-package utility;
+package core.testrail;
 
 public class Constants {
+
+    public static final String USER_TOKEN = "userToken";
 
     public static String APPIUM_URL = "appiumURL";
     public static String ANDROID_DEVICE_NAME = "AndroidDeviceName";
@@ -20,6 +22,9 @@ public class Constants {
     public static String IOS_HOME_SCREEN_TITLE= "Map";
     public static String ACCOUNTS_SCREEN_TITLE= "Account";
 
+    public static String ENVIRONMENT_CONFIG_PATH = "/src/test/java/config/environment.json";
+    public static String ENVIRONMENT_NAME = "environment";
+    public static String ENVIRONMENT_CONFIG = "envConfig";
 
     public static String CONFIG_PROPERTIES_PATH = "//src//test//java//config//config.properties";
     public enum Platform {

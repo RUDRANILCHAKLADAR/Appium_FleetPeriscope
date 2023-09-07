@@ -3,18 +3,16 @@ package testscenarios;
 
 
 import io.appium.java_client.AppiumDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.ITestContext;
 import pageobjects.AlertsPage;
 import pageobjects.ForgotPasswordPage;
 import pageobjects.MapScreenPage;
-import core.BaseTest;
-import io.appium.java_client.AppiumBy;
+import core.testrail.BaseTest;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import core.TestUtils;
+import core.testrail.TestUtils;
 
 import java.time.Duration;
 
@@ -27,7 +25,7 @@ public class AlertsTestCase extends BaseTest {
     AppiumDriver alertPageDriver;
 
     @Override
-    protected void init() {
+    protected void init(ITestContext context) {
         alertPageDriver = getDriver();
         forgotPasswordPage = new ForgotPasswordPage(getDriver());
         mapScreenPage = new MapScreenPage(getDriver());

@@ -1,11 +1,12 @@
 package testscenarios;
 
-import core.BaseTest;
-import core.TestUtils;
+import core.testrail.BaseTest;
+import core.testrail.TestUtils;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 import pageobjects.HomeScreenPage;
 
@@ -21,7 +22,7 @@ public class HomeScreenTestCase extends BaseTest {
     AppiumDriver  homeScreenPageDriver;
 
     @Override
-      protected void init()
+      protected void init(ITestContext context)
     {
         homeScreenPage = new HomeScreenPage(getDriver());
         homeScreenPageDriver = getDriver();

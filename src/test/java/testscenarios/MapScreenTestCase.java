@@ -1,21 +1,22 @@
 package testscenarios;
 
+import org.testng.ITestContext;
 import pageobjects.MapScreenPage;
 //import org.checkerframework.checker.units.qual.A;
-import core.BaseTest;
+import core.testrail.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import core.TestUtils;
-import utility.Constants;
+import core.testrail.TestUtils;
+import core.testrail.Constants;
 
 public class MapScreenTestCase extends BaseTest {
 
     private MapScreenPage mapScreenPage;
 
     @Override
-    protected void init() {
+    protected void init(ITestContext context) {
         mapScreenPage = new MapScreenPage(getDriver());
     }
 

@@ -1,18 +1,14 @@
 package testscenarios;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import pageobjects.AlertsPage;
-import pageobjects.MapScreenPage;
+import org.testng.ITestContext;
 import pageobjects.VehiclePage;
-import core.BaseTest;
+import core.testrail.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import core.TestUtils;
+import core.testrail.TestUtils;
 
 import java.time.Duration;
 
@@ -24,7 +20,7 @@ public class VehicleTestCase extends BaseTest {
     AppiumDriver vehiclePageDriver;
 
     @Override
-    protected void init() {
+    protected void init(ITestContext context) {
         vehiclePage = new VehiclePage(getDriver());
         vehiclePageDriver = getDriver();
         vehiclePageSetup();

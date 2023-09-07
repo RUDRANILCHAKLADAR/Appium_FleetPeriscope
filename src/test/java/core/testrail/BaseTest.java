@@ -1,31 +1,34 @@
-package core;
+package core.testrail;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
-import utility.Constants;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
-import static utility.Constants.*;
+import static core.testrail.Constants.*;
 
 public abstract class BaseTest {
     private AppiumDriver driver;
-
+    public static EnvProperties envProperties;
     private static Constants.Platform currentPlatform = Constants.Platform.ANDROID;
 
     public static final Logger Log = LoggerFactory.getLogger(BaseTest.class);
 
-    protected abstract void init();
+    protected abstract void init(ITestContext context);
     protected abstract void deInit();
 
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
@@ -33,7 +36,7 @@ public abstract class BaseTest {
     @BeforeClass
     public void beforeTest(@Optional("androidOnly") String emulator, @Optional String platformName, @Optional String udid, @Optional String deviceName,
                            @Optional("androidOnly") String systemPort, @Optional("androidOnly") String chromeDriverPort,
-                           @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort) throws Exception {
+                           @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort,ITestContext context) throws Exception {
 
         ConsoleLogger.setLoggable(false);
 
@@ -78,7 +81,7 @@ public abstract class BaseTest {
                 option.setPlatformVersion(prop.getProperty(IOS_VERSION));
                 option.setWdaLaunchTimeout(Duration.ofSeconds(30));
                 //option.setApp(System.getProperty("user.dir") + "//App//Fleet Staging.app");
-                option.setApp(System.getProperty("user.dir") + prop.getProperty(IOS_APP_PATH));
+                option.setApp(prop.getProperty(IOS_APP_PATH));
                 option.autoAcceptAlerts();
                 driver = new IOSDriver(url, option);
                 break;
@@ -87,7 +90,8 @@ public abstract class BaseTest {
         }
         Log.info("driver initialized: " + driver);
 
-        init();
+
+        init(context);
     }
 
     public AppiumDriver getDriver() {
@@ -113,6 +117,24 @@ public abstract class BaseTest {
     public static boolean isIosPlatform() {
         return currentPlatform == Constants.Platform.iOS;
     }
+
+    @Parameters("environment")
+    @BeforeSuite
+    public void beforeSuite(ITestContext ctx,@Optional String environment) {
+        try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + Constants.ENVIRONMENT_CONFIG_PATH));
+
+            JSONObject jsonObject =  (JSONObject) obj;
+            ctx.setAttribute(Constants.ENVIRONMENT_CONFIG, jsonObject.get(environment));
+            ctx.setAttribute(Constants.ENVIRONMENT_NAME, environment);
+            envProperties = new EnvProperties(ctx);
+            System.out.println(envProperties.getIdentityBaseUrl());
+        } catch (Exception exception) {
+            System.out.println("error reading config file --: "+exception);
+        }
+    }
+
 
     @AfterClass(alwaysRun = true)
     public void afterTest() {

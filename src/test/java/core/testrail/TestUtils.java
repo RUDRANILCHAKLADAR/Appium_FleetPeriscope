@@ -1,6 +1,5 @@
-package core;
+package core.testrail;
 
-import pageobjects.SignInPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;

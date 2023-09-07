@@ -1,4 +1,4 @@
-package core;
+package core.testrail;
 
 
 import org.slf4j.Logger;

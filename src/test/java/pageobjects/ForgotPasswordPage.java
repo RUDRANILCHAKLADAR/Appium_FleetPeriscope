@@ -1,12 +1,10 @@
 package pageobjects;
 
-import core.BasePage;
+import core.testrail.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 public class ForgotPasswordPage extends BasePage {
 
