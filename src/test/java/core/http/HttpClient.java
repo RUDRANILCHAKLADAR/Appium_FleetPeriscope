@@ -171,7 +171,7 @@ public class HttpClient implements AutoCloseable {
             }
         }
         if(bodyObject != null) {
-            request.body(bodyObject);
+            request.body(bodyObject.toString());
         }
         try {
             HttpResponse<JsonNode> response = request.asJson();
