@@ -11,8 +11,8 @@
         <parameter name="chromeDriverPort" value="11000" />
 
         <classes>
-            <class name="testscenarios.SignInTestCase"/>
-<!--            <class name="testscenarios.VehicleTestCase"/>-->
+<!--            <class name="testscenarios.SignInTestCase"/>-->
+            <class name="testscenarios.VehicleTestCase"/>
 <!--            <class name="testscenarios.LandmarksTestCase"/>-->
 <!--            <class name="testscenarios.AccountsTestCase"/>-->
 <!--            <class name="testscenarios.AlertsTestCase"/>-->

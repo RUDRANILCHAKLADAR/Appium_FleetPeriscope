@@ -150,7 +150,6 @@ public class TestUtils {
         basePage.signIn.click();
 
         if (baseTest.isAndroidPlatform()) {
-            System.out.println("Rudranil ");
             TestUtils.waitForVisibility(basePage.permission_access, driver);
             basePage.permission_access.isDisplayed();
             basePage.permission_access.click();

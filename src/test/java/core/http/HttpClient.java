@@ -90,6 +90,9 @@ public class HttpClient implements AutoCloseable {
                                  Map<String, String> headersMap,
                                  Object bodyObject) throws HttpClientException {
         HttpRequestWithBody request = Unirest.post(url);
+        System.out.println("the url is " + url.toString());
+        System.out.println("the headersMap is " + headersMap.toString());
+        System.out.println("the bodyobject is " + bodyObject.toString());
         return executeHttpRequestWithBody(routeParamsMap, queryStringMap, headersMap, bodyObject, request);
     }
 

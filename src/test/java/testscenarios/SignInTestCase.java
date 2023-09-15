@@ -36,17 +36,15 @@ public class SignInTestCase extends BaseTest {
     protected void init(ITestContext context) {
         signInPage = new SignInPage(getDriver());
         fetchNSetUserToken(context, "Fleet360A", "Password@1");
-        TestUtils.waitForVisibility(signInPage.getUsername(), getDriver());
         TestUtils.logInUser(signInPage, getDriver(),"Fleet360A", "Password@1",this);
     }
 
     private void fetchNSetUserToken(ITestContext context, String userName, String password) {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("X-Nspire-AppToken", "deac4c6c-81f1-11e7-bb31-be2e44b06b34");
-
         UserToken userToken = IdentityService.getUserToken(envProperties.getIdentityBaseUrl(), headers,userName, password);
         System.out.println("userToken: " + userToken.getToken());
-        System.out.println("the scope" +  userToken.getScope());
+        System.out.println("the scope  " +  userToken.getScope());
         context.setAttribute(Constants.USER_TOKEN, userToken.getToken());
     }
     @Test(priority = 0)

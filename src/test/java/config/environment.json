@@ -1,11 +1,13 @@
 {
   "stage": {
     "platformBaseUrl": "https://platformapi-stage.spireon.com/v0/rest",
-    "identityServiceBaseUrl": "https://identity-stage.spireon.com"
+    "identityServiceBaseUrl": "https://identity-stage.spireon.com",
+    "fleetviewServiceBaseUrl": "https://fleet-view-services-stage.spireon.com"
   },
   "prod": {
     "platformBaseUrl": "https://services.spireon.com/v0/rest",
-    "identityServiceBaseUrl": "https://identity.spireon.com"
+    "identityServiceBaseUrl": "https://identity.spireon.com",
+    "fleetviewServiceBaseUrl": "https://fleet-view-services.spireon.com"
   }
 
 }

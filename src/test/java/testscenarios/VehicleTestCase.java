@@ -1,6 +1,8 @@
 package testscenarios;
 
+import core.testrail.Constants;
 import io.appium.java_client.AppiumDriver;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -9,13 +11,19 @@ import core.testrail.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import core.testrail.TestUtils;
+import utility.model.UserToken;
+import utility.nspireservice.FleetViewService;
+import utility.nspireservice.IdentityService;
 
 import java.time.Duration;
+import java.util.HashMap;
+
+import static org.testng.Assert.assertTrue;
+import org.json.JSONArray;
 
 public class VehicleTestCase extends BaseTest {
 
     VehiclePage vehiclePage;
-
 
     AppiumDriver vehiclePageDriver;
 
@@ -23,16 +31,50 @@ public class VehicleTestCase extends BaseTest {
     protected void init(ITestContext context) {
         vehiclePage = new VehiclePage(getDriver());
         vehiclePageDriver = getDriver();
+        FleetViewService.setFleetViewServiceBaseUrl(envProperties.getFleetViewServiceBaseUrl());
+        fetchNSetUserToken(context, "Fleet360A", "Password@1");
         vehiclePageSetup();
+    }
+
+    private void fetchNSetUserToken(ITestContext context, String userName, String password) {
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("X-Nspire-AppToken", "deac4c6c-81f1-11e7-bb31-be2e44b06b34");
+        UserToken userToken = IdentityService.getUserToken(envProperties.getIdentityBaseUrl(), headers,userName, password);
+        System.out.println("userToken: " + userToken.getToken());
+        System.out.println("the scope  " +  userToken.getScope());
+        context.setAttribute(Constants.USER_TOKEN, userToken.getToken());
+    }
+
+    private Object getAssetList(ITestContext context) {
+        org.json.JSONObject jsonData = new org.json.JSONObject();
+
+        // Create a JSONArray for "filterParam"
+        JSONArray filterParamArray = new JSONArray();
+        JSONArray filterParamInnerArray = new JSONArray();
+        filterParamInnerArray.put("deviceId");
+        filterParamInnerArray.put("exists:yes");
+        filterParamArray.put(filterParamInnerArray);
+
+        // Add "filterParam", "limit", and "start" to the JSON object
+        jsonData.put("filterParam", filterParamArray);
+        jsonData.put("limit", 100);
+        jsonData.put("start", 0);
+
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("X-Nspire-UserToken", context.getAttribute(Constants.USER_TOKEN).toString()); // received from Identity service
+        headers.put("Content-Type", "application/json");
+        System.out.println("the jsondata" + jsonData.toString());
+        return FleetViewService.getAssetList(headers,jsonData);
+
     }
 
     @Override
     protected void deInit() {
-        TestUtils.logOutUser(vehiclePage,vehiclePageDriver);
+        TestUtils.logOutUser(vehiclePage, vehiclePageDriver);
     }
 
     public void vehiclePageSetup() {
-        TestUtils.logInUser(vehiclePage, vehiclePageDriver, "Fleet360A", "Password@1",this);
+        TestUtils.logInUser(vehiclePage, vehiclePageDriver, "Fleet360A", "Password@1", this);
         TestUtils.waitForVisibility(vehiclePage.vehicleBottomBar, vehiclePageDriver);
         vehiclePage.vehicleBottomBar.click();
         new WebDriverWait(vehiclePageDriver, Duration.ofSeconds(60)).until(ExpectedConditions.visibilityOf(vehiclePage.vehicleLists()));
@@ -42,13 +84,24 @@ public class VehicleTestCase extends BaseTest {
     //	C19949	Verify vehicle list screen UI is matching with Zeplin comp
     //	C19950	Verify list of vehicles are shown properly
     @Test(priority = 0)
-    public void testVehicleUIElements() {
+    public void testVehicleUIElements(ITestContext context) {
         TestUtils.waitForVisibility(vehiclePage.vehicleTitle, vehiclePageDriver);
         Assert.assertTrue((vehiclePage.getVehicleTitle().isDisplayed()));
         Assert.assertTrue((vehiclePage.vehicleLists()).isDisplayed());
         Assert.assertTrue(vehiclePage.searchField().isDisplayed());
         Assert.assertTrue(vehiclePage.filterOption().isDisplayed());
+
+
+        org.json.JSONObject assetList = (org.json.JSONObject) getAssetList(context);
+
+        assert assetList != null;
+        System.out.println("the vehicle count from UI :" + vehiclePage.totalCount.getText());
+        System.out.println("the vehicle count from API response :" + assetList.get("total").toString());
+        assertTrue(vehiclePage.totalCount.getText().contains(assetList.get("total").toString()));
     }
+
+
+
 }
 
 // //   C19965	Verify the vehicle status is shown correctly on the vehicle list screen
