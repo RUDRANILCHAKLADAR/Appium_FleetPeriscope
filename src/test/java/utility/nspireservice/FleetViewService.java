@@ -17,7 +17,7 @@ public class FleetViewService {
     public static <T> T getAssetList(Map<String, String> headers, org.json.JSONObject jsonData) {
         /**
          * HashMap<String, String> headers = new HashMap<String, String>();
-         *             headers.put("x-nspire-usertoken", userTokenResponse.getToken()); // received from Identity service
+         *             headers.put("X-Nspire-AppToken", userTokenResponse.getToken()); // received from Identity service
          *             headers.put("Content-Type", "application/json");
          */
         try{

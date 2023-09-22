@@ -63,7 +63,6 @@ public class VehicleTestCase extends BaseTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("X-Nspire-UserToken", context.getAttribute(Constants.USER_TOKEN).toString()); // received from Identity service
         headers.put("Content-Type", "application/json");
-        System.out.println("the jsondata" + jsonData.toString());
         return FleetViewService.getAssetList(headers,jsonData);
 
     }

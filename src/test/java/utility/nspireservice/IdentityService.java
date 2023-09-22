@@ -17,7 +17,7 @@ public class IdentityService
     public static UserToken getUserToken(String identityBaseUrl, Map<String, String> headers, String username, String password) {
         /**
          * HashMap<String, String> headers = new HashMap<String, String>();
-         * headers.put("X-Nspire-AppToken", "f07740dc-1252-48f3-9165-c5263bbf373c")
+         * headers.put("X-Nspire-AppToken", "deac4c6c-81f1-11e7-bb31-be2e44b06b34")
          */
         try {
             Unirest.setTimeouts(60000L, 60000L);
